@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secretaria da Mulher - Canindé de São Francisco</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Poppins para Títulos, Atkinson para Textos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Atkinson Hyperlegible"', 'sans-serif'],
+                        display: ['"Poppins"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            hero: '#F5EEFB',
+                            borderMuted: '#F0E6F7',
+                            textDark: '#3B284C',
+                            textMuted: '#6B5E78',
+                            textMenu: '#4A3E56',
+                            primary: '#7A3E9D',
+                            primaryHover: '#682F87',
+                            badgeBg: '#EEDBFF',
+                            badgeText: '#6A2B9A',
+                            cardBorder: '#EFE8F5',
+                            iconBg: '#F3EBF9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FFFFFF;
+            color: #6B5E78;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        .carousel-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .modal { transition: opacity 0.25s ease; }
+        body.modal-active { overflow: hidden !important; }
+
+        .arch-photo {
+            border-radius: 999px 999px 0 0;
+            overflow: hidden;
+        }
+
+        /* 3D Flip Card Styles */
+        .perspective-1000 { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        .is-flipped { transform: rotateY(180deg); }
+        
+        .flip-face-front, .flip-face-back {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .is-flipped .flip-face-front { opacity: 0; pointer-events: none; }
+        .is-flipped .flip-face-back { opacity: 1; pointer-events: auto; }
+        .flip-face-back { opacity: 0; pointer-events: none; }
+    </style>
+</head>
+<body class="font-sans leading-relaxed relative overflow-x-hidden w-full max-w-full">
+    
+    <!-- Marca d'água Fixa (Rosto Feminino — acompanha o scroll, some atrás do Hero) -->
+    <img 
+        src="logo.avif" 
+        alt="Ilustração rosto" 
+        class="fixed -left-16 sm:-left-20 lg:-left-24 top-1/3 w-[380px] md:w-[480px] lg:w-[540px] opacity-15 pointer-events-none select-none scale-x-[-1]"
+        style="z-index: 1;"
+    />
+
+    <!-- Hero com Gradiente e Header Integrado -->
+    <div class="relative z-20 overflow-hidden bg-gradient-to-r from-[#9782AD] to-[#7F6A96] text-white pt-6 pb-40 md:pb-56">
+        
+        <!-- Marca d'água Hero -->
+        <img src="hero-watermark.jpg" alt="" class="absolute -left-10 top-1/2 -translate-y-1/2 w-80 md:w-[480px] lg:w-[580px] max-w-none opacity-20 pointer-events-none z-0 invert brightness-200 mix-blend-screen select-none">
+        
+        <!-- Header Minimalista -->
+        <header class="w-full relative z-40 mb-12 md:mb-20">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="flex justify-between items-center">
+                    
+                    <!-- Wordmark -->
+                    <a href="#" class="font-display hover:opacity-80 transition-opacity">
+                        <div class="flex flex-col leading-none">
+                            <span class="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+                                Secretaria da Mulher
+                            </span>
+                            <span class="text-[10px] md:text-xs font-medium text-white/80 tracking-wider uppercase mt-1">
+                                Canindé de São Francisco
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Navegação Desktop -->
+                    <nav class="hidden lg:flex items-center space-x-8" aria-label="Navegação Principal">
+                        <a href="#saude" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Saúde</a>
+                        <a href="#direitos" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Direitos</a>
+                        <a href="#acoes" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Ações</a>
+                        <a href="#agenda" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Agenda</a>
+                        
+                        <!-- Botão Disque 180 (Pílula translúcida) -->
+                        <a href="tel:180" class="ml-4 inline-flex items-center px-6 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full font-display font-bold text-lg transition-colors text-white">
+                            <i class="fas fa-phone mr-2 text-sm"></i> Disque 180
+                        </a>
+                    </nav>
+
+                    <!-- Menu Mobile Toggle -->
+                    <button type="button" class="lg:hidden text-white p-2" aria-label="Abrir menu" onclick="toggleMenu()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dropdown Mobile -->
+            <div id="mobile-menu" class="hidden lg:hidden bg-[#8E79A5] absolute w-full left-0 top-full mt-4 rounded-b-3xl shadow-2xl z-50">
+                <div class="px-6 py-6 flex flex-col space-y-4">
+                    <a href="#saude" class="font-display text-2xl text-white hover:opacity-80" onclick="toggleMenu()">Saúde</a>
+                    <a href="#direitos" class="font-display text-2xl text-white hover:opacity-80" onclick="toggleMenu()">Direitos</a>
+                    <a href="#acoes" class="font-display text-2xl text-white hover:opacity-80" onclick="toggleMenu()">Ações</a>
+                    <a href="#agenda" class="font-display text-2xl text-white hover:opacity-80" onclick="toggleMenu()">Agenda</a>
+                    <a href="tel:180" class="inline-flex items-center justify-center px-6 py-3 mt-4 bg-white text-[#5C4573] rounded-full font-display font-bold text-xl" onclick="toggleMenu()">
+                        <i class="fas fa-phone mr-2"></i> Disque 180
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Conteúdo do Hero -->
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Coluna de Texto -->
+                <div class="max-w-2xl relative">
+                    <!-- Badge Pílula -->
+                    <span class="inline-flex items-center px-4 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs md:text-sm font-semibold tracking-wide shadow-sm border border-white/10 mb-6">
+                        Acolhimento, Direitos e Força Feminina
+                    </span>
+                    
+                    <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-tight sm:leading-[0.95] tracking-tight mb-6 text-white">
+                        Você não está sozinha.
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl md:text-2xl font-sans text-white/95 mb-10 max-w-xl leading-relaxed">
+                        Exame preventivo, apoio psicológico e orientação jurídica, tudo gratuito, tudo perto de você.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a 
+                            href="#acoes" 
+                            class="inline-flex items-center justify-center bg-white text-[#4A3260] font-bold px-6 md:px-8 py-3.5 rounded-full shadow-lg hover:bg-purple-50 transition-all duration-300 hover:scale-105 active:scale-95 text-base md:text-lg font-display"
+                        >
+                            Conheça a Secretaria
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coluna da Imagem -->
+                <div class="relative w-full max-w-md mx-auto flex justify-center items-end select-none -mb-32 sm:-mb-40 md:-mb-56 pt-6 sm:pt-10">
+                  <!-- MARCAS D'ÁGUA DECORATIVAS (FORA DO CARD E SEM CLIQUE) -->
+                  <div class="w-16 md:w-24 h-32 md:h-48 overflow-hidden absolute top-10 right-4 sm:right-8 md:right-14 pointer-events-none z-0 hidden sm:block">
+                    <img src="flores.png" alt="" class="w-[200%] max-w-none h-full object-cover object-left filter brightness-0 invert opacity-20" />
+                  </div>
+                  
+                  <!-- COMPONENTE 3D FLIP CARD (APENAS ESTE ELEMENTO É CLICÁVEL) -->
+                  <div 
+                    class="group relative w-[360px] md:w-[440px] lg:w-[480px] max-w-none h-[500px] md:h-[580px] cursor-pointer z-10"
+                    style="perspective: 1000px;"
+                    onclick="this.firstElementChild.classList.toggle('rotate-y-180'); this.firstElementChild.classList.toggle('is-flipped')"
+                  >
+                    <div 
+                      class="relative w-full h-full transition-transform duration-700 ease-in-out"
+                      style="transform-style: preserve-3d;"
+                    >
+                      <!-- FRENTE: FOTO SOLTA DA SECRETÁRIA -->
+                      <div 
+                        class="flip-face-front absolute inset-0 flex items-end justify-center"
+                        style="transform: rotateY(0deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;"
+                      >
+                        <img 
+                          src="secretaria-foto.png" 
+                          alt="Luana Machado - Secretária da Mulher" 
+                          class="w-full h-full object-contain object-bottom drop-shadow-xl translate-y-3 md:translate-y-5 pointer-events-none transition-all duration-300 ease-out group-hover:scale-105" 
+                        />
+                      </div>
+
+                      <!-- VERSO: CARD DE MENSAGEM -->
+                      <div 
+                        class="absolute inset-0 m-auto w-[90%] md:w-[400px] h-[340px] sm:h-[360px] md:h-[380px] -translate-y-8 md:-translate-y-16 bg-white rounded-3xl p-5 md:py-6 md:px-8 shadow-2xl flex flex-col justify-center items-center text-center border border-purple-100"
+                        style="transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;"
+                      >
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#8E79A5] mb-2 sm:mb-3 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                        </svg>
+                        <p class="text-gray-700 italic text-[11px] sm:text-xs md:text-base leading-relaxed mb-3 md:mb-4 font-medium">
+                          "Quando uma mulher se fortalece, toda uma geração se levanta com ela. É na força feminina que nascem mudanças reais, futuros mais justos e uma sociedade mais humana. Valorizar, apoiar e reconhecer essas mulheres é reconhecer o poder de transformação que move o mundo."
+                        </p>
+                        <div class="w-12 h-0.5 bg-[#8E79A5] my-3"></div>
+                        <span class="font-bold text-[#4A3260] text-sm tracking-wide">Luana Machado</span>
+                        <span class="text-xs text-gray-500 uppercase font-semibold mt-0.5">Secretária da Mulher</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Curva Ondulada Inferior -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="text-white fill-current w-full h-[60px] md:h-[120px] lg:h-[160px] block">
+                <path d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </div>
+
+
+    <!-- Ações nas Comunidades -->
+    <section id="acoes" class="py-24 w-full relative bg-white overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Nossas ações nas ruas</h2>
+                    <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl">Confira de perto os mutirões, palestras e oficinas que estão mudando a vida de mulheres em Canindé.</p>
+                </div>
+                
+                <div class="flex gap-4 md:hidden">
+                    <button id="prevBtn" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="nextBtn" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="carousel" class="carousel-container flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible snap-x snap-mandatory gap-4 md:gap-8 pb-8 pt-4 cursor-grab md:cursor-auto active:cursor-grabbing scrollbar-none">
+                <!-- Injetado via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Saúde Preventiva -->
+    <section id="saude" class="pt-12 pb-24 max-w-7xl mx-auto px-6 lg:px-8 relative bg-white" style="z-index: 10;">
+        <!-- Borboleta 2 -->
+        <img src="borboleta.png" alt="Borboleta decorativa" class="absolute top-16 right-10 w-24 md:w-32 h-auto opacity-15 transform rotate-12 pointer-events-none z-0 select-none hidden md:block">
+
+        <div class="text-center mb-16 relative z-10">
+            <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Sua saúde em primeiro lugar</h2>
+            <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">O preventivo é rápido, não dói e salva vidas. Saiba onde realizar o seu nas unidades de saúde de Canindé.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6">
+                    <i class="fas fa-droplet text-3xl"></i>
+                </div>
+                <h3 class="font-display text-2xl text-brand-textDark mb-3">Seu preventivo</h3>
+                <p class="font-sans text-brand-textMuted text-lg">Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.</p>
+            </div>
+
+            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6">
+                    <i class="fas fa-shield-virus text-3xl"></i>
+                </div>
+                <h3 class="font-display text-2xl text-brand-textDark mb-3">Proteção HPV</h3>
+                <p class="font-sans text-brand-textMuted text-lg">Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.</p>
+            </div>
+
+            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6">
+                    <i class="fas fa-moon text-3xl"></i>
+                </div>
+                <h3 class="font-display text-2xl text-brand-textDark mb-3">Horário noturno</h3>
+                <p class="font-sans text-brand-textMuted text-lg">Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Direitos e Apoio -->
+    <section id="direitos" class="py-24 bg-[#EDE8F3] border-y border-brand-borderMuted relative overflow-hidden" style="z-index: 10;">
+        <!-- Flor 2 (Recorte Direito) -->
+        <div class="w-28 h-56 overflow-hidden absolute bottom-10 right-8 pointer-events-none z-0 hidden md:block select-none">
+            <img src="flores.png" alt="" class="w-[200%] max-w-none h-full object-cover object-right opacity-15">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Rede de apoio e proteção</h2>
+                <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">Estamos aqui para amparar você. Nossos serviços sociais, legais e psicológicos são gratuitos e sigilosos.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
+                        <i class="fas fa-hand-holding-heart text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-3xl text-brand-textDark mb-3">Alguém pra te ouvir</h3>
+                        <p class="font-sans text-brand-textMuted text-lg mb-4">Sigiloso, sem julgamento. Nossas psicólogas estão prontas para te acolher. Você só precisa dar o primeiro passo.</p>
+                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Falar com psicóloga <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
+                        <i class="fas fa-scale-balanced text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-3xl text-brand-textDark mb-3">Seus direitos</h3>
+                        <p class="font-sans text-brand-textMuted text-lg mb-4">Suporte jurídico gratuito para garantir sua segurança e resolver conflitos legais. Nós te orientamos em cada etapa.</p>
+                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Orientação jurídica <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
+                        <i class="fas fa-person-military-pointing text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-3xl text-brand-textDark mb-3">Maria da Penha</h3>
+                        <p class="font-sans text-brand-textMuted text-lg mb-4">Monitoramento ativo de medidas protetivas com nossa patrulha municipal. Sua segurança é inegociável.</p>
+                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Acionar proteção <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
+                        <i class="fas fa-store text-4xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-3xl text-brand-textDark mb-3">Sua independência</h3>
+                        <p class="font-sans text-brand-textMuted text-lg mb-4">Cursos e apoio ao empreendedorismo feminino. Para você construir sua própria renda e ser dona do seu destino.</p>
+                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Ver cursos <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="galeria" class="py-16 max-w-7xl mx-auto px-6 lg:px-8 relative bg-white" style="z-index: 10;">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+                <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Fotos e Vídeos</h2>
+                <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl">Acompanhe os melhores momentos, depoimentos e registros em vídeo das nossas ações.</p>
+            </div>
+            
+            <div class="flex gap-4">
+                <button id="prevGaleriaBtn" class="w-14 h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextGaleriaBtn" class="w-14 h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="carousel-galeria" class="carousel-container flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 cursor-grab active:cursor-grabbing">
+            <!-- Galeria items injetados via JS -->
+        </div>
+    </section>
+
+    <!-- Agenda -->
+    <section id="agenda" class="py-24 max-w-4xl mx-auto px-6 lg:px-8 relative bg-white" style="z-index: 10;">
+        <div class="text-center mb-16">
+            <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Nossa agenda perto de você</h2>
+            <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">Programe-se e não perca os mutirões, palestras e serviços da Secretaria no seu bairro.</p>
+        </div>
+        
+        <div id="agenda-container" class="flex flex-col gap-6">
+            <!-- Injetado via JS -->
+        </div>
+    </section>
+
+    <!-- Footer Elegante -->
+    <footer id="contato" class="bg-brand-textDark text-white mt-12 rounded-t-[3rem] pt-20 pb-10 relative" style="z-index: 10;">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-16">
+                
+                <div>
+                    <div class="flex flex-col leading-none mb-6 font-display">
+                        <span class="text-3xl font-extrabold text-white tracking-tight">
+                            Secretaria da Mulher
+                        </span>
+                        <span class="text-sm font-medium text-white/80 tracking-wider uppercase mt-2">
+                            Canindé de São Francisco
+                        </span>
+                    </div>
+                    <p class="text-white/80 font-sans text-lg mb-8 max-w-sm">Estamos de portas abertas para te receber, te ouvir e garantir os seus direitos todos os dias do ano.</p>
+                    
+                    <a href="tel:180" class="inline-flex items-center px-8 py-3 bg-brand-primary text-white rounded-full font-display font-bold text-xl hover:bg-brand-primaryHover transition-colors shadow-sm">
+                        <i class="fas fa-phone mr-3"></i> Disque 180
+                    </a>
+                </div>
+                
+                <div>
+                    <h4 class="font-display text-2xl font-bold mb-6 text-white">Fale com a gente</h4>
+                    <ul class="space-y-6 font-sans text-lg text-white/90">
+                        <li class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+                            <span>Rua da Prefeitura, S/N<br>Centro, Canindé de São Francisco - SE</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <span>Seg a Sex, 08h às 13h</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <a href="#" class="font-bold hover:underline">(79) 99999-9999</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="h-64 rounded-3xl overflow-hidden shadow-md bg-white">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15730.083313936656!2d-37.7977!3d-9.6433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x708a3b5a1b55555%3A0x5b3f11d15c7a3b0!2sCanind%C3%A9%20de%20S%C3%A3o%20Francisco%2C%20SE!5e0!3m2!1spt-BR!2sbr!4v1699999999999!5m2!1spt-BR!2sbr" 
+                        class="w-full h-full border-0"
+                        allowfullscreen="" 
+                        loading="lazy"
+                        title="mapa de localização">
+                    </iframe>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-white/60 font-sans">
+                <div class="flex flex-col items-center md:items-start gap-1">
+                    <p>&copy; 2024 Governo Municipal. Secretaria da Mulher.</p>
+                    <a href="admin.html" class="text-xs text-gray-400 hover:text-purple-300 transition-colors">Acesso Restrito (Painel de Gestão)</a>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white font-bold transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-white font-bold transition-colors">Portal da Transparência</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Lightbox -->
+    <div id="mediaModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 px-4">
+        <div class="modal-overlay absolute w-full h-full bg-brand-textDark/90 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <div class="modal-container bg-white w-full md:max-w-4xl mx-auto rounded-[2rem] shadow-2xl z-50 overflow-hidden relative border border-brand-cardBorder">
+            <button class="absolute top-4 right-4 bg-white text-brand-primary rounded-full w-12 h-12 flex items-center justify-center shadow-md border border-brand-cardBorder hover:bg-brand-iconBg transition-colors z-50 focus:outline-none" aria-label="Fechar modal" onclick="closeModal()">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="modal-content" id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- DADOS E LÓGICA JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('api.php');
+                const data = await response.json();
+                
+                renderAcoes(data.acoes || []);
+                renderGaleria(data.galeria || []);
+                renderAgenda(data.agenda || []);
+                setupScrollLogic();
+            } catch (error) {
+                console.error("Erro ao carregar dados dinâmicos da Hostinger:", error);
+            }
+        });
+
+        function renderAcoes(acoesData) {
+            const carousel = document.getElementById('carousel');
+            if(!carousel) return;
+            carousel.innerHTML = '';
+            acoesData.forEach(acao => {
+                const el = document.createElement('div');
+                el.className = "flex-none w-[85vw] sm:w-[320px] md:w-auto snap-center bg-white border border-brand-cardBorder rounded-[2rem] overflow-hidden flex flex-col group shadow-sm hover:shadow-md transition-shadow";
+                const imgStr = (acao.image || '').replace(/'/g, "\\'");
+                const titleStr = (acao.title || '').replace(/'/g, "\\'");
+                const descStr = (acao.description || '').replace(/'/g, "\\'");
+                
+                el.innerHTML = `
+                    <div class="relative h-44 sm:h-48 cursor-pointer overflow-hidden rounded-t-[2rem]" onclick="openModal('${imgStr}', '${titleStr}', '${descStr}')">
+                        <img src="${acao.image}" alt="${acao.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 left-4 bg-brand-badgeBg text-brand-badgeText px-4 py-1.5 rounded-full font-display font-bold text-sm shadow-sm">
+                            ${acao.category || 'Ação'}
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow">
+                        <p class="text-sm font-display text-brand-primary mb-2 font-bold">${acao.date || ''}</p>
+                        <h4 class="font-display text-2xl text-brand-textDark mb-3 leading-tight">${acao.title}</h4>
+                        <p class="text-brand-textMuted font-sans text-lg leading-relaxed mb-6 flex-grow">${acao.description || ''}</p>
+                        <button class="w-full py-3 border border-brand-primary text-brand-primary rounded-full font-display font-bold text-lg hover:bg-brand-primary hover:text-white transition-colors" onclick="openModal('${imgStr}', '${titleStr}', '${descStr}')">
+                            Ver fotos
+                        </button>
+                    </div>
+                `;
+                carousel.appendChild(el);
+            });
+        }
+
+        function renderGaleria(galeriaData) {
+            const carouselGaleria = document.getElementById('carousel-galeria');
+            if(!carouselGaleria) return;
+            carouselGaleria.innerHTML = '';
+            galeriaData.forEach(item => {
+                const el = document.createElement('div');
+                el.className = "flex-none w-[80vw] md:w-[320px] snap-center rounded-[2rem] overflow-hidden group relative cursor-pointer shadow-sm hover:shadow-md border border-brand-cardBorder transition-all";
+                
+                const imgStr = (item.image || '').replace(/'/g, "\\'");
+                const titleStr = (item.title || '').replace(/'/g, "\\'");
+                const isVideo = item.type === 'video';
+                const descStr = isVideo ? 'Vídeo demonstrativo' : 'Foto da galeria';
+                const duration = item.duration || '00:00';
+                
+                el.innerHTML = `
+                    <div class="relative h-64 w-full" onclick="openModal('${imgStr}', '${titleStr}', '${descStr}')">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-brand-textDark/10 group-hover:bg-transparent transition-colors"></div>
+                        
+                        ${isVideo ? `
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-16 h-16 bg-white/90 backdrop-blur text-brand-primary rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 right-4 bg-black/60 text-white text-xs font-display px-3 py-1 rounded-full">
+                            ${duration}
+                        </div>
+                        ` : `
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-primary w-10 h-10 rounded-full flex items-center justify-center shadow-sm">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        `}
+                        
+                        <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-brand-textDark/80 to-transparent">
+                            <h4 class="font-display text-lg text-white leading-tight">${item.title}</h4>
+                        </div>
+                    </div>
+                `;
+                carouselGaleria.appendChild(el);
+            });
+        }
+
+        function renderAgenda(agendaData) {
+            const agendaContainer = document.getElementById('agenda-container');
+            if(!agendaContainer) return;
+            agendaContainer.innerHTML = '';
+            agendaData.forEach(item => {
+                const el = document.createElement('div');
+                el.className = `flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow`;
+                el.innerHTML = `
+                    <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
+                        <span class="font-display text-4xl leading-none">${item.date || ''}</span>
+                        <span class="font-display text-lg font-bold">${item.month || ''}</span>
+                    </div>
+                    <div class="flex-grow flex flex-col justify-center">
+                        <h4 class="font-display text-2xl text-brand-textDark mb-3">${item.title}</h4>
+                        <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                            <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                                <i class="far fa-clock mr-2"></i> ${item.time || ''}
+                            </span>
+                            <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                                <i class="fas fa-location-dot mr-2"></i> ${item.location || ''}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                agendaContainer.appendChild(el);
+            });
+        }
+
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function setupScrollLogic() {
+            const carousel = document.getElementById('carousel');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let isDown = false, startX, scrollLeft;
+
+            if (carousel) {
+                carousel.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    carousel.classList.add('active:cursor-grabbing');
+                    startX = e.pageX - carousel.offsetLeft;
+                    scrollLeft = carousel.scrollLeft;
+                });
+                carousel.addEventListener('mouseleave', () => { isDown = false; });
+                carousel.addEventListener('mouseup', () => { 
+                    isDown = false; 
+                    carousel.classList.remove('active:cursor-grabbing');
+                });
+                carousel.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - carousel.offsetLeft;
+                    const walk = (x - startX) * 2;
+                    carousel.scrollLeft = scrollLeft - walk;
+                });
+                if(prevBtn) prevBtn.addEventListener('click', () => { carousel.scrollBy({ left: -400, behavior: 'smooth' }); });
+                if(nextBtn) nextBtn.addEventListener('click', () => { carousel.scrollBy({ left: 400, behavior: 'smooth' }); });
+            }
+
+            const carouselGaleria = document.getElementById('carousel-galeria');
+            const prevGaleriaBtn = document.getElementById('prevGaleriaBtn');
+            const nextGaleriaBtn = document.getElementById('nextGaleriaBtn');
+            let isDownGaleria = false, startXGaleria, scrollLeftGaleria;
+
+            if (carouselGaleria) {
+                carouselGaleria.addEventListener('mousedown', (e) => {
+                    isDownGaleria = true;
+                    carouselGaleria.classList.add('active:cursor-grabbing');
+                    startXGaleria = e.pageX - carouselGaleria.offsetLeft;
+                    scrollLeftGaleria = carouselGaleria.scrollLeft;
+                });
+                carouselGaleria.addEventListener('mouseleave', () => { isDownGaleria = false; });
+                carouselGaleria.addEventListener('mouseup', () => { 
+                    isDownGaleria = false; 
+                    carouselGaleria.classList.remove('active:cursor-grabbing');
+                });
+                carouselGaleria.addEventListener('mousemove', (e) => {
+                    if (!isDownGaleria) return;
+                    e.preventDefault();
+                    const x = e.pageX - carouselGaleria.offsetLeft;
+                    const walk = (x - startXGaleria) * 2;
+                    carouselGaleria.scrollLeft = scrollLeftGaleria - walk;
+                });
+                if(prevGaleriaBtn) prevGaleriaBtn.addEventListener('click', () => { carouselGaleria.scrollBy({ left: -340, behavior: 'smooth' }); });
+                if(nextGaleriaBtn) nextGaleriaBtn.addEventListener('click', () => { carouselGaleria.scrollBy({ left: 340, behavior: 'smooth' }); });
+            }
+        }
+
+        const modal = document.getElementById('mediaModal');
+        const modalContent = document.getElementById('modalContent');
+        const body = document.body;
+
+        function openModal(imgSrc, title, desc) {
+            modalContent.innerHTML = `
+                <div class="flex flex-col md:flex-row h-full max-h-[85vh]">
+                    <div class="md:w-1/2 p-0 relative">
+                        <img src="${imgSrc}" class="w-full h-full object-cover" alt="${title}">
+                    </div>
+                    <div class="md:w-1/2 p-10 md:p-12 flex flex-col justify-center bg-white">
+                        <h4 class="font-display text-3xl text-brand-textDark mb-6">${title}</h4>
+                        <p class="font-sans text-brand-textMuted text-xl leading-relaxed">${desc}</p>
+                    </div>
+                </div>
+            `;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            body.classList.add('modal-active');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            body.classList.remove('modal-active');
+            setTimeout(() => { modalContent.innerHTML = ''; }, 300);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && !modal.classList.contains('opacity-0')) closeModal();
+        });
+    </script>
+</body>
+</html>
