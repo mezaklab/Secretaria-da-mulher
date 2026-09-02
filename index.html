@@ -11,10 +11,30 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts: Poppins para Títulos, Atkinson para Textos -->
+    <!-- Google Fonts: Poppins para Títulos, Atkinson para Textos, Playfair Display para Canindé + Delas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Playfair+Display:ital,wght@1,600;1,700;1,800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .titulo-caninde-delas {
+            font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        .brush-plus-stroke {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            transform: rotate(-4deg);
+            transition: transform 0.3s ease;
+        }
+        .brush-plus-stroke:hover {
+            transform: rotate(2deg) scale(1.08);
+        }
+    </style>
     
     <script>
         tailwind.config = {
@@ -109,13 +129,18 @@
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="flex justify-between items-center">
                     
-                    <!-- Wordmark -->
-                    <a href="#" class="font-display hover:opacity-80 transition-opacity">
-                        <div class="flex flex-col leading-none">
-                            <span class="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+                    <!-- Wordmark com Brasão (Proporção Valorizada e Imponente) -->
+                    <a href="#" class="inline-flex items-center gap-3 md:gap-3.5 group hover:opacity-95 transition-opacity select-none py-1" aria-label="Secretaria da Mulher - Canindé de São Francisco">
+                        <img 
+                            src="assets/img/brasao.png" 
+                            alt="Brasão de Canindé de São Francisco" 
+                            class="h-12 sm:h-13 md:h-14 lg:h-[58px] w-auto object-contain shrink-0 filter drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div class="flex flex-col justify-center leading-none">
+                            <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight font-display leading-none drop-shadow-sm">
                                 Secretaria da Mulher
                             </span>
-                            <span class="text-[10px] md:text-xs font-medium text-white/80 tracking-wider uppercase mt-1">
+                            <span class="text-xs sm:text-xs md:text-sm font-semibold text-white/90 tracking-wider uppercase mt-1 md:mt-1.5 leading-none">
                                 Canindé de São Francisco
                             </span>
                         </div>
@@ -176,7 +201,7 @@
                     
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a 
-                            href="#acoes" 
+                            href="#galeria" 
                             class="inline-flex items-center justify-center bg-white text-[#4A3260] font-bold px-6 md:px-8 py-3.5 rounded-full shadow-lg hover:bg-purple-50 transition-all duration-300 hover:scale-105 active:scale-95 text-base md:text-lg font-display"
                         >
                             Conheça a Secretaria
@@ -209,7 +234,7 @@
                         <img 
                           src="secretaria-foto.png" 
                           alt="Luana Machado - Secretária da Mulher" 
-                          class="w-full h-full object-contain object-bottom drop-shadow-xl translate-y-3 md:translate-y-5 pointer-events-none transition-all duration-300 ease-out group-hover:scale-105" 
+                          class="w-[115%] max-w-none md:w-full md:max-w-full h-full object-contain object-bottom drop-shadow-xl translate-y-6 md:translate-y-4 pointer-events-none transition-all duration-300 ease-out group-hover:scale-105" 
                         />
                       </div>
 
@@ -263,8 +288,48 @@
                 </div>
             </div>
 
-            <div id="carousel" class="carousel-container flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible snap-x snap-mandatory gap-4 md:gap-8 pb-8 pt-4 cursor-grab md:cursor-auto active:cursor-grabbing scrollbar-none">
-                <!-- Injetado via JS -->
+            <div id="acoes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                <!-- Card 1: Saúde -->
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer" onclick="openMediaModal({ titulo: 'Palestra sobre prevenção e cuidados', descricao: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Saúde e Bem-estar' })">
+                    <div>
+                    <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
+                        <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">Saúde e Bem-estar</span>
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80" alt="Ação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <span class="text-xs font-semibold text-purple-600 block mb-1">24 Out 2024</span>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Palestra sobre prevenção e cuidados</h3>
+                    <p class="text-slate-600 text-sm line-clamp-3 mb-6">Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.</p>
+                    </div>
+                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto">Ver fotos</button>
+                </div>
+
+                <!-- Card 2: Apoio Jurídico -->
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer" onclick="openMediaModal({ titulo: 'Mutirão de Documentação', descricao: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Apoio Jurídico' })">
+                    <div>
+                    <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
+                        <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">Apoio Jurídico</span>
+                        <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80" alt="Ação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <span class="text-xs font-semibold text-purple-600 block mb-1">15 Out 2024</span>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Mutirão de Documentação</h3>
+                    <p class="text-slate-600 text-sm line-clamp-3 mb-6">Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.</p>
+                    </div>
+                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto">Ver fotos</button>
+                </div>
+
+                <!-- Card 3: Ações Comunitárias -->
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer" onclick="openMediaModal({ titulo: 'Caminhada Agosto Lilás', descricao: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Ações Comunitárias & Rua' })">
+                    <div>
+                    <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
+                        <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">Ações Comunitárias & Rua</span>
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Ação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <span class="text-xs font-semibold text-purple-600 block mb-1">01 Set 2026</span>
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">Caminhada Agosto Lilás</h3>
+                    <p class="text-slate-600 text-sm line-clamp-3 mb-6">Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.</p>
+                    </div>
+                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto">Ver fotos</button>
+                </div>
             </div>
         </div>
     </section>
@@ -279,29 +344,190 @@
             <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">O preventivo é rápido, não dói e salva vidas. Saiba onde realizar o seu nas unidades de saúde de Canindé.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6">
+        <div id="saude-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1: Seu preventivo -->
+            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
+                titulo: 'Seu preventivo',
+                icone: 'fa-droplet',
+                descricaoCurta: 'Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.',
+                descricaoCompleta: 'O exame citopatológico (preventivo ou Papanicolau) é a principal estratégia para detectar precocemente lesões no colo do útero antes que se tornem câncer. Em Canindé de São Francisco, o atendimento é humanizado, sem filas e com profissionais capacitados para oferecer o melhor acolhimento e suporte a cada mulher.',
+                local: 'Todas as Unidades Básicas de Saúde (UBS) de Canindé de São Francisco',
+                horario: 'Segunda a Sexta, das 08h às 13h (Plantões noturnos em datas especiais)',
+                publico: 'Mulheres de 25 a 64 anos ou que já iniciaram a vida sexual ativa',
+                documentos: 'Cartão do SUS, RG e Comprovante de Residência',
+                imagem: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80'
+            })">
+                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6 group-hover:bg-purple-100 group-hover:scale-110 transition-all duration-300">
                     <i class="fas fa-droplet text-3xl"></i>
                 </div>
-                <h3 class="font-display text-2xl text-brand-textDark mb-3">Seu preventivo</h3>
-                <p class="font-sans text-brand-textMuted text-lg">Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.</p>
+                <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">Seu preventivo</h3>
+                <p class="font-sans text-brand-textMuted text-lg mb-6">Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.</p>
+                <span class="mt-auto inline-flex items-center text-brand-primary font-bold text-sm group-hover:underline">
+                    Ver detalhes do atendimento <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                </span>
             </div>
 
-            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6">
+            <!-- Card 2: Proteção HPV -->
+            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
+                titulo: 'Proteção HPV',
+                icone: 'fa-shield-virus',
+                descricaoCurta: 'Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.',
+                descricaoCompleta: 'A vacina contra o Papilomavírus Humano (HPV) previne contra os tipos de vírus responsáveis por mais de 70% dos casos de câncer de colo de útero. A imunização é segura, altamente eficaz e gratuita nas salas de vacina do município.',
+                local: 'Salas de Vacina de todas as UBSs do município',
+                horario: 'Segunda a Sexta, das 08h às 13h',
+                publico: 'Meninas e meninos de 9 a 14 anos, e imunossuprimidos até 45 anos',
+                documentos: 'Caderneta de Vacinação, Cartão do SUS e Documento com foto',
+                imagem: 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&q=80'
+            })">
+                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6 group-hover:bg-purple-100 group-hover:scale-110 transition-all duration-300">
                     <i class="fas fa-shield-virus text-3xl"></i>
                 </div>
-                <h3 class="font-display text-2xl text-brand-textDark mb-3">Proteção HPV</h3>
-                <p class="font-sans text-brand-textMuted text-lg">Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.</p>
+                <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">Proteção HPV</h3>
+                <p class="font-sans text-brand-textMuted text-lg mb-6">Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.</p>
+                <span class="mt-auto inline-flex items-center text-brand-primary font-bold text-sm group-hover:underline">
+                    Ver detalhes do atendimento <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                </span>
             </div>
 
-            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6">
+            <!-- Card 3: Horário noturno -->
+            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
+                titulo: 'Horário noturno',
+                icone: 'fa-moon',
+                descricaoCurta: 'Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.',
+                descricaoCompleta: 'Para garantir que nenhuma trabalhadora, autônoma ou estudante fique sem atendimento preventivo, a Secretaria da Mulher em parceria com a Secretaria de Saúde disponibiliza plantões noturnos com exames preventivos, vacinação, testes rápidos e acolhimento psicológico.',
+                local: 'UBS Sede e Postos Estratégicos Itinerantes',
+                horario: 'Plantões especiais das 18h às 21h (consulte cronograma da Agenda)',
+                publico: 'Trabalhadoras e mulheres que não podem comparecer em horário comercial',
+                documentos: 'Documento oficial com foto e Cartão do SUS',
+                imagem: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800&q=80'
+            })">
+                <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6 group-hover:bg-purple-100 group-hover:scale-110 transition-all duration-300">
                     <i class="fas fa-moon text-3xl"></i>
                 </div>
-                <h3 class="font-display text-2xl text-brand-textDark mb-3">Horário noturno</h3>
-                <p class="font-sans text-brand-textMuted text-lg">Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.</p>
+                <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">Horário noturno</h3>
+                <p class="font-sans text-brand-textMuted text-lg mb-6">Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.</p>
+                <span class="mt-auto inline-flex items-center text-brand-primary font-bold text-sm group-hover:underline">
+                    Ver detalhes do atendimento <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Canindé + Delas -->
+    <section id="caninde-delas" class="py-24 bg-purple-50/50 border-t border-brand-borderMuted relative overflow-hidden" style="z-index: 10;">
+        <!-- Elemento Decorativo Sutil de Fundo -->
+        <div class="w-72 h-72 bg-brand-secondary/10 rounded-full blur-3xl absolute -top-20 -left-20 pointer-events-none"></div>
+        <div class="w-72 h-72 bg-purple-200/20 rounded-full blur-3xl absolute -bottom-20 -right-20 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Cabeçalho da Seção (Empilhamento Vertical Centralizado) -->
+            <div class="flex flex-col items-center text-center mb-16 max-w-3xl mx-auto">
+                <!-- 1. Badge PROJETO ESTRUTURANTE -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 text-brand-primary text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
+                    <i class="fas fa-heart text-brand-secondary"></i> Projeto Estruturante
+                </div>
+
+                <!-- 2. Título Canindé + Delas em Itálico Nobre -->
+                <h2 id="caninde-delas-titulo" class="titulo-caninde-delas text-4xl sm:text-5xl md:text-6xl text-brand-textDark mb-4 tracking-tight w-full flex items-center justify-center gap-2.5 sm:gap-3.5 flex-wrap">
+                    <span>Canindé</span>
+                    <span class="brush-plus-stroke text-brand-primary" title="+" aria-label="+">
+                        <svg class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 drop-shadow-sm inline-block" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="brushPlusGradItalic" x1="15" y1="10" x2="85" y2="90" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#9C4EC4"/>
+                                    <stop offset="50%" stop-color="#7A3E9D"/>
+                                    <stop offset="100%" stop-color="#552473"/>
+                                </linearGradient>
+                            </defs>
+                            <!-- Traço Vertical com textura de pincel e inclinação harmônica -->
+                            <path d="M49 10C46 11 44 15 45 21C46 27 44 34 45 42C45.5 47 45 50 45 55C45.5 63 45 72 46.5 80C47.2 84 49 88 52.5 88.5C56 88.5 58 84.5 57.5 79.5C57 74 58 66 57.5 58.5C57 51 58 45.5 57.5 38C57 28 58 19 55.5 13.5C54 10 51.5 10 49 10Z" fill="url(#brushPlusGradItalic)"/>
+                            <!-- Traço Horizontal com extremidades fluidas -->
+                            <path d="M12 50.5C12.5 47 16 45 22 45.5C28 46 37 44.5 46 45C52 45.2 57 44.5 64 45C73 45.5 82 44.5 87 47.5C90.5 49.5 90 53.5 86.5 55C82.5 57 74 55.8 65 56.2C56.5 56.6 48 57.5 39.5 57C30.5 56.4 20 57.8 15 55.2C12.8 54 11.8 52.2 12 50.5Z" fill="url(#brushPlusGradItalic)"/>
+                            <!-- Salpicos Orgânicos de Tinta -->
+                            <circle cx="58" cy="16" r="2" fill="#9C4EC4" opacity="0.6"/>
+                            <circle cx="84" cy="42" r="1.5" fill="#7A3E9D" opacity="0.5"/>
+                            <circle cx="16" cy="59" r="1.8" fill="#7A3E9D" opacity="0.5"/>
+                            <circle cx="43" cy="84" r="1.5" fill="#552473" opacity="0.6"/>
+                        </svg>
+                    </span>
+                    <span>Delas</span>
+                </h2>
+
+                <!-- 3. Subtítulo / Descrição Curta -->
+                <p id="caninde-delas-subtitulo" class="text-lg md:text-xl font-sans text-brand-textMuted leading-relaxed max-w-2xl mx-auto">
+                    Mais autonomia, protagonismo e oportunidades reais para transformar a vida de cada mulher de Canindé.
+                </p>
+            </div>
+
+            <!-- Bloco de Texto Institucional / Descrição do Projeto -->
+            <div class="bg-white border border-brand-cardBorder rounded-[2.5rem] p-8 md:p-12 shadow-sm mb-16 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100/40 rounded-bl-[4rem] pointer-events-none"></div>
+                
+                <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start relative z-10">
+                    <div class="w-16 h-16 rounded-2xl bg-purple-100 text-brand-primary flex items-center justify-center text-3xl shrink-0 shadow-sm">
+                        <i class="fas fa-female"></i>
+                    </div>
+                    <div class="flex-grow text-center lg:text-left">
+                        <h3 class="font-display text-2xl md:text-3xl text-brand-textDark font-bold mb-4">Sobre o Programa</h3>
+                        <div id="caninde-delas-descricao" class="font-sans text-slate-700 text-base md:text-lg leading-relaxed space-y-4">
+                            <p>O <strong>Canindé + Delas</strong> é o grande programa integrado de emancipação feminina, qualificação profissional e garantia de direitos do município de Canindé de São Francisco.</p>
+                            <p>Articulando ações de geração de renda, capacitação profissional, apoio a microempreendedoras, mutirões de saúde integral e rodas de cidadania, o programa atua diretamente nos bairros e comunidades rurais, levando oportunidades transformadoras a quem mais precisa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Galeria de Fotos do Projeto -->
+            <div>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+                    <div>
+                        <h3 class="font-display text-2xl md:text-3xl text-brand-textDark font-bold">Galeria de Registros</h3>
+                        <p class="text-sm font-sans text-brand-textMuted">Momentos e conquistas do programa Canindé + Delas</p>
+                    </div>
+                    <span id="caninde-delas-badge-count" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-purple-100 text-brand-primary">
+                        Fotos do Projeto
+                    </span>
+                </div>
+
+                <!-- Grid Responsivo de Fotos -->
+                <div id="caninde-delas-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+                    <!-- Foto 1 -->
+                    <div class="relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60" onclick="openCanindeDelasGallery(0)">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80" alt="Canindé + Delas 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-xs font-semibold flex items-center gap-1.5">
+                                <i class="fas fa-search-plus"></i> Ampliar foto
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Foto 2 -->
+                    <div class="relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60" onclick="openCanindeDelasGallery(1)">
+                        <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80" alt="Canindé + Delas 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-xs font-semibold flex items-center gap-1.5">
+                                <i class="fas fa-search-plus"></i> Ampliar foto
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Foto 3 -->
+                    <div class="relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60" onclick="openCanindeDelasGallery(2)">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Canindé + Delas 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-xs font-semibold flex items-center gap-1.5">
+                                <i class="fas fa-search-plus"></i> Ampliar foto
+                            </span>
+                        </div>
+                    </div>
+                    <!-- Foto 4 -->
+                    <div class="relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60" onclick="openCanindeDelasGallery(3)">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80" alt="Canindé + Delas 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <span class="text-white text-xs font-semibold flex items-center gap-1.5">
+                                <i class="fas fa-search-plus"></i> Ampliar foto
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -385,9 +611,56 @@
             </div>
         </div>
 
-        <div id="carousel-galeria" class="carousel-container flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 cursor-grab active:cursor-grabbing">
-            <!-- Galeria items injetados via JS -->
-        </div>
+        <div id="galeria-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+  <!-- Item 1: Vídeo Depoimento -->
+  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm" onclick="openMediaModal({titulo: 'Depoimento: Dona Maria', descricao: 'Relato emocionante sobre o acolhimento recebido na secretaria.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Vídeo'})">
+    <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80" alt="Depoimento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
+    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
+      <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+        <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="flex items-center justify-between text-white text-xs font-semibold">
+        <span>Depoimento: Dona Maria</span>
+        <span class="bg-black/40 px-2 py-0.5 rounded-full">02:15</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 2: Foto Caminhada -->
+  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm" onclick="openMediaModal({titulo: 'Caminhada de abertura', descricao: 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Foto'})">
+    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80" alt="Caminhada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
+    <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow">
+      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zm0-2a5 5 0 110 10 5 5 0 010-10zm7.5-3H17l-1.5-2h-7L7 4H4.5A2.5 2.5 0 002 6.5v11A2.5 2.5 0 004.5 20h15a2.5 2.5 0 002.5-2.5v-11A2.5 2.5 0 0019.5 4z"/></svg>
+    </div>
+    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-purple-950/80 to-transparent p-4 text-white text-xs font-semibold">
+      Caminhada de abertura
+    </div>
+  </div>
+
+  <!-- Item 3: Vídeo Preventivo -->
+  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm" onclick="openMediaModal({titulo: 'Como é o preventivo?', descricao: 'Explicativo com a equipe médica desmistificando o exame.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Vídeo'})">
+    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Preventivo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
+    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
+      <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+        <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="flex items-center justify-between text-white text-xs font-semibold">
+        <span>Como é o preventivo?</span>
+        <span class="bg-black/40 px-2 py-0.5 rounded-full">05:30</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Item 4: Nossas Oficinas -->
+  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm flex items-end p-4" onclick="openMediaModal({titulo: 'Nossas oficinas', descricao: 'Capacitação prática em artesanato e empreendedorismo local.', imagem: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80', categoria: 'Foto'})">
+    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80" alt="Nossas Oficinas" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
+    <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow z-10">
+      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zm0-2a5 5 0 110 10 5 5 0 010-10zm7.5-3H17l-1.5-2h-7L7 4H4.5A2.5 2.5 0 002 6.5v11A2.5 2.5 0 004.5 20h15a2.5 2.5 0 002.5-2.5v-11A2.5 2.5 0 0019.5 4z"/></svg>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/70 to-transparent"></div>
+    <span class="relative z-10 text-white text-xs font-semibold">Nossas oficinas</span>
+  </div>
+</div>
     </section>
 
     <!-- Agenda -->
@@ -398,7 +671,51 @@
         </div>
         
         <div id="agenda-container" class="flex flex-col gap-6">
-            <!-- Injetado via JS -->
+            <div class="flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow">
+                <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
+                    <span class="font-display text-4xl leading-none">20</span>
+                    <span class="font-display text-lg font-bold">Out</span>
+                </div>
+                <div class="flex-grow flex flex-col justify-center">
+                    <h4 class="font-display text-2xl text-brand-textDark mb-3">Mutirão de saúde e acolhimento</h4>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                        <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                            <i class="fas fa-clock mr-2 text-brand-secondary"></i> 08h - 13h
+                        </span>
+                        <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                            <i class="fas fa-map-marker-alt mr-2 text-brand-secondary"></i> Clube Altemar Dutra
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center">
+                    <span class="inline-block px-5 py-2.5 bg-green-100 text-green-700 rounded-full font-bold text-sm tracking-wide border border-green-200">
+                        Realizado
+                    </span>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow">
+                <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
+                    <span class="font-display text-4xl leading-none">22</span>
+                    <span class="font-display text-lg font-bold">Out</span>
+                </div>
+                <div class="flex-grow flex flex-col justify-center">
+                    <h4 class="font-display text-2xl text-brand-textDark mb-3">Roda de conversa sobre direitos</h4>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+                        <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                            <i class="fas fa-clock mr-2 text-brand-secondary"></i> 18h - 21h
+                        </span>
+                        <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                            <i class="fas fa-map-marker-alt mr-2 text-brand-secondary"></i> Assentamento Cuiabá
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center">
+                    <span class="inline-block px-5 py-2.5 bg-blue-100 text-blue-700 rounded-full font-bold text-sm tracking-wide border border-blue-200">
+                        Confirmado
+                    </span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -408,13 +725,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-16">
                 
                 <div>
-                    <div class="flex flex-col leading-none mb-6 font-display">
-                        <span class="text-3xl font-extrabold text-white tracking-tight">
-                            Secretaria da Mulher
-                        </span>
-                        <span class="text-sm font-medium text-white/80 tracking-wider uppercase mt-2">
-                            Canindé de São Francisco
-                        </span>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img 
+                            src="assets/img/brasao.png" 
+                            alt="Brasão de Canindé de São Francisco" 
+                            class="h-14 md:h-16 w-auto object-contain shrink-0 filter drop-shadow-md"
+                        />
+                        <div class="flex flex-col leading-none font-display">
+                            <span class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+                                Secretaria da Mulher
+                            </span>
+                            <span class="text-xs md:text-sm font-medium text-white/80 tracking-wider uppercase mt-1.5">
+                                Canindé de São Francisco
+                            </span>
+                        </div>
                     </div>
                     <p class="text-white/80 font-sans text-lg mb-8 max-w-sm">Estamos de portas abertas para te receber, te ouvir e garantir os seus direitos todos os dias do ano.</p>
                     
@@ -485,119 +809,380 @@
 
     <!-- DADOS E LÓGICA JS -->
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const response = await fetch('api.php');
-                const data = await response.json();
-                
-                renderAcoes(data.acoes || []);
-                renderGaleria(data.galeria || []);
-                renderAgenda(data.agenda || []);
-                setupScrollLogic();
-            } catch (error) {
-                console.error("Erro ao carregar dados dinâmicos da Hostinger:", error);
+        document.addEventListener('DOMContentLoaded', () => {
+            // Função centralizada de leitura — SEMPRE lê do localStorage na hora certa
+            function loadAndRender() {
+                let acoesRaw = null, galeriaRaw = null, agendaRaw = null, saudeRaw = null, canindeRaw = null;
+                try { acoesRaw   = JSON.parse(localStorage.getItem('sec_mulher_acoes'));   } catch(e) {}
+                try { galeriaRaw = JSON.parse(localStorage.getItem('sec_mulher_galeria')); } catch(e) {}
+                try { agendaRaw  = JSON.parse(localStorage.getItem('sec_mulher_agenda'));  } catch(e) {}
+                try { saudeRaw   = JSON.parse(localStorage.getItem('sec_mulher_saude'));   } catch(e) {}
+                try { canindeRaw = JSON.parse(localStorage.getItem('sec_mulher_caninde_delas')); } catch(e) {}
+
+                // Só renderiza dinamicamente se houver dados reais no localStorage.
+                // Se localStorage vazio/nulo → o HTML estático (fallback) permanece visível.
+                if (Array.isArray(acoesRaw)   && acoesRaw.length   > 0) renderAcoes(acoesRaw);
+                if (Array.isArray(galeriaRaw) && galeriaRaw.length > 0) renderGaleria(galeriaRaw);
+                if (Array.isArray(agendaRaw)  && agendaRaw.length  > 0) renderAgenda(agendaRaw);
+                if (Array.isArray(saudeRaw)   && saudeRaw.length   > 0) renderSaude(saudeRaw);
+                if (canindeRaw && typeof canindeRaw === 'object') renderCanindeDelas(canindeRaw);
             }
+
+            loadAndRender();
+            setupScrollLogic();
+
+            // Sincronização entre abas: admin salva → index atualiza automaticamente
+            window.addEventListener('storage', (e) => {
+                if (['sec_mulher_acoes', 'sec_mulher_galeria', 'sec_mulher_agenda', 'sec_mulher_saude', 'sec_mulher_caninde_delas'].includes(e.key)) {
+                    loadAndRender();
+                }
+            });
         });
 
-        function renderAcoes(acoesData) {
-            const carousel = document.getElementById('carousel');
-            if(!carousel) return;
-            carousel.innerHTML = '';
-            acoesData.forEach(acao => {
+        // Controle de fotos do Canindé + Delas para Lightbox
+        let canindeDelasPhotosList = [
+            'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80',
+            'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80',
+            'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+            'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80'
+        ];
+
+        function renderCanindeDelas(data) {
+            if (!data) return;
+
+            const subtituloEl = document.getElementById('caninde-delas-subtitulo');
+            const descricaoEl = document.getElementById('caninde-delas-descricao');
+            const gridEl = document.getElementById('caninde-delas-grid');
+            const countBadge = document.getElementById('caninde-delas-badge-count');
+
+            if (subtituloEl && data.subtitulo) {
+                subtituloEl.innerText = data.subtitulo;
+            }
+
+            if (descricaoEl && data.descricao) {
+                // Formata parágrafos se houver quebras de linha
+                const paragraphs = data.descricao.split('\n').filter(p => p.trim());
+                if (paragraphs.length > 0) {
+                    descricaoEl.innerHTML = paragraphs.map(p => `<p>${p}</p>`).join('');
+                } else {
+                    descricaoEl.innerHTML = `<p>${data.descricao}</p>`;
+                }
+            }
+
+            if (Array.isArray(data.fotos) && data.fotos.length > 0) {
+                canindeDelasPhotosList = [...data.fotos];
+                if (countBadge) {
+                    countBadge.innerText = `${canindeDelasPhotosList.length} Foto${canindeDelasPhotosList.length > 1 ? 's' : ''} do Projeto`;
+                }
+
+                if (gridEl) {
+                    gridEl.innerHTML = '';
+                    canindeDelasPhotosList.forEach((foto, idx) => {
+                        const thumb = document.createElement('div');
+                        thumb.className = 'relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60';
+                        thumb.onclick = () => openCanindeDelasGallery(idx);
+                        thumb.innerHTML = `
+                            <img src="${foto}" alt="Canindé + Delas ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                <span class="text-white text-xs font-semibold flex items-center gap-1.5">
+                                    <i class="fas fa-search-plus"></i> Ampliar foto
+                                </span>
+                            </div>
+                        `;
+                        gridEl.appendChild(thumb);
+                    });
+                }
+            }
+        }
+
+        window.openCanindeDelasGallery = function(startIndex = 0) {
+            const fotos = canindeDelasPhotosList.length > 0 ? canindeDelasPhotosList : [
+                'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'
+            ];
+            
+            const firstImg = fotos[startIndex] || fotos[0];
+            const remaining = fotos.filter((_, idx) => idx !== startIndex);
+
+            openMediaModal({
+                titulo: 'Programa Canindé + Delas',
+                descricao: 'Registro das ações, oficinas e capacitações do programa Canindé + Delas.',
+                imagem: firstImg,
+                categoria: 'Canindé + Delas',
+                galeria: remaining
+            });
+        };
+
+        function renderSaude(saudeData) {
+            const container = document.getElementById('saude-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+            container.className = 'grid grid-cols-1 md:grid-cols-3 gap-8';
+
+            saudeData.forEach(item => {
                 const el = document.createElement('div');
-                el.className = "flex-none w-[85vw] sm:w-[320px] md:w-auto snap-center bg-white border border-brand-cardBorder rounded-[2rem] overflow-hidden flex flex-col group shadow-sm hover:shadow-md transition-shadow";
-                const imgStr = (acao.image || '').replace(/'/g, "\\'");
-                const titleStr = (acao.title || '').replace(/'/g, "\\'");
-                const descStr = (acao.description || '').replace(/'/g, "\\'");
-                
+                el.className = 'bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group';
+                el.onclick = () => openSaudeModal(item);
+
+                const iconeClass = item.icone || 'fa-droplet';
+                const titulo = item.titulo || 'Serviço de Saúde';
+                const descCurta = item.descricaoCurta || item.descricao || '';
+
                 el.innerHTML = `
-                    <div class="relative h-44 sm:h-48 cursor-pointer overflow-hidden rounded-t-[2rem]" onclick="openModal('${imgStr}', '${titleStr}', '${descStr}')">
-                        <img src="${acao.image}" alt="${acao.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-brand-badgeBg text-brand-badgeText px-4 py-1.5 rounded-full font-display font-bold text-sm shadow-sm">
-                            ${acao.category || 'Ação'}
+                    <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6 group-hover:bg-purple-100 group-hover:scale-110 transition-all duration-300">
+                        <i class="fas ${iconeClass} text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">${titulo}</h3>
+                    <p class="font-sans text-brand-textMuted text-lg mb-6">${descCurta}</p>
+                    <span class="mt-auto inline-flex items-center text-brand-primary font-bold text-sm group-hover:underline">
+                        Ver detalhes do atendimento <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
+                    </span>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function openSaudeModal(item) {
+            const modal = document.getElementById('mediaModal');
+            const modalContent = document.getElementById('modalContent');
+            const body = document.body;
+            if (!modal || !modalContent) return;
+
+            const titulo = item.titulo || 'Serviço de Saúde';
+            const icone = item.icone || 'fa-heartbeat';
+            const descCurta = item.descricaoCurta || '';
+            const descCompleta = item.descricaoCompleta || item.descricao || descCurta;
+            const local = item.local || 'Unidades Básicas de Saúde (UBS) do Município';
+            const horario = item.horario || 'Segunda a Sexta, das 08h às 13h';
+            const publico = item.publico || 'Mulheres do município de Canindé de São Francisco';
+            const documentos = item.documentos || 'Cartão do SUS e Documento oficial com foto';
+            const imagem = item.imagem || '';
+
+            modalContent.innerHTML = `
+                <div class="flex flex-col lg:flex-row h-full max-h-[90vh]">
+                    ${imagem ? `
+                    <!-- Coluna da Foto (quando houver imagem) -->
+                    <div class="lg:w-5/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[260px] lg:min-h-[480px]">
+                        <img src="${imagem}" class="w-full h-full object-cover" alt="${titulo}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-full bg-white/90 text-brand-primary flex items-center justify-center text-xl shadow-lg">
+                                    <i class="fas ${icone}"></i>
+                                </div>
+                                <span class="text-white font-display font-bold text-lg">${titulo}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-8 flex flex-col flex-grow">
-                        <p class="text-sm font-display text-brand-primary mb-2 font-bold">${acao.date || ''}</p>
-                        <h4 class="font-display text-2xl text-brand-textDark mb-3 leading-tight">${acao.title}</h4>
-                        <p class="text-brand-textMuted font-sans text-lg leading-relaxed mb-6 flex-grow">${acao.description || ''}</p>
-                        <button class="w-full py-3 border border-brand-primary text-brand-primary rounded-full font-display font-bold text-lg hover:bg-brand-primary hover:text-white transition-colors" onclick="openModal('${imgStr}', '${titleStr}', '${descStr}')">
-                            Ver fotos
-                        </button>
+                    ` : ''}
+
+                    <!-- Coluna com os Detalhes Completos -->
+                    <div class="${imagem ? 'lg:w-7/12' : 'w-full'} p-8 lg:p-12 flex flex-col justify-between bg-white overflow-y-auto">
+                        <div>
+                            <!-- Header do Serviço -->
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-14 h-14 rounded-2xl bg-purple-100 text-brand-primary flex items-center justify-center text-2xl shrink-0 shadow-sm">
+                                    <i class="fas ${icone}"></i>
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                                        <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Saúde Preventiva Municipal</span>
+                                    </div>
+                                    <h3 class="font-display text-2xl lg:text-3xl font-extrabold text-brand-textDark leading-tight mt-1">${titulo}</h3>
+                                </div>
+                            </div>
+
+                            <!-- Descrição Completa -->
+                            <div class="mb-8">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 font-display">Sobre o Serviço</h4>
+                                <p class="font-sans text-slate-700 text-base lg:text-lg leading-relaxed bg-purple-50/50 p-5 rounded-2xl border border-purple-100/60">${descCompleta}</p>
+                            </div>
+
+                            <!-- Grid com Informações Práticas -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                                <!-- Local -->
+                                <div class="p-4 rounded-2xl border border-gray-100 bg-gray-50/60 flex items-start gap-3.5">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-brand-primary flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Onde Realizar</h5>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${local}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Horário -->
+                                <div class="p-4 rounded-2xl border border-gray-100 bg-gray-50/60 flex items-start gap-3.5">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-brand-primary flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Horários de Atendimento</h5>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${horario}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Público-alvo -->
+                                <div class="p-4 rounded-2xl border border-gray-100 bg-gray-50/60 flex items-start gap-3.5">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-brand-primary flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Público-Alvo</h5>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${publico}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Documentos -->
+                                <div class="p-4 rounded-2xl border border-gray-100 bg-gray-50/60 flex items-start gap-3.5">
+                                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-brand-primary flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fas fa-id-card"></i>
+                                    </div>
+                                    <div>
+                                        <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Documentos Necessários</h5>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${documentos}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rodapé do Modal -->
+                        <div class="pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <div class="flex items-center gap-2 text-xs text-purple-700 font-medium">
+                                <i class="fas fa-shield-alt text-brand-primary"></i> Atendimento 100% gratuito e garantido pelo SUS
+                            </div>
+                            <button type="button" class="w-full sm:w-auto px-6 py-2.5 bg-brand-primary hover:bg-brand-secondary text-white font-semibold rounded-full text-sm transition-all shadow-sm" onclick="closeModal()">
+                                Fechar Detalhes
+                            </button>
+                        </div>
                     </div>
+                </div>
+            `;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            body.classList.add('modal-active');
+        }
+
+        function renderAcoes(acoesData) {
+            const container = document.getElementById('acoes-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+            container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10';
+
+            acoesData.forEach(acao => {
+                // Normaliza campos — suporta {title/titulo}, {image/imagem}, {category/categoria}
+                const title    = acao.title       || acao.titulo    || '';
+                const desc     = acao.description || acao.descricao || '';
+                const image    = acao.image       || acao.imagem    || '';
+                const category = acao.category    || acao.categoria || 'Ação';
+                const date     = acao.date        || '';
+
+                const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
+
+                const el = document.createElement('div');
+                el.className = 'bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-md transition-shadow';
+                el.innerHTML = `
+                    <div onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\` })'>
+                        <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
+                            <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">${category}</span>
+                            <img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
+                        </div>
+                        <span class="text-xs font-semibold text-purple-600 block mb-1">${date}</span>
+                        <h3 class="text-xl font-bold text-slate-800 mb-2 line-clamp-2">${title}</h3>
+                        <p class="text-slate-600 text-sm line-clamp-3 mb-6 leading-relaxed">${desc}</p>
+                    </div>
+                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto"
+                        onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\` })'>
+                        Ver fotos
+                    </button>
                 `;
-                carousel.appendChild(el);
+                container.appendChild(el);
             });
         }
 
         function renderGaleria(galeriaData) {
-            const carouselGaleria = document.getElementById('carousel-galeria');
-            if(!carouselGaleria) return;
-            carouselGaleria.innerHTML = '';
+            const container = document.getElementById('galeria-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+            container.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8';
+
             galeriaData.forEach(item => {
+                const title    = item.title       || item.titulo    || '';
+                const desc     = item.description || item.descricao || 'Registro das ações da Secretaria da Mulher';
+                const image    = item.image       || item.imagem    || '';
+                const category = item.category    || item.categoria || (item.type === 'video' ? 'Vídeo' : 'Foto');
+                const isVideo  = item.type === 'video';
+                const duration = item.duration    || '';
+
+                const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
+
                 const el = document.createElement('div');
-                el.className = "flex-none w-[80vw] md:w-[320px] snap-center rounded-[2rem] overflow-hidden group relative cursor-pointer shadow-sm hover:shadow-md border border-brand-cardBorder transition-all";
-                
-                const imgStr = (item.image || '').replace(/'/g, "\\'");
-                const titleStr = (item.title || '').replace(/'/g, "\\'");
-                const isVideo = item.type === 'video';
-                const descStr = isVideo ? 'Vídeo demonstrativo' : 'Foto da galeria';
-                const duration = item.duration || '00:00';
-                
+                el.className = 'relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm';
+                el.onclick = () => openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
+
                 el.innerHTML = `
-                    <div class="relative h-64 w-full" onclick="openModal('${imgStr}', '${titleStr}', '${descStr}')">
-                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-brand-textDark/10 group-hover:bg-transparent transition-colors"></div>
-                        
-                        ${isVideo ? `
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-16 h-16 bg-white/90 backdrop-blur text-brand-primary rounded-full flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                                <i class="fas fa-play text-2xl ml-1"></i>
-                            </div>
+                    <img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
+                        onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
+                    ${isVideo ? `
+                    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4 pointer-events-none">
+                        <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
-                        <div class="absolute bottom-4 right-4 bg-black/60 text-white text-xs font-display px-3 py-1 rounded-full">
-                            ${duration}
+                        <div class="flex items-center justify-between text-white text-xs font-semibold">
+                            <span class="line-clamp-1">${safe(title)}</span>
+                            ${duration ? `<span class="bg-black/40 px-2 py-0.5 rounded-full ml-2 shrink-0">${duration}</span>` : ''}
                         </div>
-                        ` : `
-                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-brand-primary w-10 h-10 rounded-full flex items-center justify-center shadow-sm">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                        `}
-                        
-                        <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-brand-textDark/80 to-transparent">
-                            <h4 class="font-display text-lg text-white leading-tight">${item.title}</h4>
-                        </div>
+                    </div>` : `
+                    <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow pointer-events-none">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zm0-2a5 5 0 110 10 5 5 0 010-10zm7.5-3H17l-1.5-2h-7L7 4H4.5A2.5 2.5 0 002 6.5v11A2.5 2.5 0 004.5 20h15a2.5 2.5 0 002.5-2.5v-11A2.5 2.5 0 0019.5 4z"/></svg>
                     </div>
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-purple-950/80 to-transparent p-4 text-white text-xs font-semibold pointer-events-none line-clamp-2">
+                        ${safe(title)}
+                    </div>`}
                 `;
-                carouselGaleria.appendChild(el);
+                container.appendChild(el);
             });
         }
 
         function renderAgenda(agendaData) {
-            const agendaContainer = document.getElementById('agenda-container');
-            if(!agendaContainer) return;
-            agendaContainer.innerHTML = '';
+            const container = document.getElementById('agenda-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+
             agendaData.forEach(item => {
                 const el = document.createElement('div');
-                el.className = `flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow`;
+                el.className = 'flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow';
+
+                let colorClass = 'bg-yellow-100 text-yellow-700 border-yellow-200';
+                if (item.status === 'Realizado')  colorClass = 'bg-green-100 text-green-700 border-green-200';
+                if (item.status === 'Confirmado') colorClass = 'bg-blue-100 text-blue-700 border-blue-200';
+
                 el.innerHTML = `
                     <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
                         <span class="font-display text-4xl leading-none">${item.date || ''}</span>
                         <span class="font-display text-lg font-bold">${item.month || ''}</span>
                     </div>
                     <div class="flex-grow flex flex-col justify-center">
-                        <h4 class="font-display text-2xl text-brand-textDark mb-3">${item.title}</h4>
+                        <h4 class="font-display text-2xl text-brand-textDark mb-3">${item.title || ''}</h4>
                         <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-                            <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
-                                <i class="far fa-clock mr-2"></i> ${item.time || ''}
-                            </span>
-                            <span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
-                                <i class="fas fa-location-dot mr-2"></i> ${item.location || ''}
-                            </span>
+                            ${item.time ? `<span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                                <i class="fas fa-clock mr-2 text-brand-secondary"></i>${item.time}
+                            </span>` : ''}
+                            ${item.location ? `<span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder">
+                                <i class="fas fa-map-marker-alt mr-2 text-brand-secondary"></i>${item.location}
+                            </span>` : ''}
                         </div>
                     </div>
+                    <div class="flex flex-col justify-center shrink-0">
+                        <span class="inline-block px-5 py-2.5 rounded-full font-bold text-sm tracking-wide border ${colorClass}">
+                            ${item.status || 'Pendente'}
+                        </span>
+                    </div>
                 `;
-                agendaContainer.appendChild(el);
+                container.appendChild(el);
             });
         }
 
@@ -667,15 +1252,132 @@
         const modalContent = document.getElementById('modalContent');
         const body = document.body;
 
-        function openModal(imgSrc, title, desc) {
+        // Controle de Estado do Lightbox/Galeria Modal
+        let activeGalleryImages = [];
+        let currentGalleryIndex = 0;
+
+        function updateModalImage(index) {
+            if (!activeGalleryImages.length) return;
+            currentGalleryIndex = (index + activeGalleryImages.length) % activeGalleryImages.length;
+            
+            const mainImg = document.getElementById('modalMainImage');
+            const counter = document.getElementById('modalImageCounter');
+            if (mainImg) {
+                mainImg.src = activeGalleryImages[currentGalleryIndex];
+            }
+            if (counter) {
+                counter.innerText = `${currentGalleryIndex + 1} / ${activeGalleryImages.length}`;
+            }
+
+            // Atualiza borda das miniaturas ativas
+            document.querySelectorAll('.modal-thumb-item').forEach((thumb, idx) => {
+                if (idx === currentGalleryIndex) {
+                    thumb.classList.add('ring-2', 'ring-purple-600', 'opacity-100', 'scale-105');
+                    thumb.classList.remove('opacity-60');
+                } else {
+                    thumb.classList.remove('ring-2', 'ring-purple-600', 'opacity-100', 'scale-105');
+                    thumb.classList.add('opacity-60');
+                }
+            });
+        }
+
+        window.modalPrevImage = function() {
+            updateModalImage(currentGalleryIndex - 1);
+        };
+
+        window.modalNextImage = function() {
+            updateModalImage(currentGalleryIndex + 1);
+        };
+
+        window.modalSelectImage = function(index) {
+            updateModalImage(index);
+        };
+
+        function openMediaModal(data) {
+            const titulo = data.titulo || data.title || '';
+            const descricao = data.descricao || data.description || '';
+            const capa = data.imagem || data.image || '';
+            const categoria = data.categoria || data.category || 'Galeria';
+            const extraPhotos = Array.isArray(data.galeria) ? data.galeria.filter(Boolean) : [];
+
+            // Montar array completo com Capa + Galeria
+            activeGalleryImages = [capa, ...extraPhotos].filter(Boolean);
+            if (!activeGalleryImages.length) {
+                activeGalleryImages = ['https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'];
+            }
+            currentGalleryIndex = 0;
+
+            const hasMultiple = activeGalleryImages.length > 1;
+
             modalContent.innerHTML = `
-                <div class="flex flex-col md:flex-row h-full max-h-[85vh]">
-                    <div class="md:w-1/2 p-0 relative">
-                        <img src="${imgSrc}" class="w-full h-full object-cover" alt="${title}">
+                <div class="flex flex-col lg:flex-row h-full max-h-[90vh]">
+                    <!-- Coluna da Imagem / Carrossel -->
+                    <div class="lg:w-7/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[320px] lg:min-h-[480px]">
+                        <!-- Imagem Principal -->
+                        <div class="relative w-full h-[320px] lg:h-[480px] flex items-center justify-center overflow-hidden">
+                            <img id="modalMainImage" src="${activeGalleryImages[0]}" class="w-full h-full object-contain transition-all duration-300 select-none" alt="${titulo}">
+                            
+                            <!-- Badge de Categoria -->
+                            <div class="absolute top-4 left-4 bg-brand-badgeBg text-brand-badgeText px-3.5 py-1.5 rounded-full font-display font-bold text-xs shadow-md z-10">
+                                ${categoria}
+                            </div>
+
+                            ${hasMultiple ? `
+                            <!-- Contador de Fotos -->
+                            <div id="modalImageCounter" class="absolute top-4 right-16 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full font-mono text-xs font-semibold z-10">
+                                1 / ${activeGalleryImages.length}
+                            </div>
+
+                            <!-- Botões de Navegação Anterior / Próxima -->
+                            <button type="button" onclick="modalPrevImage()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-brand-textDark flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95 z-20 focus:outline-none" aria-label="Foto anterior">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button type="button" onclick="modalNextImage()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-brand-textDark flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95 z-20 focus:outline-none" aria-label="Próxima foto">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                            ` : ''}
+                        </div>
+
+                        ${hasMultiple ? `
+                        <!-- Grade de Miniaturas no Rodapé da Imagem -->
+                        <div class="bg-black/80 px-4 py-2.5 overflow-x-auto flex gap-2 justify-center items-center scrollbar-none z-10">
+                            ${activeGalleryImages.map((img, idx) => `
+                                <button type="button" onclick="modalSelectImage(${idx})" class="modal-thumb-item flex-none w-12 h-12 rounded-lg overflow-hidden transition-all duration-200 ${idx === 0 ? 'ring-2 ring-purple-600 opacity-100 scale-105' : 'opacity-60 hover:opacity-100'}">
+                                    <img src="${img}" class="w-full h-full object-cover" alt="Miniatura ${idx + 1}">
+                                </button>
+                            `).join('')}
+                        </div>
+                        ` : ''}
                     </div>
-                    <div class="md:w-1/2 p-10 md:p-12 flex flex-col justify-center bg-white">
-                        <h4 class="font-display text-3xl text-brand-textDark mb-6">${title}</h4>
-                        <p class="font-sans text-brand-textMuted text-xl leading-relaxed">${desc}</p>
+
+                    <!-- Coluna de Informações -->
+                    <div class="lg:w-5/12 p-8 lg:p-10 flex flex-col justify-between bg-white overflow-y-auto">
+                        <div>
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-purple-700">${categoria}</span>
+                            </div>
+                            <h4 class="font-display text-2xl lg:text-3xl text-brand-textDark mb-4 leading-tight" id="modalTitle">${titulo}</h4>
+                            ${descricao ? `<p class="font-sans text-slate-600 text-base leading-relaxed mb-6" id="modalDesc">${descricao}</p>` : ''}
+                            
+                            ${hasMultiple ? `
+                            <div class="p-3.5 bg-purple-50/70 border border-purple-100 rounded-2xl flex items-center gap-3 text-purple-900 text-xs">
+                                <div class="w-8 h-8 rounded-full bg-purple-200/80 flex items-center justify-center shrink-0 text-purple-800">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Galeria Completa</p>
+                                    <p class="text-purple-700">Esta ação possui ${activeGalleryImages.length} fotos registradas.</p>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="pt-6 border-t border-gray-100 mt-6 flex justify-end">
+                            <button type="button" class="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-full text-sm transition-colors" onclick="closeModal()">
+                                Fechar visualização
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -690,7 +1392,11 @@
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape" && !modal.classList.contains('opacity-0')) closeModal();
+            if (!modal.classList.contains('opacity-0')) {
+                if (e.key === "Escape") closeModal();
+                if (e.key === "ArrowLeft" && typeof modalPrevImage === 'function') modalPrevImage();
+                if (e.key === "ArrowRight" && typeof modalNextImage === 'function') modalNextImage();
+            }
         });
     </script>
 </body>

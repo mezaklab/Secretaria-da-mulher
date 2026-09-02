@@ -31,22 +31,35 @@
 
     <!-- Sidebar -->
     <aside class="w-64 bg-brand-primary text-white flex flex-col h-full shadow-xl z-20 shrink-0">
-        <div class="p-6 border-b border-white/10 flex flex-col items-center text-center">
-            <h1 class="font-display font-bold text-2xl tracking-tight leading-tight">Secretaria da Mulher</h1>
-            <p class="text-xs uppercase tracking-wider text-white/80 mt-1">Canindé de São Francisco</p>
+        <div class="p-6 border-b border-white/10 flex items-center gap-3.5">
+            <img 
+                src="assets/img/brasao.png" 
+                alt="Brasão de Canindé de São Francisco" 
+                class="h-11 w-auto object-contain shrink-0 filter drop-shadow-md"
+            />
+            <div class="flex flex-col leading-none text-left">
+                <h1 class="font-display font-bold text-xl tracking-tight text-white leading-tight">Secretaria da Mulher</h1>
+                <p class="text-[10px] uppercase tracking-wider text-white/80 mt-1">Canindé de São Francisco</p>
+            </div>
         </div>
         
-        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-white/10 rounded-lg text-white font-medium transition-colors">
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto" id="sidebar-nav">
+            <a href="#" data-target="visao-geral" class="nav-item flex items-center gap-3 px-4 py-3 bg-white/10 rounded-lg text-white font-medium transition-colors">
                 <i class="fas fa-chart-line w-5 text-center"></i> Visão Geral
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+            <a href="#" data-target="acoes-fotos" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
                 <i class="fas fa-images w-5 text-center"></i> Ações & Fotos
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
-                <i class="fas fa-calendar-check w-5 text-center"></i> Agendamentos
+            <a href="#" data-target="servicos-saude" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+                <i class="fas fa-heartbeat w-5 text-center"></i> Serviços de Saúde
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+            <a href="#" data-target="caninde-delas" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+                <i class="fas fa-female w-5 text-center"></i> Canindé + Delas
+            </a>
+            <a href="#" data-target="agenda" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+                <i class="fas fa-calendar-alt w-5 text-center"></i> Agenda
+            </a>
+            <a href="#" data-target="configuracoes" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
                 <i class="fas fa-cog w-5 text-center"></i> Configurações
             </a>
         </nav>
@@ -65,7 +78,7 @@
     <main class="flex-grow flex flex-col h-full overflow-y-auto relative bg-brand-bg">
         <!-- Header -->
         <header class="bg-white px-8 py-5 shadow-sm flex justify-between items-center z-10 sticky top-0">
-            <h2 class="text-2xl font-display font-semibold text-brand-primary">Dashboard</h2>
+            <h2 id="header-title" class="text-2xl font-display font-semibold text-brand-primary">Visão Geral</h2>
             <div class="flex items-center gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
                 <div class="w-10 h-10 rounded-full bg-brand-secondary/20 flex items-center justify-center text-brand-primary">
                     <i class="fas fa-user"></i>
@@ -79,89 +92,324 @@
 
         <!-- Dashboard Content -->
         <div class="p-8 max-w-7xl mx-auto w-full">
-            <!-- Cards de Métricas -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                    <div class="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center text-brand-primary text-xl shrink-0">
-                        <i class="fas fa-users"></i>
+            <!-- Visão Geral -->
+            <div id="visao-geral" class="tab-content block">
+                <!-- Cards de Métricas -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center text-brand-primary text-xl shrink-0">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Atendimentos no Mês</p>
+                            <p class="text-3xl font-bold text-gray-800">248</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-500 font-medium">Atendimentos no Mês</p>
-                        <p class="text-3xl font-bold text-gray-800">248</p>
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl shrink-0">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Ações Realizadas</p>
+                            <p class="text-3xl font-bold text-gray-800">12</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xl shrink-0">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 font-medium">Preventivos Pendentes</p>
+                            <p class="text-3xl font-bold text-gray-800">35</p>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                    <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl shrink-0">
-                        <i class="fas fa-bullhorn"></i>
+
+                <!-- Módulo de Gestão de Ações -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <h3 class="text-lg font-bold text-gray-800">Ações Comunitárias Recentes</h3>
                     </div>
-                    <div>
-                        <p class="text-sm text-gray-500 font-medium">Ações Realizadas</p>
-                        <p class="text-3xl font-bold text-gray-800">12</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                    <div class="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xl shrink-0">
-                        <i class="fas fa-notes-medical"></i>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-500 font-medium">Preventivos Pendentes</p>
-                        <p class="text-3xl font-bold text-gray-800">35</p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[700px]">
+                            <thead>
+                                <tr class="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
+                                    <th class="px-6 py-4 font-semibold">Título</th>
+                                    <th class="px-6 py-4 font-semibold">Categoria</th>
+                                    <th class="px-6 py-4 font-semibold">Data</th>
+                                    <th class="px-6 py-4 font-semibold">Status</th>
+                                    <th class="px-6 py-4 font-semibold text-right">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-sm">
+                                <tr class="hover:bg-gray-50/50 transition-colors group">
+                                    <td class="px-6 py-4 font-medium text-gray-800">Palestra sobre prevenção</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-purple-100 text-brand-primary text-xs font-bold rounded-full">Saúde</span></td>
+                                    <td class="px-6 py-4 text-gray-500">24 Out 2024</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50/50 transition-colors group">
+                                    <td class="px-6 py-4 font-medium text-gray-800">Mutirão de Documentação Feminina</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Apoio Legal</span></td>
+                                    <td class="px-6 py-4 text-gray-500">15 Out 2024</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50/50 transition-colors group">
+                                    <td class="px-6 py-4 font-medium text-gray-800">Feira de Empreendedoras Locais</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full">Renda</span></td>
+                                    <td class="px-6 py-4 text-gray-500">02 Out 2024</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-gray-200 text-gray-600 text-xs font-bold rounded-full">Rascunho</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
 
-            <!-- Módulo de Gestão de Ações -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div class="px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <h3 class="text-lg font-bold text-gray-800">Ações Comunitárias Recentes</h3>
-                    <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm whitespace-nowrap" onclick="document.getElementById('modal').classList.remove('hidden')">
-                        <i class="fas fa-plus mr-2"></i> Nova Ação / Foto
-                    </button>
+            <!-- Ações & Fotos -->
+            <div id="acoes-fotos" class="tab-content hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                        <h3 class="text-lg font-bold text-gray-800">Galeria e Postagens</h3>
+                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm" onclick="document.getElementById('modal').classList.remove('hidden'); document.getElementById('edit-id-acoes').value=''; document.getElementById('modal').querySelector('h3').innerText='Cadastrar Nova Ação'; if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click(); currentActionGallery = []; if(typeof renderGalleryThumbnails === 'function') renderGalleryThumbnails();">
+                            <i class="fas fa-upload mr-2"></i> Nova Foto / Ação
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        <div class="border border-gray-200 rounded-xl overflow-hidden group">
+                            <div class="h-40 bg-gray-200 relative">
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                                    <button title="Editar" class="btn-edit w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-800 hover:text-brand-primary cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                    <button title="Excluir" class="btn-delete w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-500 hover:text-red-700 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 mb-1">Palestra sobre prevenção</h4>
+                                <p class="text-xs text-gray-500">Publicado em 24/10/2024</p>
+                            </div>
+                        </div>
+                        <div class="border border-gray-200 rounded-xl overflow-hidden group">
+                            <div class="h-40 bg-gray-200 relative">
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                                    <button title="Editar" class="btn-edit w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-800 hover:text-brand-primary cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                    <button title="Excluir" class="btn-delete w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-500 hover:text-red-700 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 mb-1">Mutirão de Documentação</h4>
+                                <p class="text-xs text-gray-500">Publicado em 15/10/2024</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse min-w-[700px]">
-                        <thead>
-                            <tr class="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
-                                <th class="px-6 py-4 font-semibold">Título</th>
-                                <th class="px-6 py-4 font-semibold">Categoria</th>
-                                <th class="px-6 py-4 font-semibold">Data</th>
-                                <th class="px-6 py-4 font-semibold">Status</th>
-                                <th class="px-6 py-4 font-semibold text-right">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-100 text-sm">
-                            <tr class="hover:bg-gray-50/50 transition-colors group">
-                                <td class="px-6 py-4 font-medium text-gray-800">Palestra sobre prevenção</td>
-                                <td class="px-6 py-4"><span class="px-3 py-1 bg-purple-100 text-brand-primary text-xs font-bold rounded-full">Saúde</span></td>
-                                <td class="px-6 py-4 text-gray-500">24 Out 2024</td>
-                                <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
-                                <td class="px-6 py-4 text-right opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button class="text-brand-secondary hover:text-brand-primary mr-3 transition-colors p-2"><i class="fas fa-edit"></i></button>
-                                    <button class="text-red-400 hover:text-red-600 transition-colors p-2"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50/50 transition-colors group">
-                                <td class="px-6 py-4 font-medium text-gray-800">Mutirão de Documentação Feminina</td>
-                                <td class="px-6 py-4"><span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Apoio Legal</span></td>
-                                <td class="px-6 py-4 text-gray-500">15 Out 2024</td>
-                                <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
-                                <td class="px-6 py-4 text-right opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button class="text-brand-secondary hover:text-brand-primary mr-3 transition-colors p-2"><i class="fas fa-edit"></i></button>
-                                    <button class="text-red-400 hover:text-red-600 transition-colors p-2"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50/50 transition-colors group">
-                                <td class="px-6 py-4 font-medium text-gray-800">Feira de Empreendedoras Locais</td>
-                                <td class="px-6 py-4"><span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full">Renda</span></td>
-                                <td class="px-6 py-4 text-gray-500">02 Out 2024</td>
-                                <td class="px-6 py-4"><span class="px-3 py-1 bg-gray-200 text-gray-600 text-xs font-bold rounded-full">Rascunho</span></td>
-                                <td class="px-6 py-4 text-right opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button class="text-brand-secondary hover:text-brand-primary mr-3 transition-colors p-2"><i class="fas fa-edit"></i></button>
-                                    <button class="text-red-400 hover:text-red-600 transition-colors p-2"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            </div>
+
+            <!-- Serviços de Saúde -->
+            <div id="servicos-saude" class="tab-content hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Serviços Preventivos de Saúde</h3>
+                            <p class="text-xs text-gray-400 mt-0.5">Gerencie os serviços exibidos na seção "Sua Saúde em Primeiro Lugar"</p>
+                        </div>
+                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm whitespace-nowrap" onclick="openNovoSaudeModal()">
+                            <i class="fas fa-plus mr-2"></i> Novo Serviço de Saúde
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[750px]">
+                            <thead>
+                                <tr class="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
+                                    <th class="px-6 py-4 font-semibold">Ícone / Serviço</th>
+                                    <th class="px-6 py-4 font-semibold">Descrição Curta</th>
+                                    <th class="px-6 py-4 font-semibold">Local / Horário</th>
+                                    <th class="px-6 py-4 font-semibold">Público-alvo</th>
+                                    <th class="px-6 py-4 font-semibold text-right">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-sm">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canindé + Delas -->
+            <div id="caninde-delas" class="tab-content hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-gray-100">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-brand-primary text-xs font-bold uppercase tracking-wider mb-2">
+                                <i class="fas fa-female"></i> Programa Estruturante
+                            </div>
+                            <h3 class="text-2xl font-display font-bold text-gray-800">Gestão: Canindé + Delas</h3>
+                            <p class="text-xs text-gray-500 mt-1">Configure o texto institucional, subtítulo e a galeria de fotos exibidos na página inicial.</p>
+                        </div>
+                        <button type="button" id="btn-salvar-caninde" class="bg-brand-primary hover:bg-brand-secondary text-white px-6 py-3 rounded-xl font-bold transition-all shadow-md text-sm flex items-center gap-2 cursor-pointer hover:scale-105 active:scale-95">
+                            <i class="fas fa-save"></i> Salvar e Publicar
+                        </button>
+                    </div>
+
+                    <form id="form-caninde-delas" class="space-y-6">
+                        <div class="grid grid-cols-1 gap-6">
+                            <!-- Subtítulo -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Subtítulo / Chamada Curta</label>
+                                <input type="text" id="input-caninde-subtitulo" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow text-sm" placeholder="Ex: Mais autonomia, protagonismo e oportunidades reais para transformar a vida de cada mulher de Canindé.">
+                            </div>
+
+                            <!-- Descrição Longa -->
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1.5">Descrição Institucional do Projeto (Texto Completo)</label>
+                                <textarea id="input-caninde-descricao" rows="5" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow resize-y text-sm leading-relaxed" placeholder="Descreva os objetivos do programa, as frentes de atuação (cursos, mutirões, geração de renda) e o impacto para a comunidade..."></textarea>
+                            </div>
+
+                            <!-- Galeria de Fotos Múltiplas -->
+                            <div class="border-t border-gray-100 pt-6">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div>
+                                        <label class="block text-sm font-bold text-gray-700">Galeria de Fotos do Projeto</label>
+                                        <p class="text-xs text-gray-400">Adicione até 10 fotos em alta qualidade (PNG, JPG até 5MB)</p>
+                                    </div>
+                                    <span id="caninde-gallery-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary">0 / 10 fotos</span>
+                                </div>
+
+                                <!-- Input & Botão de Selecionar -->
+                                <input type="file" id="input-caninde-fotos" accept="image/*" multiple class="hidden">
+                                <div id="caninde-drop-area" class="border-2 border-dashed border-purple-200 bg-purple-50/40 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-gray-500 hover:bg-purple-50/80 hover:border-brand-primary transition-colors cursor-pointer" onclick="document.getElementById('input-caninde-fotos').click()">
+                                    <div class="flex items-center gap-4 pointer-events-none">
+                                        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-brand-primary flex items-center justify-center text-xl shrink-0">
+                                            <i class="fas fa-camera"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-bold text-gray-800">Clique para selecionar múltiplas fotos</p>
+                                            <p class="text-xs text-gray-400">Você pode selecionar várias imagens de uma vez só</p>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="px-5 py-2.5 bg-white border border-purple-200 text-brand-primary hover:bg-brand-primary hover:text-white rounded-xl text-xs font-bold transition-all shadow-sm pointer-events-none whitespace-nowrap flex items-center gap-1.5">
+                                        <i class="fas fa-plus"></i> Escolher Fotos
+                                    </button>
+                                </div>
+
+                                <!-- Alerta amigável -->
+                                <div id="caninde-error-msg" class="hidden mt-3 p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
+                                    <i class="fas fa-exclamation-circle text-sm shrink-0"></i>
+                                    <span id="caninde-error-text"></span>
+                                </div>
+
+                                <!-- Grid de Miniaturas com opção de excluir -->
+                                <div id="caninde-thumbnails-grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3.5 mt-4">
+                                    <!-- Preenchido via JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Agenda -->
+            <div id="agenda" class="tab-content hidden">
+                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <h3 class="text-lg font-bold text-gray-800">Agenda de Ações & Serviços</h3>
+                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm whitespace-nowrap" onclick="document.getElementById('modal-agenda').classList.remove('hidden'); document.getElementById('edit-id-agenda').value=''; document.getElementById('modal-agenda').querySelector('h3').innerText='Novo Evento na Agenda';">
+                            <i class="fas fa-plus mr-2"></i> Novo Evento / Ação na Agenda
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse min-w-[800px]">
+                            <thead>
+                                <tr class="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
+                                    <th class="px-6 py-4 font-semibold">Dia/Mês</th>
+                                    <th class="px-6 py-4 font-semibold">Título do Evento</th>
+                                    <th class="px-6 py-4 font-semibold">Horário</th>
+                                    <th class="px-6 py-4 font-semibold">Local</th>
+                                    <th class="px-6 py-4 font-semibold">Status</th>
+                                    <th class="px-6 py-4 font-semibold text-right">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 text-sm">
+                                <tr class="hover:bg-gray-50/50 transition-colors group">
+                                    <td class="px-6 py-4 font-bold text-brand-primary">20 Out</td>
+                                    <td class="px-6 py-4 font-medium text-gray-800">Mutirão de saúde e acolhimento</td>
+                                    <td class="px-6 py-4 text-gray-500">08h - 13h</td>
+                                    <td class="px-6 py-4 text-gray-500">Clube Altemar Dutra</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Realizado</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50/50 transition-colors group">
+                                    <td class="px-6 py-4 font-bold text-brand-primary">22 Out</td>
+                                    <td class="px-6 py-4 font-medium text-gray-800">Roda de conversa sobre direitos</td>
+                                    <td class="px-6 py-4 text-gray-500">18h - 21h</td>
+                                    <td class="px-6 py-4 text-gray-500">Assentamento Cuiabá</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Confirmado</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50/50 transition-colors group">
+                                    <td class="px-6 py-4 font-bold text-brand-primary">25 Out</td>
+                                    <td class="px-6 py-4 font-medium text-gray-800">Preventivo noturno para trabalhadoras</td>
+                                    <td class="px-6 py-4 text-gray-500">18h - 21h</td>
+                                    <td class="px-6 py-4 text-gray-500">UBS Sede</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">Em Planejamento</span></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Configurações -->
+            <div id="configuracoes" class="tab-content hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 max-w-2xl">
+                    <h3 class="text-lg font-bold text-gray-800 mb-6">Dados Institucionais</h3>
+                    <form class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Endereço da Secretaria</label>
+                            <input type="text" value="Rua Principal, 123, Centro" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Telefone / WhatsApp</label>
+                                <input type="text" value="(79) 99999-9999" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">E-mail Institucional</label>
+                                <input type="email" value="contato@secretaria.gov.br" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Link do Instagram</label>
+                            <input type="url" value="https://instagram.com/secretariadamulher" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                        </div>
+                        <div class="pt-4 flex justify-end">
+                            <button type="button" class="bg-brand-primary hover:bg-brand-secondary text-white px-6 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
+                                Salvar Alterações
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -179,38 +427,91 @@
             
             <div class="p-6 overflow-y-auto">
                 <form class="space-y-5">
+                    <input type="hidden" id="edit-id-acoes">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div class="col-span-1 md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Título da Ação</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Roda de Conversa...">
+                            <input type="text" id="input-titulo" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Roda de Conversa...">
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
-                            <select class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary bg-white transition-shadow">
-                                <option>Saúde e Bem-estar</option>
-                                <option>Apoio Jurídico</option>
-                                <option>Geração de Renda</option>
+                            <select id="input-categoria" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary bg-white transition-shadow">
+                                <option>Saúde da Mulher</option>
+                                <option>Rede de Apoio & Proteção</option>
+                                <option>Geração de Renda & Capacitação</option>
+                                <option>Ações Comunitárias & Rua</option>
+                                <option>Direitos & Cidadania</option>
+                                <option>Cultura & Bem-estar</option>
                             </select>
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Data</label>
-                            <input type="date" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                            <input type="date" id="input-data" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                         </div>
                         
                         <div class="col-span-1 md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
-                            <textarea rows="3" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow resize-none" placeholder="Descreva os detalhes da ação..."></textarea>
+                            <textarea id="input-descricao" rows="3" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow resize-none" placeholder="Descreva os detalhes da ação..."></textarea>
                         </div>
                         
                         <div class="col-span-1 md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Foto da Capa</label>
-                            <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-brand-primary transition-colors cursor-pointer group">
-                                <i class="fas fa-cloud-upload-alt text-4xl mb-3 text-brand-secondary group-hover:text-brand-primary transition-colors"></i>
-                                <p class="text-sm font-medium text-gray-600">Clique para selecionar ou arraste uma imagem</p>
-                                <p class="text-xs mt-1 text-gray-400">PNG, JPG até 5MB</p>
+                            <div id="upload-area" class="border-2 border-dashed border-gray-300 rounded-xl h-48 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-brand-primary transition-colors cursor-pointer group relative overflow-hidden" onclick="document.getElementById('action-image-input').click()">
+                                <input type="file" id="action-image-input" accept="image/*" class="hidden">
+                                
+                                <!-- Estado Inicial (Ícone) -->
+                                <div id="upload-placeholder" class="flex flex-col items-center pointer-events-none p-8">
+                                    <i class="fas fa-cloud-upload-alt text-4xl mb-3 text-brand-secondary group-hover:text-brand-primary transition-colors"></i>
+                                    <p class="text-sm font-medium text-gray-600">Clique para selecionar ou arraste uma imagem</p>
+                                    <p class="text-xs mt-1 text-gray-400">PNG, JPG até 5MB</p>
+                                </div>
+
+                                <!-- Estado Preenchido (Preview) -->
+                                <div id="upload-preview" class="hidden absolute inset-0 bg-black/5 flex items-center justify-center">
+                                    <img id="image-preview" src="" class="w-full h-full object-cover" alt="Preview">
+                                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <button type="button" id="remove-image-btn" class="bg-red-500 hover:bg-red-600 text-white rounded-full w-12 h-12 shadow-lg transform hover:scale-110 transition-all pointer-events-auto">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+
+                        <!-- Galeria de Fotos Adicionais -->
+                        <div class="col-span-1 md:col-span-2 mt-2">
+                            <div class="flex items-center justify-between mb-1">
+                                <label class="block text-sm font-medium text-gray-700">Galeria de Fotos (até 10 fotos adicionais)</label>
+                                <span id="gallery-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary">0 / 10 fotos</span>
+                            </div>
+                            
+                            <!-- Input & Botão de Selecionar -->
+                            <input type="file" id="action-gallery-input" accept="image/*" multiple class="hidden">
+                            <div id="gallery-drop-area" class="border-2 border-dashed border-purple-200 bg-purple-50/40 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-gray-500 hover:bg-purple-50/80 hover:border-brand-primary transition-colors cursor-pointer" onclick="document.getElementById('action-gallery-input').click()">
+                                <div class="flex items-center gap-3 pointer-events-none">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 text-brand-primary flex items-center justify-center shrink-0">
+                                        <i class="fas fa-images"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-700">Adicionar fotos à galeria desta ação</p>
+                                        <p class="text-xs text-gray-400">Selecione uma ou mais fotos (PNG, JPG até 5MB)</p>
+                                    </div>
+                                </div>
+                                <button type="button" class="px-4 py-2 bg-white border border-purple-200 text-brand-primary hover:bg-brand-primary hover:text-white rounded-lg text-xs font-bold transition-all shadow-sm pointer-events-none whitespace-nowrap">
+                                    <i class="fas fa-plus mr-1"></i> Escolher Fotos
+                                </button>
+                            </div>
+
+                            <!-- Mensagem de Validação / Erro Amigável -->
+                            <div id="gallery-error-msg" class="hidden mt-2 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
+                                <i class="fas fa-exclamation-circle text-sm shrink-0"></i>
+                                <span id="gallery-error-text"></span>
+                            </div>
+
+                            <!-- Grade de Miniaturas / Thumbnails -->
+                            <div id="gallery-thumbnails-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-3 mt-3"></div>
                         </div>
                     </div>
                 </form>
@@ -227,5 +528,997 @@
         </div>
     </div>
 
+    <!-- Modal de Serviço de Saúde -->
+    <div id="modal-saude" class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
+                <h3 id="modal-saude-title" class="text-lg font-bold text-gray-800">Novo Serviço de Saúde</h3>
+                <button type="button" class="text-gray-400 hover:text-gray-600 transition-colors p-1" onclick="document.getElementById('modal-saude').classList.add('hidden')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto">
+                <form id="form-saude" class="space-y-5">
+                    <input type="hidden" id="edit-id-saude">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título do Serviço <span class="text-red-500">*</span></label>
+                            <input type="text" id="input-saude-titulo" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Seu preventivo" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Ícone (FontAwesome)</label>
+                            <select id="input-saude-icone" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary bg-white transition-shadow">
+                                <option value="fa-droplet">Gota / Sangue (fa-droplet)</option>
+                                <option value="fa-shield-virus">Proteção Vacina (fa-shield-virus)</option>
+                                <option value="fa-moon">Lua / Noite (fa-moon)</option>
+                                <option value="fa-heartbeat">Coração / Saúde (fa-heartbeat)</option>
+                                <option value="fa-user-nurse">Enfermagem / Saúde (fa-user-nurse)</option>
+                                <option value="fa-notes-medical">Prontuário / Exame (fa-notes-medical)</option>
+                                <option value="fa-ribbon">Laço Rosa (fa-ribbon)</option>
+                                <option value="fa-hospital">Posto / Hospital (fa-hospital)</option>
+                            </select>
+                        </div>
+
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Descrição Curta (exibida no card) <span class="text-red-500">*</span></label>
+                            <input type="text" id="input-saude-descricao-curta" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Sem espera, sem burocracia. Disponível em todas as UBS..." required>
+                        </div>
+
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Descrição Completa e Detalhada (exibida no modal) <span class="text-red-500">*</span></label>
+                            <textarea id="input-saude-descricao-completa" rows="4" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow resize-none" placeholder="Explique detalhadamente como funciona o exame, preparação necessária, importância e benefícios para a saúde da mulher..." required></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Local de Atendimento</label>
+                            <input type="text" id="input-saude-local" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Todas as UBSs do Município">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Horário de Atendimento</label>
+                            <input type="text" id="input-saude-horario" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Seg a Sex, 08h às 13h (Noturno após 18h)">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Público-Alvo</label>
+                            <input type="text" id="input-saude-publico" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Mulheres de 25 a 64 anos">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Documentos Necessários</label>
+                            <input type="text" id="input-saude-documentos" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: RG, CPF e Cartão do SUS">
+                        </div>
+
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Foto Ilustrativa (Opcional)</label>
+                            <input type="file" id="input-saude-imagem-file" accept="image/*" class="hidden">
+                            <div id="saude-upload-area" class="border-2 border-dashed border-gray-300 rounded-xl p-4 flex items-center justify-between gap-4 text-gray-500 hover:bg-gray-50 hover:border-brand-primary transition-colors cursor-pointer" onclick="document.getElementById('input-saude-imagem-file').click()">
+                                <div class="flex items-center gap-3 pointer-events-none">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 text-brand-primary flex items-center justify-center shrink-0">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <div>
+                                        <p id="saude-image-name" class="text-sm font-medium text-gray-700">Clique para anexar foto explicativa</p>
+                                        <p class="text-xs text-gray-400">PNG, JPG até 5MB</p>
+                                    </div>
+                                </div>
+                                <div id="saude-image-preview-wrapper" class="hidden flex items-center gap-2">
+                                    <img id="saude-image-preview" src="" class="w-12 h-12 rounded-lg object-cover border border-purple-200" alt="Preview">
+                                    <button type="button" id="remove-saude-image-btn" class="w-8 h-8 rounded-full bg-red-100 text-red-600 hover:bg-red-200 flex items-center justify-center text-xs" onclick="event.stopPropagation(); removeSaudeImage();">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50 shrink-0">
+                <button type="button" class="px-5 py-2 text-gray-600 font-medium hover:bg-gray-200 rounded-lg transition-colors" onclick="document.getElementById('modal-saude').classList.add('hidden')">
+                    Cancelar
+                </button>
+                <button type="button" id="btn-salvar-saude" class="px-5 py-2 bg-brand-primary hover:bg-brand-secondary text-white font-medium rounded-lg transition-colors shadow-sm">
+                    Salvar Serviço
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Agenda -->
+    <div id="modal-agenda" class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50 shrink-0">
+                <h3 class="text-lg font-bold text-gray-800">Novo Evento na Agenda</h3>
+                <button class="text-gray-400 hover:text-gray-600 transition-colors p-1" onclick="document.getElementById('modal-agenda').classList.add('hidden')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto">
+                <form class="space-y-5">
+                    <input type="hidden" id="edit-id-agenda">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Título do Evento</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Mutirão de saúde e acolhimento">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Data</label>
+                            <input type="date" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Horário (Início e Fim)</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: 08h - 13h">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Local / Bairro</label>
+                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Clube Altemar Dutra">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                            <select class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary bg-white transition-shadow">
+                                <option>Confirmado</option>
+                                <option>Em Planejamento</option>
+                                <option>Realizado</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="px-6 py-4 border-t border-gray-100 flex justify-end gap-3 bg-gray-50 shrink-0">
+                <button type="button" class="px-5 py-2 text-gray-600 font-medium hover:bg-gray-200 rounded-lg transition-colors" onclick="document.getElementById('modal-agenda').classList.add('hidden')">
+                    Cancelar
+                </button>
+                <button type="button" class="px-5 py-2 bg-brand-primary hover:bg-brand-secondary text-white font-medium rounded-lg transition-colors shadow-sm">
+                    Salvar Evento
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('.nav-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+            const headerTitle = document.getElementById('header-title');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove estado ativo de todos
+                    navItems.forEach(nav => {
+                        nav.classList.remove('bg-white/10', 'text-white');
+                        nav.classList.add('text-white/70');
+                    });
+                    
+                    // Adiciona estado ativo no clicado
+                    item.classList.add('bg-white/10', 'text-white');
+                    item.classList.remove('text-white/70');
+
+                    // Atualiza o título do Dashboard
+                    if(headerTitle) {
+                        headerTitle.textContent = item.textContent.trim();
+                    }
+
+                    // Esconde todas as abas
+                    tabContents.forEach(tab => {
+                        tab.classList.add('hidden');
+                        tab.classList.remove('block');
+                    });
+
+                    // Mostra a aba correta
+                    const targetId = item.getAttribute('data-target');
+                    if (targetId) {
+                        document.getElementById(targetId).classList.remove('hidden');
+                        document.getElementById(targetId).classList.add('block');
+                    }
+                });
+            });
+
+            
+            // ==========================================
+            // CMS LOCALSTORAGE LOGIC (Sincronização)
+            // ==========================================
+            
+            // Dados Padrões
+            const defaultAcoes = [
+                { id: 1, category: 'Saúde e Bem-estar', date: '24 Out 2024', title: 'Palestra sobre prevenção e cuidados', description: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' },
+                { id: 2, category: 'Apoio Jurídico', date: '15 Out 2024', title: 'Mutirão de Documentação', description: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', image: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80' }
+            ];
+            
+            const defaultGaleria = [
+                { id: 1, type: 'foto', title: 'Ação na Comunidade', image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' }
+            ];
+
+            const defaultAgenda = [
+                { id: 1, date: '20', month: 'Out', title: 'Mutirão de saúde e acolhimento', time: '08h - 13h', location: 'Clube Altemar Dutra', status: 'Realizado' }
+            ];
+
+            // Dados Padrão de Serviços de Saúde
+            const defaultServicosSaude = [
+                {
+                    id: 1,
+                    titulo: 'Seu preventivo',
+                    icone: 'fa-droplet',
+                    descricaoCurta: 'Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.',
+                    descricaoCompleta: 'O exame citopatológico (preventivo ou Papanicolau) é a principal estratégia para detectar precocemente lesões no colo do útero antes que se tornem câncer. Em Canindé de São Francisco, o atendimento é humanizado, sem filas e com profissionais capacitados para oferecer o melhor acolhimento.',
+                    local: 'Todas as Unidades Básicas de Saúde (UBS) de Canindé de São Francisco',
+                    horario: 'Segunda a Sexta, das 08h às 13h (Campanhas noturnas até 21h)',
+                    publico: 'Mulheres de 25 a 64 anos ou que já iniciaram a vida sexual',
+                    documentos: 'Cartão do SUS, RG e Comprovante de Residência',
+                    imagem: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80'
+                },
+                {
+                    id: 2,
+                    titulo: 'Proteção HPV',
+                    icone: 'fa-shield-virus',
+                    descricaoCurta: 'Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.',
+                    descricaoCompleta: 'A vacina contra o Papilomavírus Humano (HPV) previne contra os tipos de vírus responsáveis por mais de 70% dos casos de câncer de colo de útero. A imunização é segura, altamente eficaz e gratuita nas salas de vacina do município.',
+                    local: 'Salas de Vacina de todas as UBSs do município',
+                    horario: 'Segunda a Sexta, das 08h às 13h',
+                    publico: 'Meninas e meninos de 9 a 14 anos, e imunossuprimidos até 45 anos',
+                    documentos: 'Caderneta de Vacinação, Cartão do SUS e Documento com foto',
+                    imagem: 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&q=80'
+                },
+                {
+                    id: 3,
+                    titulo: 'Horário noturno',
+                    icone: 'fa-moon',
+                    descricaoCurta: 'Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.',
+                    descricaoCompleta: 'Para garantir que nenhuma trabalhadora, autônoma ou estudante fique sem atendimento preventivo, a Secretaria da Mulher em parceria com a Secretaria de Saúde disponibiliza plantões noturnos com exames preventivos, vacinação, testes rápidos e acolhimento psicológico.',
+                    local: 'UBS Sede e Postos Estratégicos Itinerantes',
+                    horario: 'Plantões especiais das 18h às 21h (consulte cronograma da Agenda)',
+                    publico: 'Trabalhadoras e mulheres que não podem comparecer em horário comercial',
+                    documentos: 'Documento oficial com foto e Cartão do SUS',
+                    imagem: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800&q=80'
+                }
+            ];
+
+            // Puxar do LocalStorage
+            let adminAcoes = JSON.parse(localStorage.getItem('sec_mulher_acoes')) || defaultAcoes;
+            let adminGaleria = JSON.parse(localStorage.getItem('sec_mulher_galeria')) || defaultGaleria;
+            let adminAgenda = JSON.parse(localStorage.getItem('sec_mulher_agenda')) || defaultAgenda;
+            let adminServicosSaude = JSON.parse(localStorage.getItem('sec_mulher_saude')) || defaultServicosSaude;
+
+            // Dados Padrão Canindé + Delas
+            const defaultCanindeDelas = {
+                titulo: 'Canindé + Delas',
+                subtitulo: 'Mais autonomia, protagonismo e oportunidades reais para transformar a vida de cada mulher de Canindé.',
+                descricao: 'O Canindé + Delas é o grande programa integrado de emancipação feminina, qualificação profissional e garantia de direitos do município de Canindé de São Francisco.\n\nArticulando ações de geração de renda, capacitação profissional, apoio a microempreendedoras, mutirões de saúde integral e rodas de cidadania, o programa atua diretamente nos bairros e comunidades rurais, levando oportunidades transformadoras a quem mais precisa.',
+                fotos: [
+                    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80',
+                    'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80',
+                    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+                    'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80'
+                ]
+            };
+
+            let adminCanindeDelas = JSON.parse(localStorage.getItem('sec_mulher_caninde_delas')) || defaultCanindeDelas;
+            let currentCanindePhotos = Array.isArray(adminCanindeDelas.fotos) ? [...adminCanindeDelas.fotos] : [];
+
+            // Renderizar Tabelas
+            function renderAdminAcoes() {
+                const tbody = document.querySelector('#visao-geral tbody');
+                if(!tbody) return;
+                tbody.innerHTML = '';
+                adminAcoes.forEach(item => {
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50/50 transition-colors group" data-id="${item.id}">
+                            <td class="px-6 py-4 font-medium text-gray-800">${item.title}</td>
+                            <td class="px-6 py-4"><span class="px-3 py-1 bg-purple-100 text-brand-primary text-xs font-bold rounded-full">${item.category}</span></td>
+                            <td class="px-6 py-4 text-gray-500">${item.date}</td>
+                            <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
+                            <td class="px-6 py-4 text-right">
+                                <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>`;
+                });
+            }
+
+            function renderAdminGaleria() {
+                const container = document.querySelector('#acoes-fotos .grid');
+                if(!container) return;
+                container.innerHTML = '';
+                adminGaleria.forEach(item => {
+                    container.innerHTML += `
+                        <div class="border border-gray-200 rounded-xl overflow-hidden group relative" data-id="${item.id}">
+                            <div class="h-40 bg-gray-200 relative">
+                                <img src="${item.image}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                                    <button title="Editar" class="btn-edit w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-800 hover:text-brand-primary cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                    <button title="Excluir" class="btn-delete w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-500 hover:text-red-700 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold text-gray-800 mb-1">${item.title}</h4>
+                                <p class="text-xs text-gray-500">${item.type === 'video' ? 'Vídeo' : 'Foto'}</p>
+                            </div>
+                        </div>`;
+                });
+            }
+
+            function renderAdminCanindeDelas() {
+                const subInput = document.getElementById('input-caninde-subtitulo');
+                const descInput = document.getElementById('input-caninde-descricao');
+                const badgeEl = document.getElementById('caninde-gallery-badge');
+                const gridEl = document.getElementById('caninde-thumbnails-grid');
+
+                if (subInput) subInput.value = adminCanindeDelas.subtitulo || '';
+                if (descInput) descInput.value = adminCanindeDelas.descricao || '';
+                
+                if (badgeEl) {
+                    badgeEl.innerText = `${currentCanindePhotos.length} / 10 fotos`;
+                    badgeEl.className = currentCanindePhotos.length >= 10 
+                        ? 'text-xs font-bold px-3 py-1 rounded-full bg-red-100 text-red-700' 
+                        : 'text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary';
+                }
+
+                if (gridEl) {
+                    gridEl.innerHTML = '';
+                    currentCanindePhotos.forEach((imgBase64, idx) => {
+                        const thumb = document.createElement('div');
+                        thumb.className = 'relative rounded-2xl overflow-hidden aspect-square border border-purple-200 bg-gray-100 group shadow-sm';
+                        thumb.innerHTML = `
+                            <img src="${imgBase64}" class="w-full h-full object-cover" alt="Foto ${idx + 1}">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button type="button" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-xs shadow-md transform hover:scale-110 active:scale-95 transition-all" onclick="window.removeCanindePhoto(${idx})">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <span class="absolute bottom-1.5 left-2 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded font-mono">#${idx + 1}</span>
+                        `;
+                        gridEl.appendChild(thumb);
+                    });
+                }
+            }
+
+            window.removeCanindePhoto = function(index) {
+                currentCanindePhotos.splice(index, 1);
+                renderAdminCanindeDelas();
+            };
+
+            function showCanindeError(msg) {
+                const errBox = document.getElementById('caninde-error-msg');
+                const errText = document.getElementById('caninde-error-text');
+                if (errBox && errText) {
+                    errText.innerText = msg;
+                    errBox.classList.remove('hidden');
+                    setTimeout(() => { errBox.classList.add('hidden'); }, 5000);
+                }
+            }
+
+            // Input File listener de fotos do Canindé + Delas
+            const inputCanindeFotos = document.getElementById('input-caninde-fotos');
+            if (inputCanindeFotos) {
+                inputCanindeFotos.addEventListener('change', function(e) {
+                    const files = Array.from(e.target.files || []);
+                    if (!files.length) return;
+
+                    const validFiles = files.filter(f => f.type.startsWith('image/'));
+                    if (validFiles.length < files.length) {
+                        showCanindeError('Alguns arquivos não foram adicionados por não serem imagens válidas.');
+                    }
+
+                    const availableSlots = 10 - currentCanindePhotos.length;
+                    if (validFiles.length > availableSlots) {
+                        showCanindeError(`Você só pode adicionar mais ${availableSlots} foto(s). O limite é de 10 fotos.`);
+                    }
+
+                    const toProcess = validFiles.slice(0, availableSlots);
+                    if (!toProcess.length) {
+                        inputCanindeFotos.value = '';
+                        return;
+                    }
+
+                    let loaded = 0;
+                    toProcess.forEach(file => {
+                        const reader = new FileReader();
+                        reader.onload = function(evt) {
+                            currentCanindePhotos.push(evt.target.result);
+                            loaded++;
+                            if (loaded === toProcess.length) {
+                                renderAdminCanindeDelas();
+                                inputCanindeFotos.value = '';
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                });
+            }
+
+            // Botão Salvar Canindé + Delas
+            const btnSalvarCaninde = document.getElementById('btn-salvar-caninde');
+            if (btnSalvarCaninde) {
+                btnSalvarCaninde.addEventListener('click', function() {
+                    const subtitulo = document.getElementById('input-caninde-subtitulo').value.trim();
+                    const descricao = document.getElementById('input-caninde-descricao').value.trim();
+
+                    adminCanindeDelas = {
+                        titulo: 'Canindé + Delas',
+                        subtitulo: subtitulo || defaultCanindeDelas.subtitulo,
+                        descricao: descricao || defaultCanindeDelas.descricao,
+                        fotos: [...currentCanindePhotos]
+                    };
+
+                    localStorage.setItem('sec_mulher_caninde_delas', JSON.stringify(adminCanindeDelas));
+                    alert('Seção "Canindé + Delas" atualizada e publicada com sucesso!');
+                    renderAdminCanindeDelas();
+                });
+            }
+
+            function renderAdminSaude() {
+                const tbody = document.querySelector('#servicos-saude tbody');
+                if(!tbody) return;
+                tbody.innerHTML = '';
+                adminServicosSaude.forEach(item => {
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50/50 transition-colors group" data-id="${item.id}">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-purple-100 text-brand-primary flex items-center justify-center text-lg shrink-0">
+                                        <i class="fas ${item.icone || 'fa-heartbeat'}"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">${item.titulo}</p>
+                                        <p class="text-xs text-purple-600">${item.icone || 'fa-heartbeat'}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-gray-600 max-w-xs">
+                                <p class="line-clamp-2 text-xs">${item.descricaoCurta}</p>
+                            </td>
+                            <td class="px-6 py-4 text-gray-500 text-xs">
+                                <p class="font-semibold text-gray-700">${item.local || 'Todas as UBSs'}</p>
+                                <p class="text-gray-400">${item.horario || 'Seg a Sex'}</p>
+                            </td>
+                            <td class="px-6 py-4 text-gray-500 text-xs">
+                                <span class="px-2.5 py-1 bg-purple-50 text-purple-700 rounded-full font-medium">${item.publico || 'Geral'}</span>
+                            </td>
+                            <td class="px-6 py-4 text-right whitespace-nowrap">
+                                <button title="Editar" class="btn-edit-saude text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all" onclick="editSaudeItem(${item.id})"><i class="fas fa-edit"></i></button>
+                                <button title="Excluir" class="btn-delete-saude text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all" onclick="deleteSaudeItem(${item.id})"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>`;
+                });
+            }
+
+            function renderAdminAgenda() {
+                const tbody = document.querySelector('#agenda tbody');
+                if(!tbody) return;
+                tbody.innerHTML = '';
+                adminAgenda.forEach(item => {
+                    let color = item.status === 'Realizado' ? 'bg-green-100 text-green-700' : (item.status === 'Confirmado' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700');
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50/50 transition-colors group" data-id="${item.id}">
+                            <td class="px-6 py-4 font-bold text-brand-primary">${item.date} ${item.month}</td>
+                            <td class="px-6 py-4 font-medium text-gray-800">${item.title}</td>
+                            <td class="px-6 py-4 text-gray-500">${item.time}</td>
+                            <td class="px-6 py-4 text-gray-500">${item.location}</td>
+                            <td class="px-6 py-4"><span class="px-3 py-1 ${color} text-xs font-bold rounded-full">${item.status}</span></td>
+                            <td class="px-6 py-4 text-right">
+                                <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
+                                <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>`;
+                });
+            }
+
+            
+            // Upload de Imagem Capa & Galeria Preview Logic
+            let currentBase64Image = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80';
+            let currentActionGallery = []; // Array de Base64 das fotos adicionais (até 10)
+            
+            const actionImageInput = document.getElementById('action-image-input');
+            const uploadPlaceholder = document.getElementById('upload-placeholder');
+            const uploadPreview = document.getElementById('upload-preview');
+            const imagePreview = document.getElementById('image-preview');
+            const removeImageBtn = document.getElementById('remove-image-btn');
+
+            // Galeria
+            const actionGalleryInput = document.getElementById('action-gallery-input');
+            const galleryThumbnailsGrid = document.getElementById('gallery-thumbnails-grid');
+            const galleryCountBadge = document.getElementById('gallery-count-badge');
+            const galleryErrorMsg = document.getElementById('gallery-error-msg');
+            const galleryErrorText = document.getElementById('gallery-error-text');
+
+            function showGalleryError(msg) {
+                if (!galleryErrorMsg || !galleryErrorText) return;
+                galleryErrorText.innerText = msg;
+                galleryErrorMsg.classList.remove('hidden');
+                setTimeout(() => { galleryErrorMsg.classList.add('hidden'); }, 5000);
+            }
+
+            function renderGalleryThumbnails() {
+                if (!galleryThumbnailsGrid) return;
+                galleryThumbnailsGrid.innerHTML = '';
+                
+                if (galleryCountBadge) {
+                    galleryCountBadge.innerText = `${currentActionGallery.length} / 10 fotos`;
+                    if (currentActionGallery.length >= 10) {
+                        galleryCountBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-red-700';
+                    } else {
+                        galleryCountBadge.className = 'text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary';
+                    }
+                }
+
+                currentActionGallery.forEach((imgBase64, index) => {
+                    const thumb = document.createElement('div');
+                    thumb.className = 'relative rounded-xl overflow-hidden aspect-square border border-purple-200 bg-gray-100 group shadow-sm';
+                    thumb.innerHTML = `
+                        <img src="${imgBase64}" class="w-full h-full object-cover" alt="Foto ${index + 1}">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button type="button" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-xs shadow-md transform hover:scale-110 active:scale-95 transition-all" onclick="window.removeGalleryPhoto(${index})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <span class="absolute bottom-1 left-1.5 bg-black/60 text-white text-[10px] px-1.5 py-0.2 rounded font-mono">#${index + 1}</span>
+                    `;
+                    galleryThumbnailsGrid.appendChild(thumb);
+                });
+            }
+
+            window.removeGalleryPhoto = function(index) {
+                currentActionGallery.splice(index, 1);
+                renderGalleryThumbnails();
+            };
+
+            if(actionImageInput) {
+                actionImageInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        if (!file.type.startsWith('image/')) {
+                            showGalleryError('O arquivo selecionado para a capa não é uma imagem válida.');
+                            return;
+                        }
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            currentBase64Image = event.target.result;
+                            imagePreview.src = currentBase64Image;
+                            uploadPlaceholder.classList.add('hidden');
+                            uploadPreview.classList.remove('hidden');
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                removeImageBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Previne o clique de abrir a janela de arquivo de novo
+                    actionImageInput.value = '';
+                    currentBase64Image = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80';
+                    uploadPreview.classList.add('hidden');
+                    uploadPlaceholder.classList.remove('hidden');
+                });
+            }
+
+            if(actionGalleryInput) {
+                actionGalleryInput.addEventListener('change', function(e) {
+                    const files = Array.from(e.target.files || []);
+                    if (!files.length) return;
+
+                    const nonImages = files.filter(f => !f.type.startsWith('image/'));
+                    if (nonImages.length > 0) {
+                        showGalleryError('Um ou mais arquivos selecionados não são imagens válidas.');
+                    }
+
+                    const validImages = files.filter(f => f.type.startsWith('image/'));
+                    const availableSlots = 10 - currentActionGallery.length;
+
+                    if (validImages.length > availableSlots) {
+                        showGalleryError(`Você só pode adicionar mais ${availableSlots} foto(s). O limite total é de 10 fotos por ação.`);
+                    }
+
+                    const imagesToProcess = validImages.slice(0, availableSlots);
+                    if (!imagesToProcess.length) {
+                        actionGalleryInput.value = '';
+                        return;
+                    }
+
+                    let loadedCount = 0;
+                    imagesToProcess.forEach(file => {
+                        const reader = new FileReader();
+                        reader.onload = function(evt) {
+                            currentActionGallery.push(evt.target.result);
+                            loadedCount++;
+                            if (loadedCount === imagesToProcess.length) {
+                                renderGalleryThumbnails();
+                                actionGalleryInput.value = '';
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                });
+            }
+
+            // Initialization Render
+            renderAdminAcoes();
+            renderAdminGaleria();
+            renderAdminAgenda();
+            renderAdminSaude();
+            renderAdminCanindeDelas();
+
+            // Intercepting Saves
+            document.querySelectorAll('button').forEach(btn => {
+                if(btn.innerText.includes('Salvar Evento')) {
+                    btn.addEventListener('click', () => {
+                        const modal = document.getElementById('modal-agenda');
+                        const title = modal.querySelectorAll('input')[0].value;
+                        const dateVal = modal.querySelectorAll('input')[1].value; // yyyy-mm-dd
+                        const time = modal.querySelectorAll('input')[2].value;
+                        const location = modal.querySelectorAll('input')[3].value;
+                        const status = modal.querySelector('select').value;
+                        
+                        let date = "20", month = "Out";
+                        if(dateVal) {
+                            const d = new Date(dateVal);
+                            date = String(d.getDate()).padStart(2, '0');
+                            const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+                            month = months[d.getMonth()];
+                        }
+
+                        const editId = document.getElementById('edit-id-agenda').value;
+                        if(editId) {
+                            const index = adminAgenda.findIndex(item => item.id == editId);
+                            if(index > -1) {
+                                adminAgenda[index] = { ...adminAgenda[index], date, month, title, time, location, status };
+                            }
+                        } else {
+                            adminAgenda.push({ id: Date.now(), date, month, title, time, location, status });
+                        }
+                        localStorage.setItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
+                        renderAdminAgenda();
+                        modal.classList.add('hidden'); if(removeImageBtn) removeImageBtn.click();
+                    });
+                }
+                
+                if(btn.innerText.includes('Salvar e Publicar')) {
+                    btn.addEventListener('click', () => {
+                        const modal = document.getElementById('modal');
+                        const title = document.getElementById('input-titulo').value;
+                        const category = document.getElementById('input-categoria').value;
+                        const description = document.getElementById('input-descricao').value;
+                        
+                        let date = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).replace('.','');
+                        const inputDataVal = document.getElementById('input-data').value;
+                        if(inputDataVal) {
+                            const d = new Date(inputDataVal + 'T12:00:00');
+                            const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+                            date = `${String(d.getDate()).padStart(2, '0')} ${months[d.getMonth()]} ${d.getFullYear()}`;
+                        }
+                        
+                        const editId = document.getElementById('edit-id-acoes').value;
+                        const isPlaceholder = currentBase64Image.includes('unsplash.com');
+                        
+                        let finalImage = currentBase64Image;
+
+                        if (editId) {
+                            const acaoIndex = adminAcoes.findIndex(item => item.id == editId);
+                            if (acaoIndex > -1) {
+                                const oldImage = adminAcoes[acaoIndex].image || adminAcoes[acaoIndex].imagem || adminAcoes[acaoIndex].fotoCapa;
+                                finalImage = (isPlaceholder && oldImage) ? oldImage : currentBase64Image;
+                                adminAcoes[acaoIndex] = { 
+                                    ...adminAcoes[acaoIndex], 
+                                    category, 
+                                    date, 
+                                    title, 
+                                    description, 
+                                    image: finalImage,
+                                    fotoCapa: finalImage,
+                                    galeria: [...currentActionGallery]
+                                };
+                            }
+                            
+                            const galIndex = adminGaleria.findIndex(item => item.id == editId || item.title === title);
+                            if (galIndex > -1) {
+                                const oldImage = adminGaleria[galIndex].image;
+                                finalImage = (isPlaceholder && oldImage) ? oldImage : currentBase64Image;
+                                adminGaleria[galIndex] = { ...adminGaleria[galIndex], title, description, category, image: finalImage };
+                            }
+                        } else {
+                            finalImage = isPlaceholder ? 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' : currentBase64Image;
+                            const newId = Date.now();
+                            adminAcoes.unshift({ 
+                                id: newId, 
+                                category, 
+                                date, 
+                                title, 
+                                description, 
+                                image: finalImage,
+                                fotoCapa: finalImage,
+                                galeria: [...currentActionGallery]
+                            });
+                            adminGaleria.unshift({ id: newId, type: 'foto', title, description, category, image: finalImage });
+                        }
+
+                        localStorage.setItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
+                        localStorage.setItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
+                        
+                        renderAdminAcoes();
+                        renderAdminGaleria();
+                        modal.classList.add('hidden');
+                        if(removeImageBtn) removeImageBtn.click(); // Reseta o estado do uploader
+                        currentActionGallery = [];
+                        renderGalleryThumbnails();
+                    });
+                }
+                
+                if(btn.innerText.includes('Salvar Alterações')) {
+                    btn.addEventListener('click', () => {
+                        localStorage.setItem("sec_mulher_config", JSON.stringify({ endereco: document.querySelectorAll("#configuracoes input")[0].value, telefone: document.querySelectorAll("#configuracoes input")[1].value, email: document.querySelectorAll("#configuracoes input")[2].value, instagram: document.querySelectorAll("#configuracoes input")[3].value })); alert('Configurações institucionais atualizadas com sucesso no localStorage!');
+                    });
+                }
+            });
+
+            // Variável para imagem do serviço de saúde
+            let currentSaudeImage = '';
+
+            const inputSaudeImagemFile = document.getElementById('input-saude-imagem-file');
+            if (inputSaudeImagemFile) {
+                inputSaudeImagemFile.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(evt) {
+                            currentSaudeImage = evt.target.result;
+                            document.getElementById('saude-image-preview').src = currentSaudeImage;
+                            document.getElementById('saude-image-preview-wrapper').classList.remove('hidden');
+                            document.getElementById('saude-image-name').innerText = file.name;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+
+            window.removeSaudeImage = function() {
+                currentSaudeImage = '';
+                if(inputSaudeImagemFile) inputSaudeImagemFile.value = '';
+                document.getElementById('saude-image-preview').src = '';
+                document.getElementById('saude-image-preview-wrapper').classList.add('hidden');
+                document.getElementById('saude-image-name').innerText = 'Clique para anexar foto explicativa';
+            };
+
+            window.openNovoSaudeModal = function() {
+                document.getElementById('edit-id-saude').value = '';
+                document.getElementById('input-saude-titulo').value = '';
+                document.getElementById('input-saude-icone').value = 'fa-droplet';
+                document.getElementById('input-saude-descricao-curta').value = '';
+                document.getElementById('input-saude-descricao-completa').value = '';
+                document.getElementById('input-saude-local').value = '';
+                document.getElementById('input-saude-horario').value = '';
+                document.getElementById('input-saude-publico').value = '';
+                document.getElementById('input-saude-documentos').value = '';
+                removeSaudeImage();
+                document.getElementById('modal-saude-title').innerText = 'Novo Serviço de Saúde';
+                document.getElementById('modal-saude').classList.remove('hidden');
+            };
+
+            window.editSaudeItem = function(id) {
+                const item = adminServicosSaude.find(i => i.id == id);
+                if (!item) return;
+
+                document.getElementById('edit-id-saude').value = item.id;
+                document.getElementById('input-saude-titulo').value = item.titulo || '';
+                document.getElementById('input-saude-icone').value = item.icone || 'fa-droplet';
+                document.getElementById('input-saude-descricao-curta').value = item.descricaoCurta || '';
+                document.getElementById('input-saude-descricao-completa').value = item.descricaoCompleta || '';
+                document.getElementById('input-saude-local').value = item.local || '';
+                document.getElementById('input-saude-horario').value = item.horario || '';
+                document.getElementById('input-saude-publico').value = item.publico || '';
+                document.getElementById('input-saude-documentos').value = item.documentos || '';
+                
+                if (item.imagem) {
+                    currentSaudeImage = item.imagem;
+                    document.getElementById('saude-image-preview').src = currentSaudeImage;
+                    document.getElementById('saude-image-preview-wrapper').classList.remove('hidden');
+                    document.getElementById('saude-image-name').innerText = 'Foto anexada';
+                } else {
+                    removeSaudeImage();
+                }
+
+                document.getElementById('modal-saude-title').innerText = 'Editar Serviço de Saúde';
+                document.getElementById('modal-saude').classList.remove('hidden');
+            };
+
+            window.deleteSaudeItem = function(id) {
+                if (confirm('Deseja realmente remover este serviço de saúde?')) {
+                    adminServicosSaude = adminServicosSaude.filter(i => i.id != id);
+                    localStorage.setItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
+                    renderAdminSaude();
+                }
+            };
+
+            // Salvar Serviço de Saúde
+            const btnSalvarSaude = document.getElementById('btn-salvar-saude');
+            if (btnSalvarSaude) {
+                btnSalvarSaude.addEventListener('click', function() {
+                    const titulo = document.getElementById('input-saude-titulo').value.trim();
+                    const descCurta = document.getElementById('input-saude-descricao-curta').value.trim();
+                    const descCompleta = document.getElementById('input-saude-descricao-completa').value.trim();
+
+                    if (!titulo || !descCurta || !descCompleta) {
+                        alert('Por favor, preencha os campos obrigatórios: Título, Descrição Curta e Descrição Completa.');
+                        return;
+                    }
+
+                    const editId = document.getElementById('edit-id-saude').value;
+                    const icone = document.getElementById('input-saude-icone').value;
+                    const local = document.getElementById('input-saude-local').value.trim();
+                    const horario = document.getElementById('input-saude-horario').value.trim();
+                    const publico = document.getElementById('input-saude-publico').value.trim();
+                    const documentos = document.getElementById('input-saude-documentos').value.trim();
+
+                    if (editId) {
+                        const index = adminServicosSaude.findIndex(i => i.id == editId);
+                        if (index > -1) {
+                            adminServicosSaude[index] = {
+                                ...adminServicosSaude[index],
+                                titulo,
+                                icone,
+                                descricaoCurta: descCurta,
+                                descricaoCompleta: descCompleta,
+                                local,
+                                horario,
+                                publico,
+                                documentos,
+                                imagem: currentSaudeImage
+                            };
+                        }
+                    } else {
+                        adminServicosSaude.unshift({
+                            id: Date.now(),
+                            titulo,
+                            icone,
+                            descricaoCurta: descCurta,
+                            descricaoCompleta: descCompleta,
+                            local,
+                            horario,
+                            publico,
+                            documentos,
+                            imagem: currentSaudeImage
+                        });
+                    }
+
+                    localStorage.setItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
+                    renderAdminSaude();
+                    document.getElementById('modal-saude').classList.add('hidden');
+                });
+            }
+
+            // Make global functions so standard click handlers work (overriding previous DOM events)
+            window.deleteItem = function(id, type) {
+                if(type === 'acoes') {
+                    adminAcoes = adminAcoes.filter(i => i.id != id);
+                    localStorage.setItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
+                    renderAdminAcoes();
+                } else if(type === 'galeria') {
+                    adminGaleria = adminGaleria.filter(i => i.id != id);
+                    localStorage.setItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
+                    renderAdminGaleria();
+                } else if(type === 'agenda') {
+                    adminAgenda = adminAgenda.filter(i => i.id != id);
+                    localStorage.setItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
+                    renderAdminAgenda();
+                }
+            }
+
+            // --- LÓGICA DE AÇÕES (EDITAR / EXCLUIR) ---
+            document.body.addEventListener('click', function(e) {
+                // EXCLUIR
+                const btnDelete = e.target.closest('.btn-delete');
+                if (btnDelete) {
+                    if (confirm('Deseja realmente remover este registro?')) {
+                        // Encontra a linha da tabela ou o card da galeria
+                        const row = btnDelete.closest('tr') || btnDelete.closest('.group');
+                        if (row) {
+                            row.style.transition = 'all 0.4s ease';
+                            row.style.opacity = '0';
+                            row.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                const id = row.getAttribute('data-id');
+                                const agendaRow = row.closest('#agenda') !== null; const galRow = row.tagName.toLowerCase() !== 'tr'; if (agendaRow) window.deleteItem(id, 'agenda');
+                                else if (galRow) window.deleteItem(id, 'galeria');
+                                else window.deleteItem(id, 'acoes');
+                            }, 400);
+                        }
+                    }
+                    return; // Para não disparar mais nada
+                }
+
+                // EDITAR
+                const btnEdit = e.target.closest('.btn-edit');
+                if (btnEdit) {
+                    const row = btnEdit.closest('tr') || btnEdit.closest('.group');
+                    if (!row) return;
+
+                    const id = row.getAttribute('data-id');
+                    const isAgenda = row.closest('#agenda') !== null;
+                    const isGallery = row.tagName.toLowerCase() !== 'tr';
+
+                    if (isAgenda) {
+                        const item = adminAgenda.find(i => i.id == id);
+                        if(!item) return;
+                        
+                        document.getElementById('edit-id-agenda').value = id;
+                        const modal = document.getElementById('modal-agenda');
+                        modal.querySelectorAll('input')[0].value = item.title;
+                        modal.querySelectorAll('input')[1].value = ''; // A data original não era armazenada no formato YYYY-MM-DD
+                        modal.querySelectorAll('input')[2].value = item.time;
+                        modal.querySelectorAll('input')[3].value = item.location;
+                        
+                        const select = modal.querySelector('select');
+                        Array.from(select.options).forEach(opt => {
+                            if (opt.text.toLowerCase() === item.status.toLowerCase()) opt.selected = true;
+                        });
+
+                        modal.querySelector('h3').innerText = "Editar Evento na Agenda";
+                        modal.classList.remove('hidden');
+
+                    } else {
+                        const item = isGallery ? adminGaleria.find(i => i.id == id) : adminAcoes.find(i => i.id == id);
+                        if(!item) return;
+
+                        document.getElementById('edit-id-acoes').value = id;
+                        const modal = document.getElementById('modal');
+                        
+                        // Populando os campos
+                        if (document.getElementById('input-titulo')) document.getElementById('input-titulo').value = item.title || item.titulo || '';
+                        
+                        // Tentando preencher a categoria
+                        const select = document.getElementById('input-categoria');
+                        if (select && (item.category || item.categoria)) {
+                            Array.from(select.options).forEach(opt => {
+                                if (opt.text.toLowerCase() === (item.category || item.categoria).toLowerCase()) opt.selected = true;
+                            });
+                        }
+                        
+                        // Tentando preencher descrição
+                        if (document.getElementById('input-descricao') && (item.description || item.descricao)) {
+                            document.getElementById('input-descricao').value = item.description || item.descricao;
+                        }
+
+                        // Converter string de data para formato YYYY-MM-DD
+                        if (document.getElementById('input-data') && (item.date || item.data)) {
+                             // tenta reverter "24 Out 2024" para "YYYY-MM-DD" se possível, senao deixa em branco para o html5 date input. 
+                             // Como é complexo tratar locale em uma linha, usaremos um map basico
+                             const dStr = item.date || item.data;
+                             const months = { 'Jan':'01', 'Fev':'02', 'Mar':'03', 'Abr':'04', 'Mai':'05', 'Jun':'06', 'Jul':'07', 'Ago':'08', 'Set':'09', 'Out':'10', 'Nov':'11', 'Dez':'12' };
+                             const parts = dStr.split(' ');
+                             if(parts.length === 3) {
+                                document.getElementById('input-data').value = `${parts[2]}-${months[parts[1]]}-${parts[0].padStart(2, '0')}`;
+                             }
+                        }
+
+                        // Preservando e exibindo a imagem atual do item
+                        const itemCapa = item.fotoCapa || item.image || item.imagem;
+                        if (itemCapa) {
+                            currentBase64Image = itemCapa;
+                            if (imagePreview) {
+                                imagePreview.src = currentBase64Image;
+                                if(uploadPlaceholder) uploadPlaceholder.classList.add('hidden');
+                                if(uploadPreview) uploadPreview.classList.remove('hidden');
+                            }
+                        }
+
+                        // Carregar galeria de fotos existente
+                        currentActionGallery = Array.isArray(item.galeria) ? [...item.galeria] : [];
+                        renderGalleryThumbnails();
+
+                        modal.querySelector('h3').innerText = "Editar Ação";
+                        modal.classList.remove('hidden');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
