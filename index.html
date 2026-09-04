@@ -65,7 +65,7 @@
     </script>
     <style>
         body {
-            background-color: #FFFFFF;
+            background-color: #f6f2f8;
             color: #6B5E78;
             -webkit-font-smoothing: antialiased;
         }
@@ -106,41 +106,294 @@
         .is-flipped .flip-face-front { opacity: 0; pointer-events: none; }
         .is-flipped .flip-face-back { opacity: 1; pointer-events: auto; }
         .flip-face-back { opacity: 0; pointer-events: none; }
+
+        /* Estilos de Alto Contraste Claro Institucional (High Contrast Light) */
+        body.high-contrast {
+            background-color: #ffffff !important;
+            color: #0a0a0a !important;
+        }
+
+        /* Seções e Containers Principais */
+        body.high-contrast header,
+        body.high-contrast section,
+        body.high-contrast footer,
+        body.high-contrast .bg-white,
+        body.high-contrast .bg-purple-50,
+        body.high-contrast .bg-purple-50\/50,
+        body.high-contrast .bg-\[\#EDE8F3\],
+        body.high-contrast .bg-\[\#8E79A5\],
+        body.high-contrast .bg-gradient-to-r,
+        body.high-contrast [class*="bg-stone-"],
+        body.high-contrast [class*="bg-slate-"],
+        body.high-contrast [class*="bg-purple-"] {
+            background-color: #ffffff !important;
+            background-image: none !important;
+            color: #0a0a0a !important;
+            border-color: #3b0764 !important;
+        }
+
+        body.high-contrast footer#contato {
+            background-color: #f8fafc !important;
+            border-top: 3px solid #3b0764 !important;
+        }
+
+        /* Cards e blocos de conteúdo */
+        body.high-contrast #acoes-container > div,
+        body.high-contrast #saude-container > div,
+        body.high-contrast #agenda-container > div,
+        body.high-contrast .modal-content,
+        body.high-contrast section .rounded-\[2rem\],
+        body.high-contrast section .rounded-\[2\.5rem\],
+        body.high-contrast section .rounded-3xl {
+            background-color: #ffffff !important;
+            border: 2px solid #3b0764 !important;
+            box-shadow: none !important;
+        }
+
+        /* Títulos e subtítulos */
+        body.high-contrast h1,
+        body.high-contrast h2,
+        body.high-contrast h3,
+        body.high-contrast h4,
+        body.high-contrast h5,
+        body.high-contrast h6,
+        body.high-contrast .font-display {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+
+        /* Textos gerais */
+        body.high-contrast p,
+        body.high-contrast span:not(#accessibility-bar span):not(.text-white),
+        body.high-contrast li,
+        body.high-contrast label,
+        body.high-contrast [class*="text-"] {
+            color: #0a0a0a !important;
+            font-weight: 500 !important;
+        }
+
+        /* Links interativos (apenas links em texto corrido, fora de botões) */
+        body.high-contrast a:not(#accessibility-bar a):not(.rounded-full):not([class*="rounded"]):not([class*="bg-"]):not(.btn) {
+            color: #581c87 !important;
+            text-decoration: underline !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast a:not(#accessibility-bar a):not(.rounded-full):not([class*="rounded"]):not([class*="bg-"]):not(.btn):hover,
+        body.high-contrast a:not(#accessibility-bar a):not(.rounded-full):not([class*="rounded"]):not([class*="bg-"]):not(.btn):focus {
+            color: #3b0764 !important;
+            background-color: #f3e8ff !important;
+        }
+
+        /* Botões principais e botões de ação (Hero, rodapé, modais, etc.) */
+        body.high-contrast button:not(#accessibility-bar button),
+        body.high-contrast a.btn,
+        body.high-contrast .btn-primary,
+        body.high-contrast a.rounded-full,
+        body.high-contrast a[href^="tel:"],
+        body.high-contrast a[href^="#galeria"],
+        body.high-contrast [class*="bg-purple"] button,
+        body.high-contrast button[class*="border-purple"] {
+            background-color: #581c87 !important;
+            color: #ffffff !important;
+            border: 2px solid #3b0764 !important;
+            font-weight: bold !important;
+            text-decoration: none !important;
+        }
+
+        /* Forçar texto e ícones brancos em botões */
+        body.high-contrast button:not(#accessibility-bar button) *,
+        body.high-contrast a.btn *,
+        body.high-contrast .btn-primary *,
+        body.high-contrast a.rounded-full *,
+        body.high-contrast a[href^="tel:"] *,
+        body.high-contrast a[href^="#galeria"] * {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+        }
+
+        body.high-contrast button:hover:not(#accessibility-bar button),
+        body.high-contrast a.btn:hover,
+        body.high-contrast .btn-primary:hover,
+        body.high-contrast a.rounded-full:hover,
+        body.high-contrast a[href^="tel:"]:hover,
+        body.high-contrast a[href^="#galeria"]:hover {
+            background-color: #3b0764 !important;
+            color: #ffffff !important;
+        }
+
+        /* Preservar font-family de ícones (FontAwesome, Phosphor, Lucide, SVGs, etc.) */
+        body.high-contrast i,
+        body.high-contrast [class*="fa-"],
+        body.high-contrast [class*="fa"],
+        body.high-contrast [class*="icon"],
+        body.high-contrast .ph,
+        body.high-contrast [data-lucide],
+        body.high-contrast svg {
+            font-family: inherit !important;
+        }
+
+        /* Ícones gerais em links/cards */
+        body.high-contrast i,
+        body.high-contrast [class*="fa-"],
+        body.high-contrast svg:not(.text-white) {
+            color: #3b0764 !important;
+            fill: currentColor !important;
+        }
+
+        body.high-contrast button i,
+        body.high-contrast a.btn i,
+        body.high-contrast a.rounded-full i,
+        body.high-contrast a[href^="tel:"] i,
+        body.high-contrast a[href^="#galeria"] i,
+        body.high-contrast button svg,
+        body.high-contrast a.rounded-full svg {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+        }
+
+        /* Inputs de formulário */
+        body.high-contrast input,
+        body.high-contrast select,
+        body.high-contrast textarea {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #3b0764 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Divisores e SVGs de onda */
+        body.high-contrast svg.text-white,
+        body.high-contrast .absolute.-bottom-\[1px\] {
+            display: none !important;
+        }
+
+        /* Ocultar elementos decorativos secundários */
+        body.high-contrast .decor-line-art,
+        body.high-contrast img[src*="borboleta"],
+        body.high-contrast img[src*="flores"],
+        body.high-contrast img[src*="rosto"],
+        body.high-contrast img[src*="/rosto-transparente.png"],
+        body.high-contrast img[src*="hero-watermark"],
+        body.high-contrast [data-decorative] {
+            display: none !important;
+        }
+
+        /* Manter imagens reais/fotos normais e visíveis */
+        body.high-contrast img:not([data-decorative]):not([src*="brasao"]) {
+            display: block !important;
+            opacity: 1 !important;
+            filter: contrast(110%) !important;
+        }
+
+        /* Brasão no Fundo Claro: torna 100% escuro e nítido */
+        body.high-contrast img[src*="brasao"],
+        body.high-contrast img[alt*="Brasão"],
+        body.high-contrast .logo-brasao {
+            filter: brightness(0) !important;
+            opacity: 1 !important;
+            display: block !important;
+        }
+
+        /* Barra Superior de Acessibilidade */
+        body.high-contrast #accessibility-bar {
+            background-color: #2c1540 !important;
+            border-bottom: 2px solid #581c87 !important;
+        }
+        body.high-contrast #accessibility-bar span {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        body.high-contrast #accessibility-bar button {
+            background-color: #3b1d54 !important;
+            color: #ffffff !important;
+            border: 1px solid #7e22ce !important;
+        }
+        body.high-contrast #accessibility-bar button:hover {
+            background-color: #ffffff !important;
+            color: #2c1540 !important;
+        }
+
+        /* VLibras — garante visibilidade acima de qualquer camada */
+        [vw],
+        [vw-access-button],
+        .access-button,
+        div[vw] {
+            z-index: 99999 !important;
+            display: block !important;
+            visibility: visible !important;
+            position: fixed !important;
+        }
     </style>
+
 </head>
-<body class="font-sans leading-relaxed relative overflow-x-hidden w-full max-w-full">
+<body class="font-sans leading-relaxed relative overflow-x-hidden w-full max-w-full bg-[#f6f2f8] min-h-screen">
     
-    <!-- Marca d'água Fixa (Rosto Feminino — acompanha o scroll, some atrás do Hero) -->
+    <!-- Barra Superior de Acessibilidade Institucional -->
+    <aside id="accessibility-bar" aria-label="Barra de Acessibilidade Institucional" class="w-full bg-[#3b1d54] text-purple-100 py-[6px] px-[16px] z-50 relative border-b border-purple-900/30 transition-colors duration-200" style="font-size: 12px !important; line-height: normal !important; letter-spacing: normal !important;">
+        <div class="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-[8px]">
+            <div class="flex items-center gap-[8px]">
+                <span class="font-semibold tracking-wide flex items-center gap-[6px] text-purple-100 text-[12px]">
+                    <i class="fas fa-universal-access text-[14px] text-purple-300" aria-hidden="true"></i>
+                    Acessibilidade
+                </span>
+                <span class="hidden sm:inline text-purple-400/60 text-[12px]">|</span>
+                <span class="hidden sm:inline text-purple-200/90 text-[11px]">Prefeitura Municipal de Canindé de São Francisco</span>
+            </div>
+            
+            <div class="flex items-center gap-[4px] sm:gap-[8px]">
+                <!-- Diminuir Fonte -->
+                <button type="button" onclick="changeFontSize(-10)" class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold" title="Diminuir tamanho do texto (A-)" aria-label="Diminuir tamanho da fonte">
+                    <span>A-</span>
+                </button>
+                <!-- Redefinir Fonte -->
+                <button type="button" onclick="resetFontSize()" class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold" title="Redefinir tamanho normal do texto (A)" aria-label="Redefinir tamanho da fonte">
+                    <span>A</span>
+                </button>
+                <!-- Aumentar Fonte -->
+                <button type="button" onclick="changeFontSize(10)" class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold" title="Aumentar tamanho do texto (A+)" aria-label="Aumentar tamanho da fonte">
+                    <span>A+</span>
+                </button>
+                <!-- Alternar Alto Contraste -->
+                <button type="button" onclick="toggleHighContrast()" id="btn-contrast" class="ml-[4px] sm:ml-[8px] bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[10px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-semibold flex items-center gap-[6px]" title="Alternar modo de Alto Contraste" aria-label="Alternar Alto Contraste">
+                    <i class="fas fa-circle-half-stroke text-[14px] text-purple-300" aria-hidden="true"></i>
+                    <span class="hidden xs:inline sm:inline text-[11px]">Alto Contraste</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+    <!-- Marca d'água Fixa (Rosto Feminino — acompanha o scroll, sobrepondo o fundo) -->
     <img 
-        src="logo.avif" 
-        alt="Ilustração rosto" 
-        class="fixed -left-16 sm:-left-20 lg:-left-24 top-1/3 w-[380px] md:w-[480px] lg:w-[540px] opacity-15 pointer-events-none select-none scale-x-[-1]"
-        style="z-index: 1;"
+        src="/public/rosto-transparente.png" 
+        alt="" 
+        aria-hidden="true"
+        data-decorative="true"
+        class="fixed -left-8 md:-left-2 lg:left-2 top-1/3 w-[320px] md:w-[420px] lg:w-[480px] opacity-15 pointer-events-none select-none scale-x-[-1] bg-transparent transparent-asset hidden md:block z-0"
     />
 
     <!-- Hero com Gradiente e Header Integrado -->
-    <div class="relative z-20 overflow-hidden bg-gradient-to-r from-[#9782AD] to-[#7F6A96] text-white pt-6 pb-40 md:pb-56">
+    <div class="relative z-20 w-full bg-gradient-to-r from-[#9782AD] to-[#7F6A96] text-white pt-6 pb-20 md:pb-56" style="transform: translateZ(0);">
         
         <!-- Marca d'água Hero -->
-        <img src="hero-watermark.jpg" alt="" class="absolute -left-10 top-1/2 -translate-y-1/2 w-80 md:w-[480px] lg:w-[580px] max-w-none opacity-20 pointer-events-none z-0 invert brightness-200 mix-blend-screen select-none">
+        <img src="/public/rosto-transparente2.png" alt="" aria-hidden="true" data-decorative="true" class="absolute left-6 top-1/2 -translate-y-1/2 w-56 md:w-[340px] lg:w-[420px] max-w-none opacity-20 pointer-events-none z-0 invert brightness-200 mix-blend-screen select-none bg-transparent transparent-asset hidden md:block">
         
         <!-- Header Minimalista -->
         <header class="w-full relative z-40 mb-12 md:mb-20">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center">
                     
-                    <!-- Wordmark com Brasão (Proporção Valorizada e Imponente) -->
+                    <!-- Wordmark com Brasão -->
                     <a href="#" class="inline-flex items-center gap-3 md:gap-3.5 group hover:opacity-95 transition-opacity select-none py-1" aria-label="Secretaria da Mulher - Canindé de São Francisco">
                         <img 
-                            src="assets/img/brasao.png" 
+                            src="/public/brasao.png" 
                             alt="Brasão de Canindé de São Francisco" 
-                            class="h-12 sm:h-13 md:h-14 lg:h-[58px] w-auto object-contain shrink-0 filter drop-shadow-md group-hover:scale-105 transition-transform duration-300"
+                            class="h-10 sm:h-12 md:h-14 lg:h-[58px] w-auto object-contain shrink-0 filter drop-shadow-md group-hover:scale-105 transition-transform duration-300 bg-transparent transparent-asset"
                         />
                         <div class="flex flex-col justify-center leading-none">
-                            <span class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight font-display leading-none drop-shadow-sm">
+                            <span class="text-lg sm:text-xl md:text-3xl font-extrabold text-white tracking-tight font-display leading-none drop-shadow-sm">
                                 Secretaria da Mulher
                             </span>
-                            <span class="text-xs sm:text-xs md:text-sm font-semibold text-white/90 tracking-wider uppercase mt-1 md:mt-1.5 leading-none">
+                            <span class="text-[10px] sm:text-xs md:text-sm font-semibold text-white/90 tracking-wider uppercase mt-1 md:mt-1.5 leading-none">
                                 Canindé de São Francisco
                             </span>
                         </div>
@@ -153,7 +406,7 @@
                         <a href="#acoes" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Ações</a>
                         <a href="#agenda" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Agenda</a>
                         
-                        <!-- Botão Disque 180 (Pílula translúcida) -->
+                        <!-- Botão Disque 180 -->
                         <a href="tel:180" class="ml-4 inline-flex items-center px-6 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full font-display font-bold text-lg transition-colors text-white">
                             <i class="fas fa-phone mr-2 text-sm"></i> Disque 180
                         </a>
@@ -181,95 +434,89 @@
         </header>
 
         <!-- Conteúdo do Hero -->
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-30 w-full">
+            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-10 lg:gap-8 items-center w-full">
                 
-                <!-- Coluna de Texto -->
-                <div class="max-w-2xl relative">
-                    <!-- Badge Pílula -->
-                    <span class="inline-flex items-center px-4 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs md:text-sm font-semibold tracking-wide shadow-sm border border-white/10 mb-6">
+                <!-- Coluna de Texto (Mobile: Centralizado | Desktop: Esquerda) -->
+                <div class="w-full flex flex-col items-center text-center lg:items-start lg:text-left relative z-30 pt-2 lg:pt-0">
+                    <span class="inline-flex items-center px-4 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-[11px] sm:text-xs md:text-sm font-semibold tracking-wide shadow-sm border border-white/10 mb-4 sm:mb-6">
                         Acolhimento, Direitos e Força Feminina
                     </span>
                     
-                    <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-tight sm:leading-[0.95] tracking-tight mb-6 text-white">
+                    <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-[5.5rem] leading-tight sm:leading-[0.95] tracking-tight mb-4 sm:mb-6 text-white w-full">
                         Você não está sozinha.
                     </h1>
                     
-                    <p class="text-lg sm:text-xl md:text-2xl font-sans text-white/95 mb-10 max-w-xl leading-relaxed">
+                    <p class="text-base sm:text-lg md:text-xl font-sans text-white/95 mb-8 sm:mb-10 max-w-[90%] sm:max-w-xl leading-relaxed">
                         Exame preventivo, apoio psicológico e orientação jurídica, tudo gratuito, tudo perto de você.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 w-full sm:w-auto px-4 sm:px-0">
                         <a 
                             href="#galeria" 
-                            class="inline-flex items-center justify-center bg-white text-[#4A3260] font-bold px-6 md:px-8 py-3.5 rounded-full shadow-lg hover:bg-purple-50 transition-all duration-300 hover:scale-105 active:scale-95 text-base md:text-lg font-display"
+                            class="inline-flex items-center justify-center w-full sm:w-auto bg-white text-[#4A3260] font-bold px-6 md:px-8 py-3.5 rounded-full shadow-lg hover:bg-purple-50 transition-all duration-300 hover:scale-105 active:scale-95 text-base md:text-lg font-display"
                         >
                             Conheça a Secretaria
                         </a>
                     </div>
                 </div>
 
-                <!-- Coluna da Imagem -->
-                <div class="relative w-full max-w-md mx-auto flex justify-center items-end select-none -mb-32 sm:-mb-40 md:-mb-56 pt-6 sm:pt-10">
-                  <!-- MARCAS D'ÁGUA DECORATIVAS (FORA DO CARD E SEM CLIQUE) -->
-                  <div class="w-16 md:w-24 h-32 md:h-48 overflow-hidden absolute top-10 right-4 sm:right-8 md:right-14 pointer-events-none z-0 hidden sm:block">
-                    <img src="flores.png" alt="" class="w-[200%] max-w-none h-full object-cover object-left filter brightness-0 invert opacity-20" />
-                  </div>
+                <!-- Coluna da Imagem (Mobile: Fluxo normal, sem margins negativas extremas) -->
+                <div class="relative z-0 w-full flex justify-center items-end select-none mt-6 sm:mt-10 lg:mt-0 hero-img-container bg-transparent -mb-16 sm:-mb-20 md:-mb-40 lg:-mb-56">
                   
-                  <!-- COMPONENTE 3D FLIP CARD (APENAS ESTE ELEMENTO É CLICÁVEL) -->
+                  <!-- COMPONENTE 3D FLIP CARD (Dimensões flexíveis no mobile) -->
                   <div 
-                    class="group relative w-[360px] md:w-[440px] lg:w-[480px] max-w-none h-[500px] md:h-[580px] cursor-pointer z-10"
+                    class="group relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-[440px] lg:max-w-[480px] h-[340px] sm:h-[400px] md:h-[580px] cursor-pointer z-10 bg-transparent mx-auto"
                     style="perspective: 1000px;"
                     onclick="this.firstElementChild.classList.toggle('rotate-y-180'); this.firstElementChild.classList.toggle('is-flipped')"
                   >
                     <div 
-                      class="relative w-full h-full transition-transform duration-700 ease-in-out"
+                      class="relative w-full h-full transition-transform duration-700 ease-in-out bg-transparent"
                       style="transform-style: preserve-3d;"
                     >
                       <!-- FRENTE: FOTO SOLTA DA SECRETÁRIA -->
                       <div 
-                        class="flip-face-front absolute inset-0 flex items-end justify-center"
+                        class="flip-face-front absolute inset-0 flex items-end justify-center bg-transparent hero-img-container"
                         style="transform: rotateY(0deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;"
                       >
+                        <!-- Imagem: 100% width, max-width controlado pelo container, height auto no mobile -->
                         <img 
-                          src="secretaria-foto.png" 
+                          src="/public/secretaria-foto.png" 
                           alt="Luana Machado - Secretária da Mulher" 
-                          class="w-[115%] max-w-none md:w-full md:max-w-full h-full object-contain object-bottom drop-shadow-xl translate-y-6 md:translate-y-4 pointer-events-none transition-all duration-300 ease-out group-hover:scale-105" 
+                          class="w-full h-auto md:h-full max-h-full object-contain object-bottom drop-shadow-xl pointer-events-none transition-all duration-300 ease-out group-hover:scale-105 bg-transparent transparent-asset" 
+                          style="clip-path: inset(0 3px 0 0); -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%); mask-image: linear-gradient(to bottom, black 90%, transparent 100%);"
                         />
                       </div>
 
                       <!-- VERSO: CARD DE MENSAGEM -->
                       <div 
-                        class="absolute inset-0 m-auto w-[90%] md:w-[400px] h-[340px] sm:h-[360px] md:h-[380px] -translate-y-8 md:-translate-y-16 bg-white rounded-3xl p-5 md:py-6 md:px-8 shadow-2xl flex flex-col justify-center items-center text-center border border-purple-100"
+                        class="absolute inset-0 m-auto w-full md:w-[400px] h-[95%] md:h-[380px] md:-translate-y-16 bg-white rounded-3xl p-5 md:py-6 md:px-8 shadow-2xl flex flex-col justify-center items-center text-center border border-purple-100"
                         style="transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;"
                       >
                         <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#8E79A5] mb-2 sm:mb-3 opacity-80" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                         </svg>
-                        <p class="text-gray-700 italic text-[11px] sm:text-xs md:text-base leading-relaxed mb-3 md:mb-4 font-medium">
-                          "Quando uma mulher se fortalece, toda uma geração se levanta com ela. É na força feminina que nascem mudanças reais, futuros mais justos e uma sociedade mais humana. Valorizar, apoiar e reconhecer essas mulheres é reconhecer o poder de transformação que move o mundo."
+                        <p class="text-gray-700 italic text-[11px] sm:text-xs md:text-base leading-relaxed mb-2 md:mb-4 font-medium">
+                          "Quando uma mulher se fortalece, toda uma geração se levanta com ela. É na força feminina que nascem mudanças reais, futuros mais justos e uma sociedade mais humana."
                         </p>
-                        <div class="w-12 h-0.5 bg-[#8E79A5] my-3"></div>
-                        <span class="font-bold text-[#4A3260] text-sm tracking-wide">Luana Machado</span>
-                        <span class="text-xs text-gray-500 uppercase font-semibold mt-0.5">Secretária da Mulher</span>
+                        <div class="w-8 md:w-12 h-0.5 bg-[#8E79A5] my-2 md:my-3"></div>
+                        <span class="font-bold text-[#4A3260] text-xs md:text-sm tracking-wide">Luana Machado</span>
+                        <span class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mt-0.5">Secretária da Mulher</span>
                       </div>
                     </div>
                   </div>
                 </div>
             </div>
         </div>
-
-        <!-- Curva Ondulada Inferior -->
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
-            <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="text-white fill-current w-full h-[60px] md:h-[120px] lg:h-[160px] block">
-                <path d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-        </div>
+    <div class="absolute bottom-0 left-0 w-full leading-none z-30 pointer-events-none">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="block w-full h-[42px] sm:h-[62px] md:h-[122px] lg:h-[162px]">
+            <path fill="#f6f2f8" d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+    </div>
     </div>
 
-
     <!-- Ações nas Comunidades -->
-    <section id="acoes" class="py-24 w-full relative bg-white overflow-hidden">
+    <section id="acoes" class="py-24 w-full relative z-10 bg-transparent">
         
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
@@ -278,7 +525,7 @@
                     <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl">Confira de perto os mutirões, palestras e oficinas que estão mudando a vida de mulheres em Canindé.</p>
                 </div>
                 
-                <div class="flex gap-4 md:hidden">
+                <div class="flex gap-4">
                     <button id="prevBtn" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
                         <i class="fas fa-chevron-left"></i>
                     </button>
@@ -288,9 +535,9 @@
                 </div>
             </div>
 
-            <div id="acoes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+            <div id="acoes-container" class="carousel-container flex overflow-x-auto gap-6 lg:gap-8 mt-10 pb-4 snap-x snap-mandatory cursor-grab scroll-smooth">
                 <!-- Card 1: Saúde -->
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer" onclick="openMediaModal({ titulo: 'Palestra sobre prevenção e cuidados', descricao: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Saúde e Bem-estar' })">
+                <div data-key="acao-${idx}" class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start relative z-20 bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({ titulo: 'Palestra sobre prevenção e cuidados', descricao: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Saúde e Bem-estar', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/1'+i+'/800/600') })">
                     <div>
                     <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
                         <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">Saúde e Bem-estar</span>
@@ -300,11 +547,11 @@
                     <h3 class="text-xl font-bold text-slate-800 mb-2">Palestra sobre prevenção e cuidados</h3>
                     <p class="text-slate-600 text-sm line-clamp-3 mb-6">Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.</p>
                     </div>
-                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto">Ver fotos</button>
+                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto" onclick="event.stopPropagation(); openMediaModal({ titulo: 'Palestra sobre prevenção e cuidados', descricao: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Saúde e Bem-estar', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/1'+i+'/800/600') })">Ver fotos</button>
                 </div>
 
                 <!-- Card 2: Apoio Jurídico -->
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer" onclick="openMediaModal({ titulo: 'Mutirão de Documentação', descricao: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Apoio Jurídico' })">
+                <div data-key="acao-${idx}" class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start relative z-20 bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({ titulo: 'Mutirão de Documentação', descricao: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Apoio Jurídico', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/2'+i+'/800/600') })">
                     <div>
                     <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
                         <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">Apoio Jurídico</span>
@@ -314,11 +561,11 @@
                     <h3 class="text-xl font-bold text-slate-800 mb-2">Mutirão de Documentação</h3>
                     <p class="text-slate-600 text-sm line-clamp-3 mb-6">Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.</p>
                     </div>
-                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto">Ver fotos</button>
+                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto" onclick="event.stopPropagation(); openMediaModal({ titulo: 'Mutirão de Documentação', descricao: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Apoio Jurídico', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/2'+i+'/800/600') })">Ver fotos</button>
                 </div>
 
                 <!-- Card 3: Ações Comunitárias -->
-                <div class="bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer" onclick="openMediaModal({ titulo: 'Caminhada Agosto Lilás', descricao: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Ações Comunitárias & Rua' })">
+                <div data-key="acao-${idx}" class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start relative z-20 bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({ titulo: 'Caminhada Agosto Lilás', descricao: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Ações Comunitárias & Rua', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/3'+i+'/800/600') })">
                     <div>
                     <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
                         <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">Ações Comunitárias & Rua</span>
@@ -328,16 +575,16 @@
                     <h3 class="text-xl font-bold text-slate-800 mb-2">Caminhada Agosto Lilás</h3>
                     <p class="text-slate-600 text-sm line-clamp-3 mb-6">Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.</p>
                     </div>
-                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto">Ver fotos</button>
+                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto" onclick="event.stopPropagation(); openMediaModal({ titulo: 'Caminhada Agosto Lilás', descricao: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Ações Comunitárias & Rua', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/3'+i+'/800/600') })">Ver fotos</button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Seção de Saúde Preventiva -->
-    <section id="saude" class="pt-12 pb-24 max-w-7xl mx-auto px-6 lg:px-8 relative bg-white" style="z-index: 10;">
+    <section id="saude" class="pt-12 pb-24 max-w-7xl mx-auto px-6 lg:px-8 relative">
         <!-- Borboleta 2 -->
-        <img src="borboleta.png" alt="Borboleta decorativa" class="absolute top-16 right-10 w-24 md:w-32 h-auto opacity-15 transform rotate-12 pointer-events-none z-0 select-none hidden md:block">
+        <img src="/public/borboleta.png" alt="" aria-hidden="true" data-decorative="true" class="absolute top-16 right-10 w-24 md:w-32 h-auto opacity-15 transform rotate-12 pointer-events-none z-0 select-none hidden md:block bg-transparent transparent-asset">
 
         <div class="text-center mb-16 relative z-10">
             <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Sua saúde em primeiro lugar</h2>
@@ -346,7 +593,7 @@
 
         <div id="saude-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Card 1: Seu preventivo -->
-            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
+            <div class="relative z-20 bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
                 titulo: 'Seu preventivo',
                 icone: 'fa-droplet',
                 descricaoCurta: 'Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.',
@@ -368,7 +615,7 @@
             </div>
 
             <!-- Card 2: Proteção HPV -->
-            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
+            <div class="relative z-20 bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
                 titulo: 'Proteção HPV',
                 icone: 'fa-shield-virus',
                 descricaoCurta: 'Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.',
@@ -390,7 +637,7 @@
             </div>
 
             <!-- Card 3: Horário noturno -->
-            <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
+            <div class="relative z-20 bg-white border border-brand-cardBorder rounded-[2rem] p-10 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group" onclick="openSaudeModal({
                 titulo: 'Horário noturno',
                 icone: 'fa-moon',
                 descricaoCurta: 'Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.',
@@ -414,7 +661,7 @@
     </section>
 
     <!-- Canindé + Delas -->
-    <section id="caninde-delas" class="py-24 bg-purple-50/50 border-t border-brand-borderMuted relative overflow-hidden" style="z-index: 10;">
+    <section id="caninde-delas" class="py-24 bg-transparent relative">
         <!-- Elemento Decorativo Sutil de Fundo -->
         <div class="w-72 h-72 bg-brand-secondary/10 rounded-full blur-3xl absolute -top-20 -left-20 pointer-events-none"></div>
         <div class="w-72 h-72 bg-purple-200/20 rounded-full blur-3xl absolute -bottom-20 -right-20 pointer-events-none"></div>
@@ -458,20 +705,26 @@
                     Mais autonomia, protagonismo e oportunidades reais para transformar a vida de cada mulher de Canindé.
                 </p>
             </div>
+            
+            <!-- Wrapper do Card para alinhar a Flor perfeitamente -->
+            <div class="relative mb-16">
+                <!-- Flor Decorativa (Rosa) -->
+                <img src="/public/rosatransparente.png" alt="" aria-hidden="true" data-decorative="true" class="absolute pointer-events-none select-none z-0 -right-10 md:-right-24 lg:-right-40 bottom-0 w-24 md:w-32 max-w-[100px] md:max-w-[120px] opacity-15 hidden md:block">
 
-            <!-- Bloco de Texto Institucional / Descrição do Projeto -->
-            <div class="bg-white border border-brand-cardBorder rounded-[2.5rem] p-8 md:p-12 shadow-sm mb-16 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100/40 rounded-bl-[4rem] pointer-events-none"></div>
-                
-                <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-purple-100 text-brand-primary flex items-center justify-center text-3xl shrink-0 shadow-sm">
-                        <i class="fas fa-female"></i>
-                    </div>
-                    <div class="flex-grow text-center lg:text-left">
-                        <h3 class="font-display text-2xl md:text-3xl text-brand-textDark font-bold mb-4">Sobre o Programa</h3>
-                        <div id="caninde-delas-descricao" class="font-sans text-slate-700 text-base md:text-lg leading-relaxed space-y-4">
-                            <p>O <strong>Canindé + Delas</strong> é o grande programa integrado de emancipação feminina, qualificação profissional e garantia de direitos do município de Canindé de São Francisco.</p>
-                            <p>Articulando ações de geração de renda, capacitação profissional, apoio a microempreendedoras, mutirões de saúde integral e rodas de cidadania, o programa atua diretamente nos bairros e comunidades rurais, levando oportunidades transformadoras a quem mais precisa.</p>
+                <!-- Bloco de Texto Institucional / Descrição do Projeto -->
+                <div class="bg-white border border-brand-cardBorder rounded-[2.5rem] p-8 md:p-12 shadow-sm relative overflow-hidden group hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100/40 rounded-bl-[4rem] pointer-events-none"></div>
+                    
+                    <div class="flex flex-col lg:flex-row gap-8 items-center lg:items-start relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-purple-100 text-brand-primary flex items-center justify-center text-3xl shrink-0 shadow-sm">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <div class="flex-grow text-center lg:text-left">
+                            <h3 class="font-display text-2xl md:text-3xl text-brand-textDark font-bold mb-4">Sobre o Programa</h3>
+                            <div id="caninde-delas-descricao" class="font-sans text-slate-700 text-base md:text-lg leading-relaxed space-y-4">
+                                <p>O <strong>Canindé + Delas</strong> é o grande programa integrado de emancipação feminina, qualificação profissional e garantia de direitos do município de Canindé de São Francisco.</p>
+                                <p>Articulando ações de geração de renda, capacitação profissional, apoio a microempreendedoras, mutirões de saúde integral e rodas de cidadania, o programa atua diretamente nos bairros e comunidades rurais, levando oportunidades transformadoras a quem mais precisa.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -533,53 +786,54 @@
     </section>
 
     <!-- Direitos e Apoio -->
-    <section id="direitos" class="py-24 bg-[#EDE8F3] border-y border-brand-borderMuted relative overflow-hidden" style="z-index: 10;">
+    <section id="direitos" class="py-24 bg-transparent relative">
         <!-- Flor 2 (Recorte Direito) -->
-        <div class="w-28 h-56 overflow-hidden absolute bottom-10 right-8 pointer-events-none z-0 hidden md:block select-none">
-            <img src="flores.png" alt="" class="w-[200%] max-w-none h-full object-cover object-right opacity-15">
+        <div class="w-28 h-56 overflow-hidden absolute bottom-10 right-8 pointer-events-none z-0 hidden md:block select-none bg-transparent">
+            <img src="/public/flores.png" alt="" aria-hidden="true" data-decorative="true" class="w-[200%] max-w-none h-full object-cover object-right opacity-15 bg-transparent transparent-asset">
         </div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16">
+                <img src="/public/cram.png" alt="Logo CRAM" class="block h-20 sm:h-24 w-auto mx-auto mb-4 object-contain" />
                 <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Rede de apoio e proteção</h2>
                 <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">Estamos aqui para amparar você. Nossos serviços sociais, legais e psicológicos são gratuitos e sigilosos.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                     <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
                         <i class="fas fa-hand-holding-heart text-4xl"></i>
                     </div>
                     <div>
                         <h3 class="font-display text-3xl text-brand-textDark mb-3">Alguém pra te ouvir</h3>
                         <p class="font-sans text-brand-textMuted text-lg mb-4">Sigiloso, sem julgamento. Nossas psicólogas estão prontas para te acolher. Você só precisa dar o primeiro passo.</p>
-                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Falar com psicóloga <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                        <a href="atendimento-psicologico.html" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Falar com psicóloga <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
                     </div>
                 </div>
 
-                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                     <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
                         <i class="fas fa-scale-balanced text-4xl"></i>
                     </div>
                     <div>
                         <h3 class="font-display text-3xl text-brand-textDark mb-3">Seus direitos</h3>
                         <p class="font-sans text-brand-textMuted text-lg mb-4">Suporte jurídico gratuito para garantir sua segurança e resolver conflitos legais. Nós te orientamos em cada etapa.</p>
-                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Orientação jurídica <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                        <a href="atendimento-juridico.html" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Orientação jurídica <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
                     </div>
                 </div>
 
-                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                     <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
                         <i class="fas fa-person-military-pointing text-4xl"></i>
                     </div>
                     <div>
                         <h3 class="font-display text-3xl text-brand-textDark mb-3">Maria da Penha</h3>
                         <p class="font-sans text-brand-textMuted text-lg mb-4">Monitoramento ativo de medidas protetivas com nossa patrulha municipal. Sua segurança é inegociável.</p>
-                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Acionar proteção <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                        <a href="maria-da-penha.html" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Acionar proteção <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
                     </div>
                 </div>
 
-                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                     <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
                         <i class="fas fa-store text-4xl"></i>
                     </div>
@@ -594,11 +848,11 @@
     </section>
 
     <!-- Galeria -->
-    <section id="galeria" class="py-16 max-w-7xl mx-auto px-6 lg:px-8 relative bg-white" style="z-index: 10;">
+    <section id="galeria" class="py-16 max-w-7xl mx-auto px-6 lg:px-8 relative z-20" style="isolation: isolate;">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-                <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Fotos e Vídeos</h2>
-                <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl">Acompanhe os melhores momentos, depoimentos e registros em vídeo das nossas ações.</p>
+                <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Nossos Vídeos</h2>
+                <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl">Acompanhe depoimentos, informativos e registros em vídeo das nossas ações.</p>
             </div>
             
             <div class="flex gap-4">
@@ -611,9 +865,9 @@
             </div>
         </div>
 
-        <div id="galeria-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+        <div id="galeria-container" class="relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
   <!-- Item 1: Vídeo Depoimento -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm" onclick="openMediaModal({titulo: 'Depoimento: Dona Maria', descricao: 'Relato emocionante sobre o acolhimento recebido na secretaria.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Depoimento: Dona Maria', descricao: 'Relato emocionante sobre o acolhimento recebido na secretaria.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Vídeo'})">
     <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80" alt="Depoimento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -626,19 +880,22 @@
     </div>
   </div>
 
-  <!-- Item 2: Foto Caminhada -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm" onclick="openMediaModal({titulo: 'Caminhada de abertura', descricao: 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Foto'})">
+  <!-- Item 2: Vídeo Caminhada -->
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Caminhada de abertura', descricao: 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Vídeo'})">
     <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80" alt="Caminhada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
-    <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow">
-      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zm0-2a5 5 0 110 10 5 5 0 010-10zm7.5-3H17l-1.5-2h-7L7 4H4.5A2.5 2.5 0 002 6.5v11A2.5 2.5 0 004.5 20h15a2.5 2.5 0 002.5-2.5v-11A2.5 2.5 0 0019.5 4z"/></svg>
-    </div>
-    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-purple-950/80 to-transparent p-4 text-white text-xs font-semibold">
-      Caminhada de abertura
+    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
+      <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+        <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="flex items-center justify-between text-white text-xs font-semibold">
+        <span>Caminhada de abertura</span>
+        <span class="bg-black/40 px-2 py-0.5 rounded-full">01:45</span>
+      </div>
     </div>
   </div>
 
   <!-- Item 3: Vídeo Preventivo -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm" onclick="openMediaModal({titulo: 'Como é o preventivo?', descricao: 'Explicativo com a equipe médica desmistificando o exame.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Como é o preventivo?', descricao: 'Explicativo com a equipe médica desmistificando o exame.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Vídeo'})">
     <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Preventivo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -651,27 +908,32 @@
     </div>
   </div>
 
-  <!-- Item 4: Nossas Oficinas -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm flex items-end p-4" onclick="openMediaModal({titulo: 'Nossas oficinas', descricao: 'Capacitação prática em artesanato e empreendedorismo local.', imagem: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80', categoria: 'Foto'})">
-    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80" alt="Nossas Oficinas" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
-    <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow z-10">
-      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zm0-2a5 5 0 110 10 5 5 0 010-10zm7.5-3H17l-1.5-2h-7L7 4H4.5A2.5 2.5 0 002 6.5v11A2.5 2.5 0 004.5 20h15a2.5 2.5 0 002.5-2.5v-11A2.5 2.5 0 0019.5 4z"/></svg>
+  <!-- Item 4: Vídeo Oficinas -->
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Nossas oficinas', descricao: 'Capacitação prática em artesanato e empreendedorismo local.', imagem: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80', categoria: 'Vídeo'})">
+    <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80" alt="Nossas Oficinas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
+    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
+      <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+        <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="flex items-center justify-between text-white text-xs font-semibold">
+        <span>Nossas oficinas</span>
+        <span class="bg-black/40 px-2 py-0.5 rounded-full">03:10</span>
+      </div>
     </div>
-    <div class="absolute inset-0 bg-gradient-to-t from-purple-950/70 to-transparent"></div>
-    <span class="relative z-10 text-white text-xs font-semibold">Nossas oficinas</span>
   </div>
 </div>
     </section>
 
     <!-- Agenda -->
-    <section id="agenda" class="py-24 max-w-4xl mx-auto px-6 lg:px-8 relative bg-white" style="z-index: 10;">
-        <div class="text-center mb-16">
+    <section id="agenda" class="py-24 max-w-4xl mx-auto px-6 lg:px-8 relative overflow-visible">
+
+        <div class="text-center mb-16 relative z-10">
             <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Nossa agenda perto de você</h2>
             <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">Programe-se e não perca os mutirões, palestras e serviços da Secretaria no seu bairro.</p>
         </div>
         
-        <div id="agenda-container" class="flex flex-col gap-6">
-            <div class="flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow">
+        <div id="agenda-container" class="flex flex-col gap-6 relative z-10">
+            <div class="flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
                     <span class="font-display text-4xl leading-none">20</span>
                     <span class="font-display text-lg font-bold">Out</span>
@@ -694,7 +956,7 @@
                 </div>
             </div>
             
-            <div class="flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
                     <span class="font-display text-4xl leading-none">22</span>
                     <span class="font-display text-lg font-bold">Out</span>
@@ -720,16 +982,16 @@
     </section>
 
     <!-- Footer Elegante -->
-    <footer id="contato" class="bg-brand-textDark text-white mt-12 rounded-t-[3rem] pt-20 pb-10 relative" style="z-index: 10;">
+    <footer id="contato" class="bg-brand-textDark text-white mt-12 rounded-t-[3rem] pt-20 pb-10 relative z-30 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-16">
                 
                 <div>
                     <div class="flex items-center gap-4 mb-6">
                         <img 
-                            src="assets/img/brasao.png" 
+                            src="/public/brasao.png" 
                             alt="Brasão de Canindé de São Francisco" 
-                            class="h-14 md:h-16 w-auto object-contain shrink-0 filter drop-shadow-md"
+                            class="h-14 md:h-16 w-auto object-contain shrink-0 filter drop-shadow-md bg-transparent transparent-asset"
                         />
                         <div class="flex flex-col leading-none font-display">
                             <span class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">
@@ -799,7 +1061,7 @@
     <div id="mediaModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 px-4">
         <div class="modal-overlay absolute w-full h-full bg-brand-textDark/90 backdrop-blur-sm" onclick="closeModal()"></div>
         
-        <div class="modal-container bg-white w-full md:max-w-4xl mx-auto rounded-[2rem] shadow-2xl z-50 overflow-hidden relative border border-brand-cardBorder">
+        <div class="modal-container bg-white w-full md:max-w-6xl xl:max-w-7xl mx-auto rounded-[2rem] shadow-2xl z-50 overflow-hidden relative border border-brand-cardBorder">
             <button class="absolute top-4 right-4 bg-white text-brand-primary rounded-full w-12 h-12 flex items-center justify-center shadow-md border border-brand-cardBorder hover:bg-brand-iconBg transition-colors z-50 focus:outline-none" aria-label="Fechar modal" onclick="closeModal()">
                 <i class="fas fa-times text-xl"></i>
             </button>
@@ -1068,9 +1330,9 @@
             if (!container) return;
 
             container.innerHTML = '';
-            container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10';
+            container.className = 'carousel-container flex overflow-x-auto gap-6 sm:gap-8 mt-10 pb-4 snap-x snap-mandatory cursor-grab scroll-smooth';
 
-            acoesData.forEach(acao => {
+            acoesData.forEach((acao, idx) => {
                 // Normaliza campos — suporta {title/titulo}, {image/imagem}, {category/categoria}
                 const title    = acao.title       || acao.titulo    || '';
                 const desc     = acao.description || acao.descricao || '';
@@ -1078,12 +1340,19 @@
                 const category = acao.category    || acao.categoria || 'Ação';
                 const date     = acao.date        || '';
 
+                // Suporte para múltiplas fotos: usa a galeria real ou injeta 30 de demonstração se não existir
+                let galeriaArr = Array.isArray(acao.galeria) ? acao.galeria : (Array.isArray(acao.gallery) ? acao.gallery : []);
+                if (galeriaArr.length === 0) {
+                    galeriaArr = Array.from({length: 30}, (_, i) => `https://picsum.photos/seed/${encodeURIComponent((title || 'acao') + i)}/800/600`);
+                }
+                const galeriaJson = JSON.stringify(galeriaArr).replace(/"/g, '&quot;');
+
                 const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
 
                 const el = document.createElement('div');
-                el.className = 'bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-md transition-shadow';
+                el.className = 'w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
                 el.innerHTML = `
-                    <div onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\` })'>
+                    <div onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\`, galeria: ${galeriaJson} })'>
                         <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
                             <span class="absolute top-3 left-3 bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10">${category}</span>
                             <img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
@@ -1093,7 +1362,7 @@
                         <p class="text-slate-600 text-sm line-clamp-3 mb-6 leading-relaxed">${desc}</p>
                     </div>
                     <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto"
-                        onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\` })'>
+                        onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\`, galeria: ${galeriaJson} })'>
                         Ver fotos
                     </button>
                 `;
@@ -1112,20 +1381,18 @@
                 const title    = item.title       || item.titulo    || '';
                 const desc     = item.description || item.descricao || 'Registro das ações da Secretaria da Mulher';
                 const image    = item.image       || item.imagem    || '';
-                const category = item.category    || item.categoria || (item.type === 'video' ? 'Vídeo' : 'Foto');
-                const isVideo  = item.type === 'video';
+                const category = item.category    || item.categoria || 'Vídeo';
                 const duration = item.duration    || '';
 
                 const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
 
                 const el = document.createElement('div');
-                el.className = 'relative rounded-3xl overflow-hidden aspect-[4/5] bg-slate-900 group cursor-pointer shadow-sm';
+                el.className = 'relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
                 el.onclick = () => openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
 
                 el.innerHTML = `
                     <img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
                         onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
-                    ${isVideo ? `
                     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4 pointer-events-none">
                         <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                             <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -1134,13 +1401,7 @@
                             <span class="line-clamp-1">${safe(title)}</span>
                             ${duration ? `<span class="bg-black/40 px-2 py-0.5 rounded-full ml-2 shrink-0">${duration}</span>` : ''}
                         </div>
-                    </div>` : `
-                    <div class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow pointer-events-none">
-                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 9a3 3 0 100 6 3 3 0 000-6zm0-2a5 5 0 110 10 5 5 0 010-10zm7.5-3H17l-1.5-2h-7L7 4H4.5A2.5 2.5 0 002 6.5v11A2.5 2.5 0 004.5 20h15a2.5 2.5 0 002.5-2.5v-11A2.5 2.5 0 0019.5 4z"/></svg>
                     </div>
-                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-purple-950/80 to-transparent p-4 text-white text-xs font-semibold pointer-events-none line-clamp-2">
-                        ${safe(title)}
-                    </div>`}
                 `;
                 container.appendChild(el);
             });
@@ -1154,7 +1415,7 @@
 
             agendaData.forEach(item => {
                 const el = document.createElement('div');
-                el.className = 'flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-md transition-shadow';
+                el.className = 'flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
 
                 let colorClass = 'bg-yellow-100 text-yellow-700 border-yellow-200';
                 if (item.status === 'Realizado')  colorClass = 'bg-green-100 text-green-700 border-green-200';
@@ -1191,7 +1452,7 @@
         }
 
         function setupScrollLogic() {
-            const carousel = document.getElementById('carousel');
+            const carousel = document.getElementById('acoes-container');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             let isDown = false, startX, scrollLeft;
@@ -1215,8 +1476,16 @@
                     const walk = (x - startX) * 2;
                     carousel.scrollLeft = scrollLeft - walk;
                 });
-                if(prevBtn) prevBtn.addEventListener('click', () => { carousel.scrollBy({ left: -400, behavior: 'smooth' }); });
-                if(nextBtn) nextBtn.addEventListener('click', () => { carousel.scrollBy({ left: 400, behavior: 'smooth' }); });
+                if(prevBtn) prevBtn.addEventListener('click', () => { 
+                    const gap = parseInt(getComputedStyle(carousel).gap || 24);
+                    const cardW = carousel.firstElementChild ? carousel.firstElementChild.offsetWidth : 300;
+                    carousel.scrollBy({ left: -(cardW + gap), behavior: 'smooth' }); 
+                });
+                if(nextBtn) nextBtn.addEventListener('click', () => { 
+                    const gap = parseInt(getComputedStyle(carousel).gap || 24);
+                    const cardW = carousel.firstElementChild ? carousel.firstElementChild.offsetWidth : 300;
+                    carousel.scrollBy({ left: (cardW + gap), behavior: 'smooth' }); 
+                });
             }
 
             const carouselGaleria = document.getElementById('carousel-galeria');
@@ -1308,14 +1577,26 @@
             currentGalleryIndex = 0;
 
             const hasMultiple = activeGalleryImages.length > 1;
+            const isVideo = categoria.toLowerCase().includes('vídeo') || categoria.toLowerCase().includes('video');
 
             modalContent.innerHTML = `
                 <div class="flex flex-col lg:flex-row h-full max-h-[90vh]">
                     <!-- Coluna da Imagem / Carrossel -->
-                    <div class="lg:w-7/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[320px] lg:min-h-[480px]">
+                    <div class="lg:w-7/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[400px] lg:min-h-[600px] xl:min-h-[75vh]">
                         <!-- Imagem Principal -->
-                        <div class="relative w-full h-[320px] lg:h-[480px] flex items-center justify-center overflow-hidden">
+                        <div class="relative w-full flex-1 flex items-center justify-center overflow-hidden p-4 lg:p-8">
+                            ${isVideo ? `
+                            <div class="relative h-full aspect-[9/16] rounded-xl overflow-hidden shadow-2xl">
+                                <img id="modalMainImage" src="${activeGalleryImages[0]}" class="w-full h-full object-cover transition-all duration-300 select-none opacity-90" alt="${titulo}">
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div class="w-16 h-16 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg">
+                                        <svg class="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            ` : `
                             <img id="modalMainImage" src="${activeGalleryImages[0]}" class="w-full h-full object-contain transition-all duration-300 select-none" alt="${titulo}">
+                            `}
                             
                             <!-- Badge de Categoria -->
                             <div class="absolute top-4 left-4 bg-brand-badgeBg text-brand-badgeText px-3.5 py-1.5 rounded-full font-display font-bold text-xs shadow-md z-10">
@@ -1342,7 +1623,7 @@
                         <!-- Grade de Miniaturas no Rodapé da Imagem -->
                         <div class="bg-black/80 px-4 py-2.5 overflow-x-auto flex gap-2 justify-center items-center scrollbar-none z-10">
                             ${activeGalleryImages.map((img, idx) => `
-                                <button type="button" onclick="modalSelectImage(${idx})" class="modal-thumb-item flex-none w-12 h-12 rounded-lg overflow-hidden transition-all duration-200 ${idx === 0 ? 'ring-2 ring-purple-600 opacity-100 scale-105' : 'opacity-60 hover:opacity-100'}">
+                                <button type="button" data-key="thumb-${idx}" onclick="modalSelectImage(${idx})" class="modal-thumb-item flex-none w-12 h-12 rounded-lg overflow-hidden transition-all duration-200 ${idx === 0 ? 'ring-2 ring-purple-600 opacity-100 scale-105' : 'opacity-60 hover:opacity-100'}">
                                     <img src="${img}" class="w-full h-full object-cover" alt="Miniatura ${idx + 1}">
                                 </button>
                             `).join('')}
@@ -1398,6 +1679,70 @@
                 if (e.key === "ArrowRight" && typeof modalNextImage === 'function') modalNextImage();
             }
         });
+
+        /* ========================================================
+           Lógica de Acessibilidade (Fonte, Contraste e Persistência)
+           ======================================================== */
+        let currentFontSizePercent = 100;
+        const MIN_FONT_PERCENT = 60;
+        const MAX_FONT_PERCENT = 200;
+        const FONT_STEP = 10;
+
+        function applyFontSize(percent) {
+            currentFontSizePercent = Math.min(Math.max(percent, MIN_FONT_PERCENT), MAX_FONT_PERCENT);
+            document.documentElement.style.fontSize = `${currentFontSizePercent}%`;
+            localStorage.setItem('pref_font_size', currentFontSizePercent);
+        }
+
+        function changeFontSize(delta) {
+            applyFontSize(currentFontSizePercent + delta);
+        }
+
+        function resetFontSize() {
+            applyFontSize(100);
+        }
+
+        function toggleHighContrast() {
+            const isHighContrast = document.body.classList.toggle('high-contrast');
+            localStorage.setItem('pref_high_contrast', isHighContrast ? 'true' : 'false');
+            
+            const btnContrast = document.getElementById('btn-contrast');
+            if (btnContrast) {
+                btnContrast.setAttribute('aria-pressed', isHighContrast ? 'true' : 'false');
+            }
+        }
+
+        // Inicializar preferências salvas ao carregar
+        (function initAccessibilityPreferences() {
+            const savedFontSize = localStorage.getItem('pref_font_size');
+            if (savedFontSize) {
+                const parsed = parseInt(savedFontSize, 10);
+                if (!isNaN(parsed)) {
+                    applyFontSize(parsed);
+                }
+            }
+
+            const savedContrast = localStorage.getItem('pref_high_contrast');
+            if (savedContrast === 'true') {
+                document.body.classList.add('high-contrast');
+                const btnContrast = document.getElementById('btn-contrast');
+                if (btnContrast) {
+                    btnContrast.setAttribute('aria-pressed', 'true');
+                }
+            }
+        })();
+    </script>
+
+    <!-- Widget VLibras Oficial de Acessibilidade -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 </body>
 </html>

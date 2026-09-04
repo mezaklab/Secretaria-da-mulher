@@ -18,7 +18,7 @@ const oldIndexNavbarLogo = `                    <!-- Wordmark -->
 const newIndexNavbarLogo = `                    <!-- Wordmark com Brasão -->
                     <a href="#" class="flex items-center gap-3.5 group hover:opacity-90 transition-opacity" aria-label="Secretaria da Mulher - Canindé de São Francisco">
                         <img 
-                            src="assets/img/brasao.png" 
+                            src="/brasao.png" 
                             alt="Brasão de Canindé de São Francisco" 
                             class="h-11 md:h-14 w-auto object-contain shrink-0 filter drop-shadow-md group-hover:scale-105 transition-transform duration-300"
                         />
@@ -51,7 +51,7 @@ const oldIndexFooterLogo = `                    <div class="flex flex-col leadin
 
 const newIndexFooterLogo = `                    <div class="flex items-center gap-4 mb-6">
                         <img 
-                            src="assets/img/brasao.png" 
+                            src="/brasao.png" 
                             alt="Brasão de Canindé de São Francisco" 
                             class="h-14 md:h-16 w-auto object-contain shrink-0 filter drop-shadow-md"
                         />
@@ -82,7 +82,7 @@ const oldAdminSidebarLogo = `        <div class="p-6 border-b border-white/10 fl
 
 const newAdminSidebarLogo = `        <div class="p-6 border-b border-white/10 flex items-center gap-3.5">
             <img 
-                src="assets/img/brasao.png" 
+                src="/brasao.png" 
                 alt="Brasão de Canindé de São Francisco" 
                 class="h-11 w-auto object-contain shrink-0 filter drop-shadow-md"
             />

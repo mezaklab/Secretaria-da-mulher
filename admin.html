@@ -33,7 +33,7 @@
     <aside class="w-64 bg-brand-primary text-white flex flex-col h-full shadow-xl z-20 shrink-0">
         <div class="p-6 border-b border-white/10 flex items-center gap-3.5">
             <img 
-                src="assets/img/brasao.png" 
+                src="/public/brasao.png" 
                 alt="Brasão de Canindé de São Francisco" 
                 class="h-11 w-auto object-contain shrink-0 filter drop-shadow-md"
             />
@@ -45,13 +45,13 @@
         
         <nav class="flex-grow p-4 space-y-2 overflow-y-auto" id="sidebar-nav">
             <a href="#" data-target="visao-geral" class="nav-item flex items-center gap-3 px-4 py-3 bg-white/10 rounded-lg text-white font-medium transition-colors">
-                <i class="fas fa-chart-line w-5 text-center"></i> Visão Geral
+                <i class="fas fa-chart-line w-5 text-center"></i> Nossas Ações nas Ruas
             </a>
             <a href="#" data-target="acoes-fotos" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
-                <i class="fas fa-images w-5 text-center"></i> Ações & Fotos
+                <i class="fas fa-video w-5 text-center"></i> Nossos Vídeos
             </a>
             <a href="#" data-target="servicos-saude" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
-                <i class="fas fa-heartbeat w-5 text-center"></i> Serviços de Saúde
+                <i class="fas fa-heartbeat w-5 text-center"></i> Saúde Preventiva
             </a>
             <a href="#" data-target="caninde-delas" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
                 <i class="fas fa-female w-5 text-center"></i> Canindé + Delas
@@ -78,7 +78,7 @@
     <main class="flex-grow flex flex-col h-full overflow-y-auto relative bg-brand-bg">
         <!-- Header -->
         <header class="bg-white px-8 py-5 shadow-sm flex justify-between items-center z-10 sticky top-0">
-            <h2 id="header-title" class="text-2xl font-display font-semibold text-brand-primary">Visão Geral</h2>
+            <h2 id="header-title" class="text-2xl font-display font-semibold text-brand-primary">Nossas Ações nas Ruas</h2>
             <div class="flex items-center gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
                 <div class="w-10 h-10 rounded-full bg-brand-secondary/20 flex items-center justify-center text-brand-primary">
                     <i class="fas fa-user"></i>
@@ -94,41 +94,14 @@
         <div class="p-8 max-w-7xl mx-auto w-full">
             <!-- Visão Geral -->
             <div id="visao-geral" class="tab-content block">
-                <!-- Cards de Métricas -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center text-brand-primary text-xl shrink-0">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Atendimentos no Mês</p>
-                            <p class="text-3xl font-bold text-gray-800">248</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl shrink-0">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Ações Realizadas</p>
-                            <p class="text-3xl font-bold text-gray-800">12</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xl shrink-0">
-                            <i class="fas fa-notes-medical"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-500 font-medium">Preventivos Pendentes</p>
-                            <p class="text-3xl font-bold text-gray-800">35</p>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Módulo de Gestão de Ações -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                        <h3 class="text-lg font-bold text-gray-800">Ações Comunitárias Recentes</h3>
+                        <h3 class="text-lg font-bold text-gray-800">Gerenciar Ações nas Ruas</h3>
+                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm" onclick="document.getElementById('modal').classList.remove('hidden'); document.getElementById('edit-id-acoes').value=''; document.getElementById('modal').querySelector('h3').innerText='Cadastrar Nova Ação'; if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click(); currentActionGallery = []; if(typeof renderGalleryThumbnails === 'function') renderGalleryThumbnails();">
+                            <i class="fas fa-plus mr-2"></i> Nova Ação
+                        </button>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse min-w-[700px]">
@@ -163,10 +136,10 @@
                                     </td>
                                 </tr>
                                 <tr class="hover:bg-gray-50/50 transition-colors group">
-                                    <td class="px-6 py-4 font-medium text-gray-800">Feira de Empreendedoras Locais</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full">Renda</span></td>
-                                    <td class="px-6 py-4 text-gray-500">02 Out 2024</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-gray-200 text-gray-600 text-xs font-bold rounded-full">Rascunho</span></td>
+                                    <td class="px-6 py-4 font-medium text-gray-800">Caminhada Agosto Lilás</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-purple-100 text-brand-primary text-xs font-bold rounded-full">Ações Comunitárias</span></td>
+                                    <td class="px-6 py-4 text-gray-500">01 Set 2026</td>
+                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
                                     <td class="px-6 py-4 text-right">
                                         <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
                                         <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
@@ -182,9 +155,9 @@
             <div id="acoes-fotos" class="tab-content hidden">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                        <h3 class="text-lg font-bold text-gray-800">Galeria e Postagens</h3>
+                        <h3 class="text-lg font-bold text-gray-800">Nossos Vídeos</h3>
                         <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm" onclick="document.getElementById('modal').classList.remove('hidden'); document.getElementById('edit-id-acoes').value=''; document.getElementById('modal').querySelector('h3').innerText='Cadastrar Nova Ação'; if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click(); currentActionGallery = []; if(typeof renderGalleryThumbnails === 'function') renderGalleryThumbnails();">
-                            <i class="fas fa-upload mr-2"></i> Nova Foto / Ação
+                            <i class="fas fa-upload mr-2"></i> Nova Ação / Vídeo
                         </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -282,9 +255,9 @@
                                 <div class="flex items-center justify-between mb-3">
                                     <div>
                                         <label class="block text-sm font-bold text-gray-700">Galeria de Fotos do Projeto</label>
-                                        <p class="text-xs text-gray-400">Adicione até 10 fotos em alta qualidade (PNG, JPG até 5MB)</p>
+                                        <p class="text-xs text-gray-400">Adicione até 30 fotos em alta qualidade (PNG, JPG até 5MB)</p>
                                     </div>
-                                    <span id="caninde-gallery-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary">0 / 10 fotos</span>
+                                    <span id="caninde-gallery-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary">0 / 30 fotos</span>
                                 </div>
 
                                 <!-- Input & Botão de Selecionar -->
@@ -483,8 +456,8 @@
                         <!-- Galeria de Fotos Adicionais -->
                         <div class="col-span-1 md:col-span-2 mt-2">
                             <div class="flex items-center justify-between mb-1">
-                                <label class="block text-sm font-medium text-gray-700">Galeria de Fotos (até 10 fotos adicionais)</label>
-                                <span id="gallery-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary">0 / 10 fotos</span>
+                                <label class="block text-sm font-medium text-gray-700">Galeria de Fotos (até 30 fotos adicionais)</label>
+                                <span id="gallery-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary">0 / 30 fotos</span>
                             </div>
                             
                             <!-- Input & Botão de Selecionar -->
@@ -733,7 +706,8 @@
             // Dados Padrões
             const defaultAcoes = [
                 { id: 1, category: 'Saúde e Bem-estar', date: '24 Out 2024', title: 'Palestra sobre prevenção e cuidados', description: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' },
-                { id: 2, category: 'Apoio Jurídico', date: '15 Out 2024', title: 'Mutirão de Documentação', description: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', image: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80' }
+                { id: 2, category: 'Apoio Jurídico', date: '15 Out 2024', title: 'Mutirão de Documentação', description: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', image: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80' },
+                { id: 3, category: 'Ações Comunitárias & Rua', date: '01 Set 2026', title: 'Caminhada Agosto Lilás', description: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80' }
             ];
             
             const defaultGaleria = [
@@ -858,8 +832,8 @@
                 if (descInput) descInput.value = adminCanindeDelas.descricao || '';
                 
                 if (badgeEl) {
-                    badgeEl.innerText = `${currentCanindePhotos.length} / 10 fotos`;
-                    badgeEl.className = currentCanindePhotos.length >= 10 
+                    badgeEl.innerText = `${currentCanindePhotos.length} / 30 fotos`;
+                    badgeEl.className = currentCanindePhotos.length >= 30 
                         ? 'text-xs font-bold px-3 py-1 rounded-full bg-red-100 text-red-700' 
                         : 'text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary';
                 }
@@ -910,9 +884,9 @@
                         showCanindeError('Alguns arquivos não foram adicionados por não serem imagens válidas.');
                     }
 
-                    const availableSlots = 10 - currentCanindePhotos.length;
+                    const availableSlots = 30 - currentCanindePhotos.length;
                     if (validFiles.length > availableSlots) {
-                        showCanindeError(`Você só pode adicionar mais ${availableSlots} foto(s). O limite é de 10 fotos.`);
+                        showCanindeError(`Você só pode adicionar mais ${availableSlots} foto(s). O limite é de 30 fotos.`);
                     }
 
                     const toProcess = validFiles.slice(0, availableSlots);
@@ -1044,8 +1018,8 @@
                 galleryThumbnailsGrid.innerHTML = '';
                 
                 if (galleryCountBadge) {
-                    galleryCountBadge.innerText = `${currentActionGallery.length} / 10 fotos`;
-                    if (currentActionGallery.length >= 10) {
+                    galleryCountBadge.innerText = `${currentActionGallery.length} / 30 fotos`;
+                    if (currentActionGallery.length >= 30) {
                         galleryCountBadge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full bg-red-100 text-red-700';
                     } else {
                         galleryCountBadge.className = 'text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary';
@@ -1112,10 +1086,10 @@
                     }
 
                     const validImages = files.filter(f => f.type.startsWith('image/'));
-                    const availableSlots = 10 - currentActionGallery.length;
+                    const availableSlots = 30 - currentActionGallery.length;
 
                     if (validImages.length > availableSlots) {
-                        showGalleryError(`Você só pode adicionar mais ${availableSlots} foto(s). O limite total é de 10 fotos por ação.`);
+                        showGalleryError(`Você só pode adicionar mais ${availableSlots} foto(s). O limite total é de 30 fotos por ação.`);
                     }
 
                     const imagesToProcess = validImages.slice(0, availableSlots);
