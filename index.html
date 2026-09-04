@@ -326,6 +326,50 @@
         }
     </style>
 
+    <style>
+        @media (max-width: 767px) {
+          html, body { overflow-x: hidden !important; max-width: 100vw; }
+          #caninde-delas .blur-3xl { display: none !important; }
+        
+          #saude-container {
+            display: flex !important;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            gap: 1rem !important;
+            padding: 0 1.5rem 0.5rem;
+            margin: 0 -1.5rem;
+          }
+          #saude-container::-webkit-scrollbar { display: none; }
+          #saude-container > div { flex: 0 0 100%; scroll-snap-align: start; }
+        
+          #galeria-container {
+            display: flex !important;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            gap: 1rem !important;
+            padding: 0 1.5rem 0.5rem;
+            margin: 0 -1.5rem;
+          }
+          #galeria-container::-webkit-scrollbar { display: none; }
+          #galeria-container > div { flex: 0 0 100%; scroll-snap-align: start; }
+        
+          header button[aria-label="Abrir menu"] {
+            background: rgba(255,255,255,0.15);
+            border-radius: 9999px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+    </style>
 </head>
 <body class="font-sans leading-relaxed relative overflow-x-hidden w-full max-w-full bg-[#f6f2f8] min-h-screen">
     
@@ -1743,6 +1787,65 @@
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
         new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script>
+    (function () {
+      function setupCarouselDots(containerId, dotsWrapperId) {
+        var container = document.getElementById(containerId);
+        if (!container) return;
+        var mq = window.matchMedia('(max-width: 767px)');
+    
+        function build() {
+          var existing = document.getElementById(dotsWrapperId);
+          if (existing) existing.remove();
+          if (!mq.matches) return;
+    
+          var cards = container.children;
+          if (cards.length <= 1) return;
+    
+          var wrapper = document.createElement('div');
+          wrapper.id = dotsWrapperId;
+          wrapper.className = 'flex justify-center gap-2 mt-4';
+          for (var i = 0; i < cards.length; i++) {
+            var dot = document.createElement('span');
+            dot.className = 'w-2 h-2 rounded-full bg-purple-200 transition-all duration-300';
+            wrapper.appendChild(dot);
+          }
+          container.insertAdjacentElement('afterend', wrapper);
+          updateDots();
+        }
+    
+        function updateDots() {
+          var wrapper = document.getElementById(dotsWrapperId);
+          if (!wrapper || !container.children.length) return;
+          var cardWidth = container.children[0].offsetWidth + 16;
+          var index = Math.round(container.scrollLeft / cardWidth);
+          Array.prototype.forEach.call(wrapper.children, function (dot, i) {
+            if (i === index) {
+              dot.classList.add('bg-brand-primary', 'w-5');
+              dot.classList.remove('bg-purple-200', 'w-2');
+            } else {
+              dot.classList.remove('bg-brand-primary', 'w-5');
+              dot.classList.add('bg-purple-200', 'w-2');
+            }
+          });
+        }
+    
+        container.addEventListener('scroll', function () {
+          window.requestAnimationFrame(updateDots);
+        }, { passive: true });
+    
+        mq.addEventListener('change', build);
+        window.addEventListener('resize', build);
+        build();
+      }
+    
+      document.addEventListener('DOMContentLoaded', function () {
+        setupCarouselDots('saude-container', 'saude-carousel-dots');
+        setupCarouselDots('galeria-container', 'galeria-carousel-dots');
+        setupCarouselDots('acoes-container', 'acoes-carousel-dots');
+      });
+    })();
     </script>
 </body>
 </html>
