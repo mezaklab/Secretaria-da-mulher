@@ -26,11 +26,22 @@
             }
         }
     </script>
+    <style>
+      @media (max-width: 1023px) {
+        header#admin-header-not-exists-placeholder { } /* ignorar, apenas reserva */
+        main .p-8 { padding: 1.25rem !important; }
+        header.bg-white.px-8 { padding-left: 1rem !important; padding-right: 1rem !important; }
+        #header-title { font-size: 1.25rem !important; }
+      }
+    </style>
 </head>
 <body class="bg-brand-bg font-sans text-gray-800 flex h-screen overflow-hidden">
 
+    <!-- Overlay do Sidebar -->
+    <div id="admin-sidebar-overlay" class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden"></div>
+
     <!-- Sidebar -->
-    <aside class="w-64 bg-brand-primary text-white flex flex-col h-full shadow-xl z-20 shrink-0">
+    <aside id="admin-sidebar" class="w-64 bg-brand-primary text-white flex flex-col h-full shadow-xl z-40 shrink-0 fixed lg:static inset-y-0 left-0 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out">
         <div class="p-6 border-b border-white/10 flex items-center gap-3.5">
             <img 
                 src="/public/brasao.png" 
@@ -78,7 +89,12 @@
     <main class="flex-grow flex flex-col h-full overflow-y-auto relative bg-brand-bg">
         <!-- Header -->
         <header class="bg-white px-8 py-5 shadow-sm flex justify-between items-center z-10 sticky top-0">
-            <h2 id="header-title" class="text-2xl font-display font-semibold text-brand-primary">Nossas Ações nas Ruas</h2>
+            <div class="flex items-center">
+                <button type="button" id="admin-menu-toggle" class="lg:hidden mr-3 text-brand-primary p-2 -ml-2" aria-label="Abrir menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h2 id="header-title" class="text-2xl font-display font-semibold text-brand-primary">Nossas Ações nas Ruas</h2>
+            </div>
             <div class="flex items-center gap-4 cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors">
                 <div class="w-10 h-10 rounded-full bg-brand-secondary/20 flex items-center justify-center text-brand-primary">
                     <i class="fas fa-user"></i>
@@ -1493,6 +1509,41 @@
                 }
             });
         });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebar = document.getElementById('admin-sidebar');
+      const overlay = document.getElementById('admin-sidebar-overlay');
+      const toggleBtn = document.getElementById('admin-menu-toggle');
+    
+      function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+      }
+      function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+      }
+    
+      if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+      if (overlay) overlay.addEventListener('click', closeSidebar);
+    
+      // Fecha a gaveta automaticamente ao clicar em qualquer item do menu (mobile)
+      document.querySelectorAll('#sidebar-nav .nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+          if (window.innerWidth < 1024) closeSidebar();
+        });
+      });
+    
+      // Se a tela for redimensionada para desktop, garante que a gaveta não
+      // fique com transform residual escondendo a sidebar fixa
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) {
+          sidebar.classList.remove('-translate-x-full');
+          overlay.classList.add('hidden');
+        }
+      });
+    });
     </script>
 </body>
 </html>
