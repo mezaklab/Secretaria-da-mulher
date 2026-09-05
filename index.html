@@ -449,7 +449,7 @@
         alt="" 
         aria-hidden="true"
         data-decorative="true"
-        class="fixed -left-8 md:-left-2 lg:left-2 top-1/3 w-[320px] md:w-[420px] lg:w-[480px] opacity-15 pointer-events-none select-none scale-x-[-1] bg-transparent transparent-asset hidden md:block z-0"
+        class="fixed -left-16 md:-left-10 lg:-left-6 top-1/3 w-[320px] md:w-[420px] lg:w-[480px] opacity-15 pointer-events-none select-none scale-x-[-1] bg-transparent transparent-asset hidden md:block z-0"
     />
 
     <!-- Hero com Gradiente e Header Integrado -->
@@ -545,6 +545,11 @@
                 <!-- Coluna da Imagem (Mobile: Fluxo normal, sem margins negativas extremas) -->
                 <div class="relative z-0 w-full flex justify-center items-end select-none mt-6 sm:mt-10 lg:mt-0 hero-img-container bg-transparent -mb-16 sm:-mb-20 md:-mb-40 lg:-mb-56">
                   
+                  <!-- MARCA D'ÁGUA FLOR (LADO DIREITO DA SECRETÁRIA) -->
+                  <div class="w-24 md:w-32 h-40 md:h-56 overflow-hidden absolute top-0 md:-top-10 left-1/2 sm:ml-[60px] md:ml-[80px] lg:ml-[120px] pointer-events-none z-0 hidden sm:block opacity-20 filter brightness-0 invert">
+                    <img src="/public/flores.png" alt="" aria-hidden="true" data-decorative="true" class="w-[200%] max-w-none h-full object-cover object-left bg-transparent transparent-asset" />
+                  </div>
+
                   <!-- COMPONENTE 3D FLIP CARD (Dimensões flexíveis no mobile) -->
                   <div 
                     class="group relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-[440px] lg:max-w-[480px] h-[340px] sm:h-[400px] md:h-[580px] cursor-pointer z-10 bg-transparent mx-auto"
@@ -1887,7 +1892,9 @@
                             </div>
                             <h4 class="font-display text-2xl lg:text-3xl text-brand-textDark mb-4 leading-tight" id="modalTitle">${titulo}</h4>
                             ${descricao ? `<p class="font-sans text-slate-600 text-base leading-relaxed mb-6" id="modalDesc">${descricao}</p>` : ''}
-                            
+                        </div>
+
+                        <div class="pt-6 border-t border-gray-100 mt-6 flex flex-col gap-4">
                             ${hasMultiple ? `
                             <div class="p-3.5 bg-purple-50/70 border border-purple-100 rounded-2xl flex items-center gap-3 text-purple-900 text-xs">
                                 <div class="w-8 h-8 rounded-full bg-purple-200/80 flex items-center justify-center shrink-0 text-purple-800">
@@ -1899,12 +1906,11 @@
                                 </div>
                             </div>
                             ` : ''}
-                        </div>
-
-                        <div class="pt-6 border-t border-gray-100 mt-6 flex justify-end">
-                            <button type="button" class="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-full text-sm transition-colors" onclick="closeModal()">
-                                Fechar visualização
-                            </button>
+                            <div class="flex justify-end">
+                                <button type="button" class="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-full text-sm transition-colors" onclick="closeModal()">
+                                    Fechar visualização
+                                </button>
+                            </div>
                         </div>
                     </div>
                     ` : ''}
