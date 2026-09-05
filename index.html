@@ -1704,9 +1704,13 @@
             return url.startsWith('data:video/') || url.match(/\.(mp4|webm|ogg)$/i);
         }
 
-        function renderMediaElement(url, isMain = true, titulo = '') {
+        function renderMediaElement(url, isMain = true, titulo = '', categoria = '') {
             if (isUrlVideo(url)) {
-                return `<video ${isMain ? 'id="modalMainVideo" controls autoplay' : 'muted'} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'}"></video>`;
+                const isVerticalVideo = categoria === 'Vídeo';
+                const mainClasses = isVerticalVideo 
+                    ? 'w-full h-full object-cover pointer-events-auto md:rounded-xl shadow-2xl'
+                    : 'w-full h-full object-contain max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto';
+                return `<video ${isMain ? 'id="modalMainVideo" controls autoplay loop playsinline' : 'muted'} src="${url}" class="${isMain ? mainClasses : 'w-full h-full object-cover'}"></video>`;
             } else {
                 return `<img ${isMain ? 'id="modalMainImage"' : ''} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'} transition-all duration-300 select-none" alt="${titulo}">`;
             }
@@ -1720,7 +1724,7 @@
             const counter = document.getElementById('modalImageCounter');
             
             if (mediaContainer) {
-                mediaContainer.innerHTML = renderMediaElement(activeGalleryImages[currentGalleryIndex], true);
+                mediaContainer.innerHTML = renderMediaElement(activeGalleryImages[currentGalleryIndex], true, '', currentModalCategoria);
             }
             if (counter) {
                 counter.innerText = `${currentGalleryIndex + 1} / ${activeGalleryImages.length}`;
@@ -1770,6 +1774,7 @@
                 activeGalleryImages = ['https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'];
             }
             currentGalleryIndex = 0;
+            currentModalCategoria = categoria;
 
             const hasMultiple = activeGalleryImages.length > 1;
             const isFullscreenOnly = categoria === 'Canindé + Delas' || categoria === 'Vídeo';
@@ -1785,8 +1790,8 @@
                         </button>
 
                         <!-- Imagem Principal -->
-                        <div class="relative w-full h-full flex items-center justify-center overflow-hidden p-4 md:p-8" id="modalMediaContainer" onclick="if(event.target === this) closeModal()">
-                            ${renderMediaElement(activeGalleryImages[0], true, titulo)}
+                        <div class="relative w-full h-full flex items-center justify-center overflow-hidden ${categoria === 'Vídeo' ? 'p-0 md:p-8' : 'p-4 md:p-8'}" id="modalMediaContainer" onclick="if(event.target === this) closeModal()">
+                            ${renderMediaElement(activeGalleryImages[0], true, titulo, categoria)}
                         </div>
                         
                         <!-- Controles extras absolutizados -->
