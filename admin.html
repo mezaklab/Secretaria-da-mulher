@@ -474,20 +474,23 @@
                         </div>
                         
                         <div class="col-span-1 md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Foto da Capa</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Mídia da Capa (Foto ou Vídeo)</label>
                             <div id="upload-area" class="border-2 border-dashed border-gray-300 rounded-xl h-48 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-brand-primary transition-colors cursor-pointer group relative overflow-hidden" onclick="document.getElementById('action-image-input').click()">
                                 <input type="file" id="action-image-input" accept="image/*,video/*" class="hidden">
                                 
                                 <!-- Estado Inicial (Ícone) -->
-                                <div id="upload-placeholder" class="flex flex-col items-center pointer-events-none p-8">
+                                <div id="upload-placeholder" class="flex flex-col items-center pointer-events-none p-8 text-center">
                                     <i class="fas fa-cloud-upload-alt text-4xl mb-3 text-brand-secondary group-hover:text-brand-primary transition-colors"></i>
-                                    <p class="text-sm font-medium text-gray-600">Clique para selecionar ou arraste uma imagem</p>
-                                    <p class="text-xs mt-1 text-gray-400">PNG, JPG até 5MB</p>
+                                    <p class="text-sm font-medium text-gray-600">Clique ou arraste uma imagem/vídeo</p>
+                                    <p class="text-xs mt-1 text-gray-400">PNG, JPG ou MP4 (até 50MB)</p>
                                 </div>
 
                                 <!-- Estado Preenchido (Preview) -->
                                 <div id="upload-preview" class="hidden absolute inset-0 bg-black/5 flex items-center justify-center">
-                                    <img id="image-preview" src="" class="w-full h-full object-cover" alt="Preview">
+                                    <!-- A mídia renderizada será ajustada dinamicamente via JS (img ou video) -->
+                                    <div id="media-preview-container" class="w-full h-full flex items-center justify-center">
+                                        <img id="image-preview" src="" class="w-full h-full object-cover" alt="Preview">
+                                    </div>
                                     <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                         <button type="button" id="remove-image-btn" class="bg-red-500 hover:bg-red-600 text-white rounded-full w-12 h-12 shadow-lg transform hover:scale-110 transition-all pointer-events-auto">
                                             <i class="fas fa-trash"></i>
@@ -497,11 +500,11 @@
                             </div>
                         </div>
 
-                        <!-- Galeria de Fotos Adicionais -->
+                        <!-- Galeria Adicional -->
                         <div class="col-span-1 md:col-span-2 mt-2">
                             <div class="flex items-center justify-between mb-1">
-                                <label class="block text-sm font-medium text-gray-700">Galeria de Fotos (até 30 fotos adicionais)</label>
-                                <span id="gallery-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary">0 / 30 fotos</span>
+                                <label class="block text-sm font-medium text-gray-700">Galeria de Mídias (até 30 adicionais)</label>
+                                <span id="gallery-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary">0 / 30 mídias</span>
                             </div>
                             
                             <!-- Input & Botão de Selecionar -->
@@ -512,12 +515,12 @@
                                         <i class="fas fa-images"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-medium text-gray-700">Adicionar fotos à galeria desta ação</p>
-                                        <p class="text-xs text-gray-400">Selecione uma ou mais fotos (PNG, JPG até 5MB)</p>
+                                        <p class="text-sm font-medium text-gray-700">Adicionar mídias à galeria desta ação</p>
+                                        <p class="text-xs text-gray-400">Selecione imagens ou vídeos MP4</p>
                                     </div>
                                 </div>
                                 <button type="button" class="px-4 py-2 bg-white border border-purple-200 text-brand-primary hover:bg-brand-primary hover:text-white rounded-lg text-xs font-bold transition-all shadow-sm pointer-events-none whitespace-nowrap">
-                                    <i class="fas fa-plus mr-1"></i> Escolher Fotos
+                                    <i class="fas fa-plus mr-1"></i> Escolher Mídias
                                 </button>
                             </div>
 
@@ -661,27 +664,27 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div class="col-span-1 md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Título do Evento</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Mutirão de saúde e acolhimento">
+                            <input type="text" id="agenda-title" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Mutirão de saúde e acolhimento">
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Data</label>
-                            <input type="date" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                            <input type="date" id="agenda-date" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Horário (Início e Fim)</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: 08h - 13h">
+                            <input type="text" id="agenda-time" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: 08h - 13h">
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Local / Bairro</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Clube Altemar Dutra">
+                            <input type="text" id="agenda-location" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow" placeholder="Ex: Clube Altemar Dutra">
                         </div>
                         
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                            <select class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary bg-white transition-shadow">
+                            <select id="agenda-status" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary bg-white transition-shadow">
                                 <option>Confirmado</option>
                                 <option>Em Planejamento</option>
                                 <option>Realizado</option>
@@ -801,6 +804,30 @@
                     imagem: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800&q=80'
                 }
             ];
+
+            function safeStorageSetItem(key, dataStr) {
+
+                try {
+
+                    localStorage.setItem(key, dataStr);
+
+                } catch (e) {
+
+                    if (e.name === "QuotaExceededError" || e.name === "NS_ERROR_DOM_QUOTA_REACHED") {
+
+                        alert("ERRO CRÍTICO: O limite de armazenamento do seu navegador foi atingido (cerca de 5MB). Remova fotos ou ações antigas antes de salvar novas mídias pesadas.");
+
+                    } else {
+
+                        alert("Erro ao salvar: " + e.message);
+
+                    }
+
+                    console.error("Erro no LocalStorage:", e);
+
+                }
+
+            }
 
             // Puxar do LocalStorage
             let adminAcoes = JSON.parse(localStorage.getItem('sec_mulher_acoes')) || defaultAcoes;
@@ -995,7 +1022,7 @@
                         fotos: [...currentCanindePhotos]
                     };
 
-                    localStorage.setItem('sec_mulher_caninde_delas', JSON.stringify(adminCanindeDelas));
+                    safeStorageSetItem('sec_mulher_caninde_delas', JSON.stringify(adminCanindeDelas));
                     alert('Seção "Canindé + Delas" atualizada e publicada com sucesso!');
                     renderAdminCanindeDelas();
                 });
@@ -1097,10 +1124,15 @@
                 }
 
                 currentActionGallery.forEach((imgBase64, index) => {
+                    const isVideo = imgBase64.startsWith('data:video');
+                    const mediaTag = isVideo 
+                        ? `<video src="${imgBase64}" class="w-full h-full object-cover" muted></video><div class="absolute inset-0 flex items-center justify-center bg-black/30 pointer-events-none"><i class="fas fa-play text-white text-sm"></i></div>` 
+                        : `<img src="${imgBase64}" class="w-full h-full object-cover" alt="Foto ${index + 1}">`;
+
                     const thumb = document.createElement('div');
                     thumb.className = 'relative rounded-xl overflow-hidden aspect-square border border-purple-200 bg-gray-100 group shadow-sm';
                     thumb.innerHTML = `
-                        <img src="${imgBase64}" class="w-full h-full object-cover" alt="Foto ${index + 1}">
+                        ${mediaTag}
                         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                             <button type="button" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-xs shadow-md transform hover:scale-110 active:scale-95 transition-all" onclick="window.removeGalleryPhoto(${index})">
                                 <i class="fas fa-times"></i>
@@ -1118,17 +1150,22 @@
             };
 
             if(actionImageInput) {
+                const mediaPreviewContainer = document.getElementById('media-preview-container');
                 actionImageInput.addEventListener('change', function(e) {
                     const file = e.target.files[0];
                     if (file) {
-                        if (!file.type.startsWith('image/')) {
-                            showGalleryError('O arquivo selecionado para a capa não é uma imagem válida.');
+                        if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+                            showGalleryError('O arquivo selecionado não é uma mídia válida.');
                             return;
                         }
                         const reader = new FileReader();
                         reader.onload = function(event) {
                             currentBase64Image = event.target.result;
-                            imagePreview.src = currentBase64Image;
+                            if (mediaPreviewContainer) {
+                                mediaPreviewContainer.innerHTML = currentBase64Image.startsWith('data:video') 
+                                    ? `<video src="${currentBase64Image}" class="w-full h-full object-cover" autoplay muted loop playsinline></video>`
+                                    : `<img src="${currentBase64Image}" class="w-full h-full object-cover" alt="Preview">`;
+                            }
                             uploadPlaceholder.classList.add('hidden');
                             uploadPreview.classList.remove('hidden');
                         }
@@ -1150,31 +1187,31 @@
                     const files = Array.from(e.target.files || []);
                     if (!files.length) return;
 
-                    const nonImages = files.filter(f => !f.type.startsWith('image/'));
-                    if (nonImages.length > 0) {
-                        showGalleryError('Um ou mais arquivos selecionados não são imagens válidas.');
+                    const nonMedia = files.filter(f => !f.type.startsWith('image/') && !f.type.startsWith('video/'));
+                    if (nonMedia.length > 0) {
+                        showGalleryError('Um ou mais arquivos selecionados não são mídias (foto/vídeo) válidas.');
                     }
 
-                    const validImages = files.filter(f => f.type.startsWith('image/'));
+                    const validMedia = files.filter(f => f.type.startsWith('image/') || f.type.startsWith('video/'));
                     const availableSlots = 30 - currentActionGallery.length;
 
-                    if (validImages.length > availableSlots) {
-                        showGalleryError(`Você só pode adicionar mais ${availableSlots} foto(s). O limite total é de 30 fotos por ação.`);
+                    if (validMedia.length > availableSlots) {
+                        showGalleryError(`Você só pode adicionar mais ${availableSlots} mídia(s). O limite total é de 30 mídias por ação.`);
                     }
 
-                    const imagesToProcess = validImages.slice(0, availableSlots);
-                    if (!imagesToProcess.length) {
+                    const mediaToProcess = validMedia.slice(0, availableSlots);
+                    if (!mediaToProcess.length) {
                         actionGalleryInput.value = '';
                         return;
                     }
 
                     let loadedCount = 0;
-                    imagesToProcess.forEach(file => {
+                    mediaToProcess.forEach(file => {
                         const reader = new FileReader();
-                        reader.onload = function(evt) {
-                            currentActionGallery.push(evt.target.result);
+                        reader.onload = function(event) {
+                            currentActionGallery.push(event.target.result);
                             loadedCount++;
-                            if (loadedCount === imagesToProcess.length) {
+                            if(loadedCount === mediaToProcess.length) {
                                 renderGalleryThumbnails();
                                 actionGalleryInput.value = '';
                             }
@@ -1196,15 +1233,15 @@
                 if(btn.innerText.includes('Salvar Evento')) {
                     btn.addEventListener('click', () => {
                         const modal = document.getElementById('modal-agenda');
-                        const title = modal.querySelectorAll('input')[0].value;
-                        const dateVal = modal.querySelectorAll('input')[1].value; // yyyy-mm-dd
-                        const time = modal.querySelectorAll('input')[2].value;
-                        const location = modal.querySelectorAll('input')[3].value;
-                        const status = modal.querySelector('select').value;
+                        const title = document.getElementById('agenda-title').value;
+                        const dateVal = document.getElementById('agenda-date').value; // yyyy-mm-dd
+                        const time = document.getElementById('agenda-time').value;
+                        const location = document.getElementById('agenda-location').value;
+                        const status = document.getElementById('agenda-status').value;
                         
                         let date = "20", month = "Out";
                         if(dateVal) {
-                            const d = new Date(dateVal);
+                            const d = new Date(dateVal + 'T12:00:00');
                             date = String(d.getDate()).padStart(2, '0');
                             const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
                             month = months[d.getMonth()];
@@ -1219,7 +1256,7 @@
                         } else {
                             adminAgenda.push({ id: Date.now(), date, month, title, time, location, status });
                         }
-                        localStorage.setItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
+                        safeStorageSetItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
                         renderAdminAgenda();
                         modal.classList.add('hidden'); if(removeImageBtn) removeImageBtn.click();
                     });
@@ -1284,8 +1321,8 @@
                             adminGaleria.unshift({ id: newId, type: 'foto', title, description, category, image: finalImage });
                         }
 
-                        localStorage.setItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
-                        localStorage.setItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
+                        safeStorageSetItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
+                        safeStorageSetItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
                         
                         renderAdminAcoes();
                         renderAdminGaleria();
@@ -1298,7 +1335,7 @@
                 
                 if(btn.innerText.includes('Salvar Alterações')) {
                     btn.addEventListener('click', () => {
-                        localStorage.setItem("sec_mulher_config", JSON.stringify({ endereco: document.querySelectorAll("#configuracoes input")[0].value, telefone: document.querySelectorAll("#configuracoes input")[1].value, email: document.querySelectorAll("#configuracoes input")[2].value, instagram: document.querySelectorAll("#configuracoes input")[3].value })); alert('Configurações institucionais atualizadas com sucesso no localStorage!');
+                        safeStorageSetItem("sec_mulher_config", JSON.stringify({ endereco: document.querySelectorAll("#configuracoes input")[0].value, telefone: document.querySelectorAll("#configuracoes input")[1].value, email: document.querySelectorAll("#configuracoes input")[2].value, instagram: document.querySelectorAll("#configuracoes input")[3].value })); alert('Configurações institucionais atualizadas com sucesso no localStorage!');
                     });
                 }
             });
@@ -1376,7 +1413,7 @@
             window.deleteSaudeItem = function(id) {
                 if (confirm('Deseja realmente remover este serviço de saúde?')) {
                     adminServicosSaude = adminServicosSaude.filter(i => i.id != id);
-                    localStorage.setItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
+                    safeStorageSetItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
                     renderAdminSaude();
                 }
             };
@@ -1432,7 +1469,7 @@
                         });
                     }
 
-                    localStorage.setItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
+                    safeStorageSetItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
                     renderAdminSaude();
                     document.getElementById('modal-saude').classList.add('hidden');
                 });
@@ -1442,15 +1479,15 @@
             window.deleteItem = function(id, type) {
                 if(type === 'acoes') {
                     adminAcoes = adminAcoes.filter(i => i.id != id);
-                    localStorage.setItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
+                    safeStorageSetItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
                     renderAdminAcoes();
                 } else if(type === 'galeria') {
                     adminGaleria = adminGaleria.filter(i => i.id != id);
-                    localStorage.setItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
+                    safeStorageSetItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
                     renderAdminGaleria();
                 } else if(type === 'agenda') {
                     adminAgenda = adminAgenda.filter(i => i.id != id);
-                    localStorage.setItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
+                    safeStorageSetItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
                     renderAdminAgenda();
                 }
             }
@@ -1493,13 +1530,12 @@
                         if(!item) return;
                         
                         document.getElementById('edit-id-agenda').value = id;
-                        const modal = document.getElementById('modal-agenda');
-                        modal.querySelectorAll('input')[0].value = item.title;
-                        modal.querySelectorAll('input')[1].value = ''; // A data original não era armazenada no formato YYYY-MM-DD
-                        modal.querySelectorAll('input')[2].value = item.time;
-                        modal.querySelectorAll('input')[3].value = item.location;
+                        document.getElementById('agenda-title').value = item.title;
+                        document.getElementById('agenda-date').value = ''; // Original date object not saved in YYYY-MM-DD
+                        document.getElementById('agenda-time').value = item.time;
+                        document.getElementById('agenda-location').value = item.location;
                         
-                        const select = modal.querySelector('select');
+                        const select = document.getElementById('agenda-status');
                         Array.from(select.options).forEach(opt => {
                             if (opt.text.toLowerCase() === item.status.toLowerCase()) opt.selected = true;
                         });

@@ -85,6 +85,8 @@
 
         .modal { transition: opacity 0.25s ease; }
         body.modal-active { overflow: hidden !important; }
+        body.modal-active [vw], body.modal-active .vw-plugin-wrapper { display: none !important; z-index: -1 !important; visibility: hidden !important; opacity: 0 !important; }
+        #mediaModal { z-index: 2147483647 !important; }
 
         .arch-photo {
             border-radius: 999px 999px 0 0;
@@ -587,11 +589,11 @@
                 </div>
             </div>
         </div>
-    <div class="absolute -bottom-1 left-0 w-full leading-none z-30 pointer-events-none translate-y-[1px]">
-        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="block w-full h-[42px] sm:h-[62px] md:h-[122px] lg:h-[162px]">
-            <path fill="#fdfbfd" d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
-    </div>
+        <div class="absolute -bottom-1 left-0 w-full leading-none z-30 pointer-events-none translate-y-[1px]">
+            <svg viewBox="0 0 1440 320" preserveAspectRatio="none" class="block w-full h-[42px] sm:h-[62px] md:h-[122px] lg:h-[162px]">
+                <path fill="#f6f2f8" d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,218.7C672,213,768,139,864,128C960,117,1056,171,1152,197.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
     </div>
 
     <!-- Ações nas Comunidades -->
@@ -986,13 +988,13 @@
 
     <!-- Galeria -->
     <section id="galeria" class="py-16 max-w-7xl mx-auto px-6 lg:px-8 relative z-20" style="isolation: isolate;">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+        <div class="flex flex-col md:flex-row justify-between md:items-start mb-12 gap-6">
             <div>
                 <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Nossos Vídeos</h2>
                 <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl">Acompanhe depoimentos, informativos e registros em vídeo das nossas ações.</p>
             </div>
             
-            <div class="flex gap-4">
+            <div class="flex gap-4 md:mt-4 shrink-0">
                 <button id="prevGaleriaBtn" class="w-14 h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary hidden md:flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
                     <i class="fas fa-chevron-left"></i>
                 </button>
@@ -1002,9 +1004,9 @@
             </div>
         </div>
 
-        <div id="galeria-container" class="relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+        <div id="galeria-container" class="relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:flex lg:overflow-x-auto gap-6 mt-8 hide-scrollbar scroll-smooth lg:snap-x lg:snap-mandatory">
   <!-- Item 1: Vídeo Depoimento -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Depoimento: Dona Maria', descricao: 'Relato emocionante sobre o acolhimento recebido na secretaria.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Depoimento: Dona Maria', descricao: 'Relato emocionante sobre o acolhimento recebido na secretaria.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Vídeo'})">
     <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80" alt="Depoimento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -1018,7 +1020,7 @@
   </div>
 
   <!-- Item 2: Vídeo Caminhada -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Caminhada de abertura', descricao: 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Caminhada de abertura', descricao: 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Vídeo'})">
     <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80" alt="Caminhada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -1032,7 +1034,7 @@
   </div>
 
   <!-- Item 3: Vídeo Preventivo -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Como é o preventivo?', descricao: 'Explicativo com a equipe médica desmistificando o exame.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Como é o preventivo?', descricao: 'Explicativo com a equipe médica desmistificando o exame.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Vídeo'})">
     <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Preventivo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -1046,7 +1048,7 @@
   </div>
 
   <!-- Item 4: Vídeo Oficinas -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({titulo: 'Nossas oficinas', descricao: 'Capacitação prática em artesanato e empreendedorismo local.', imagem: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Nossas oficinas', descricao: 'Capacitação prática em artesanato e empreendedorismo local.', imagem: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80', categoria: 'Vídeo'})">
     <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80" alt="Nossas Oficinas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -1069,8 +1071,8 @@
             <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">Programe-se e não perca os mutirões, palestras e serviços da Secretaria no seu bairro.</p>
         </div>
         
-        <div id="agenda-container" class="flex flex-col gap-6 relative z-10">
-            <div class="flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+        <div id="agenda-container" class="carousel-container flex overflow-x-auto md:overflow-visible flex-row md:flex-col gap-6 relative z-10 snap-x snap-mandatory md:snap-none hide-scrollbar pb-4 md:pb-0">
+            <div class="flex-none snap-center w-[85vw] md:w-auto flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
                     <span class="font-display text-4xl leading-none">20</span>
                     <span class="font-display text-lg font-bold">Out</span>
@@ -1086,7 +1088,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="flex flex-col justify-center">
+                <div class="flex flex-col justify-center shrink-0">
                     <span class="inline-block px-5 py-2.5 bg-green-100 text-green-700 rounded-full font-bold text-sm tracking-wide border border-green-200">
                         Realizado
                     </span>
@@ -1197,8 +1199,8 @@
     <div id="mediaModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 px-0 md:px-4">
         <div class="modal-overlay absolute w-full h-full bg-brand-textDark/95 backdrop-blur-sm" onclick="closeModal()"></div>
         
-        <div class="modal-container bg-transparent md:bg-white w-full h-full md:h-auto md:max-w-6xl xl:max-w-7xl mx-auto md:rounded-[2rem] shadow-2xl z-50 overflow-hidden relative md:border md:border-brand-cardBorder">
-            <button class="absolute top-4 right-4 bg-white/20 text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center shadow-md hover:bg-white/40 transition-colors z-[60] focus:outline-none hidden md:flex" aria-label="Fechar modal" onclick="closeModal()">
+        <div class="modal-container bg-transparent md:bg-white w-full h-full md:h-[85vh] md:max-w-6xl xl:max-w-7xl mx-auto md:rounded-[2rem] shadow-2xl z-50 overflow-hidden relative md:border md:border-brand-cardBorder flex flex-col">
+            <button class="absolute top-4 right-4 bg-gray-100 text-gray-600 rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center shadow-md hover:bg-gray-200 transition-colors z-[60] focus:outline-none hidden md:flex" aria-label="Fechar modal" onclick="closeModal()">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <div class="modal-content w-full h-full flex flex-col" id="modalContent"></div>
@@ -1228,6 +1230,32 @@
 
             loadAndRender();
             setupScrollLogic();
+
+            // Ajustar cliques da galeria de vídeos fixa para suportar swipe e navegação
+            const videoUrls = [
+                'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80',
+                'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80',
+                'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+                'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80'
+            ];
+            const titulos = ['Depoimento: Dona Maria', 'Caminhada de abertura', 'Como é o preventivo?', 'Nossas oficinas'];
+            const descricoes = ['Relato emocionante sobre o acolhimento recebido na secretaria.', 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', 'Explicativo com a equipe médica desmistificando o exame.', 'Capacitação prática em artesanato e empreendedorismo local.'];
+            
+            const galeriaCont = document.getElementById('galeria-container');
+            if (galeriaCont) {
+                const divs = galeriaCont.querySelectorAll(':scope > div');
+                divs.forEach((div, i) => {
+                    const galeriaCopy = [...videoUrls];
+                    galeriaCopy.splice(i, 1);
+                    div.onclick = () => openMediaModal({
+                        titulo: titulos[i],
+                        descricao: descricoes[i],
+                        imagem: videoUrls[i],
+                        categoria: 'Vídeo',
+                        galeria: galeriaCopy
+                    });
+                });
+            }
 
             // Sincronização entre abas: admin salva → index atualiza automaticamente
             window.addEventListener('storage', (e) => {
@@ -1527,7 +1555,7 @@
             if (!container) return;
 
             container.innerHTML = '';
-            container.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8';
+            container.className = 'relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:flex lg:overflow-x-auto gap-6 mt-8 hide-scrollbar scroll-smooth lg:snap-x lg:snap-mandatory';
 
             galeriaData.forEach(item => {
                 const title    = item.title       || item.titulo    || '';
@@ -1539,7 +1567,7 @@
                 const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
 
                 const el = document.createElement('div');
-                el.className = 'relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
+                el.className = 'relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start';
                 el.onclick = () => openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
 
                 el.innerHTML = `
@@ -1567,7 +1595,7 @@
 
             agendaData.forEach(item => {
                 const el = document.createElement('div');
-                el.className = 'flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
+                el.className = 'flex-none snap-center w-[85vw] md:w-auto flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
 
                 let colorClass = 'bg-yellow-100 text-yellow-700 border-yellow-200';
                 if (item.status === 'Realizado')  colorClass = 'bg-green-100 text-green-700 border-green-200';
@@ -1640,7 +1668,7 @@
                 });
             }
 
-            const carouselGaleria = document.getElementById('carousel-galeria');
+            const carouselGaleria = document.getElementById('galeria-container');
             const prevGaleriaBtn = document.getElementById('prevGaleriaBtn');
             const nextGaleriaBtn = document.getElementById('nextGaleriaBtn');
             let isDownGaleria = false, startXGaleria, scrollLeftGaleria;
@@ -1779,10 +1807,22 @@
             const hasMultiple = activeGalleryImages.length > 1;
             const isFullscreenOnly = categoria === 'Canindé + Delas' || categoria === 'Vídeo';
 
+            // Ajuste dinâmico do tamanho do Modal para Vídeos (Resolução tipo Instagram/TikTok)
+            const modalContainer = document.querySelector('.modal-container');
+            if (modalContainer) {
+                if (categoria === 'Vídeo') {
+                    // Modal fica estreito no formato 9:16 para evitar enormes bordas pretas laterais
+                    modalContainer.className = "modal-container bg-transparent md:bg-white w-full h-full md:h-[85vh] md:max-w-none md:w-auto md:aspect-[9/16] mx-auto md:rounded-[2rem] shadow-2xl z-50 overflow-hidden relative md:border md:border-brand-cardBorder flex flex-col";
+                } else {
+                    // Modal normal largo para outras galerias
+                    modalContainer.className = "modal-container bg-transparent md:bg-white w-full h-full md:h-[85vh] md:max-w-6xl xl:max-w-7xl mx-auto md:rounded-[2rem] shadow-2xl z-50 overflow-hidden relative md:border md:border-brand-cardBorder flex flex-col";
+                }
+            }
+
             modalContent.innerHTML = `
                 <div class="flex flex-col lg:flex-row h-full md:max-h-[90vh]">
                     <!-- Coluna da Imagem / Carrossel -->
-                    <div id="modalImageColumn" class="${isFullscreenOnly ? 'w-full' : 'lg:w-9/12'} p-0 relative bg-transparent flex flex-col justify-center h-full min-h-[50vh] lg:min-h-[600px] xl:min-h-[75vh]" ondblclick="if(window.innerWidth < 1024 && !${isFullscreenOnly}) toggleModalFullscreen()" onclick="if(event.target === this) closeModal()">
+                    <div id="modalImageColumn" class="${isFullscreenOnly ? 'w-full' : 'lg:w-9/12'} p-0 relative bg-transparent lg:bg-slate-950 flex flex-col justify-center h-full min-h-[50vh] lg:min-h-[600px] xl:min-h-[75vh]" ondblclick="if(window.innerWidth < 1024 && !${isFullscreenOnly}) toggleModalFullscreen()" onclick="if(event.target === this) closeModal()">
                         
                         <!-- Botão Fechar Flutuante -->
                         <button type="button" onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center z-50 hover:bg-black/70 backdrop-blur-sm transition-colors focus:outline-none" aria-label="Fechar">
@@ -1790,7 +1830,7 @@
                         </button>
 
                         <!-- Imagem Principal -->
-                        <div class="relative w-full h-full flex items-center justify-center overflow-hidden ${categoria === 'Vídeo' ? 'p-0 md:p-8' : 'p-4 md:p-8'}" id="modalMediaContainer" onclick="if(event.target === this) closeModal()">
+                        <div class="relative w-full h-full flex items-center justify-center overflow-hidden ${categoria === 'Vídeo' ? 'p-0' : 'p-4 md:p-8'}" id="modalMediaContainer" onclick="if(event.target === this) closeModal()">
                             ${renderMediaElement(activeGalleryImages[0], true, titulo, categoria)}
                         </div>
                         
@@ -1872,6 +1912,22 @@
             `;
             modal.classList.remove('opacity-0', 'pointer-events-none');
             body.classList.add('modal-active');
+            
+            if (hasMultiple) {
+                const imgCol = document.getElementById('modalImageColumn');
+                if (imgCol) {
+                    let touchstartX = 0;
+                    let touchendX = 0;
+                    imgCol.addEventListener('touchstart', e => {
+                        touchstartX = e.changedTouches[0].screenX;
+                    }, {passive: true});
+                    imgCol.addEventListener('touchend', e => {
+                        touchendX = e.changedTouches[0].screenX;
+                        if (touchendX < touchstartX - 40 && typeof modalNextImage === 'function') modalNextImage();
+                        if (touchendX > touchstartX + 40 && typeof modalPrevImage === 'function') modalPrevImage();
+                    }, {passive: true});
+                }
+            }
         }
 
         function closeModal() {
