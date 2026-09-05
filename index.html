@@ -335,7 +335,8 @@
           #galeria-container,
           #direitos-container,
           #caninde-cards-container,
-          #acoes-container {
+          #acoes-container,
+          #caninde-delas-grid {
             display: flex !important;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -349,13 +350,15 @@
           #galeria-container::-webkit-scrollbar,
           #direitos-container::-webkit-scrollbar,
           #caninde-cards-container::-webkit-scrollbar,
-          #acoes-container::-webkit-scrollbar { display: none; }
+          #acoes-container::-webkit-scrollbar,
+          #caninde-delas-grid::-webkit-scrollbar { display: none; }
         
           #saude-container > div,
           #galeria-container > div,
           #direitos-container > div,
           #caninde-cards-container > div,
-          #acoes-container > div {
+          #acoes-container > div,
+          #caninde-delas-grid > div {
             flex: 0 0 100%;
             scroll-snap-align: center;
             max-width: 100%;
@@ -1275,20 +1278,26 @@
             if (Array.isArray(data.fotos) && data.fotos.length > 0) {
                 canindeDelasPhotosList = [...data.fotos];
                 if (countBadge) {
-                    countBadge.innerText = `${canindeDelasPhotosList.length} Foto${canindeDelasPhotosList.length > 1 ? 's' : ''} do Projeto`;
+                    countBadge.innerText = `${canindeDelasPhotosList.length} Mídia${canindeDelasPhotosList.length > 1 ? 's' : ''} do Projeto`;
                 }
 
                 if (gridEl) {
                     gridEl.innerHTML = '';
                     canindeDelasPhotosList.forEach((foto, idx) => {
+                        const isVid = typeof isUrlVideo === 'function' ? isUrlVideo(foto) : (foto.startsWith('data:video/') || foto.match(/\.(mp4|webm|ogg)$/i));
+                        const mediaTag = isVid 
+                            ? `<video src="${foto}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" muted></video>` 
+                            : `<img src="${foto}" alt="Canindé + Delas ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">`;
+                        
                         const thumb = document.createElement('div');
-                        thumb.className = 'relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60';
-                        thumb.onclick = () => openCanindeDelasGallery(idx);
+                        thumb.className = 'relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60 shrink-0';
+                        thumb.onclick = () => window.openCanindeDelasGallery ? window.openCanindeDelasGallery(idx) : null;
                         thumb.innerHTML = `
-                            <img src="${foto}" alt="Canindé + Delas ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
+                            ${mediaTag}
+                            ${isVid ? `<div class="absolute inset-0 flex items-center justify-center pointer-events-none"><i class="fas fa-play text-white text-3xl opacity-80 shadow-sm"></i></div>` : ''}
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                                <span class="text-white text-xs font-semibold flex items-center gap-1.5">
-                                    <i class="fas fa-search-plus"></i> Ampliar foto
+                                <span class="text-white text-xs font-semibold flex items-center gap-1.5 z-10">
+                                    <i class="fas fa-search-plus"></i> Ampliar mídia
                                 </span>
                             </div>
                         `;
@@ -1733,6 +1742,20 @@
         window.modalNextImage = function() { updateModalImage(currentGalleryIndex + 1); }
         window.modalPrevImage = function() { updateModalImage(currentGalleryIndex - 1); }
         window.modalSelectImage = function(index) { updateModalImage(index); }
+        
+        window.toggleModalFullscreen = function() {
+            const infoCol = document.getElementById('modalInfoColumn');
+            const imgCol = document.getElementById('modalImageColumn');
+            if (infoCol) {
+                if (infoCol.classList.contains('hidden')) {
+                    infoCol.classList.remove('hidden');
+                    imgCol.classList.remove('h-full', 'w-full');
+                } else {
+                    infoCol.classList.add('hidden');
+                    imgCol.classList.add('h-full', 'w-full');
+                }
+            }
+        };
 
         function openMediaModal(data) {
             const titulo = data.titulo || data.title || '';
@@ -1753,7 +1776,7 @@
             modalContent.innerHTML = `
                 <div class="flex flex-col lg:flex-row h-full max-h-[90vh]">
                     <!-- Coluna da Imagem / Carrossel -->
-                    <div class="lg:w-7/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[400px] lg:min-h-[600px] xl:min-h-[75vh]">
+                    <div id="modalImageColumn" class="lg:w-9/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[400px] lg:min-h-[600px] xl:min-h-[75vh]" ondblclick="if(window.innerWidth < 1024) toggleModalFullscreen()">
                         <!-- Imagem Principal -->
                         <div class="relative w-full flex-1 flex items-center justify-center overflow-hidden p-4 lg:p-8" id="modalMediaContainer">
                             ${renderMediaElement(activeGalleryImages[0], true, titulo)}
@@ -1794,10 +1817,13 @@
                             `).join('')}
                         </div>
                         ` : ''}
+                        <div class="absolute top-4 right-4 lg:hidden pointer-events-auto text-white/50 text-[10px] flex items-center gap-1 bg-black/30 px-2 py-1 rounded-full backdrop-blur-sm z-10 select-none">
+                            <i class="fas fa-expand"></i> Dois cliques para tela cheia
+                        </div>
                     </div>
 
                     <!-- Coluna de Informações -->
-                    <div class="lg:w-5/12 p-8 lg:p-10 flex flex-col justify-between bg-white overflow-y-auto">
+                    <div id="modalInfoColumn" class="lg:w-3/12 p-8 lg:p-10 flex flex-col justify-between bg-white overflow-y-auto">
                         <div>
                             <div class="flex items-center gap-2 mb-3">
                                 <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
