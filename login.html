@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Restrito — Secretaria da Mulher</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Atkinson Hyperlegible"', 'sans-serif'],
+                        display: ['"Poppins"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            hero: '#F5EEFB',
+                            textDark: '#3B284C',
+                            textMuted: '#6B5E78',
+                            primary: '#7A3E9D',
+                            primaryHover: '#682F87',
+                            cardBorder: '#EFE8F5',
+                            iconBg: '#F3EBF9',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f6f2f8; -webkit-font-smoothing: antialiased; }
+        h1,h2,h3,h4,h5,h6,.font-display { font-family: 'Poppins', sans-serif; letter-spacing: -0.02em; }
+
+        [vw],[vw-access-button],.access-button,div[vw] {
+            z-index: 99999 !important; display: block !important;
+            visibility: visible !important; position: fixed !important;
+        }
+
+        .login-card {
+            background: rgba(255,255,255,0.93);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #7A3E9D;
+            box-shadow: 0 0 0 3px rgba(122,62,157,0.18);
+        }
+
+        body.high-contrast { background-color: #000 !important; color: #fff !important; }
+        body.high-contrast .login-card { background: #111 !important; border-color: #fff !important; color: #fff !important; }
+        body.high-contrast input { background: #222 !important; color: #fff !important; border-color: #fff !important; }
+        body.high-contrast label { color: #fff !important; }
+        body.high-contrast #accessibility-bar { background-color: #000 !important; border-bottom-color: #fff !important; }
+        body.high-contrast #accessibility-bar button { background-color: #333 !important; color: #fff !important; border: 1px solid #fff !important; }
+
+        @media (max-width: 767px) { html,body { overflow-x: hidden !important; max-width: 100vw; } }
+    </style>
+</head>
+
+<body class="font-sans leading-relaxed relative overflow-x-hidden w-full max-w-full min-h-screen">
+
+    <!-- Barra de Acessibilidade Institucional -->
+    <aside id="accessibility-bar" aria-label="Barra de Acessibilidade Institucional"
+        class="w-full bg-[#3b1d54] text-purple-100 py-[6px] px-[16px] z-50 relative border-b border-purple-900/30"
+        style="font-size: 12px !important;">
+        <div class="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-[8px]">
+            <div class="flex items-center gap-[8px]">
+                <span class="font-semibold tracking-wide flex items-center gap-[6px] text-purple-100 text-[12px]">
+                    <i class="fas fa-universal-access text-[14px] text-purple-300" aria-hidden="true"></i>
+                    Acessibilidade
+                </span>
+                <span class="hidden sm:inline text-purple-400/60 text-[12px]">|</span>
+                <span class="hidden sm:inline text-purple-200/90 text-[11px]">Prefeitura Municipal de Canindé de São Francisco</span>
+            </div>
+            <div class="flex items-center gap-[4px] sm:gap-[8px]">
+                <button type="button" onclick="changeFontSize(-10)"
+                    class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold"
+                    title="Diminuir tamanho do texto" aria-label="Diminuir fonte"><span>A-</span></button>
+                <button type="button" onclick="resetFontSize()"
+                    class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold"
+                    title="Redefinir tamanho do texto" aria-label="Redefinir fonte"><span>A</span></button>
+                <button type="button" onclick="changeFontSize(10)"
+                    class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold"
+                    title="Aumentar tamanho do texto" aria-label="Aumentar fonte"><span>A+</span></button>
+                <button type="button" onclick="toggleHighContrast()" id="btn-contrast"
+                    class="ml-[4px] sm:ml-[8px] bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[10px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-semibold flex items-center gap-[6px]"
+                    title="Alternar Alto Contraste" aria-label="Alternar Alto Contraste" aria-pressed="false">
+                    <i class="fas fa-circle-half-stroke text-[14px] text-purple-300" aria-hidden="true"></i>
+                    <span class="hidden sm:inline text-[11px]">Alto Contraste</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Fundo gradiente idêntico ao Hero da index.html -->
+    <div class="relative w-full min-h-[calc(100vh-36px)] bg-gradient-to-br from-[#9782AD] via-[#7F6A96] to-[#5C4573] flex flex-col">
+
+        <!-- Efeitos decorativos -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
+            <div class="absolute -top-24 -right-24 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 -left-24 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-white/5 rounded-full blur-2xl"></div>
+        </div>
+
+        <!-- Header: brasão + nome da Secretaria -->
+        <header class="relative z-10 w-full pt-6 pb-4 px-4 sm:px-8">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <a href="index.html" class="inline-flex items-center gap-3 group hover:opacity-90 transition-opacity"
+                    aria-label="Voltar para a página inicial da Secretaria da Mulher">
+                    <img src="/public/brasao.png" alt="Brasão de Canindé de São Francisco"
+                        class="h-10 sm:h-12 md:h-14 w-auto object-contain shrink-0 filter drop-shadow-md group-hover:scale-105 transition-transform duration-300 bg-transparent"/>
+                    <div class="flex flex-col justify-center leading-none">
+                        <span class="text-base sm:text-xl md:text-2xl font-extrabold text-white tracking-tight font-display leading-none drop-shadow-sm">
+                            Secretaria da Mulher
+                        </span>
+                        <span class="text-[10px] sm:text-xs font-semibold text-white/80 tracking-wider uppercase mt-1 leading-none">
+                            Canindé de São Francisco
+                        </span>
+                    </div>
+                </a>
+                <a href="index.html" class="hidden sm:inline-flex items-center gap-2 text-white/75 hover:text-white text-sm font-semibold transition-colors">
+                    <i class="fas fa-arrow-left text-xs"></i> Voltar ao site
+                </a>
+            </div>
+        </header>
+
+        <!-- Card de Login centralizado -->
+        <main class="relative z-10 flex-grow flex items-center justify-center px-4 py-10 sm:py-12">
+            <div class="w-full max-w-md">
+
+                <!-- Badge área restrita -->
+                <div class="flex justify-center mb-6">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/15 backdrop-blur-sm text-white rounded-full text-xs font-semibold tracking-wide border border-white/20 shadow-sm">
+                        <i class="fas fa-lock text-purple-200 text-[10px]"></i>
+                        Área de Acesso Restrito
+                    </span>
+                </div>
+
+                <!-- Card -->
+                <div class="login-card rounded-[2rem] shadow-2xl border border-white/40 px-8 py-10 sm:px-10">
+
+                    <!-- Ícone de usuário -->
+                    <div class="flex justify-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#7A3E9D] to-[#5C4573] flex items-center justify-center shadow-lg ring-4 ring-white/40">
+                            <i class="fas fa-user-shield text-white text-2xl"></i>
+                        </div>
+                    </div>
+
+                    <h1 class="font-display text-2xl sm:text-3xl text-brand-textDark text-center mb-1">Painel de Gestão</h1>
+                    <p class="text-center text-brand-textMuted text-sm mb-8 font-sans leading-relaxed">
+                        Secretaria da Mulher<br><span class="text-xs">Canindé de São Francisco</span>
+                    </p>
+
+                    <!-- Alerta de erro -->
+                    <div id="login-error"
+                        class="hidden mb-5 flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm font-medium"
+                        role="alert" aria-live="assertive">
+                        <i class="fas fa-exclamation-circle text-red-400 shrink-0"></i>
+                        <span>Usuário ou senha incorretos. Tente novamente.</span>
+                    </div>
+
+                    <form id="login-form" onsubmit="handleLogin(event)" novalidate>
+
+                        <!-- Usuário -->
+                        <div class="mb-5">
+                            <label for="login-user" class="block text-sm font-semibold text-brand-textDark mb-2">
+                                <i class="fas fa-user text-brand-primary mr-1.5 text-xs"></i>Usuário
+                            </label>
+                            <input type="text" id="login-user" name="usuario" autocomplete="username"
+                                placeholder="Digite seu usuário" required
+                                class="input-field w-full border border-brand-cardBorder rounded-xl px-4 py-3 text-brand-textDark placeholder-brand-textMuted/50 bg-brand-hero/50 text-sm transition-all duration-200 focus:bg-white">
+                        </div>
+
+                        <!-- Senha -->
+                        <div class="mb-5">
+                            <label for="login-senha" class="block text-sm font-semibold text-brand-textDark mb-2">
+                                <i class="fas fa-lock text-brand-primary mr-1.5 text-xs"></i>Senha
+                            </label>
+                            <div class="relative">
+                                <input type="password" id="login-senha" name="senha" autocomplete="current-password"
+                                    placeholder="Digite sua senha" required
+                                    class="input-field w-full border border-brand-cardBorder rounded-xl px-4 py-3 pr-12 text-brand-textDark placeholder-brand-textMuted/50 bg-brand-hero/50 text-sm transition-all duration-200 focus:bg-white">
+                                <button type="button" onclick="toggleSenha()"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-brand-textMuted hover:text-brand-primary transition-colors p-1.5"
+                                    aria-label="Mostrar ou ocultar senha">
+                                    <i id="icon-senha" class="fas fa-eye text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Manter Conectado -->
+                        <div class="flex items-center mb-7">
+                            <label class="flex items-center gap-3 cursor-pointer select-none group" for="manter-conectado">
+                                <div class="relative shrink-0">
+                                    <input type="checkbox" id="manter-conectado" name="manter_conectado" class="sr-only">
+                                    <div id="checkbox-box"
+                                        class="w-5 h-5 border-2 border-brand-cardBorder rounded-md bg-white transition-all duration-200 flex items-center justify-center cursor-pointer"
+                                        onclick="toggleCheckbox()">
+                                        <i id="check-icon" class="fas fa-check text-white text-[10px] opacity-0 transition-opacity duration-150"></i>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-brand-textMuted group-hover:text-brand-textDark transition-colors font-medium">
+                                    Manter conectado
+                                </span>
+                            </label>
+                        </div>
+
+                        <!-- Botão Entrar -->
+                        <button type="submit" id="btn-entrar"
+                            class="w-full bg-brand-primary hover:bg-brand-primaryHover active:scale-[0.98] text-white font-display font-bold text-base py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2.5">
+                            <i class="fas fa-sign-in-alt text-sm"></i> Entrar
+                        </button>
+                    </form>
+
+                    <!-- Rodapé do card -->
+                    <div class="mt-8 pt-6 border-t border-brand-cardBorder text-center">
+                        <a href="index.html" class="inline-flex items-center gap-1.5 text-brand-textMuted hover:text-brand-primary text-xs font-medium transition-colors">
+                            <i class="fas fa-arrow-left text-[10px]"></i> Voltar ao site da Secretaria
+                        </a>
+                    </div>
+                </div>
+
+                <p class="text-center text-white/40 text-xs mt-6 font-sans">
+                    © 2026 Prefeitura Municipal de Canindé de São Francisco
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+    <script>
+        // ── Checkbox visual personalizado ────────────────────────────
+        let isChecked = false;
+        function toggleCheckbox() {
+            isChecked = !isChecked;
+            const box  = document.getElementById('checkbox-box');
+            const icon = document.getElementById('check-icon');
+            document.getElementById('manter-conectado').checked = isChecked;
+            if (isChecked) {
+                box.style.backgroundColor = '#7A3E9D';
+                box.style.borderColor = '#7A3E9D';
+                icon.style.opacity = '1';
+            } else {
+                box.style.backgroundColor = '#fff';
+                box.style.borderColor = '#EFE8F5';
+                icon.style.opacity = '0';
+            }
+        }
+
+        // ── Mostrar/Ocultar senha ────────────────────────────────────
+        function toggleSenha() {
+            const input = document.getElementById('login-senha');
+            const icon  = document.getElementById('icon-senha');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        // ── Login com SHA-256 (senha nunca em texto puro no código) ───
+        // Hash = SHA-256( SALT + usuario + senha )
+        // SALT: SecMulher_CSF_2026
+        const _SALT    = 'SecMulher_CSF_2026';
+        const _USUARIO = 'super.admin';
+        const _HASH    = '2020cc2f7870b79312da23bddbf5dc7f8e4b684a9c69aadee1e28caafc9ef39a';
+
+        // ── Proteção contra força bruta ───────────────────────────────
+        const MAX_TENTATIVAS  = 5;
+        const LOCKOUT_MS      = 10 * 60 * 1000; // 10 minutos
+        const KEY_TENTATIVAS  = 'sec_login_fail';
+        const KEY_LOCKOUT     = 'sec_login_lock';
+
+        function verificarBloqueio() {
+            const lockUntil = parseInt(sessionStorage.getItem(KEY_LOCKOUT) || '0', 10);
+            if (Date.now() < lockUntil) return lockUntil;
+            return 0;
+        }
+
+        function registrarFalha() {
+            let falhas = parseInt(sessionStorage.getItem(KEY_TENTATIVAS) || '0', 10) + 1;
+            sessionStorage.setItem(KEY_TENTATIVAS, falhas);
+            if (falhas >= MAX_TENTATIVAS) {
+                const ate = Date.now() + LOCKOUT_MS;
+                sessionStorage.setItem(KEY_LOCKOUT, ate);
+                sessionStorage.setItem(KEY_TENTATIVAS, '0');
+                return ate;
+            }
+            return 0;
+        }
+
+        function limparFalhas() {
+            sessionStorage.removeItem(KEY_TENTATIVAS);
+            sessionStorage.removeItem(KEY_LOCKOUT);
+        }
+
+        let _lockTimer = null;
+        function mostrarContagem(ate) {
+            const errBox = document.getElementById('login-error');
+            const btn    = document.getElementById('btn-entrar');
+            btn.disabled = true;
+            if (_lockTimer) clearInterval(_lockTimer);
+            _lockTimer = setInterval(() => {
+                const resto = Math.max(0, Math.ceil((ate - Date.now()) / 1000));
+                const min   = String(Math.floor(resto / 60)).padStart(2, '0');
+                const seg   = String(resto % 60).padStart(2, '0');
+                errBox.querySelector('span').textContent =
+                    `Muitas tentativas incorretas. Aguarde ${min}:${seg} para tentar novamente.`;
+                errBox.classList.remove('hidden');
+                if (resto === 0) {
+                    clearInterval(_lockTimer);
+                    btn.disabled = false;
+                    errBox.classList.add('hidden');
+                }
+            }, 1000);
+        }
+
+        async function computarHash(usuario, senha) {
+            const dados = new TextEncoder().encode(_SALT + usuario + senha);
+            const buffer = await crypto.subtle.digest('SHA-256', dados);
+            return Array.from(new Uint8Array(buffer))
+                .map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const usuario = document.getElementById('login-user').value.trim();
+            const senha   = document.getElementById('login-senha').value;
+            const manter  = document.getElementById('manter-conectado').checked;
+            const errBox  = document.getElementById('login-error');
+            const btn     = document.getElementById('btn-entrar');
+
+            errBox.classList.add('hidden');
+
+            // Verificar bloqueio ativo
+            const lockUntil = verificarBloqueio();
+            if (lockUntil) { mostrarContagem(lockUntil); return; }
+
+            // Computar hash e comparar
+            const hashInput = await computarHash(usuario, senha);
+            const credOk    = (usuario === _USUARIO) && (hashInput === _HASH);
+
+            if (credOk) {
+                limparFalhas();
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin text-sm"></i>&nbsp;Entrando…';
+                btn.disabled  = true;
+
+                const storage = manter ? localStorage : sessionStorage;
+                storage.setItem('sec_mulher_auth', '1');
+                storage.setItem('sec_mulher_usuario', usuario);
+
+                setTimeout(() => { window.location.href = 'admin.html'; }, 700);
+            } else {
+                const ate = registrarFalha();
+                const restam = MAX_TENTATIVAS - parseInt(sessionStorage.getItem(KEY_TENTATIVAS) || '0', 10);
+                document.getElementById('login-senha').value = '';
+                document.getElementById('login-senha').focus();
+                if (ate) {
+                    mostrarContagem(ate);
+                } else {
+                    const msg = restam > 0
+                        ? `Usuário ou senha incorretos. ${restam} tentativa(s) restante(s).`
+                        : 'Usuário ou senha incorretos.';
+                    errBox.querySelector('span').textContent = msg;
+                    errBox.classList.remove('hidden');
+                }
+            }
+        }
+
+        // Ativa bloqueio residual ao carregar página
+        (function verificarBloqueioInicial() {
+            const ate = verificarBloqueio();
+            if (ate) mostrarContagem(ate);
+        })();
+
+        // ── Redireciona quem já está autenticado ──────────────────────
+        (function () {
+            if (localStorage.getItem('sec_mulher_auth')   === '1' ||
+                sessionStorage.getItem('sec_mulher_auth') === '1') {
+                window.location.replace('admin.html');
+            }
+        })();
+
+        // ── Tamanho de Fonte ──────────────────────────────────────────
+        let currentFontSize = 100;
+        function changeFontSize(delta) {
+            currentFontSize = Math.min(130, Math.max(80, currentFontSize + delta));
+            document.documentElement.style.fontSize = currentFontSize + '%';
+        }
+        function resetFontSize() {
+            currentFontSize = 100;
+            document.documentElement.style.fontSize = '100%';
+        }
+
+        // ── Alto Contraste ────────────────────────────────────────────
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            const btn    = document.getElementById('btn-contrast');
+            const active = document.body.classList.contains('high-contrast');
+            btn.setAttribute('aria-pressed', active);
+        }
+    </script>
+</body>
+</html>

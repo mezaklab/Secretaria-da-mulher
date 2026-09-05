@@ -36,9 +36,9 @@ const cmsLogic = `
                     tbody.innerHTML += \`
                         <tr class="hover:bg-gray-50/50 transition-colors group" data-id="\${item.id}">
                             <td class="px-6 py-4 font-medium text-gray-800">\${item.title}</td>
-                            <td class="px-6 py-4"><span class="px-3 py-1 bg-purple-100 text-brand-primary text-xs font-bold rounded-full">\${item.category}</span></td>
-                            <td class="px-6 py-4 text-gray-500">\${item.date}</td>
-                            <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
+                            <td class="whitespace-nowrap px-4 py-2"><span class="inline-block px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap bg-purple-100 text-brand-primary">\${item.category}</span></td>
+                            <td class="px-6 py-4 text-gray-500 whitespace-nowrap">\${item.date}</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
                             <td class="px-6 py-4 text-right">
                                 <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
                                 <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
