@@ -1772,11 +1772,12 @@
             currentGalleryIndex = 0;
 
             const hasMultiple = activeGalleryImages.length > 1;
+            const isFullscreenOnly = categoria === 'Canindé + Delas' || categoria === 'Vídeo';
 
             modalContent.innerHTML = `
                 <div class="flex flex-col lg:flex-row h-full md:max-h-[90vh]">
                     <!-- Coluna da Imagem / Carrossel -->
-                    <div id="modalImageColumn" class="${categoria === 'Canindé + Delas' ? 'w-full' : 'lg:w-9/12'} p-0 relative bg-transparent flex flex-col justify-center h-full min-h-[50vh] lg:min-h-[600px] xl:min-h-[75vh]" ondblclick="if(window.innerWidth < 1024 && '${categoria}' !== 'Canindé + Delas') toggleModalFullscreen()" onclick="if(event.target === this) closeModal()">
+                    <div id="modalImageColumn" class="${isFullscreenOnly ? 'w-full' : 'lg:w-9/12'} p-0 relative bg-transparent flex flex-col justify-center h-full min-h-[50vh] lg:min-h-[600px] xl:min-h-[75vh]" ondblclick="if(window.innerWidth < 1024 && !${isFullscreenOnly}) toggleModalFullscreen()" onclick="if(event.target === this) closeModal()">
                         
                         <!-- Botão Fechar Flutuante -->
                         <button type="button" onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center z-50 hover:bg-black/70 backdrop-blur-sm transition-colors focus:outline-none" aria-label="Fechar">
@@ -1824,7 +1825,7 @@
                         </div>
                         ` : ''}
                         
-                        ${categoria !== 'Canindé + Delas' ? `
+                        ${!isFullscreenOnly ? `
                         <div class="absolute top-4 left-1/2 -translate-x-1/2 lg:hidden pointer-events-auto text-white/70 text-[10px] flex items-center gap-1 bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm z-10 select-none shadow-sm">
                             <i class="fas fa-expand"></i> 2 toques p/ tela cheia
                         </div>
@@ -1832,7 +1833,7 @@
                     </div>
 
                     <!-- Coluna de Informações -->
-                    ${categoria !== 'Canindé + Delas' ? `
+                    ${!isFullscreenOnly ? `
                     <div id="modalInfoColumn" class="flex lg:w-3/12 p-8 lg:p-10 flex-col justify-between bg-white overflow-y-auto">
                         <div>
                             <div class="flex items-center gap-2 mb-3">
