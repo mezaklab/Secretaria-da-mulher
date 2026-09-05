@@ -1194,11 +1194,11 @@
     </footer>
 
     <!-- Modal Lightbox -->
-    <div id="mediaModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 px-4">
-        <div class="modal-overlay absolute w-full h-full bg-brand-textDark/90 backdrop-blur-sm" onclick="closeModal()"></div>
+    <div id="mediaModal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-50 px-0 md:px-4">
+        <div class="modal-overlay absolute w-full h-full bg-brand-textDark/95 backdrop-blur-sm" onclick="closeModal()"></div>
         
-        <div class="modal-container bg-white w-full md:max-w-6xl xl:max-w-7xl mx-auto rounded-[2rem] shadow-2xl z-50 overflow-hidden relative border border-brand-cardBorder">
-            <button class="absolute top-4 right-4 bg-white text-brand-primary rounded-full w-12 h-12 flex items-center justify-center shadow-md border border-brand-cardBorder hover:bg-brand-iconBg transition-colors z-50 focus:outline-none" aria-label="Fechar modal" onclick="closeModal()">
+        <div class="modal-container bg-transparent md:bg-white w-full h-full md:h-auto md:max-w-6xl xl:max-w-7xl mx-auto md:rounded-[2rem] shadow-2xl z-50 overflow-hidden relative md:border md:border-brand-cardBorder">
+            <button class="absolute top-4 right-4 bg-white/20 text-white rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center shadow-md hover:bg-white/40 transition-colors z-[60] focus:outline-none hidden md:flex" aria-label="Fechar modal" onclick="closeModal()">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <div class="modal-content" id="modalContent"></div>
@@ -1774,16 +1774,22 @@
             const hasMultiple = activeGalleryImages.length > 1;
 
             modalContent.innerHTML = `
-                <div class="flex flex-col lg:flex-row h-full max-h-[90vh]">
+                <div class="flex flex-col lg:flex-row h-full md:max-h-[90vh]">
                     <!-- Coluna da Imagem / Carrossel -->
-                    <div id="modalImageColumn" class="lg:w-9/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[400px] lg:min-h-[600px] xl:min-h-[75vh]" ondblclick="if(window.innerWidth < 1024) toggleModalFullscreen()">
+                    <div id="modalImageColumn" class="${categoria === 'Canindé + Delas' ? 'w-full' : 'lg:w-9/12'} p-0 relative bg-transparent flex flex-col justify-center h-full min-h-[50vh] lg:min-h-[600px] xl:min-h-[75vh]" ondblclick="if(window.innerWidth < 1024 && '${categoria}' !== 'Canindé + Delas') toggleModalFullscreen()">
+                        
+                        <!-- Botão Fechar Flutuante -->
+                        <button type="button" onclick="closeModal()" class="absolute top-4 right-4 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center z-50 hover:bg-black/70 backdrop-blur-sm transition-colors focus:outline-none" aria-label="Fechar">
+                            <i class="fas fa-times text-lg"></i>
+                        </button>
+
                         <!-- Imagem Principal -->
-                        <div class="relative w-full flex-1 flex items-center justify-center overflow-hidden p-4 lg:p-8" id="modalMediaContainer">
+                        <div class="relative w-full h-full flex items-center justify-center overflow-hidden p-4 md:p-8" id="modalMediaContainer">
                             ${renderMediaElement(activeGalleryImages[0], true, titulo)}
                         </div>
                         
                         <!-- Controles extras absolutizados -->
-                        <div class="absolute inset-0 pointer-events-none z-10 p-4 lg:p-8 flex items-center justify-center">
+                        <div class="absolute inset-0 pointer-events-none z-10 p-4 md:p-8 flex items-center justify-center">
                             <!-- Badge de Categoria -->
                             <div class="absolute top-4 left-4 bg-brand-badgeBg text-brand-badgeText px-3.5 py-1.5 rounded-full font-display font-bold text-xs shadow-md pointer-events-auto">
                                 ${categoria}
@@ -1791,16 +1797,16 @@
 
                             ${hasMultiple ? `
                             <!-- Contador de Fotos -->
-                            <div id="modalImageCounter" class="absolute top-4 right-16 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-full font-mono text-xs font-semibold pointer-events-auto">
+                            <div id="modalImageCounter" class="absolute top-4 right-16 mr-2 lg:mr-0 bg-black/60 backdrop-blur-md text-white px-3 py-1.5 rounded-full font-mono text-xs font-semibold pointer-events-auto">
                                 1 / ${activeGalleryImages.length}
                             </div>
 
                             <!-- Botões de Navegação Anterior / Próxima -->
-                            <button type="button" onclick="modalPrevImage()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-brand-textDark flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none" aria-label="Foto anterior">
-                                <i class="fas fa-chevron-left"></i>
+                            <button type="button" onclick="modalPrevImage()" class="absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none" aria-label="Foto anterior">
+                                <i class="fas fa-chevron-left text-lg lg:text-xl"></i>
                             </button>
-                            <button type="button" onclick="modalNextImage()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-brand-textDark flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none" aria-label="Próxima foto">
-                                <i class="fas fa-chevron-right"></i>
+                            <button type="button" onclick="modalNextImage()" class="absolute right-2 lg:right-4 top-1/2 -translate-y-1/2 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-sm text-white flex items-center justify-center shadow-lg transition-all hover:scale-110 active:scale-95 pointer-events-auto focus:outline-none" aria-label="Próxima foto">
+                                <i class="fas fa-chevron-right text-lg lg:text-xl"></i>
                             </button>
                             ` : ''}
                         </div>
@@ -1817,13 +1823,17 @@
                             `).join('')}
                         </div>
                         ` : ''}
-                        <div class="absolute top-4 right-4 lg:hidden pointer-events-auto text-white/50 text-[10px] flex items-center gap-1 bg-black/30 px-2 py-1 rounded-full backdrop-blur-sm z-10 select-none">
-                            <i class="fas fa-expand"></i> Dois cliques para tela cheia
+                        
+                        ${categoria !== 'Canindé + Delas' ? `
+                        <div class="absolute top-4 left-1/2 -translate-x-1/2 lg:hidden pointer-events-auto text-white/70 text-[10px] flex items-center gap-1 bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm z-10 select-none shadow-sm">
+                            <i class="fas fa-expand"></i> 2 toques p/ tela cheia
                         </div>
+                        ` : ''}
                     </div>
 
                     <!-- Coluna de Informações -->
-                    <div id="modalInfoColumn" class="lg:w-3/12 p-8 lg:p-10 flex flex-col justify-between bg-white overflow-y-auto">
+                    ${categoria !== 'Canindé + Delas' ? `
+                    <div id="modalInfoColumn" class="flex lg:w-3/12 p-8 lg:p-10 flex-col justify-between bg-white overflow-y-auto">
                         <div>
                             <div class="flex items-center gap-2 mb-3">
                                 <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
@@ -1851,6 +1861,7 @@
                             </button>
                         </div>
                     </div>
+                    ` : ''}
                 </div>
             `;
             modal.classList.remove('opacity-0', 'pointer-events-none');
