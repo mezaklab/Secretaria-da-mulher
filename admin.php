@@ -2,11 +2,36 @@
 session_start();
 require_once __DIR__ . '/config.php';
 
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset($_POST['password'])) {
-    if ($_POST['username'] === ADMIN_USER && password_verify($_POST['password'], ADMIN_PASS_HASH)) {
-        $_SESSION['logged_in'] = true;
+    $time_now = time();
+
+    // Verifica se a sessão está bloqueada
+    if (isset($_SESSION['lockout_time']) && $time_now < $_SESSION['lockout_time']) {
+        $error = "Muitas tentativas falhas. Tente novamente em 10 minutos.";
     } else {
-        $error = "Usuário ou senha incorretos.";
+        // Desbloqueia se o tempo passou
+        if (isset($_SESSION['lockout_time']) && $time_now >= $_SESSION['lockout_time']) {
+            unset($_SESSION['lockout_time']);
+            $_SESSION['login_attempts'] = 0;
+        }
+
+        if ($_POST['username'] === ADMIN_USER && password_verify($_POST['password'], ADMIN_PASS_HASH)) {
+            $_SESSION['logged_in'] = true;
+            $_SESSION['login_attempts'] = 0;
+            unset($_SESSION['lockout_time']);
+        } else {
+            $_SESSION['login_attempts']++;
+            if ($_SESSION['login_attempts'] >= 5) {
+                $_SESSION['lockout_time'] = $time_now + 600;
+                $error = "Muitas tentativas falhas. Tente novamente em 10 minutos.";
+            } else {
+                $error = "Usuário ou senha incorretos.";
+            }
+        }
     }
 }
 
