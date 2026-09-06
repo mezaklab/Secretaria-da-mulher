@@ -1,12 +1,12 @@
 <?php
 session_start();
-$PASSWORD = 'secretaria2024';
+require_once __DIR__ . '/config.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
-    if ($_POST['password'] === $PASSWORD) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset($_POST['password'])) {
+    if ($_POST['username'] === ADMIN_USER && password_verify($_POST['password'], ADMIN_PASS_HASH)) {
         $_SESSION['logged_in'] = true;
     } else {
-        $error = "Senha incorreta.";
+        $error = "Usuário ou senha incorretos.";
     }
 }
 
@@ -83,6 +83,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             <?php endif; ?>
 
             <form method="POST" action="">
+                <input type="text" name="username" placeholder="Usuário" required 
+                    class="w-full px-4 py-3 rounded-xl border border-brand-cardBorder focus:outline-none focus:border-brand-primary mb-4 bg-brand-hero/20">
                 <input type="password" name="password" placeholder="Senha de Acesso" required 
                     class="w-full px-4 py-3 rounded-xl border border-brand-cardBorder focus:outline-none focus:border-brand-primary mb-6 bg-brand-hero/20">
                 <button type="submit" class="w-full bg-brand-primary text-white font-bold py-3 rounded-xl hover:bg-brand-primaryHover transition-colors">
