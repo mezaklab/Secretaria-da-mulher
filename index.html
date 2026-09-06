@@ -1214,6 +1214,21 @@
 
     <!-- DADOS E LÓGICA JS -->
     <script>
+        
+        function escapeHTML(str) {
+            if (typeof str !== 'string') return str;
+            return str.replace(/[&<>"']/g, function(match) {
+                const escape = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                };
+                return escape[match];
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             // Função centralizada de leitura — SEMPRE lê do localStorage na hora certa
             function loadAndRender() {
@@ -1294,8 +1309,8 @@
 
             function formatarParagrafos(texto) {
                 const arr = texto.split('\n').filter(p => p.trim());
-                if (arr.length > 0) return arr.map(p => `<p>${p}</p>`).join('');
-                return `<p>${texto}</p>`;
+                if (arr.length > 0) return arr.map(p => `<p>${escapeHTML(p)}</p>`).join(\'\');
+                return `<p>${escapeHTML(texto)}</p>`;
             }
 
             if (descricaoEl && data.descricao) {
@@ -1319,8 +1334,8 @@
                     canindeDelasPhotosList.forEach((foto, idx) => {
                         const isVid = typeof isUrlVideo === 'function' ? isUrlVideo(foto) : (foto.startsWith('data:video/') || foto.match(/\.(mp4|webm|ogg)$/i));
                         const mediaTag = isVid 
-                            ? `<video src="${foto}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" muted></video>` 
-                            : `<img src="${foto}" alt="Canindé + Delas ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">`;
+                            ? `<video src="${escapeHTML(foto)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" muted></video>` 
+                            : `<img src="${escapeHTML(foto)}" alt="Canindé + Delas ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">`;
                         
                         const thumb = document.createElement('div');
                         thumb.className = 'relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60 shrink-0';
@@ -1375,10 +1390,10 @@
 
                 el.innerHTML = `
                     <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6 group-hover:bg-purple-100 group-hover:scale-110 transition-all duration-300">
-                        <i class="fas ${iconeClass} text-3xl"></i>
+                        <i class="fas ${escapeHTML(iconeClass)} text-3xl"></i>
                     </div>
-                    <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">${titulo}</h3>
-                    <p class="font-sans text-brand-textMuted text-lg mb-6">${descCurta}</p>
+                    <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">${escapeHTML(titulo)}</h3>
+                    <p class="font-sans text-brand-textMuted text-lg mb-6">${escapeHTML(descCurta)}</p>
                     <span class="mt-auto inline-flex items-center text-brand-primary font-bold text-sm group-hover:underline">
                         Ver detalhes do atendimento <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
                     </span>
@@ -1408,11 +1423,11 @@
                     ${imagem ? `
                     <!-- Coluna da Foto (quando houver imagem) -->
                     <div class="lg:w-5/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[260px] lg:min-h-[480px]">
-                        <img src="${imagem}" class="w-full h-full object-cover" alt="${titulo}">
+                        <img src="${escapeHTML(imagem)}" class="w-full h-full object-cover" alt="${escapeHTML(titulo)}">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 rounded-full bg-white/90 text-brand-primary flex items-center justify-center text-xl shadow-lg">
-                                    <i class="fas ${icone}"></i>
+                                    <i class="fas ${escapeHTML(icone)}"></i>
                                 </div>
                                 <span class="text-white font-display font-bold text-lg">${titulo}</span>
                             </div>
@@ -1426,21 +1441,21 @@
                             <!-- Header do Serviço -->
                             <div class="flex items-center gap-4 mb-6">
                                 <div class="w-14 h-14 rounded-2xl bg-purple-100 text-brand-primary flex items-center justify-center text-2xl shrink-0 shadow-sm">
-                                    <i class="fas ${icone}"></i>
+                                    <i class="fas ${escapeHTML(icone)}"></i>
                                 </div>
                                 <div>
                                     <div class="flex items-center gap-2">
                                         <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
                                         <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Saúde Preventiva Municipal</span>
                                     </div>
-                                    <h3 class="font-display text-2xl lg:text-3xl font-extrabold text-brand-textDark leading-tight mt-1">${titulo}</h3>
+                                    <h3 class="font-display text-2xl lg:text-3xl font-extrabold text-brand-textDark leading-tight mt-1">${escapeHTML(titulo)}</h3>
                                 </div>
                             </div>
 
                             <!-- Descrição Completa -->
                             <div class="mb-8">
                                 <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 font-display">Sobre o Serviço</h4>
-                                <p class="font-sans text-slate-700 text-base lg:text-lg leading-relaxed bg-purple-50/50 p-5 rounded-2xl border border-purple-100/60">${descCompleta}</p>
+                                <p class="font-sans text-slate-700 text-base lg:text-lg leading-relaxed bg-purple-50/50 p-5 rounded-2xl border border-purple-100/60">${escapeHTML(descCompleta)}</p>
                             </div>
 
                             <!-- Grid com Informações Práticas -->
@@ -1452,7 +1467,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Onde Realizar</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${local}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(local)}</p>
                                     </div>
                                 </div>
 
@@ -1463,7 +1478,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Horários de Atendimento</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${horario}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(horario)}</p>
                                     </div>
                                 </div>
 
@@ -1474,7 +1489,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Público-Alvo</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${publico}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(publico)}</p>
                                     </div>
                                 </div>
 
@@ -1485,7 +1500,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Documentos Necessários</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${documentos}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(documentos)}</p>
                                     </div>
                                 </div>
                             </div>
@@ -1537,14 +1552,14 @@
                 el.innerHTML = `
                     <div onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\`, galeria: ${galeriaJson} })'>
                         <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
-                            <img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
+                            <img src="${escapeHTML(image)}" alt="${escapeHTML(safe(title))}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
                         </div>
-                        <span class="text-xs font-semibold text-purple-600 block mb-1">${date}</span>
+                        <span class="text-xs font-semibold text-purple-600 block mb-1">${escapeHTML(date)}</span>
                         <div class="flex flex-col items-start md:flex-row md:items-center justify-between gap-3 mb-2">
-                            <h3 class="text-xl font-bold text-slate-800 line-clamp-2">${title}</h3>
-                            <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10 shrink-0 min-w-max whitespace-nowrap">${category}</span>
+                            <h3 class="text-xl font-bold text-slate-800 line-clamp-2">${escapeHTML(title)}</h3>
+                            <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10 shrink-0 min-w-max whitespace-nowrap">${escapeHTML(category)}</span>
                         </div>
-                        <p class="text-slate-600 text-sm line-clamp-3 mb-6 leading-relaxed">${desc}</p>
+                        <p class="text-slate-600 text-sm line-clamp-3 mb-6 leading-relaxed">${escapeHTML(desc)}</p>
                     </div>
                     <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto"
                         onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\`, galeria: ${galeriaJson} })'>
@@ -1576,15 +1591,15 @@
                 el.onclick = () => openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
 
                 el.innerHTML = `
-                    <img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
+                    <img src="${escapeHTML(image)}" alt="${escapeHTML(safe(title))}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
                         onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
                     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4 pointer-events-none">
                         <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                             <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                         <div class="flex items-center justify-between text-white text-xs font-semibold">
-                            <span class="line-clamp-1">${safe(title)}</span>
-                            ${duration ? `<span class="bg-black/40 px-2 py-0.5 rounded-full ml-2 shrink-0">${duration}</span>` : ''}
+                            <span class="line-clamp-1">${escapeHTML(safe(title))}</span>
+                            ${duration ? `<span class="bg-black/40 px-2 py-0.5 rounded-full ml-2 shrink-0">${escapeHTML(duration)}</span>` : ''}
                         </div>
                     </div>
                 `;
@@ -1608,23 +1623,23 @@
 
                 el.innerHTML = `
                     <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
-                        <span class="font-display text-4xl leading-none">${item.date || ''}</span>
-                        <span class="font-display text-lg font-bold">${item.month || ''}</span>
+                        <span class="font-display text-4xl leading-none">${escapeHTML(item.date || \'\')}</span>
+                        <span class="font-display text-lg font-bold">${escapeHTML(item.month || \'\')}</span>
                     </div>
                     <div class="flex-grow flex flex-col justify-center">
-                        <h4 class="font-display text-2xl text-brand-textDark mb-3">${item.title || ''}</h4>
+                        <h4 class="font-display text-2xl text-brand-textDark mb-3">${escapeHTML(item.title || \'\')}</h4>
                         <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                             ${item.time ? `<span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder whitespace-nowrap shrink-0 w-fit mx-auto sm:mx-0">
-                                <i class="fas fa-clock mr-2 text-brand-secondary"></i>${item.time}
+                                <i class="fas fa-clock mr-2 text-brand-secondary"></i>${escapeHTML(item.time)}
                             </span>` : ''}
                             ${item.location ? `<span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder whitespace-nowrap shrink-0 w-fit mx-auto sm:mx-0">
-                                <i class="fas fa-map-marker-alt mr-2 text-brand-secondary"></i>${item.location}
+                                <i class="fas fa-map-marker-alt mr-2 text-brand-secondary"></i>${escapeHTML(item.location)}
                             </span>` : ''}
                         </div>
                     </div>
                     <div class="flex flex-col justify-center shrink-0">
                         <span class="inline-block px-5 py-2.5 whitespace-nowrap shrink-0 rounded-full font-bold text-sm tracking-wide border ${colorClass}">
-                            ${item.status || 'Pendente'}
+                            ${escapeHTML(item.status || \'Pendente\')}
                         </span>
                     </div>
                 `;
@@ -1745,7 +1760,7 @@
                     : 'w-full h-full object-contain max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto';
                 return `<video ${isMain ? 'id="modalMainVideo" controls autoplay loop playsinline' : 'muted'} src="${url}" class="${isMain ? mainClasses : 'w-full h-full object-cover'}"></video>`;
             } else {
-                return `<img ${isMain ? 'id="modalMainImage"' : ''} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'} transition-all duration-300 select-none" alt="${titulo}">`;
+                return `<img ${isMain ? 'id="modalMainImage"' : ''} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'} transition-all duration-300 select-none" alt="${escapeHTML(titulo)}">`;
             }
         }
 
