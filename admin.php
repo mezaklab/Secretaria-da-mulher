@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
         }
 
         if ($_POST['username'] === ADMIN_USER && password_verify($_POST['password'], ADMIN_PASS_HASH)) {
+            session_regenerate_id(true);
             $_SESSION['logged_in'] = true;
             $_SESSION['login_attempts'] = 0;
             unset($_SESSION['lockout_time']);
