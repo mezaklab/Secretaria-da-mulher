@@ -1,85 +1,166 @@
 {
-  "acoes": [
-    {
-      "id": 1,
-      "title": "Mutirão na comunidade",
-      "date": "15 Out",
-      "category": "Saúde",
-      "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "description": "Mais de 150 exames realizados pela equipe móvel para trabalhadoras da comunidade local, sem filas e com carinho."
-    },
-    {
-      "id": 2,
-      "title": "Debate de saúde mental",
-      "date": "10 Out",
-      "category": "Apoio",
-      "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "description": "Encontro institucional conduzido pelo nosso setor de psicologia. Roda de conversa aberta e muito acolhedora."
-    },
-    {
-      "id": 3,
-      "title": "Oficina para mulheres",
-      "date": "05 Out",
-      "category": "Renda",
-      "image": "https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "description": "Cursos práticos gerando ferramentas de renda extra e independência financeira para dezenas de mulheres."
+    "acoes": [
+        {
+            "id": 1788743889048,
+            "category": "Ações Comunitárias & Rua",
+            "date": "31 Ago 2026",
+            "title": "Caminhada Agosto Lilás",
+            "description": "Caminhada em conscientização ao agosto lilás.",
+            "image": "uploads\/media_6a9e10d10b670.png",
+            "fotoCapa": "uploads\/media_6a9e10d10b670.png",
+            "galeria": [
+                "uploads\/media_6a9e10cf5640d.png",
+                "uploads\/media_6a9e10cf56e11.png",
+                "uploads\/media_6a9e10cf57d7b.png",
+                "uploads\/media_6a9e10cf573a9.png",
+                "uploads\/media_6a9e10cf58b09.png",
+                "uploads\/media_6a9e10cf594c1.png",
+                "uploads\/media_6a9e10cf584d2.png",
+                "uploads\/media_6a9e10cf59a6f.png",
+                "uploads\/media_6a9e10cf59044.png"
+            ]
+        }
+    ],
+    "galeria": [
+        {
+            "id": 1788745423620,
+            "type": "video",
+            "title": "Caminhada Agosto Lilás",
+            "description": "A Prefeitura de Canindé de São Francisco, por meio da Secretaria Municipal de Políticas Públicas para a Mulher, realizou a Caminhada Agosto Lilás, promovendo um momento de conscientização, mobilização e fortalecimento das políticas públicas voltadas à proteção e aos direitos das mulheres.\n\nA iniciativa reforça o compromisso do município com a promoção do respeito, da segurança e da dignidade das mulheres.\n\nPrefeitura de Canindé de São Francisco\nO desenvolvimento chegou!",
+            "category": "Saúde da Mulher",
+            "image": "uploads\/media_6a9e16cf94607.mp4"
+        },
+        {
+            "id": 1788744577805,
+            "type": "video",
+            "title": "Defesa Pessoal",
+            "description": "A aula inaugural de defesa pessoal foi um momento de força, aprendizado e união entre mulheres incríveis 💪💜\n\nCada movimento ensinado representa mais do que técnica: é sobre autonomia, segurança e confiança no próprio corpo.\n\nInvestir em ações como essa é cuidar de vidas e fortalecer mulheres para que ocupem todos os espaços com coragem e dignidade. Seguimos firmes, incentivando o autocuidado e a proteção como direitos de todas! 🙌",
+            "category": "Saúde da Mulher",
+            "image": "uploads\/media_6a9e1381c16aa.mp4"
+        },
+        {
+            "id": 1788740949821,
+            "type": "video",
+            "title": "Inauguação casa da mulher",
+            "description": "Hoje, tive a honra de prestigiar a inauguração da Casa da Mulher Brasileira, um marco histórico que vai fortalecer o acolhimento e a proteção de todas as sergipanas! Como primeira dama e secretária municipal, reafirmo meu compromisso de seguir alinhando parcerias e fortalecendo a rede de apoio para garantir mais dignidade e segurança para as mulheres da nossa cidade. 🏛️✊💜\n",
+            "category": "Saúde da Mulher",
+            "image": "uploads\/media_6a9e0572365bf.mp4"
+        },
+        {
+            "id": 1788739682049,
+            "type": "video",
+            "title": "Chá com Elas",
+            "description": "A Secretaria Municipal de Políticas Públicas para a Mulher realizou mais uma edição do projeto Chá com Elas, desta vez no Assentamento Gualter. O encontro foi um momento único de diálogo, escuta ativa e valorização do protagonismo feminino. A iniciativa reafirma o nosso compromisso, levando acolhimento, informações e nossa rede de apoio para todas as regiões do município. 🫂💜",
+            "category": "Cultura & Bem-estar",
+            "image": "uploads\/media_6a9e006208dde.mp4"
+        }
+    ],
+    "agenda": [
+        {
+            "id": 1,
+            "date": "20",
+            "month": "Out",
+            "title": "Mutirão de saúde e acolhimento",
+            "time": "08h - 13h",
+            "location": "Clube Altemar Dutra",
+            "status": "Realizado"
+        },
+        {
+            "id": 1788740650625,
+            "date": "20",
+            "month": "Fev",
+            "title": "Corrida Delas Run",
+            "time": "8h - 9h30",
+            "location": "Centro",
+            "status": "Confirmado"
+        },
+        {
+            "id": 1788740718025,
+            "date": "02",
+            "month": "Nov",
+            "title": "Multirão de Saúde",
+            "time": "08h - 13h",
+            "location": "Torre",
+            "status": "Em Planejamento"
+        },
+        {
+            "id": 1788745648888,
+            "date": "23",
+            "month": "Out",
+            "fullDate": "2026-10-23",
+            "title": "Aulão Defesa Pessoal",
+            "time": "08h - 10h",
+            "location": "Centro",
+            "status": "Confirmado"
+        },
+        {
+            "id": 1788746190111,
+            "date": "18",
+            "month": "Set",
+            "fullDate": "2026-09-18",
+            "title": "Multirão da Beleza",
+            "time": "09h - 12h",
+            "location": "Praça Central",
+            "status": "Confirmado"
+        }
+    ],
+    "saude": [
+        {
+            "id": 1,
+            "titulo": "Seu preventivo",
+            "icone": "fa-droplet",
+            "descricaoCurta": "Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.",
+            "descricaoCompleta": "O exame citopatológico (preventivo ou Papanicolau) é a principal estratégia para detectar precocemente lesões no colo do útero antes que se tornem câncer. Em Canindé de São Francisco, o atendimento é humanizado, sem filas e com profissionais capacitados para oferecer o melhor acolhimento.",
+            "local": "Todas as Unidades Básicas de Saúde (UBS) de Canindé de São Francisco",
+            "horario": "Segunda a Sexta, das 08h às 13h (Campanhas noturnas até 21h)",
+            "publico": "Mulheres de 25 a 64 anos ou que já iniciaram a vida sexual",
+            "documentos": "Cartão do SUS, RG e Comprovante de Residência",
+            "imagem": "uploads\/media_6a9e153552831.jpg",
+            "publicoAlvo": "Mulheres de 25 a 64 anos ou que já iniciaram a vida sexual"
+        },
+        {
+            "id": 2,
+            "titulo": "Proteção HPV",
+            "icone": "fa-shield-virus",
+            "descricaoCurta": "Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.",
+            "descricaoCompleta": "A vacina contra o Papilomavírus Humano (HPV) previne contra os tipos de vírus responsáveis por mais de 70% dos casos de câncer de colo de útero. A imunização é segura, altamente eficaz e gratuita nas salas de vacina do município.",
+            "local": "Salas de Vacina de todas as UBSs do município",
+            "horario": "Segunda a Sexta, das 08h às 13h",
+            "publico": "Meninas e meninos de 9 a 14 anos, e imunossuprimidos até 45 anos",
+            "documentos": "Caderneta de Vacinação, Cartão do SUS e Documento com foto",
+            "imagem": "https:\/\/images.unsplash.com\/photo-1631815589968-fdb09a223b1e?w=800&q=80"
+        },
+        {
+            "id": 3,
+            "titulo": "Horário noturno",
+            "icone": "fa-moon",
+            "descricaoCurta": "Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.",
+            "descricaoCompleta": "Para garantir que nenhuma trabalhadora, autônoma ou estudante fique sem atendimento preventivo, a Secretaria da Mulher em parceria com a Secretaria de Saúde disponibiliza plantões noturnos com exames preventivos, vacinação, testes rápidos e acolhimento psicológico.",
+            "local": "UBS Sede e Postos Estratégicos Itinerantes",
+            "horario": "Plantões especiais das 18h às 21h (consulte cronograma da Agenda)",
+            "publico": "Trabalhadoras e mulheres que não podem comparecer em horário comercial",
+            "documentos": "Documento oficial com foto e Cartão do SUS",
+            "imagem": "https:\/\/images.unsplash.com\/photo-1516549655169-df83a0774514?w=800&q=80"
+        }
+    ],
+    "canindeDelas": {
+        "titulo": "Canindé + Delas",
+        "subtitulo": "Mais autonomia, protagonismo e oportunidades reais para transformar a vida de cada mulher de Canindé.",
+        "descricao": "O Canindé + Delas é o grande programa integrado de emancipação feminina, qualificação profissional e garantia de direitos do município de Canindé de São Francisco.\n\nArticulando ações de geração de renda, capacitação profissional, apoio a microempreendedoras, mutirões de saúde integral e rodas de cidadania, o programa atua diretamente nos bairros e comunidades rurais, levando oportunidades transformadoras a quem mais precisa.",
+        "defesaDescricao": "O Defesa Delas é a nossa rede de proteção e acolhimento para mulheres em situação de violência, oferecendo suporte jurídico, psicológico e social gratuito.\n\nCom profissionais capacitadas e atendimento humanizado, garantimos que nenhuma mulher precise enfrentar o ciclo de violência sozinha. Juntas somos mais fortes e protegidas.",
+        "empreenderDescricao": "O Empreender Delas foca na independência financeira das mulheres através de capacitação, mentoria e acesso a microcrédito.\n\nApoiamos ideias inovadoras e negócios locais liderados por mulheres, oferecendo as ferramentas necessárias para que cada empreendedora possa transformar seus sonhos em realidade sustentável e lucrativa.",
+        "fotos": [
+            "uploads\/media_6a9e0da9286d2.png",
+            "uploads\/media_6a9e0da92967f.png",
+            "uploads\/media_6a9e0da92901c.png",
+            "uploads\/media_6a9e0da92a6eb.png",
+            "uploads\/media_6a9e0da92ad55.png",
+            "uploads\/media_6a9e0da92a00c.png",
+            "uploads\/media_6a9e0da92b694.png",
+            "uploads\/media_6a9e0da92c83b.png",
+            "uploads\/media_6a9e0da92be97.png",
+            "uploads\/media_6a9e0da92c362.png",
+            "uploads\/media_6a9e0fd393b44.png"
+        ]
     }
-  ],
-  "galeria": [
-    {
-      "id": 1,
-      "type": "video",
-      "title": "Depoimento: Dona Maria",
-      "image": "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "duration": "02:15"
-    },
-    {
-      "id": 2,
-      "type": "photo",
-      "title": "Caminhada de abertura",
-      "image": "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": 3,
-      "type": "video",
-      "title": "Como é o preventivo?",
-      "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "duration": "05:30"
-    },
-    {
-      "id": 4,
-      "type": "photo",
-      "title": "Nossas oficinas",
-      "image": "https://images.unsplash.com/photo-1603513492128-ba7bc9b3e143?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-  "agenda": [
-    {
-      "id": 1,
-      "date": "20",
-      "month": "Out",
-      "day": "Domingo",
-      "time": "08h - 13h",
-      "title": "Mutirão de saúde e acolhimento",
-      "location": "Clube Altemar Dutra"
-    },
-    {
-      "id": 2,
-      "date": "22",
-      "month": "Out",
-      "day": "Terça",
-      "time": "09h - 11h",
-      "title": "Roda de conversa sobre direitos",
-      "location": "Assentamento Cuiabá"
-    },
-    {
-      "id": 3,
-      "date": "25",
-      "month": "Out",
-      "day": "Sexta",
-      "time": "18h - 21h",
-      "title": "Preventivo noturno para trabalhadoras",
-      "location": "UBS Sede"
-    }
-  ]
 }

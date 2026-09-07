@@ -48,6 +48,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
+    <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token'] ?? ''; ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acesso Restrito — Secretaria da Mulher</title>
@@ -356,6 +357,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta name="csrf-token" content="<?php echo $_SESSION['csrf_token'] ?? ''; ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
@@ -476,7 +478,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div class="px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                         <h3 class="text-lg font-bold text-gray-800">Gerenciar Ações nas Ruas</h3>
-                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm" onclick="document.getElementById('modal').classList.remove('hidden'); document.getElementById('edit-id-acoes').value=''; document.getElementById('modal').querySelector('h3').innerText='Cadastrar Nova Ação'; if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click(); currentActionGallery = []; if(typeof renderGalleryThumbnails === 'function') renderGalleryThumbnails();">
+                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm" onclick="document.getElementById('modal').classList.remove('hidden'); document.getElementById('edit-id-acoes').value=''; document.getElementById('modal-context').value='acoes'; document.getElementById('modal').querySelector('h3').innerText='Cadastrar Nova Ação'; document.getElementById('label-capa-midia').innerText='Mídia da Capa (Foto ou Vídeo)'; document.getElementById('upload-placeholder-text').innerText='Clique ou arraste uma imagem/vídeo'; document.getElementById('galeria-adicional-wrapper').classList.remove('hidden'); if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click(); currentActionGallery = []; if(typeof renderGalleryThumbnails === 'function') renderGalleryThumbnails();">
                             <i class="fas fa-plus mr-2"></i> Nova Ação
                         </button>
                     </div>
@@ -533,8 +535,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                         <h3 class="text-lg font-bold text-gray-800">Nossos Vídeos</h3>
-                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm" onclick="document.getElementById('modal').classList.remove('hidden'); document.getElementById('edit-id-acoes').value=''; document.getElementById('modal').querySelector('h3').innerText='Cadastrar Nova Ação'; if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click(); currentActionGallery = []; if(typeof renderGalleryThumbnails === 'function') renderGalleryThumbnails();">
-                            <i class="fas fa-upload mr-2"></i> Nova Ação / Vídeo
+                        <button class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm text-sm" onclick="document.getElementById('modal').classList.remove('hidden'); document.getElementById('edit-id-acoes').value=''; document.getElementById('modal-context').value='galeria'; document.getElementById('modal').querySelector('h3').innerText='Cadastrar Novo Vídeo'; document.getElementById('label-capa-midia').innerText='Arquivo de Mídia (Vídeo)'; document.getElementById('upload-placeholder-text').innerText='Clique ou arraste um vídeo'; document.getElementById('galeria-adicional-wrapper').classList.add('hidden'); if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click(); currentActionGallery = []; if(typeof renderGalleryThumbnails === 'function') renderGalleryThumbnails();">
+                            <i class="fas fa-upload mr-2"></i> Adicionar Mídia
                         </button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -644,9 +646,9 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                                 <div class="flex items-center justify-between mb-3">
                                     <div>
                                         <label class="block text-sm font-bold text-gray-700">Galeria de Fotos do Projeto</label>
-                                        <p class="text-xs text-gray-400">Adicione até 30 mídias em alta qualidade (PNG, JPG, MP4 até 5MB)</p>
+                                        <p class="text-xs text-gray-400">Adicione até 100 mídias em alta qualidade (PNG, JPG, MP4 até 100MB)</p>
                                     </div>
-                                    <span id="caninde-gallery-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary">0 / 30 fotos</span>
+                                    <span id="caninde-gallery-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary">0 / 100 fotos</span>
                                 </div>
 
                                 <!-- Input & Botão de Selecionar -->
@@ -790,6 +792,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             <div class="p-6 overflow-y-auto">
                 <form class="space-y-5">
                     <input type="hidden" id="edit-id-acoes">
+                    <input type="hidden" id="modal-context" value="acoes">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div class="col-span-1 md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Título da Ação</label>
@@ -813,21 +816,25 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             <input type="date" id="input-data" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                         </div>
                         
+
                         <div class="col-span-1 md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
                             <textarea id="input-descricao" rows="3" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow resize-none" placeholder="Descreva os detalhes da ação..."></textarea>
                         </div>
                         
+
+
+                        
                         <div class="col-span-1 md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Mídia da Capa (Foto ou Vídeo)</label>
+                            <label id="label-capa-midia" class="block text-sm font-medium text-gray-700 mb-1">Mídia da Capa (Foto ou Vídeo)</label>
                             <div id="upload-area" class="border-2 border-dashed border-gray-300 rounded-xl h-48 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-brand-primary transition-colors cursor-pointer group relative overflow-hidden" onclick="document.getElementById('action-image-input').click()">
                                 <input type="file" id="action-image-input" accept="image/*,video/*" class="hidden">
                                 
                                 <!-- Estado Inicial (Ícone) -->
                                 <div id="upload-placeholder" class="flex flex-col items-center pointer-events-none p-8 text-center">
                                     <i class="fas fa-cloud-upload-alt text-4xl mb-3 text-brand-secondary group-hover:text-brand-primary transition-colors"></i>
-                                    <p class="text-sm font-medium text-gray-600">Clique ou arraste uma imagem/vídeo</p>
-                                    <p class="text-xs mt-1 text-gray-400">PNG, JPG ou MP4 (até 50MB)</p>
+                                    <p id="upload-placeholder-text" class="text-sm font-medium text-gray-600">Clique ou arraste uma imagem/vídeo</p>
+                                    <p class="text-xs mt-1 text-gray-400">PNG, JPG ou MP4 (até 100MB)</p>
                                 </div>
 
                                 <!-- Estado Preenchido (Preview) -->
@@ -846,7 +853,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         </div>
 
                         <!-- Galeria Adicional -->
-                        <div class="col-span-1 md:col-span-2 mt-2">
+                        <div id="galeria-adicional-wrapper" class="col-span-1 md:col-span-2 mt-2">
                             <div class="flex items-center justify-between mb-1">
                                 <label class="block text-sm font-medium text-gray-700">Galeria de Mídias (até 30 adicionais)</label>
                                 <span id="gallery-count-badge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-100 text-brand-primary">0 / 30 mídias</span>
@@ -967,7 +974,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                                     </div>
                                     <div>
                                         <p id="saude-image-name" class="text-sm font-medium text-gray-700">Clique para anexar foto explicativa</p>
-                                        <p class="text-xs text-gray-400">PNG, JPG até 5MB</p>
+                                        <p class="text-xs text-gray-400">PNG, JPG até 100MB</p>
                                     </div>
                                 </div>
                                 <div id="saude-image-preview-wrapper" class="hidden flex items-center gap-2">
@@ -1096,91 +1103,46 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             // ==========================================
             
             // Dados Padrões
-            const defaultAcoes = [
-                { id: 1, category: 'Saúde e Bem-estar', date: '24 Out 2024', title: 'Palestra sobre prevenção e cuidados', description: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' },
-                { id: 2, category: 'Apoio Jurídico', date: '15 Out 2024', title: 'Mutirão de Documentação', description: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', image: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80' },
-                { id: 3, category: 'Ações Comunitárias & Rua', date: '01 Set 2026', title: 'Caminhada Agosto Lilás', description: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80' }
-            ];
+            const defaultAcoes = [];
             
-            const defaultGaleria = [
-                { id: 1, type: 'foto', title: 'Ação na Comunidade', image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' }
-            ];
+            const defaultGaleria = [];
 
-            const defaultAgenda = [
-                { id: 1, date: '20', month: 'Out', title: 'Mutirão de saúde e acolhimento', time: '08h - 13h', location: 'Clube Altemar Dutra', status: 'Realizado' }
-            ];
+            const defaultAgenda = [];
 
             // Dados Padrão de Serviços de Saúde
-            const defaultServicosSaude = [
-                {
-                    id: 1,
-                    titulo: 'Seu preventivo',
-                    icone: 'fa-droplet',
-                    descricaoCurta: 'Sem espera, sem burocracia. Disponível em todas as UBS do município com entrega rápida do resultado.',
-                    descricaoCompleta: 'O exame citopatológico (preventivo ou Papanicolau) é a principal estratégia para detectar precocemente lesões no colo do útero antes que se tornem câncer. Em Canindé de São Francisco, o atendimento é humanizado, sem filas e com profissionais capacitados para oferecer o melhor acolhimento.',
-                    local: 'Todas as Unidades Básicas de Saúde (UBS) de Canindé de São Francisco',
-                    horario: 'Segunda a Sexta, das 08h às 13h (Campanhas noturnas até 21h)',
-                    publico: 'Mulheres de 25 a 64 anos ou que já iniciaram a vida sexual',
-                    documentos: 'Cartão do SUS, RG e Comprovante de Residência',
-                    imagem: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&q=80'
-                },
-                {
-                    id: 2,
-                    titulo: 'Proteção HPV',
-                    icone: 'fa-shield-virus',
-                    descricaoCurta: 'Vacinação de rotina para adolescentes e público-alvo nas unidades de saúde. A principal proteção começa cedo.',
-                    descricaoCompleta: 'A vacina contra o Papilomavírus Humano (HPV) previne contra os tipos de vírus responsáveis por mais de 70% dos casos de câncer de colo de útero. A imunização é segura, altamente eficaz e gratuita nas salas de vacina do município.',
-                    local: 'Salas de Vacina de todas as UBSs do município',
-                    horario: 'Segunda a Sexta, das 08h às 13h',
-                    publico: 'Meninas e meninos de 9 a 14 anos, e imunossuprimidos até 45 anos',
-                    documentos: 'Caderneta de Vacinação, Cartão do SUS e Documento com foto',
-                    imagem: 'https://images.unsplash.com/photo-1631815589968-fdb09a223b1e?w=800&q=80'
-                },
-                {
-                    id: 3,
-                    titulo: 'Horário noturno',
-                    icone: 'fa-moon',
-                    descricaoCurta: 'Trabalha o dia todo? Nossas equipes estarão a postos após as 18h em postos estratégicos da campanha.',
-                    descricaoCompleta: 'Para garantir que nenhuma trabalhadora, autônoma ou estudante fique sem atendimento preventivo, a Secretaria da Mulher em parceria com a Secretaria de Saúde disponibiliza plantões noturnos com exames preventivos, vacinação, testes rápidos e acolhimento psicológico.',
-                    local: 'UBS Sede e Postos Estratégicos Itinerantes',
-                    horario: 'Plantões especiais das 18h às 21h (consulte cronograma da Agenda)',
-                    publico: 'Trabalhadoras e mulheres que não podem comparecer em horário comercial',
-                    documentos: 'Documento oficial com foto e Cartão do SUS',
-                    imagem: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=800&q=80'
-                }
-            ];
+            const defaultServicosSaude = [];
 
-            function safeStorageSetItem(key, dataStr) {
 
+            async function saveData(acoes, galeria, agenda, saude, canindeDelas) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 try {
-
-                    localStorage.setItem(key, dataStr);
-
-                } catch (e) {
-
-                    if (e.name === "QuotaExceededError" || e.name === "NS_ERROR_DOM_QUOTA_REACHED") {
-
-                        alert("ERRO CRÍTICO: O limite de armazenamento do seu navegador foi atingido (cerca de 5MB). Remova fotos ou ações antigas antes de salvar novas mídias pesadas.");
-
-                    } else {
-
-                        alert("Erro ao salvar: " + e.message);
-
+                    const response = await fetch('api.php', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'X-CSRF-Token': csrfToken
+                        },
+                        body: JSON.stringify({ acoes, galeria, agenda, saude, canindeDelas })
+                    });
+                    const result = await response.json();
+                    if (!response.ok) {
+                        throw new Error(result.message || 'Erro desconhecido ao salvar.');
                     }
-
-                    console.error("Erro no LocalStorage:", e);
-
+                    return result;
+                } catch (e) {
+                    console.error("Erro na API:", e);
+                    alert("Erro ao salvar no servidor: " + e.message);
+                    throw e; // Repassa o erro para abortar o fluxo da interface
                 }
-
             }
 
-            // Puxar do LocalStorage
-            let adminAcoes = JSON.parse(localStorage.getItem('sec_mulher_acoes')) || defaultAcoes;
-            let adminGaleria = JSON.parse(localStorage.getItem('sec_mulher_galeria')) || defaultGaleria;
-            let adminAgenda = JSON.parse(localStorage.getItem('sec_mulher_agenda')) || defaultAgenda;
-            let adminServicosSaude = JSON.parse(localStorage.getItem('sec_mulher_saude')) || defaultServicosSaude;
 
-            // Dados Padrão Canindé + Delas
+            // Variáveis de Estado
+            let adminAcoes = [...defaultAcoes];
+            let adminGaleria = [...defaultGaleria];
+            let adminAgenda = [...defaultAgenda];
+            let adminServicosSaude = [...defaultServicosSaude];
+
             const defaultCanindeDelas = {
                 titulo: 'Canindé + Delas',
                 subtitulo: 'Mais autonomia, protagonismo e oportunidades reais para transformar a vida de cada mulher de Canindé.',
@@ -1195,8 +1157,47 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 ]
             };
 
-            let adminCanindeDelas = JSON.parse(localStorage.getItem('sec_mulher_caninde_delas')) || defaultCanindeDelas;
-            let currentCanindePhotos = Array.isArray(adminCanindeDelas.fotos) ? [...adminCanindeDelas.fotos] : [];
+            let adminCanindeDelas = JSON.parse(JSON.stringify(defaultCanindeDelas));
+            let currentCanindePhotos = [];
+
+            // Buscar dados reais do servidor em vez do localStorage
+            fetch('api.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acoes) adminAcoes = data.acoes;
+                    if (data.galeria) adminGaleria = data.galeria;
+                    if (data.agenda) {
+                        adminAgenda = data.agenda.map(item => {
+                            if (item.status === 'Confirmado' && item.fullDate) {
+                                const eventDate = new Date(item.fullDate + 'T23:59:59');
+                                if (new Date() > eventDate) {
+                                    item.status = 'Realizado';
+                                }
+                            }
+                            return item;
+                        });
+                    }
+                    if (data.saude) adminServicosSaude = data.saude;
+                    if (data.canindeDelas) adminCanindeDelas = data.canindeDelas;
+                    
+                    currentCanindePhotos = Array.isArray(adminCanindeDelas.fotos) ? [...adminCanindeDelas.fotos] : [];
+                    
+                    // Renderiza a interface apenas depois que os dados carregarem
+                    renderAdminAcoes();
+                    renderAdminGaleria();
+                    renderAdminAgenda();
+                    renderAdminSaude();
+                    renderAdminCanindeDelas();
+                })
+                .catch(err => {
+                    console.error("Erro ao carregar os dados:", err);
+                    alert("Não foi possível carregar os dados do servidor. Usando dados padrão.");
+                    renderAdminAcoes();
+                    renderAdminGaleria();
+                    renderAdminAgenda();
+                    renderAdminSaude();
+                    renderAdminCanindeDelas();
+                });
 
             // ── Sanitização: escapa HTML para prevenir XSS ──────────────
             function safe(str) {
@@ -1234,11 +1235,17 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 if(!container) return;
                 container.innerHTML = '';
                 adminGaleria.forEach(item => {
+                    const isVideo = item.image && item.image.toLowerCase().endsWith('.mp4');
+                    const mediaHtml = isVideo 
+                        ? `<video src="${item.image}" class="w-full h-full object-cover" muted playsinline></video>
+                           <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0"><i class="fas fa-play-circle text-4xl text-white/80 shadow-sm"></i></div>`
+                        : `<img src="${item.image}" class="w-full h-full object-cover">`;
+
                     container.innerHTML += `
                         <div class="border border-gray-200 rounded-xl overflow-hidden group relative" data-id="${item.id}">
                             <div class="h-40 bg-gray-200 relative">
-                                <img src="${item.image}" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                                ${mediaHtml}
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 z-10">
                                     <button title="Editar" class="btn-edit w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-800 hover:text-brand-primary cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
                                     <button title="Excluir" class="btn-delete w-10 h-10 bg-white rounded-full flex items-center justify-center text-red-500 hover:text-red-700 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
                                 </div>
@@ -1265,8 +1272,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 if (empInput) empInput.value = adminCanindeDelas.empreenderDescricao || '';
                 
                 if (badgeEl) {
-                    badgeEl.innerText = `${currentCanindePhotos.length} / 30 fotos`;
-                    badgeEl.className = currentCanindePhotos.length >= 30 
+                    badgeEl.innerText = `${currentCanindePhotos.length} / 100 fotos`;
+                    badgeEl.className = currentCanindePhotos.length >= 100 
                         ? 'text-xs font-bold px-3 py-1 rounded-full bg-red-100 text-red-700' 
                         : 'text-xs font-semibold px-3 py-1 rounded-full bg-purple-100 text-brand-primary';
                 }
@@ -1322,9 +1329,9 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         showCanindeError('Alguns arquivos não foram adicionados por não serem imagens ou vídeos válidos.');
                     }
 
-                    const availableSlots = 30 - currentCanindePhotos.length;
+                    const availableSlots = 100 - currentCanindePhotos.length;
                     if (validFiles.length > availableSlots) {
-                        showCanindeError(`Você só pode adicionar mais ${availableSlots} arquivo(s). O limite é de 30 fotos/vídeos.`);
+                        showCanindeError(`Você só pode adicionar mais ${availableSlots} arquivo(s). O limite é de 100 fotos/vídeos.`);
                     }
 
                     const toProcess = validFiles.slice(0, availableSlots);
@@ -1333,43 +1340,77 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         return;
                     }
 
-                    let loaded = 0;
-                    toProcess.forEach(file => {
-                        const reader = new FileReader();
-                        reader.onload = function(evt) {
-                            currentCanindePhotos.push(evt.target.result);
-                            loaded++;
-                            if (loaded === toProcess.length) {
-                                renderAdminCanindeDelas();
-                                inputCanindeFotos.value = '';
-                            }
-                        };
-                        reader.readAsDataURL(file);
-                    });
+                    // Faz upload imediato para o servidor ao invés de usar Base64 na memória
+                    const uploadButton = document.querySelector('#caninde-drop-area');
+                    const originalHTML = uploadButton.innerHTML;
+                    uploadButton.innerHTML = '<div class="text-center w-full py-4"><i class="fas fa-spinner fa-spin text-brand-primary text-2xl mb-2"></i><p>Enviando...</p></div>';
+                    uploadButton.style.pointerEvents = 'none';
+                    
+                    Promise.all(toProcess.map(file => uploadFile(file)))
+                        .then(paths => {
+                            paths.forEach(path => {
+                                if (path) currentCanindePhotos.push(path);
+                            });
+                            renderAdminCanindeDelas();
+                        })
+                        .catch(err => {
+                            showCanindeError('Erro no upload de uma ou mais mídias.');
+                        })
+                        .finally(() => {
+                            uploadButton.innerHTML = originalHTML;
+                            uploadButton.style.pointerEvents = 'auto';
+                            inputCanindeFotos.value = '';
+                        });
                 });
             }
 
             // Botão Salvar Canindé + Delas
             const btnSalvarCaninde = document.getElementById('btn-salvar-caninde');
             if (btnSalvarCaninde) {
-                btnSalvarCaninde.addEventListener('click', function() {
-                    const subtitulo = document.getElementById('input-caninde-subtitulo').value.trim();
-                    const descricao = document.getElementById('input-caninde-descricao').value.trim();
-                    const defesaDesc = document.getElementById('input-defesa-descricao').value.trim();
-                    const empDesc = document.getElementById('input-empreender-descricao').value.trim();
+                btnSalvarCaninde.addEventListener('click', async function() {
+                    try {
+                        btnSalvarCaninde.innerText = 'Salvando...';
+                        btnSalvarCaninde.disabled = true;
 
-                    adminCanindeDelas = {
-                        titulo: 'Canindé + Delas',
-                        subtitulo: subtitulo || defaultCanindeDelas.subtitulo,
-                        descricao: descricao || defaultCanindeDelas.descricao,
-                        defesaDescricao: defesaDesc || defaultCanindeDelas.defesaDescricao,
-                        empreenderDescricao: empDesc || defaultCanindeDelas.empreenderDescricao,
-                        fotos: [...currentCanindePhotos]
-                    };
+                        // 1. Fazer upload de todas as fotos/vídeos selecionados
+                        const inputCanindeFotos = document.getElementById('input-caninde-fotos');
+                        let uploadedPaths = [];
+                        if (inputCanindeFotos.files && inputCanindeFotos.files.length > 0) {
+                            const validFiles = Array.from(inputCanindeFotos.files).filter(f => f.type.startsWith('image/') || f.type.startsWith('video/'));
+                            uploadedPaths = await Promise.all(validFiles.map(file => uploadFile(file)));
+                        }
 
-                    safeStorageSetItem('sec_mulher_caninde_delas', JSON.stringify(adminCanindeDelas));
-                    alert('Seção "Canindé + Delas" atualizada e publicada com sucesso!');
-                    renderAdminCanindeDelas();
+                        // Filtra os previews base64 e adiciona os novos paths
+                        const finalFotos = [...currentCanindePhotos.filter(p => !p.startsWith('data:')), ...uploadedPaths];
+
+                        const subtitulo = document.getElementById('input-caninde-subtitulo').value.trim();
+                        const descricao = document.getElementById('input-caninde-descricao').value.trim();
+                        const defesaDesc = document.getElementById('input-defesa-descricao').value.trim();
+                        const empDesc = document.getElementById('input-empreender-descricao').value.trim();
+
+                        adminCanindeDelas = {
+                            titulo: 'Canindé + Delas',
+                            subtitulo: subtitulo || defaultCanindeDelas.subtitulo,
+                            descricao: descricao || defaultCanindeDelas.descricao,
+                            defesaDescricao: defesaDesc || defaultCanindeDelas.defesaDescricao,
+                            empreenderDescricao: empDesc || defaultCanindeDelas.empreenderDescricao,
+                            fotos: finalFotos
+                        };
+
+                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                        
+                        // Reseta inputs e estado
+                        inputCanindeFotos.value = '';
+                        currentCanindePhotos = [...finalFotos];
+                        
+                        alert('Seção "Canindé + Delas" atualizada e publicada com sucesso!');
+                        renderAdminCanindeDelas();
+                    } catch (e) {
+                        alert('Erro ao salvar Canindé + Delas: ' + e.message);
+                    } finally {
+                        btnSalvarCaninde.innerText = 'Salvar Alterações';
+                        btnSalvarCaninde.disabled = false;
+                    }
                 });
             }
 
@@ -1432,7 +1473,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
             
             // Upload de Imagem Capa & Galeria Preview Logic
-            let currentBase64Image = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80';
+            let currentBase64Image = '';
             let currentActionGallery = []; // Array de Base64 das fotos adicionais (até 10)
             
             const actionImageInput = document.getElementById('action-image-input');
@@ -1468,11 +1509,11 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     }
                 }
 
-                currentActionGallery.forEach((imgBase64, index) => {
-                    const isVideo = imgBase64.startsWith('data:video');
+                currentActionGallery.forEach((imgPath, index) => {
+                    const isVideo = imgPath.startsWith('data:video') || imgPath.toLowerCase().endsWith('.mp4');
                     const mediaTag = isVideo 
-                        ? `<video src="${imgBase64}" class="w-full h-full object-cover" muted></video><div class="absolute inset-0 flex items-center justify-center bg-black/30 pointer-events-none"><i class="fas fa-play text-white text-sm"></i></div>` 
-                        : `<img src="${imgBase64}" class="w-full h-full object-cover" alt="Foto ${index + 1}">`;
+                        ? `<video src="${imgPath}" class="w-full h-full object-cover" muted playsinline></video><div class="absolute inset-0 flex items-center justify-center bg-black/30 pointer-events-none"><i class="fas fa-play text-white text-sm"></i></div>` 
+                        : `<img src="${imgPath}" class="w-full h-full object-cover" alt="Foto ${index + 1}">`;
 
                     const thumb = document.createElement('div');
                     thumb.className = 'relative rounded-xl overflow-hidden aspect-square border border-purple-200 bg-gray-100 group shadow-sm';
@@ -1521,7 +1562,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 removeImageBtn.addEventListener('click', function(e) {
                     e.stopPropagation(); // Previne o clique de abrir a janela de arquivo de novo
                     actionImageInput.value = '';
-                    currentBase64Image = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80';
+                    currentBase64Image = '';
                     uploadPreview.classList.add('hidden');
                     uploadPlaceholder.classList.remove('hidden');
                 });
@@ -1550,40 +1591,46 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         return;
                     }
 
-                    let loadedCount = 0;
-                    mediaToProcess.forEach(file => {
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            currentActionGallery.push(event.target.result);
-                            loadedCount++;
-                            if(loadedCount === mediaToProcess.length) {
-                                renderGalleryThumbnails();
-                                actionGalleryInput.value = '';
-                            }
-                        };
-                        reader.readAsDataURL(file);
-                    });
+                    // Faz upload imediato dos arquivos selecionados
+                    const uploadButton = document.querySelector('#gallery-drop-area button');
+                    const originalBtnText = uploadButton.innerHTML;
+                    uploadButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Carregando...';
+                    
+                    Promise.all(mediaToProcess.map(file => uploadFile(file)))
+                        .then(paths => {
+                            paths.forEach(path => {
+                                if (path) currentActionGallery.push(path);
+                            });
+                            renderGalleryThumbnails();
+                        })
+                        .catch(err => {
+                            showGalleryError('Erro no upload de uma ou mais mídias.');
+                        })
+                        .finally(() => {
+                            uploadButton.innerHTML = originalBtnText;
+                            actionGalleryInput.value = '';
+                        });
                 });
             }
 
-            // Initialization Render
-            renderAdminAcoes();
-            renderAdminGaleria();
-            renderAdminAgenda();
-            renderAdminSaude();
-            renderAdminCanindeDelas();
+
 
             // Intercepting Saves
             document.querySelectorAll('button').forEach(btn => {
                 if(btn.innerText.includes('Salvar Evento')) {
-                    btn.addEventListener('click', () => {
+                    btn.addEventListener('click', async () => {
                         const modal = document.getElementById('modal-agenda');
                         const title = document.getElementById('agenda-title').value;
-                        const dateVal = document.getElementById('agenda-date').value; // yyyy-mm-dd
+                        const dateVal = document.getElementById('agenda-date').value;
                         const time = document.getElementById('agenda-time').value;
                         const location = document.getElementById('agenda-location').value;
-                        const status = document.getElementById('agenda-status').value;
+                        const status = document.getElementById('agenda-status') ? document.getElementById('agenda-status').value : '';
                         
+                        if(!title || !dateVal || !time || !location) {
+                            alert("Preencha todos os campos da agenda.");
+                            return;
+                        }
+
                         let date = "20", month = "Out";
                         if(dateVal) {
                             const d = new Date(dateVal + 'T12:00:00');
@@ -1596,85 +1643,123 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         if(editId) {
                             const index = adminAgenda.findIndex(item => item.id == editId);
                             if(index > -1) {
-                                adminAgenda[index] = { ...adminAgenda[index], date, month, title, time, location, status };
+                                adminAgenda[index] = { ...adminAgenda[index], date, month, fullDate: dateVal, title, time, location, status };
                             }
                         } else {
-                            adminAgenda.push({ id: Date.now(), date, month, title, time, location, status });
+                            adminAgenda.push({ id: Date.now(), date, month, fullDate: dateVal, title, time, location, status });
                         }
-                        safeStorageSetItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
-                        renderAdminAgenda();
-                        modal.classList.add('hidden'); if(removeImageBtn) removeImageBtn.click();
+                        
+                        try {
+                            btn.innerText = 'Salvando...';
+                            btn.disabled = true;
+                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                            renderAdminAgenda();
+                            modal.classList.add('hidden'); if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click();
+                        } catch (e) {
+                            alert('Erro ao salvar Agenda: ' + e.message);
+                        } finally {
+                            btn.innerText = 'Salvar Evento';
+                            btn.disabled = false;
+                        }
                     });
                 }
                 
-                if(btn.innerText.includes('Salvar e Publicar')) {
-                    btn.addEventListener('click', () => {
-                        const modal = document.getElementById('modal');
-                        const title = document.getElementById('input-titulo').value;
-                        const category = document.getElementById('input-categoria').value;
-                        const description = document.getElementById('input-descricao').value;
-                        
-                        let date = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).replace('.','');
-                        const inputDataVal = document.getElementById('input-data').value;
-                        if(inputDataVal) {
-                            const d = new Date(inputDataVal + 'T12:00:00');
-                            const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-                            date = `${String(d.getDate()).padStart(2, '0')} ${months[d.getMonth()]} ${d.getFullYear()}`;
-                        }
-                        
-                        const editId = document.getElementById('edit-id-acoes').value;
-                        const isPlaceholder = currentBase64Image.includes('unsplash.com');
-                        
-                        let finalImage = currentBase64Image;
+                if(btn.innerText.includes('Salvar e Publicar') && btn.id !== 'btn-salvar-caninde') {
+                    btn.addEventListener('click', async () => {
+                        try {
+                            btn.innerText = "Salvando...";
+                            btn.disabled = true;
 
-                        if (editId) {
-                            const acaoIndex = adminAcoes.findIndex(item => item.id == editId);
-                            if (acaoIndex > -1) {
-                                const oldImage = adminAcoes[acaoIndex].image || adminAcoes[acaoIndex].imagem || adminAcoes[acaoIndex].fotoCapa;
-                                finalImage = (isPlaceholder && oldImage) ? oldImage : currentBase64Image;
-                                adminAcoes[acaoIndex] = { 
-                                    ...adminAcoes[acaoIndex], 
-                                    category, 
-                                    date, 
-                                    title, 
-                                    description, 
-                                    image: finalImage,
-                                    fotoCapa: finalImage,
-                                    galeria: [...currentActionGallery]
-                                };
+                            const modal = document.getElementById('modal');
+                            const title = document.getElementById('input-titulo').value;
+                            const category = document.getElementById('input-categoria').value;
+                            const description = document.getElementById('input-descricao').value;
+                            
+                            let date = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }).replace('.','');
+                            const inputDataVal = document.getElementById('input-data').value;
+                            if(inputDataVal) {
+                                const d = new Date(inputDataVal + 'T12:00:00');
+                                const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+                                date = `${String(d.getDate()).padStart(2, '0')} ${months[d.getMonth()]} ${d.getFullYear()}`;
                             }
                             
-                            const galIndex = adminGaleria.findIndex(item => item.id == editId || item.title === title);
-                            if (galIndex > -1) {
-                                const oldImage = adminGaleria[galIndex].image;
-                                finalImage = (isPlaceholder && oldImage) ? oldImage : currentBase64Image;
-                                adminGaleria[galIndex] = { ...adminGaleria[galIndex], title, description, category, image: finalImage };
+                            const editId = document.getElementById('edit-id-acoes').value;
+                            const context = document.getElementById('modal-context') ? document.getElementById('modal-context').value : 'acoes';
+                            
+                            // 1. Upload Capa
+                            let finalImage = currentBase64Image;
+                            const actionImageInput = document.getElementById('action-image-input');
+                            if (actionImageInput.files && actionImageInput.files.length > 0) {
+                                finalImage = await uploadFile(actionImageInput.files[0]);
                             }
-                        } else {
-                            finalImage = isPlaceholder ? 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80' : currentBase64Image;
-                            const newId = Date.now();
-                            adminAcoes.unshift({ 
-                                id: newId, 
-                                category, 
-                                date, 
-                                title, 
-                                description, 
-                                image: finalImage,
-                                fotoCapa: finalImage,
-                                galeria: [...currentActionGallery]
-                            });
-                            adminGaleria.unshift({ id: newId, type: 'foto', title, description, category, image: finalImage });
-                        }
 
-                        safeStorageSetItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
-                        safeStorageSetItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
-                        
-                        renderAdminAcoes();
-                        renderAdminGaleria();
-                        modal.classList.add('hidden');
-                        if(removeImageBtn) removeImageBtn.click(); // Reseta o estado do uploader
-                        currentActionGallery = [];
-                        renderGalleryThumbnails();
+                            // 2. Upload Galeria
+                            const actionGalleryInput = document.getElementById('action-gallery-input');
+                            let uploadedGalleryPaths = [];
+                            if (actionGalleryInput.files && actionGalleryInput.files.length > 0) {
+                                const validMedia = Array.from(actionGalleryInput.files).filter(f => f.type.startsWith('image/') || f.type.startsWith('video/'));
+                                uploadedGalleryPaths = await Promise.all(validMedia.map(file => uploadFile(file)));
+                            }
+                            const finalGallery = [...currentActionGallery.filter(p => !p.startsWith("data:")), ...uploadedGalleryPaths];
+                            
+                            const isPlaceholder = finalImage.includes('unsplash.com');
+
+                            if (editId) {
+                                const isGaleria = context === 'galeria';
+                                
+                                if (!isGaleria) {
+                                    const acaoIndex = adminAcoes.findIndex(item => item.id == editId);
+                                    if (acaoIndex > -1) {
+                                        const oldImage = adminAcoes[acaoIndex].image || adminAcoes[acaoIndex].imagem || adminAcoes[acaoIndex].fotoCapa;
+                                        finalImage = (isPlaceholder && oldImage) ? oldImage : finalImage;
+                                        adminAcoes[acaoIndex] = { 
+                                            ...adminAcoes[acaoIndex], category, date, title, description, 
+                                            image: finalImage, fotoCapa: finalImage, galeria: finalGallery
+                                        };
+                                    }
+                                } else {
+                                    const galIndex = adminGaleria.findIndex(item => item.id == editId);
+                                    if (galIndex > -1) {
+                                        const oldImage = adminGaleria[galIndex].image;
+                                        finalImage = (isPlaceholder && oldImage) ? oldImage : finalImage;
+                                        adminGaleria[galIndex] = { ...adminGaleria[galIndex], title, description, category, image: finalImage, type: finalImage.toLowerCase().endsWith('.mp4') ? 'video' : 'foto' };
+                                    }
+                                }
+                            } else {
+                                finalImage = isPlaceholder ? '' : finalImage;
+                                const newId = Date.now();
+                                
+                                if (context === 'acoes') {
+                                    adminAcoes.unshift({ 
+                                        id: newId, category, date, title, description, 
+                                        image: finalImage, fotoCapa: finalImage, galeria: finalGallery
+                                    });
+                                } else if (context === 'galeria') {
+                                    adminGaleria.unshift({ 
+                                        id: newId, type: finalImage.toLowerCase().endsWith('.mp4') ? 'video' : 'foto', 
+                                        title, description, category, image: finalImage 
+                                    });
+                                }
+                            }
+
+                            // 3. Salvar no servidor (api.php)
+                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                            
+                            renderAdminAcoes();
+                            renderAdminGaleria();
+                            modal.classList.add('hidden');
+                            if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click();
+                            currentActionGallery = [];
+                            actionGalleryInput.value = '';
+                            renderGalleryThumbnails();
+                            
+                            alert('Ação salva e publicada com sucesso!');
+                        } catch (err) {
+                            alert('Erro durante o salvamento: ' + err.message);
+                        } finally {
+                            btn.innerText = 'Salvar e Publicar';
+                            btn.disabled = false;
+                        }
                     });
                 }
                 
@@ -1758,7 +1843,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             window.deleteSaudeItem = function(id) {
                 if (confirm('Deseja realmente remover este serviço de saúde?')) {
                     adminServicosSaude = adminServicosSaude.filter(i => i.id != id);
-                    safeStorageSetItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
                     renderAdminSaude();
                 }
             };
@@ -1766,57 +1851,56 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             // Salvar Serviço de Saúde
             const btnSalvarSaude = document.getElementById('btn-salvar-saude');
             if (btnSalvarSaude) {
-                btnSalvarSaude.addEventListener('click', function() {
-                    const titulo = document.getElementById('input-saude-titulo').value.trim();
-                    const descCurta = document.getElementById('input-saude-descricao-curta').value.trim();
-                    const descCompleta = document.getElementById('input-saude-descricao-completa').value.trim();
+                btnSalvarSaude.addEventListener('click', async function() {
+                    const id = document.getElementById('edit-id-saude').value;
+                    const titulo = document.getElementById('input-saude-titulo').value;
+                    const icone = document.getElementById('input-saude-icone').value;
+                    const descCurta = document.getElementById('input-saude-descricao-curta').value;
+                    const descComp = document.getElementById('input-saude-descricao-completa').value;
+                    const local = document.getElementById('input-saude-local').value;
+                    const horario = document.getElementById('input-saude-horario').value;
+                    const publico = document.getElementById('input-saude-publico').value;
+                    const docs = document.getElementById('input-saude-documentos').value;
 
-                    if (!titulo || !descCurta || !descCompleta) {
-                        alert('Por favor, preencha os campos obrigatórios: Título, Descrição Curta e Descrição Completa.');
+                    if(!titulo || !icone || !descCurta || !descComp) {
+                        alert('Preencha os campos obrigatórios (*)');
                         return;
                     }
 
-                    const editId = document.getElementById('edit-id-saude').value;
-                    const icone = document.getElementById('input-saude-icone').value;
-                    const local = document.getElementById('input-saude-local').value.trim();
-                    const horario = document.getElementById('input-saude-horario').value.trim();
-                    const publico = document.getElementById('input-saude-publico').value.trim();
-                    const documentos = document.getElementById('input-saude-documentos').value.trim();
+                    try {
+                        btnSalvarSaude.innerText = 'Salvando...';
+                        btnSalvarSaude.disabled = true;
 
-                    if (editId) {
-                        const index = adminServicosSaude.findIndex(i => i.id == editId);
-                        if (index > -1) {
-                            adminServicosSaude[index] = {
-                                ...adminServicosSaude[index],
-                                titulo,
-                                icone,
-                                descricaoCurta: descCurta,
-                                descricaoCompleta: descCompleta,
-                                local,
-                                horario,
-                                publico,
-                                documentos,
-                                imagem: currentSaudeImage
-                            };
+                        let finalImage = currentSaudeImage;
+                        const inputSaudeImagemFile = document.getElementById('input-saude-imagem-file');
+                        if (inputSaudeImagemFile.files && inputSaudeImagemFile.files.length > 0) {
+                            finalImage = await uploadFile(inputSaudeImagemFile.files[0]);
                         }
-                    } else {
-                        adminServicosSaude.unshift({
-                            id: Date.now(),
-                            titulo,
-                            icone,
-                            descricaoCurta: descCurta,
-                            descricaoCompleta: descCompleta,
-                            local,
-                            horario,
-                            publico,
-                            documentos,
-                            imagem: currentSaudeImage
-                        });
-                    }
 
-                    safeStorageSetItem('sec_mulher_saude', JSON.stringify(adminServicosSaude));
-                    renderAdminSaude();
-                    document.getElementById('modal-saude').classList.add('hidden');
+                        const isPlaceholder = finalImage.includes('unsplash.com') || finalImage === '';
+
+                        if (id) {
+                            const idx = adminServicosSaude.findIndex(s => s.id == id);
+                            if (idx > -1) {
+                                const oldImage = adminServicosSaude[idx].imagem;
+                                finalImage = (isPlaceholder && oldImage) ? oldImage : (isPlaceholder ? '' : finalImage);
+                                adminServicosSaude[idx] = { ...adminServicosSaude[idx], titulo, icone, descricaoCurta: descCurta, descricaoCompleta: descComp, local, horario, publicoAlvo: publico, documentos: docs, imagem: finalImage };
+                            }
+                        } else {
+                            finalImage = isPlaceholder ? '' : finalImage;
+                            adminServicosSaude.push({ id: Date.now(), titulo, icone, descricaoCurta: descCurta, descricaoCompleta: descComp, local, horario, publicoAlvo: publico, documentos: docs, imagem: finalImage });
+                        }
+
+                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                        renderAdminSaude();
+                        document.getElementById('modal-saude').classList.add('hidden');
+                        alert('Serviço de saúde salvo com sucesso!');
+                    } catch (e) {
+                        alert('Erro ao salvar Saúde: ' + e.message);
+                    } finally {
+                        btnSalvarSaude.innerText = 'Salvar Serviço';
+                        btnSalvarSaude.disabled = false;
+                    }
                 });
             }
 
@@ -1824,15 +1908,15 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             window.deleteItem = function(id, type) {
                 if(type === 'acoes') {
                     adminAcoes = adminAcoes.filter(i => i.id != id);
-                    safeStorageSetItem('sec_mulher_acoes', JSON.stringify(adminAcoes));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
                     renderAdminAcoes();
                 } else if(type === 'galeria') {
                     adminGaleria = adminGaleria.filter(i => i.id != id);
-                    safeStorageSetItem('sec_mulher_galeria', JSON.stringify(adminGaleria));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
                     renderAdminGaleria();
                 } else if(type === 'agenda') {
                     adminAgenda = adminAgenda.filter(i => i.id != id);
-                    safeStorageSetItem('sec_mulher_agenda', JSON.stringify(adminAgenda));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
                     renderAdminAgenda();
                 }
             }
@@ -1938,7 +2022,17 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         currentActionGallery = Array.isArray(item.galeria) ? [...item.galeria] : [];
                         renderGalleryThumbnails();
 
-                        modal.querySelector('h3').innerText = "Editar Ação";
+                        modal.querySelector('h3').innerText = isGallery ? "Editar Vídeo" : "Editar Ação"; 
+                        document.getElementById('modal-context').value = isGallery ? "galeria" : "acoes";
+                        if (isGallery) {
+                            document.getElementById('label-capa-midia').innerText = 'Arquivo de Mídia (Vídeo)';
+                            document.getElementById('upload-placeholder-text').innerText = 'Clique ou arraste um vídeo';
+                            document.getElementById('galeria-adicional-wrapper').classList.add('hidden');
+                        } else {
+                            document.getElementById('label-capa-midia').innerText = 'Mídia da Capa (Foto ou Vídeo)';
+                            document.getElementById('upload-placeholder-text').innerText = 'Clique ou arraste uma imagem/vídeo';
+                            document.getElementById('galeria-adicional-wrapper').classList.remove('hidden');
+                        }
                         modal.classList.remove('hidden');
                     }
                 }
@@ -1993,6 +2087,26 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             if (nameEl) nameEl.textContent = usuario;
             if (roleEl) roleEl.textContent = 'Gestor Institucional';
         })();
+
+
+        async function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            try {
+                const response = await fetch('api.php?upload=1', {
+                    method: 'POST',
+                    headers: { 'X-CSRF-Token': csrfToken },
+                    body: formData
+                });
+                const res = await response.json();
+                if (res.status === "success") return res.path;
+                throw new Error(res.message || 'Erro no upload.');
+            } catch (e) {
+                console.error("Erro de upload:", e);
+                throw e;
+            }
+        }
 
         // ── Logout: limpa ambos os storages e redireciona para login ───
         function fazerLogout() {

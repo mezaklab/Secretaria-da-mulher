@@ -621,55 +621,7 @@
                 </div>
             </div>
 
-            <div id="acoes-container" class="carousel-container flex overflow-x-auto gap-6 lg:gap-8 mt-10 pb-4 snap-x snap-mandatory cursor-grab scroll-smooth">
-                <!-- Card 1: Saúde -->
-                <div data-key="acao-${idx}" class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start relative z-20 bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({ titulo: 'Palestra sobre prevenção e cuidados', descricao: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Saúde e Bem-estar', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/1'+i+'/800/600') })">
-                    <div>
-                    <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80" alt="Ação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-xs font-semibold text-purple-600 block mb-1">24 Out 2024</span>
-                    <div class="flex flex-col items-start md:flex-row md:items-center justify-between gap-3 mb-2">
-                        <h3 class="text-xl font-bold text-slate-800 line-clamp-2">Palestra sobre prevenção e cuidados</h3>
-                        <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10 shrink-0 min-w-max whitespace-nowrap">Saúde e Bem-estar</span>
-                    </div>
-                    <p class="text-slate-600 text-sm line-clamp-3 mb-6">Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.</p>
-                    </div>
-                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto" onclick="event.stopPropagation(); openMediaModal({ titulo: 'Palestra sobre prevenção e cuidados', descricao: 'Uma tarde dedicada a orientações preventivas com especialistas, focando na saúde integral da mulher.', imagem: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80', categoria: 'Saúde e Bem-estar', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/1'+i+'/800/600') })">Ver fotos</button>
-                </div>
-
-                <!-- Card 2: Apoio Jurídico -->
-                <div data-key="acao-${idx}" class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start relative z-20 bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({ titulo: 'Mutirão de Documentação', descricao: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Apoio Jurídico', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/2'+i+'/800/600') })">
-                    <div>
-                    <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80" alt="Ação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-xs font-semibold text-purple-600 block mb-1">15 Out 2024</span>
-                    <div class="flex flex-col items-start md:flex-row md:items-center justify-between gap-3 mb-2">
-                        <h3 class="text-xl font-bold text-slate-800 line-clamp-2">Mutirão de Documentação</h3>
-                        <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10 shrink-0 min-w-max whitespace-nowrap">Apoio Jurídico</span>
-                    </div>
-                    <p class="text-slate-600 text-sm line-clamp-3 mb-6">Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.</p>
-                    </div>
-                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto" onclick="event.stopPropagation(); openMediaModal({ titulo: 'Mutirão de Documentação', descricao: 'Ação para emissão gratuita de documentos e orientação legal para mulheres da comunidade rural.', imagem: 'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80', categoria: 'Apoio Jurídico', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/2'+i+'/800/600') })">Ver fotos</button>
-                </div>
-
-                <!-- Card 3: Ações Comunitárias -->
-                <div data-key="acao-${idx}" class="w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start relative z-20 bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300" onclick="openMediaModal({ titulo: 'Caminhada Agosto Lilás', descricao: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Ações Comunitárias & Rua', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/3'+i+'/800/600') })">
-                    <div>
-                    <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="Ação" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <span class="text-xs font-semibold text-purple-600 block mb-1">01 Set 2026</span>
-                    <div class="flex flex-col items-start md:flex-row md:items-center justify-between gap-3 mb-2">
-                        <h3 class="text-xl font-bold text-slate-800 line-clamp-2">Caminhada Agosto Lilás</h3>
-                        <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10 shrink-0 min-w-max whitespace-nowrap">Ações Comunitárias & Rua</span>
-                    </div>
-                    <p class="text-slate-600 text-sm line-clamp-3 mb-6">Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.</p>
-                    </div>
-                    <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto" onclick="event.stopPropagation(); openMediaModal({ titulo: 'Caminhada Agosto Lilás', descricao: 'Mobilização e conscientização nas ruas pelo fim da violência e garantia dos direitos.', imagem: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80', categoria: 'Ações Comunitárias & Rua', galeria: Array.from({length:30}, (_,i)=>'https://picsum.photos/seed/3'+i+'/800/600') })">Ver fotos</button>
-                </div>
-            </div>
+            <div id="acoes-container" class="carousel-container flex overflow-x-auto gap-6 lg:gap-8 mt-10 pb-4 snap-x snap-mandatory cursor-grab scroll-smooth"></div>
         </div>
     </section>
 
@@ -887,7 +839,7 @@
                 </div>
 
                 <!-- Grid Responsivo de Fotos -->
-                <div id="caninde-delas-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+                <div id="caninde-delas-grid" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 lg:grid lg:grid-cols-4 lg:overflow-visible lg:gap-5 pb-4 lg:pb-0">
                     <!-- Foto 1 -->
                     <div class="relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60" onclick="openCanindeDelasGallery(0)">
                         <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80" alt="Canindé + Delas 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95">
@@ -924,12 +876,7 @@
                             </span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Direitos e Apoio -->
+                </div></div></div></section><!-- Direitos e Apoio -->
     <section id="direitos" class="py-24 bg-transparent relative">
         <!-- Flor 2 (Recorte Direito) -->
         <div class="w-28 h-56 overflow-hidden absolute bottom-10 right-8 pointer-events-none z-0 hidden md:block select-none bg-transparent">
@@ -986,12 +933,7 @@
                         <p class="font-sans text-brand-textMuted text-lg mb-4">Cursos e apoio ao empreendedorismo feminino. Para você construir sua própria renda e ser dona do seu destino.</p>
                         <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Ver cursos <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Galeria -->
+                </div></div></div></section><!-- Galeria -->
     <section id="galeria" class="py-16 max-w-7xl mx-auto px-6 lg:px-8 relative z-20" style="isolation: isolate;">
         <div class="flex flex-col md:flex-row justify-between md:items-start mb-12 gap-6">
             <div>
@@ -1063,20 +1005,25 @@
         <span>Nossas oficinas</span>
         <span class="bg-black/40 px-2 py-0.5 rounded-full">03:10</span>
       </div>
-    </div>
-  </div>
-</div>
-    </section>
-
-    <!-- Agenda -->
+    </div></div></div></section><!-- Agenda -->
     <section id="agenda" class="py-24 max-w-4xl mx-auto px-6 lg:px-8 relative overflow-visible">
 
-        <div class="text-center mb-16 relative z-10">
-            <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Nossa agenda perto de você</h2>
-            <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">Programe-se e não perca os mutirões, palestras e serviços da Secretaria no seu bairro.</p>
+        <div class="flex flex-col md:flex-row justify-between md:items-end mb-12 gap-6 text-center md:text-left relative z-10">
+            <div>
+                <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Nossa agenda perto de você</h2>
+                <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto md:mx-0">Programe-se e não perca os mutirões, palestras e serviços da Secretaria no seu bairro.</p>
+            </div>
+            <div class="flex justify-center md:justify-end gap-4 shrink-0 hidden" id="agenda-nav-buttons">
+                <button id="prevAgendaBtn" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextAgendaBtn" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border border-brand-cardBorder text-brand-primary flex items-center justify-center hover:bg-brand-iconBg transition-colors shadow-sm focus:outline-none">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
         
-        <div id="agenda-container" class="carousel-container flex overflow-x-auto md:overflow-visible flex-row md:flex-col gap-6 relative z-10 snap-x snap-mandatory md:snap-none scroll-pl-6 sm:scroll-pl-8 md:scroll-pl-0 px-6 -mx-6 sm:px-8 sm:-mx-8 md:px-0 md:mx-0 hide-scrollbar pb-4 md:pb-0">
+        <div id="agenda-container" class="carousel-container flex overflow-x-auto flex-row md:grid md:grid-rows-3 md:grid-flow-col md:auto-cols-[100%] gap-6 relative z-10 snap-x snap-mandatory scroll-pl-6 sm:scroll-pl-8 md:scroll-pl-0 px-6 -mx-6 sm:px-8 sm:-mx-8 md:px-0 md:mx-0 hide-scrollbar pb-4 md:pb-0">
             <div class="flex-none snap-start w-[85vw] md:w-auto flex flex-col md:flex-row p-6 md:p-8 bg-white border border-brand-cardBorder rounded-[2rem] gap-6 items-center md:items-start text-center md:text-left shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                 <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
                     <span class="font-display text-4xl leading-none">20</span>
@@ -1120,12 +1067,7 @@
                     <span class="inline-block px-5 py-2.5 whitespace-nowrap shrink-0 bg-yellow-100 text-yellow-700 rounded-full font-bold text-sm tracking-wide border border-yellow-200">
                         Confirmado
                     </span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Elegante -->
+                </div></div></div></section><!-- Footer Elegante -->
     <footer id="contato" class="bg-brand-textDark text-white mt-12 rounded-t-[3rem] pt-20 pb-10 relative z-30 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-16">
@@ -1214,38 +1156,31 @@
 
     <!-- DADOS E LÓGICA JS -->
     <script>
-        
-        function escapeHTML(str) {
-            if (typeof str !== 'string') return str;
-            return str.replace(/[&<>"']/g, function(match) {
-                const escape = {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#39;'
-                };
-                return escape[match];
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             // Função centralizada de leitura — SEMPRE lê do localStorage na hora certa
             function loadAndRender() {
                 let acoesRaw = null, galeriaRaw = null, agendaRaw = null, saudeRaw = null, canindeRaw = null;
-                try { acoesRaw   = JSON.parse(localStorage.getItem('sec_mulher_acoes'));   } catch(e) {}
-                try { galeriaRaw = JSON.parse(localStorage.getItem('sec_mulher_galeria')); } catch(e) {}
-                try { agendaRaw  = JSON.parse(localStorage.getItem('sec_mulher_agenda'));  } catch(e) {}
-                try { saudeRaw   = JSON.parse(localStorage.getItem('sec_mulher_saude'));   } catch(e) {}
-                try { canindeRaw = JSON.parse(localStorage.getItem('sec_mulher_caninde_delas')); } catch(e) {}
-
-                // Só renderiza dinamicamente se houver dados reais no localStorage.
-                // Se localStorage vazio/nulo → o HTML estático (fallback) permanece visível.
-                if (Array.isArray(acoesRaw)   && acoesRaw.length   > 0) renderAcoes(acoesRaw);
-                if (Array.isArray(galeriaRaw) && galeriaRaw.length > 0) renderGaleria(galeriaRaw);
-                if (Array.isArray(agendaRaw)  && agendaRaw.length  > 0) renderAgenda(agendaRaw);
-                if (Array.isArray(saudeRaw)   && saudeRaw.length   > 0) renderSaude(saudeRaw);
-                if (canindeRaw && typeof canindeRaw === 'object') renderCanindeDelas(canindeRaw);
+                fetch('api.php')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.acoes && Array.isArray(data.acoes)) renderAcoes(data.acoes);
+                        if (data.galeria && Array.isArray(data.galeria)) renderGaleria(data.galeria);
+                        if (data.agenda && Array.isArray(data.agenda)) {
+                            const updatedAgenda = data.agenda.map(item => {
+                                if (item.status === 'Confirmado' && item.fullDate) {
+                                    const eventDate = new Date(item.fullDate + 'T23:59:59');
+                                    if (new Date() > eventDate) {
+                                        item.status = 'Realizado';
+                                    }
+                                }
+                                return item;
+                            });
+                            renderAgenda(updatedAgenda);
+                        }
+                        if (data.saude && Array.isArray(data.saude)) renderSaude(data.saude);
+                        if (data.canindeDelas && typeof data.canindeDelas === 'object') renderCanindeDelas(data.canindeDelas);
+                    })
+                    .catch(e => console.error("Erro ao carregar da API:", e));
             }
 
             loadAndRender();
@@ -1286,12 +1221,7 @@
         });
 
         // Controle de fotos do Canindé + Delas para Lightbox
-        let canindeDelasPhotosList = [
-            'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80',
-            'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80',
-            'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
-            'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80'
-        ];
+        let canindeDelasPhotosList = [];
 
         function renderCanindeDelas(data) {
             if (!data) return;
@@ -1309,8 +1239,8 @@
 
             function formatarParagrafos(texto) {
                 const arr = texto.split('\n').filter(p => p.trim());
-                if (arr.length > 0) return arr.map(p => `<p>${escapeHTML(p)}</p>`).join(\'\');
-                return `<p>${escapeHTML(texto)}</p>`;
+                if (arr.length > 0) return arr.map(p => `<p>${p}</p>`).join('');
+                return `<p>${texto}</p>`;
             }
 
             if (descricaoEl && data.descricao) {
@@ -1323,22 +1253,46 @@
                 empDescricaoEl.innerHTML = formatarParagrafos(data.empreenderDescricao);
             }
 
-            if (Array.isArray(data.fotos) && data.fotos.length > 0) {
+            if (Array.isArray(data.fotos)) {
                 canindeDelasPhotosList = [...data.fotos];
                 if (countBadge) {
-                    countBadge.innerText = `${canindeDelasPhotosList.length} Mídia${canindeDelasPhotosList.length > 1 ? 's' : ''} do Projeto`;
+                    countBadge.innerText = `${canindeDelasPhotosList.length} Mídia${canindeDelasPhotosList.length !== 1 ? 's' : ''} do Projeto`;
                 }
 
                 if (gridEl) {
                     gridEl.innerHTML = '';
-                    canindeDelasPhotosList.forEach((foto, idx) => {
-                        const isVid = typeof isUrlVideo === 'function' ? isUrlVideo(foto) : (foto.startsWith('data:video/') || foto.match(/\.(mp4|webm|ogg)$/i));
+                    if(canindeDelasPhotosList.length === 0) {
+                        gridEl.innerHTML = '<div class="col-span-full py-8 text-center text-slate-400 text-sm">Nenhuma foto adicionada ao projeto ainda.</div>';
+                    }
+                    // Pega apenas as 4 primeiras fotos para exibir na vitrine
+                    const fotosParaExibir = canindeDelasPhotosList.slice(0, 4);
+                    
+                    // Mostra o botão "Ver galeria" apenas se tiver mais de 4 fotos ou se quisermos mostrar sempre
+                    let btnContainer = document.getElementById('caninde-delas-btn-container');
+                    if (!btnContainer) {
+                        btnContainer = document.createElement('div');
+                        btnContainer.id = 'caninde-delas-btn-container';
+                        btnContainer.className = 'mt-8 flex justify-center w-full col-span-full';
+                        btnContainer.innerHTML = `<button type="button" onclick="window.openCanindeDelasGallery(0)" class="bg-purple-100 hover:bg-brand-primary text-brand-primary hover:text-white px-6 py-2.5 rounded-full font-bold transition-all text-sm flex items-center gap-2 shadow-sm border border-purple-200 hover:border-transparent cursor-pointer"><i class="fas fa-images"></i> Ver galeria completa</button>`;
+                        gridEl.parentNode.appendChild(btnContainer);
+                    }
+                    btnContainer.classList.remove('hidden');
+                    
+                    // Se estiver no mobile, a classe flex container não permite usar col-span, mas o flex justify-center cuida disso.
+                    // Para ficar perfeito fora do carrossel, melhor inserir o container APÓS o gridEl se ele não existir
+                    if (btnContainer.parentNode === gridEl.parentNode) {
+                        gridEl.parentNode.insertBefore(btnContainer, gridEl.nextSibling);
+                    }
+
+                    fotosParaExibir.forEach((foto, idx) => {
+                        const isVid = typeof isUrlVideo === 'function' ? isUrlVideo(foto) : (foto && foto.toLowerCase().endsWith('.mp4'));
                         const mediaTag = isVid 
-                            ? `<video src="${escapeHTML(foto)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" muted></video>` 
-                            : `<img src="${escapeHTML(foto)}" alt="Canindé + Delas ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">`;
+                            ? `<video src="${foto}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" muted playsinline preload="metadata"></video>` 
+                            : `<img src="${foto}" alt="Canindé + Delas ${idx + 1}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95" onerror="this.style.display='none'">`;
                         
                         const thumb = document.createElement('div');
-                        thumb.className = 'relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60 shrink-0';
+                        // No responsivo, shrink-0 w-4/5 snap-start faz o card ter 80% da tela para o carrossel, no LG vira grid-cols-4
+                        thumb.className = 'relative rounded-3xl overflow-hidden aspect-[4/5] sm:aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60 shrink-0 w-[85%] sm:w-[45%] lg:w-auto snap-start';
                         thumb.onclick = () => window.openCanindeDelasGallery ? window.openCanindeDelasGallery(idx) : null;
                         thumb.innerHTML = `
                             ${mediaTag}
@@ -1390,10 +1344,10 @@
 
                 el.innerHTML = `
                     <div class="w-20 h-20 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center mb-6 group-hover:bg-purple-100 group-hover:scale-110 transition-all duration-300">
-                        <i class="fas ${escapeHTML(iconeClass)} text-3xl"></i>
+                        <i class="fas ${iconeClass} text-3xl"></i>
                     </div>
-                    <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">${escapeHTML(titulo)}</h3>
-                    <p class="font-sans text-brand-textMuted text-lg mb-6">${escapeHTML(descCurta)}</p>
+                    <h3 class="font-display text-2xl text-brand-textDark mb-3 group-hover:text-brand-primary transition-colors">${titulo}</h3>
+                    <p class="font-sans text-brand-textMuted text-lg mb-6">${descCurta}</p>
                     <span class="mt-auto inline-flex items-center text-brand-primary font-bold text-sm group-hover:underline">
                         Ver detalhes do atendimento <i class="fas fa-arrow-right ml-2 text-xs transition-transform group-hover:translate-x-1"></i>
                     </span>
@@ -1423,11 +1377,11 @@
                     ${imagem ? `
                     <!-- Coluna da Foto (quando houver imagem) -->
                     <div class="lg:w-5/12 p-0 relative bg-slate-950 flex flex-col justify-center min-h-[260px] lg:min-h-[480px]">
-                        <img src="${escapeHTML(imagem)}" class="w-full h-full object-cover" alt="${escapeHTML(titulo)}">
+                        <img src="${imagem}" class="w-full h-full object-cover" alt="${titulo}">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 rounded-full bg-white/90 text-brand-primary flex items-center justify-center text-xl shadow-lg">
-                                    <i class="fas ${escapeHTML(icone)}"></i>
+                                    <i class="fas ${icone}"></i>
                                 </div>
                                 <span class="text-white font-display font-bold text-lg">${titulo}</span>
                             </div>
@@ -1441,21 +1395,21 @@
                             <!-- Header do Serviço -->
                             <div class="flex items-center gap-4 mb-6">
                                 <div class="w-14 h-14 rounded-2xl bg-purple-100 text-brand-primary flex items-center justify-center text-2xl shrink-0 shadow-sm">
-                                    <i class="fas ${escapeHTML(icone)}"></i>
+                                    <i class="fas ${icone}"></i>
                                 </div>
                                 <div>
                                     <div class="flex items-center gap-2">
                                         <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
                                         <span class="text-xs font-bold uppercase tracking-wider text-purple-700">Saúde Preventiva Municipal</span>
                                     </div>
-                                    <h3 class="font-display text-2xl lg:text-3xl font-extrabold text-brand-textDark leading-tight mt-1">${escapeHTML(titulo)}</h3>
+                                    <h3 class="font-display text-2xl lg:text-3xl font-extrabold text-brand-textDark leading-tight mt-1">${titulo}</h3>
                                 </div>
                             </div>
 
                             <!-- Descrição Completa -->
                             <div class="mb-8">
                                 <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 font-display">Sobre o Serviço</h4>
-                                <p class="font-sans text-slate-700 text-base lg:text-lg leading-relaxed bg-purple-50/50 p-5 rounded-2xl border border-purple-100/60">${escapeHTML(descCompleta)}</p>
+                                <p class="font-sans text-slate-700 text-base lg:text-lg leading-relaxed bg-purple-50/50 p-5 rounded-2xl border border-purple-100/60">${descCompleta}</p>
                             </div>
 
                             <!-- Grid com Informações Práticas -->
@@ -1467,7 +1421,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Onde Realizar</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(local)}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${local}</p>
                                     </div>
                                 </div>
 
@@ -1478,7 +1432,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Horários de Atendimento</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(horario)}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${horario}</p>
                                     </div>
                                 </div>
 
@@ -1489,7 +1443,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Público-Alvo</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(publico)}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${publico}</p>
                                     </div>
                                 </div>
 
@@ -1500,7 +1454,7 @@
                                     </div>
                                     <div>
                                         <h5 class="text-xs font-bold uppercase tracking-wider text-gray-500">Documentos Necessários</h5>
-                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${escapeHTML(documentos)}</p>
+                                        <p class="text-sm font-semibold text-gray-800 mt-0.5 leading-snug">${documentos}</p>
                                     </div>
                                 </div>
                             </div>
@@ -1538,11 +1492,8 @@
                 const category = acao.category    || acao.categoria || 'Ação';
                 const date     = acao.date        || '';
 
-                // Suporte para múltiplas fotos: usa a galeria real ou injeta 30 de demonstração se não existir
+                // Suporte para múltiplas fotos: usa a galeria real sem injetar fotos genéricas
                 let galeriaArr = Array.isArray(acao.galeria) ? acao.galeria : (Array.isArray(acao.gallery) ? acao.gallery : []);
-                if (galeriaArr.length === 0) {
-                    galeriaArr = Array.from({length: 30}, (_, i) => `https://picsum.photos/seed/${encodeURIComponent((title || 'acao') + i)}/800/600`);
-                }
                 const galeriaJson = JSON.stringify(galeriaArr).replace(/"/g, '&quot;');
 
                 const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
@@ -1552,14 +1503,16 @@
                 el.innerHTML = `
                     <div onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\`, galeria: ${galeriaJson} })'>
                         <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
-                            <img src="${escapeHTML(image)}" alt="${escapeHTML(safe(title))}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
+                            ${image && image.toLowerCase().endsWith('.mp4') 
+    ? `<video src="${image}" muted playsinline preload="metadata" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></video>` 
+    : `<img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'">`}
                         </div>
-                        <span class="text-xs font-semibold text-purple-600 block mb-1">${escapeHTML(date)}</span>
+                        <span class="text-xs font-semibold text-purple-600 block mb-1">${date}</span>
                         <div class="flex flex-col items-start md:flex-row md:items-center justify-between gap-3 mb-2">
-                            <h3 class="text-xl font-bold text-slate-800 line-clamp-2">${escapeHTML(title)}</h3>
-                            <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10 shrink-0 min-w-max whitespace-nowrap">${escapeHTML(category)}</span>
+                            <h3 class="text-xl font-bold text-slate-800 line-clamp-2">${title}</h3>
+                            <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full z-10 shrink-0 min-w-max whitespace-nowrap">${category}</span>
                         </div>
-                        <p class="text-slate-600 text-sm line-clamp-3 mb-6 leading-relaxed">${escapeHTML(desc)}</p>
+                        <p class="text-slate-600 text-sm line-clamp-3 mb-6 leading-relaxed">${desc}</p>
                     </div>
                     <button class="w-full py-3 rounded-full border border-purple-600 text-purple-700 font-semibold hover:bg-purple-600 hover:text-white transition-all mt-auto"
                         onclick='openMediaModal({ titulo: \`${safe(title)}\`, descricao: \`${safe(desc)}\`, imagem: \`${safe(image)}\`, categoria: \`${safe(category)}\`, galeria: ${galeriaJson} })'>
@@ -1591,15 +1544,16 @@
                 el.onclick = () => openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
 
                 el.innerHTML = `
-                    <img src="${escapeHTML(image)}" alt="${escapeHTML(safe(title))}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
-                        onerror="this.src='https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'">
+                    ${image && image.toLowerCase().endsWith('.mp4') 
+    ? `<video src="${image}" muted playsinline preload="metadata" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"></video>` 
+    : `<img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90" onerror="this.style.display='none'">`}
                     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4 pointer-events-none">
                         <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                             <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                         <div class="flex items-center justify-between text-white text-xs font-semibold">
-                            <span class="line-clamp-1">${escapeHTML(safe(title))}</span>
-                            ${duration ? `<span class="bg-black/40 px-2 py-0.5 rounded-full ml-2 shrink-0">${escapeHTML(duration)}</span>` : ''}
+                            <span class="line-clamp-1">${safe(title)}</span>
+                            ${duration ? `<span class="bg-black/40 px-2 py-0.5 rounded-full ml-2 shrink-0">${duration}</span>` : ''}
                         </div>
                     </div>
                 `;
@@ -1623,23 +1577,23 @@
 
                 el.innerHTML = `
                     <div class="shrink-0 flex flex-col items-center justify-center w-24 h-24 bg-brand-iconBg rounded-2xl text-brand-primary shadow-sm border border-brand-cardBorder">
-                        <span class="font-display text-4xl leading-none">${escapeHTML(item.date || \'\')}</span>
-                        <span class="font-display text-lg font-bold">${escapeHTML(item.month || \'\')}</span>
+                        <span class="font-display text-4xl leading-none">${item.date || ''}</span>
+                        <span class="font-display text-lg font-bold">${item.month || ''}</span>
                     </div>
                     <div class="flex-grow flex flex-col justify-center">
-                        <h4 class="font-display text-2xl text-brand-textDark mb-3">${escapeHTML(item.title || \'\')}</h4>
+                        <h4 class="font-display text-2xl text-brand-textDark mb-3">${item.title || ''}</h4>
                         <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                             ${item.time ? `<span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder whitespace-nowrap shrink-0 w-fit mx-auto sm:mx-0">
-                                <i class="fas fa-clock mr-2 text-brand-secondary"></i>${escapeHTML(item.time)}
+                                <i class="fas fa-clock mr-2 text-brand-secondary"></i>${item.time}
                             </span>` : ''}
                             ${item.location ? `<span class="inline-flex items-center text-base font-sans font-bold bg-brand-iconBg text-brand-primary px-4 py-2 rounded-full border border-brand-cardBorder whitespace-nowrap shrink-0 w-fit mx-auto sm:mx-0">
-                                <i class="fas fa-map-marker-alt mr-2 text-brand-secondary"></i>${escapeHTML(item.location)}
+                                <i class="fas fa-map-marker-alt mr-2 text-brand-secondary"></i>${item.location}
                             </span>` : ''}
                         </div>
                     </div>
                     <div class="flex flex-col justify-center shrink-0">
                         <span class="inline-block px-5 py-2.5 whitespace-nowrap shrink-0 rounded-full font-bold text-sm tracking-wide border ${colorClass}">
-                            ${escapeHTML(item.status || \'Pendente\')}
+                            ${item.status || 'Pendente'}
                         </span>
                     </div>
                 `;
@@ -1738,6 +1692,31 @@
                     carouselCaninde.scrollTo({ left: newIndex * snapDistance, behavior: 'smooth' }); 
                 });
             }
+
+            const agendaContainer = document.getElementById('agenda-container');
+            const prevAgendaBtn = document.getElementById('prevAgendaBtn');
+            const nextAgendaBtn = document.getElementById('nextAgendaBtn');
+            const navButtons = document.getElementById('agenda-nav-buttons');
+            
+            if (agendaContainer && prevAgendaBtn && nextAgendaBtn) {
+                prevAgendaBtn.addEventListener('click', () => agendaContainer.scrollBy({ left: -agendaContainer.clientWidth, behavior: 'smooth' }));
+                nextAgendaBtn.addEventListener('click', () => agendaContainer.scrollBy({ left: agendaContainer.clientWidth, behavior: 'smooth' }));
+                
+                // Show buttons if there are more than 3 items on desktop
+                const checkAgendaScroll = () => {
+                    if (window.innerWidth >= 768 && agendaContainer.children.length > 3) {
+                        if (navButtons) navButtons.classList.remove('hidden');
+                    } else {
+                        if (navButtons) navButtons.classList.add('hidden');
+                    }
+                };
+                checkAgendaScroll();
+                
+                // MutationObserver to watch for agenda updates
+                const observer = new MutationObserver(checkAgendaScroll);
+                observer.observe(agendaContainer, { childList: true });
+                window.addEventListener('resize', checkAgendaScroll);
+            }
         }
 
         const modal = document.getElementById('mediaModal');
@@ -1749,7 +1728,7 @@
         let currentGalleryIndex = 0;
 
         function isUrlVideo(url) {
-            return url.startsWith('data:video/') || url.match(/\.(mp4|webm|ogg)$/i);
+            return url && typeof url === 'string' && url.toLowerCase().endsWith('.mp4');
         }
 
         function renderMediaElement(url, isMain = true, titulo = '', categoria = '') {
@@ -1760,7 +1739,7 @@
                     : 'w-full h-full object-contain max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto';
                 return `<video ${isMain ? 'id="modalMainVideo" controls autoplay loop playsinline' : 'muted'} src="${url}" class="${isMain ? mainClasses : 'w-full h-full object-cover'}"></video>`;
             } else {
-                return `<img ${isMain ? 'id="modalMainImage"' : ''} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'} transition-all duration-300 select-none" alt="${escapeHTML(titulo)}">`;
+                return `<img ${isMain ? 'id="modalMainImage"' : ''} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'} transition-all duration-300 select-none" alt="${titulo}">`;
             }
         }
 
@@ -1819,7 +1798,7 @@
             // Montar array completo com Capa + Galeria
             activeGalleryImages = [capa, ...extraPhotos].filter(Boolean);
             if (!activeGalleryImages.length) {
-                activeGalleryImages = ['https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80'];
+                activeGalleryImages = [];
             }
             currentGalleryIndex = 0;
             currentModalCategoria = categoria;
@@ -1882,7 +1861,7 @@
                             ${activeGalleryImages.map((img, idx) => `
                                 <button type="button" data-key="thumb-${idx}" onclick="modalSelectImage(${idx})" class="modal-thumb-item relative flex-none w-12 h-12 rounded-lg overflow-hidden transition-all duration-200 ${idx === 0 ? 'ring-2 ring-purple-400 ring-offset-2 ring-offset-slate-900 opacity-100' : 'opacity-50 hover:opacity-100'}">
                                     ${isUrlVideo(img) 
-                                        ? `<video src="${img}" class="w-full h-full object-cover" muted></video><div class="absolute inset-0 flex items-center justify-center bg-black/30"><i class="fas fa-play text-white text-[10px]"></i></div>` 
+                                        ? `<video src="${img}" class="w-full h-full object-cover" muted playsinline preload="metadata"></video><div class="absolute inset-0 flex items-center justify-center bg-black/30"><i class="fas fa-play text-white text-[10px]"></i></div>` 
                                         : `<img src="${img}" class="w-full h-full object-cover" alt="Miniatura ${idx + 1}">`
                                     }
                                 </button>
