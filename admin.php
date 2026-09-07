@@ -1150,10 +1150,10 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 defesaDescricao: 'O Defesa Delas é a nossa rede de proteção e acolhimento para mulheres em situação de violência, oferecendo suporte jurídico, psicológico e social gratuito.\n\nCom profissionais capacitadas e atendimento humanizado, garantimos que nenhuma mulher precise enfrentar o ciclo de violência sozinha. Juntas somos mais fortes e protegidas.',
                 empreenderDescricao: 'O Empreender Delas foca na independência financeira das mulheres através de capacitação, mentoria e acesso a microcrédito.\n\nApoiamos ideias inovadoras e negócios locais liderados por mulheres, oferecendo as ferramentas necessárias para que cada empreendedora possa transformar seus sonhos em realidade sustentável e lucrativa.',
                 fotos: [
-                    'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80',
-                    'https://images.unsplash.com/photo-1590650516494-0c8e4a4dd67e?w=800&q=80',
-                    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
-                    'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80'
+                    '',
+                    '',
+                    '',
+                    ''
                 ]
             };
 
