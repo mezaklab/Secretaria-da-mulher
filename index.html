@@ -1767,7 +1767,7 @@
                     : 'w-full h-full object-contain max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto';
                 return `
                     <video ${isMain ? 'id="modalMainVideo" controls autoplay loop playsinline' : 'muted'} src="${url}" class="${isMain ? mainClasses + ' relative z-0' : 'w-full h-full object-cover'}"></video>
-                    ${isMain ? `<div class="absolute top-0 bottom-[60px] left-[20%] right-[20%] z-10 cursor-pointer" style="touch-action: manipulation;" onclick="handleVideoOverlayClick()"></div>` : ''}
+                    ${isMain ? `<div class="absolute top-0 bottom-[80px] left-[15%] right-[15%] z-[50]" style="touch-action: none;" ontouchend="handleVideoOverlayClick(event)" onclick="handleVideoOverlayClick(event)"></div>` : ''}
                 `;
             } else {
                 return `<img ${isMain ? 'id="modalMainImage" ondblclick="if(window.toggleModalFullscreen) toggleModalFullscreen()"' : ''} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'} transition-all duration-300 select-none" alt="${titulo}">`;
@@ -1807,7 +1807,11 @@
         
         let lastVideoTap = 0;
         let videoTapTimeout = null;
-        window.handleVideoOverlayClick = function() {
+        window.handleVideoOverlayClick = function(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
             const now = new Date().getTime();
             const timeDiff = now - lastVideoTap;
             
