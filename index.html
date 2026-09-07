@@ -1554,14 +1554,29 @@
 
                 const el = document.createElement('div');
                 el.className = 'relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start';
-                el.onclick = () => openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
+                el.onclick = function() {
+                    const btn = this.querySelector('.play-btn-anim');
+                    if (btn) {
+                        btn.style.transform = 'scale(0.7)';
+                        btn.style.opacity = '0';
+                        setTimeout(() => {
+                            openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
+                            setTimeout(() => {
+                                btn.style.transform = '';
+                                btn.style.opacity = '';
+                            }, 500);
+                        }, 200);
+                    } else {
+                        openMediaModal({ titulo: title, descricao: desc, imagem: image, categoria: category });
+                    }
+                };
 
                 el.innerHTML = `
                     ${image && image.toLowerCase().endsWith('.mp4') 
     ? `<video src="${image}" muted playsinline preload="metadata" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"></video>` 
     : `<img src="${image}" alt="${safe(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90" onerror="this.style.display='none'">`}
                     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4 pointer-events-none">
-                        <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <div class="play-btn-anim self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
                             <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                         <div class="flex items-center justify-between text-white text-xs font-semibold">
@@ -1750,7 +1765,10 @@
                 const mainClasses = isVerticalVideo 
                     ? 'w-full h-full object-cover pointer-events-auto md:rounded-xl shadow-2xl'
                     : 'w-full h-full object-contain max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto';
-                return `<video ${isMain ? 'id="modalMainVideo" controls autoplay loop playsinline ondblclick="if(window.toggleModalFullscreen) toggleModalFullscreen()"' : 'muted'} src="${url}" class="${isMain ? mainClasses : 'w-full h-full object-cover'}"></video>`;
+                return `
+                    <video ${isMain ? 'id="modalMainVideo" controls autoplay loop playsinline' : 'muted'} src="${url}" class="${isMain ? mainClasses + ' relative z-0' : 'w-full h-full object-cover'}"></video>
+                    ${isMain ? `<div class="absolute top-0 bottom-[60px] left-[20%] right-[20%] z-10" style="touch-action: manipulation;" onclick="const v=document.getElementById('modalMainVideo'); if(v){ v.paused ? v.play() : v.pause(); }" ondblclick="if(window.toggleModalFullscreen) toggleModalFullscreen()"></div>` : ''}
+                `;
             } else {
                 return `<img ${isMain ? 'id="modalMainImage" ondblclick="if(window.toggleModalFullscreen) toggleModalFullscreen()"' : ''} src="${url}" class="${isMain ? 'max-w-full max-h-full rounded-xl shadow-2xl pointer-events-auto' : 'w-full h-full object-cover'} transition-all duration-300 select-none" alt="${titulo}">`;
             }
