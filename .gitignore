@@ -8,5 +8,4 @@ node_modules/
 .agents/
 .claude/
 node_modules/
-scripts_manutencao/
 config.php

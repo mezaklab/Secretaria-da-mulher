@@ -46,3 +46,12 @@ Portal institucional e painel administrativo da Secretaria da Mulher do municíp
 - FontAwesome 6
 - Google Fonts (Poppins, Atkinson Hyperlegible)
 - VLibras (acessibilidade LIBRAS)
+
+## 🔒 Scripts de Manutenção
+
+Os scripts de manutenção e migração (ex.: `update_*.js`, `fix_*.py`) foram isolados na pasta `scripts-internos/` e **não devem ser referenciados pelo site**.
+Para que a proteção contra acesso HTTP direto a esses scripts funcione no ambiente local de desenvolvimento ou produção (quando usado o servidor embutido do PHP), inicie o servidor usando o `router.php`:
+
+```bash
+php -S localhost:8000 router.php
+```

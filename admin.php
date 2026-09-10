@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 require_once __DIR__ . '/config.php';
 
 if (!isset($_SESSION['login_attempts'])) {
@@ -7,30 +10,34 @@ if (!isset($_SESSION['login_attempts'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset($_POST['password'])) {
-    $time_now = time();
-
-    // Verifica se a sessão está bloqueada
-    if (isset($_SESSION['lockout_time']) && $time_now < $_SESSION['lockout_time']) {
-        $error = "Muitas tentativas falhas. Tente novamente em 10 minutos.";
+    if (empty($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        $error = "Sessão expirada. Recarregue a página e tente novamente.";
     } else {
-        // Desbloqueia se o tempo passou
-        if (isset($_SESSION['lockout_time']) && $time_now >= $_SESSION['lockout_time']) {
-            unset($_SESSION['lockout_time']);
-            $_SESSION['login_attempts'] = 0;
-        }
+        $time_now = time();
 
-        if ($_POST['username'] === ADMIN_USER && password_verify($_POST['password'], ADMIN_PASS_HASH)) {
-            session_regenerate_id(true);
-            $_SESSION['logged_in'] = true;
-            $_SESSION['login_attempts'] = 0;
-            unset($_SESSION['lockout_time']);
+        // Verifica se a sessão está bloqueada
+        if (isset($_SESSION['lockout_time']) && $time_now < $_SESSION['lockout_time']) {
+            $error = "Muitas tentativas falhas. Tente novamente em 10 minutos.";
         } else {
-            $_SESSION['login_attempts']++;
-            if ($_SESSION['login_attempts'] >= 5) {
-                $_SESSION['lockout_time'] = $time_now + 600;
-                $error = "Muitas tentativas falhas. Tente novamente em 10 minutos.";
+            // Desbloqueia se o tempo passou
+            if (isset($_SESSION['lockout_time']) && $time_now >= $_SESSION['lockout_time']) {
+                unset($_SESSION['lockout_time']);
+                $_SESSION['login_attempts'] = 0;
+            }
+
+            if ($_POST['username'] === ADMIN_USER && password_verify($_POST['password'], ADMIN_PASS_HASH)) {
+                session_regenerate_id(true);
+                $_SESSION['logged_in'] = true;
+                $_SESSION['login_attempts'] = 0;
+                unset($_SESSION['lockout_time']);
             } else {
-                $error = "Usuário ou senha incorretos.";
+                $_SESSION['login_attempts']++;
+                if ($_SESSION['login_attempts'] >= 5) {
+                    $_SESSION['lockout_time'] = $time_now + 600;
+                    $error = "Muitas tentativas falhas. Tente novamente em 10 minutos.";
+                } else {
+                    $error = "Usuário ou senha incorretos.";
+                }
             }
         }
     }
@@ -222,6 +229,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
 
                     <form id="login-form" method="POST" action="">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES); ?>">
 
                         <!-- Usuário -->
                         <div class="mb-5">
