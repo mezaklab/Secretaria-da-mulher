@@ -25,7 +25,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
                 $_SESSION['login_attempts'] = 0;
             }
 
-            if ($_POST['username'] === ADMIN_USER && password_verify($_POST['password'], ADMIN_PASS_HASH)) {
+            $username = $_POST['username'] ?? '';
+            $password = $_POST['password'] ?? '';
+            $usuariosFile = __DIR__ . '/usuarios.json';
+            
+            $userFound = null;
+            if (file_exists($usuariosFile)) {
+                $usuariosData = json_decode(file_get_contents($usuariosFile), true);
+                if (json_last_error() === JSON_ERROR_NONE && isset($usuariosData['usuarios'])) {
+                    foreach ($usuariosData['usuarios'] as $u) {
+                        if (isset($u['usuario']) && $u['usuario'] === $username) {
+                            $userFound = $u;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $loginSuccess = false;
+            
+            // 1. Tentar login via usuarios.json
+            if ($userFound) {
+                if (isset($userFound['ativo']) && $userFound['ativo'] === true && password_verify($password, $userFound['senha_hash'])) {
+                    $loginSuccess = true;
+                    $_SESSION['usuario'] = $userFound['usuario'];
+                    $_SESSION['usuario_id'] = $userFound['id'];
+                    $_SESSION['usuario_nome'] = $userFound['nome_completo'];
+                    $_SESSION['papel'] = $userFound['papel'];
+                }
+            } 
+            // 2. Fallback de segurança para config.php
+            else if (defined('ADMIN_USER') && defined('ADMIN_PASS_HASH') && $username === ADMIN_USER && password_verify($password, ADMIN_PASS_HASH)) {
+                $loginSuccess = true;
+                $_SESSION['usuario'] = ADMIN_USER;
+                $_SESSION['usuario_id'] = 'fallback_admin';
+                $_SESSION['usuario_nome'] = 'Administrador de Sistema';
+                $_SESSION['papel'] = 'super_admin';
+            }
+
+            if ($loginSuccess) {
                 session_regenerate_id(true);
                 $_SESSION['logged_in'] = true;
                 $_SESSION['login_attempts'] = 0;
@@ -358,6 +396,140 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             btn.setAttribute('aria-pressed', active);
         }
     </script>
+
+    <!-- Admin Management Script (Passo 6 e 7) -->
+    <script>
+        const isSuperAdmin = <?php echo isset($_SESSION['papel']) && $_SESSION['papel'] === 'super_admin' ? 'true' : 'false'; ?>;
+        const currentCsrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        
+        if (isSuperAdmin) {
+            async function loadAdminData() {
+                try {
+                    const res = await fetch('api.php?admin_data=1', { headers: { 'X-CSRF-Token': currentCsrfToken } });
+                    const data = await res.json();
+                    
+                    const listaUsuarios = document.getElementById('lista-usuarios');
+                    if (listaUsuarios && data.usuarios) {
+                        listaUsuarios.innerHTML = '';
+                        data.usuarios.forEach(u => {
+                            const tr = document.createElement('tr');
+                            tr.className = "border-b border-gray-50/50 hover:bg-gray-50/50";
+                            const isSelf = u.usuario === '<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>';
+                            const badgeClass = u.papel === 'super_admin' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
+                            const statusBadgeClass = u.ativo ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+                            
+                            tr.innerHTML = `
+                                <td class="px-6 py-4 font-medium text-gray-800">${u.nome_completo}</td>
+                                <td class="px-6 py-4">${u.usuario}</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 rounded-full text-xs font-semibold ${badgeClass}">${u.papel}</span></td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 rounded-full text-xs font-semibold ${statusBadgeClass}">${u.ativo ? 'Ativo' : 'Inativo'}</span></td>
+                                <td class="px-6 py-4 text-right">
+                                    ${!isSelf && u.papel !== 'super_admin' ? `
+                                    <button onclick="toggleUserStatus('${u.id}')" class="text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors ${u.ativo ? 'border-red-200 text-red-600 hover:bg-red-50' : 'border-green-200 text-green-600 hover:bg-green-50'}">
+                                        ${u.ativo ? 'Desativar' : 'Reativar'}
+                                    </button>
+                                    ` : '<span class="text-xs text-gray-400 italic">Protegido</span>'}
+                                </td>
+                            `;
+                            listaUsuarios.appendChild(tr);
+                        });
+                    }
+                    
+                    const listaLogs = document.getElementById('lista-logs');
+                    if (listaLogs && data.logs) {
+                        listaLogs.innerHTML = '';
+                        data.logs.forEach(l => {
+                            const tr = document.createElement('tr');
+                            tr.className = "border-b border-gray-50/50 hover:bg-gray-50/50";
+                            const badgeClass = l.papel === 'super_admin' ? 'text-purple-600' : 'text-blue-600';
+                            tr.innerHTML = `
+                                <td class="px-6 py-3 text-gray-500 whitespace-nowrap">${l.data_hora}</td>
+                                <td class="px-6 py-3 font-medium text-gray-800">${l.usuario}</td>
+                                <td class="px-6 py-3 text-xs font-semibold ${badgeClass}">${l.papel}</td>
+                                <td class="px-6 py-3 text-gray-600">${l.acao}</td>
+                            `;
+                            listaLogs.appendChild(tr);
+                        });
+                    }
+                } catch (e) {
+                    console.error("Erro ao carregar dados admin:", e);
+                }
+            }
+            
+            // Carrega tabelas
+            const tabLinks = document.querySelectorAll('nav [data-target]');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (e.currentTarget.dataset.target === 'gerenciar-usuarios' || e.currentTarget.dataset.target === 'logs-atividade') {
+                        loadAdminData();
+                    }
+                });
+            });
+            
+            const formNovoOp = document.getElementById('form-novo-operador');
+            if (formNovoOp) {
+                formNovoOp.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const nome = document.getElementById('op-nome').value.trim();
+                    const usuario = document.getElementById('op-usuario').value.trim();
+                    const senha = document.getElementById('op-senha').value;
+                    
+                    const btn = e.target.querySelector('button[type="submit"]');
+                    const btnText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Criando...';
+                    btn.disabled = true;
+                    
+                    try {
+                        const res = await fetch('api.php?gerenciar_usuarios=1', {
+                            method: 'POST',
+                            headers: { 
+                                'X-CSRF-Token': currentCsrfToken,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ action: 'create', nome, usuario, senha })
+                        });
+                        
+                        const result = await res.json();
+                        if (result.status === 'success') {
+                            alert(result.message);
+                            formNovoOp.reset();
+                            loadAdminData();
+                        } else {
+                            alert(result.message || 'Erro ao criar operador.');
+                        }
+                    } catch (e) {
+                        alert('Erro de conexão ao criar operador.');
+                    } finally {
+                        btn.innerHTML = btnText;
+                        btn.disabled = false;
+                    }
+                });
+            }
+            
+            window.toggleUserStatus = async function(id) {
+                if (!confirm('Deseja realmente alterar o status deste usuário?')) return;
+                try {
+                    const res = await fetch('api.php?gerenciar_usuarios=1', {
+                        method: 'POST',
+                        headers: { 
+                            'X-CSRF-Token': currentCsrfToken,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ action: 'toggle_status', id })
+                    });
+                    
+                    const result = await res.json();
+                    if (result.status === 'success') {
+                        loadAdminData(); 
+                    } else {
+                        alert(result.message || 'Erro ao alterar status.');
+                    }
+                } catch (e) {
+                    alert('Erro de conexão ao alterar status.');
+                }
+            };
+        }
+    </script>
 </body>
 </html>
 
@@ -444,6 +616,14 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             <a href="#" data-target="configuracoes" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
                 <i class="fas fa-cog w-5 text-center"></i> Configurações
             </a>
+            <?php if ($_SESSION['papel'] === 'super_admin'): ?>
+            <a href="#" data-target="gerenciar-usuarios" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+                <i class="fas fa-users-cog w-5 text-center"></i> Gerenciar Usuários
+            </a>
+            <a href="#" data-target="logs-atividade" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+                <i class="fas fa-clipboard-list w-5 text-center"></i> Logs de Atividade
+            </a>
+            <?php endif; ?>
         </nav>
 
         <div class="p-4 border-t border-white/10 space-y-2">
@@ -471,8 +651,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="text-sm">
-                    <p id="admin-display-name" class="font-bold text-gray-800">Administrador</p>
-                    <p id="admin-display-role" class="text-gray-500">Gestor Institucional</p>
+                    <p id="admin-display-name" class="font-bold text-gray-800"><?php echo htmlspecialchars($_SESSION['usuario_nome']); ?></p>
+                    <p id="admin-display-role" class="text-gray-500"><?php echo $_SESSION['papel'] === 'super_admin' ? 'Super Admin' : 'Operador'; ?></p>
                 </div>
             </div>
         </header>
@@ -757,33 +937,123 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             <div id="configuracoes" class="tab-content hidden">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 max-w-2xl">
                     <h3 class="text-lg font-bold text-gray-800 mb-6">Dados Institucionais</h3>
-                    <form class="space-y-5">
+                    <form id="form-configuracoes" class="space-y-5">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Endereço da Secretaria</label>
-                            <input type="text" value="Rua Principal, 123, Centro" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                            <input type="text" id="config-endereco" placeholder="Ex: Rua Principal, 123, Centro" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">Telefone / WhatsApp</label>
-                                <input type="text" value="(79) 99999-9999" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                                <input type="text" id="config-telefone" placeholder="Ex: (79) 99999-9999" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">E-mail Institucional</label>
-                                <input type="email" value="contato@secretaria.gov.br" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Horário de funcionamento</label>
+                                <input type="text" id="config-horario" placeholder="Ex: Seg a Sex, 08h às 13h" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Link do Instagram</label>
-                            <input type="url" value="https://instagram.com/secretariadamulher" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">E-mail Institucional</label>
+                            <input type="email" id="config-email" placeholder="Ex: contato@secretaria.gov.br" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Link do Instagram (Opcional)</label>
+                            <input type="url" id="config-instagram" placeholder="Ex: https://instagram.com/secretariadamulher" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                         </div>
                         <div class="pt-4 flex justify-end">
-                            <button type="button" class="bg-brand-primary hover:bg-brand-secondary text-white px-6 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
-                                Salvar Alterações
+                            <button type="submit" id="btn-salvar-configuracoes" class="bg-brand-primary hover:bg-brand-secondary text-white px-6 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
+                                <i class="fas fa-save mr-2"></i> Salvar Alterações
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
+
+            <?php if ($_SESSION['papel'] === 'super_admin'): ?>
+            <!-- Gerenciar Usuários -->
+            <div id="gerenciar-usuarios" class="tab-content hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
+                    <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Novo Operador</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Crie uma conta para um novo operador do sistema.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <form id="form-novo-operador" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                                    <input type="text" id="op-nome" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Usuário (nome.sobrenome)</label>
+                                    <input type="text" id="op-usuario" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                                    <input type="password" id="op-senha" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
+                                    <p class="text-[10px] text-gray-500 mt-1">Mínimo 8 caracteres, 1 maiúscula, 1 número, 1 símbolo.</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-end pt-2">
+                                <button type="submit" class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2 rounded-lg font-medium text-sm transition-colors shadow-sm">
+                                    <i class="fas fa-user-plus mr-2"></i> Criar Operador
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-800">Usuários Cadastrados</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
+                                    <th class="px-6 py-4 font-semibold">Nome</th>
+                                    <th class="px-6 py-4 font-semibold">Usuário</th>
+                                    <th class="px-6 py-4 font-semibold">Papel</th>
+                                    <th class="px-6 py-4 font-semibold">Status</th>
+                                    <th class="px-6 py-4 font-semibold text-right">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-usuarios" class="divide-y divide-gray-100 text-sm">
+                                <!-- Preenchido via JS (ou injetado pelo PHP no futuro) -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs de Atividade -->
+            <div id="logs-atividade" class="tab-content hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-800">Histórico de Alterações</h3>
+                        <p class="text-xs text-gray-500 mt-0.5">Últimas ações realizadas no painel administrativo.</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-50/50 text-gray-500 text-xs uppercase tracking-wider">
+                                    <th class="px-6 py-4 font-semibold">Data/Hora</th>
+                                    <th class="px-6 py-4 font-semibold">Usuário</th>
+                                    <th class="px-6 py-4 font-semibold">Papel</th>
+                                    <th class="px-6 py-4 font-semibold">Ação Realizada</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista-logs" class="divide-y divide-gray-100 text-sm">
+                                <!-- Preenchido via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
         </div>
     </main>
 
@@ -1121,7 +1391,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             const defaultServicosSaude = [];
 
 
-            async function saveData(acoes, galeria, agenda, saude, canindeDelas) {
+            async function saveData(acoes, galeria, agenda, saude, canindeDelas, configuracoes) {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 try {
                     const response = await fetch('api.php', {
@@ -1130,7 +1400,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             'Content-Type': 'application/json',
                             'X-CSRF-Token': csrfToken
                         },
-                        body: JSON.stringify({ acoes, galeria, agenda, saude, canindeDelas })
+                        body: JSON.stringify({ acoes, galeria, agenda, saude, canindeDelas, configuracoes })
                     });
                     const result = await response.json();
                     if (!response.ok) {
@@ -1167,6 +1437,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
             let adminCanindeDelas = JSON.parse(JSON.stringify(defaultCanindeDelas));
             let currentCanindePhotos = [];
+            let adminConfiguracoes = {};
 
             // Buscar dados reais do servidor em vez do localStorage
             const processData = (data) => {
@@ -1185,6 +1456,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 }
                 if (data.saude) adminServicosSaude = data.saude;
                 if (data.canindeDelas) adminCanindeDelas = data.canindeDelas;
+                if (data.configuracoes) adminConfiguracoes = data.configuracoes;
                 
                 currentCanindePhotos = Array.isArray(adminCanindeDelas.fotos) ? [...adminCanindeDelas.fotos] : [];
                 
@@ -1193,6 +1465,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 renderAdminAgenda();
                 renderAdminSaude();
                 renderAdminCanindeDelas();
+                if (typeof renderAdminConfiguracoes === 'function') renderAdminConfiguracoes();
             };
 
             fetch('api.php')
@@ -1414,7 +1687,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             fotos: finalFotos
                         };
 
-                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
                         
                         // Reseta inputs e estado
                         inputCanindeFotos.value = '';
@@ -1427,6 +1700,51 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     } finally {
                         btnSalvarCaninde.innerText = 'Salvar Alterações';
                         btnSalvarCaninde.disabled = false;
+                    }
+                });
+            }
+
+                        function renderAdminConfiguracoes() {
+                const conf = adminConfiguracoes || {};
+                const eEnd = document.getElementById('config-endereco');
+                const eTel = document.getElementById('config-telefone');
+                const eHor = document.getElementById('config-horario');
+                const eEma = document.getElementById('config-email');
+                const eIns = document.getElementById('config-instagram');
+                
+                if(eEnd) eEnd.value = conf.endereco || 'Rua da Prefeitura, S/N, Centro, Canindé de São Francisco - SE';
+                if(eTel) eTel.value = conf.telefone || '(79) 99999-9999';
+                if(eHor) eHor.value = conf.horario || 'Seg a Sex, 08h às 13h';
+                if(eEma) eEma.value = conf.email || '';
+                if(eIns) eIns.value = conf.instagram || '';
+            }
+
+            const formConfig = document.getElementById('form-configuracoes');
+            if (formConfig) {
+                formConfig.addEventListener('submit', async function(e) {
+                    e.preventDefault(); // Prevents page reload!
+                    adminConfiguracoes = {
+                        endereco: document.getElementById('config-endereco').value,
+                        telefone: document.getElementById('config-telefone').value,
+                        horario: document.getElementById('config-horario').value,
+                        email: document.getElementById('config-email').value,
+                        instagram: document.getElementById('config-instagram').value
+                    };
+                    
+                    const btn = e.target.querySelector('button[type="submit"]');
+                    const origText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Salvando...';
+                    btn.disabled = true;
+                    
+                    try {
+                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
+                        alert('Configurações salvas com sucesso!');
+                    } catch (err) {
+                        alert('Erro ao salvar as configurações.');
+                        console.error(err);
+                    } finally {
+                        btn.innerHTML = origText;
+                        btn.disabled = false;
                     }
                 });
             }
@@ -1669,7 +1987,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         try {
                             btn.innerText = 'Salvando...';
                             btn.disabled = true;
-                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
                             renderAdminAgenda();
                             modal.classList.add('hidden'); if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click();
                         } catch (e) {
@@ -1760,7 +2078,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             }
 
                             // 3. Salvar no servidor (api.php)
-                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
                             
                             renderAdminAcoes();
                             renderAdminGaleria();
@@ -1860,7 +2178,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             window.deleteSaudeItem = function(id) {
                 if (confirm('Deseja realmente remover este serviço de saúde?')) {
                     adminServicosSaude = adminServicosSaude.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
                     renderAdminSaude();
                 }
             };
@@ -1908,7 +2226,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             adminServicosSaude.push({ id: Date.now(), titulo, icone, descricaoCurta: descCurta, descricaoCompleta: descComp, local, horario, publicoAlvo: publico, documentos: docs, imagem: finalImage });
                         }
 
-                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas);
+                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
                         renderAdminSaude();
                         document.getElementById('modal-saude').classList.add('hidden');
                         alert('Serviço de saúde salvo com sucesso!');
@@ -1925,15 +2243,15 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             window.deleteItem = function(id, type) {
                 if(type === 'acoes') {
                     adminAcoes = adminAcoes.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
                     renderAdminAcoes();
                 } else if(type === 'galeria') {
                     adminGaleria = adminGaleria.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
                     renderAdminGaleria();
                 } else if(type === 'agenda') {
                     adminAgenda = adminAgenda.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas).catch(e => console.error(e));
+                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
                     renderAdminAgenda();
                 }
             }
@@ -2095,6 +2413,9 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
     <script>
         
 
+        
+
+
         // ── Exibe nome do usuário logado no header ──────────────────────
         (function exibirUsuario() {
             const usuario = "super.admin";
@@ -2173,6 +2494,140 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
             resetar(); // inicia o timer
         })();
+    </script>
+
+    <!-- Admin Management Script (Passo 6 e 7) -->
+    <script>
+        const isSuperAdmin = <?php echo isset($_SESSION['papel']) && $_SESSION['papel'] === 'super_admin' ? 'true' : 'false'; ?>;
+        const currentCsrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        
+        if (isSuperAdmin) {
+            async function loadAdminData() {
+                try {
+                    const res = await fetch('api.php?admin_data=1', { headers: { 'X-CSRF-Token': currentCsrfToken } });
+                    const data = await res.json();
+                    
+                    const listaUsuarios = document.getElementById('lista-usuarios');
+                    if (listaUsuarios && data.usuarios) {
+                        listaUsuarios.innerHTML = '';
+                        data.usuarios.forEach(u => {
+                            const tr = document.createElement('tr');
+                            tr.className = "border-b border-gray-50/50 hover:bg-gray-50/50";
+                            const isSelf = u.usuario === '<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>';
+                            const badgeClass = u.papel === 'super_admin' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
+                            const statusBadgeClass = u.ativo ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+                            
+                            tr.innerHTML = `
+                                <td class="px-6 py-4 font-medium text-gray-800">${u.nome_completo}</td>
+                                <td class="px-6 py-4">${u.usuario}</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 rounded-full text-xs font-semibold ${badgeClass}">${u.papel}</span></td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 rounded-full text-xs font-semibold ${statusBadgeClass}">${u.ativo ? 'Ativo' : 'Inativo'}</span></td>
+                                <td class="px-6 py-4 text-right">
+                                    ${!isSelf && u.papel !== 'super_admin' ? `
+                                    <button onclick="toggleUserStatus('${u.id}')" class="text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors ${u.ativo ? 'border-red-200 text-red-600 hover:bg-red-50' : 'border-green-200 text-green-600 hover:bg-green-50'}">
+                                        ${u.ativo ? 'Desativar' : 'Reativar'}
+                                    </button>
+                                    ` : '<span class="text-xs text-gray-400 italic">Protegido</span>'}
+                                </td>
+                            `;
+                            listaUsuarios.appendChild(tr);
+                        });
+                    }
+                    
+                    const listaLogs = document.getElementById('lista-logs');
+                    if (listaLogs && data.logs) {
+                        listaLogs.innerHTML = '';
+                        data.logs.forEach(l => {
+                            const tr = document.createElement('tr');
+                            tr.className = "border-b border-gray-50/50 hover:bg-gray-50/50";
+                            const badgeClass = l.papel === 'super_admin' ? 'text-purple-600' : 'text-blue-600';
+                            tr.innerHTML = `
+                                <td class="px-6 py-3 text-gray-500 whitespace-nowrap">${l.data_hora}</td>
+                                <td class="px-6 py-3 font-medium text-gray-800">${l.usuario}</td>
+                                <td class="px-6 py-3 text-xs font-semibold ${badgeClass}">${l.papel}</td>
+                                <td class="px-6 py-3 text-gray-600">${l.acao}</td>
+                            `;
+                            listaLogs.appendChild(tr);
+                        });
+                    }
+                } catch (e) {
+                    console.error("Erro ao carregar dados admin:", e);
+                }
+            }
+            
+            // Carrega tabelas
+            const tabLinks = document.querySelectorAll('nav [data-target]');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (e.currentTarget.dataset.target === 'gerenciar-usuarios' || e.currentTarget.dataset.target === 'logs-atividade') {
+                        loadAdminData();
+                    }
+                });
+            });
+            
+            const formNovoOp = document.getElementById('form-novo-operador');
+            if (formNovoOp) {
+                formNovoOp.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const nome = document.getElementById('op-nome').value.trim();
+                    const usuario = document.getElementById('op-usuario').value.trim();
+                    const senha = document.getElementById('op-senha').value;
+                    
+                    const btn = e.target.querySelector('button[type="submit"]');
+                    const btnText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Criando...';
+                    btn.disabled = true;
+                    
+                    try {
+                        const res = await fetch('api.php?gerenciar_usuarios=1', {
+                            method: 'POST',
+                            headers: { 
+                                'X-CSRF-Token': currentCsrfToken,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ action: 'create', nome, usuario, senha })
+                        });
+                        
+                        const result = await res.json();
+                        if (result.status === 'success') {
+                            alert(result.message);
+                            formNovoOp.reset();
+                            loadAdminData();
+                        } else {
+                            alert(result.message || 'Erro ao criar operador.');
+                        }
+                    } catch (e) {
+                        alert('Erro de conexão ao criar operador.');
+                    } finally {
+                        btn.innerHTML = btnText;
+                        btn.disabled = false;
+                    }
+                });
+            }
+            
+            window.toggleUserStatus = async function(id) {
+                if (!confirm('Deseja realmente alterar o status deste usuário?')) return;
+                try {
+                    const res = await fetch('api.php?gerenciar_usuarios=1', {
+                        method: 'POST',
+                        headers: { 
+                            'X-CSRF-Token': currentCsrfToken,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ action: 'toggle_status', id })
+                    });
+                    
+                    const result = await res.json();
+                    if (result.status === 'success') {
+                        loadAdminData(); 
+                    } else {
+                        alert(result.message || 'Erro ao alterar status.');
+                    }
+                } catch (e) {
+                    alert('Erro de conexão ao alterar status.');
+                }
+            };
+        }
     </script>
 </body>
 </html>

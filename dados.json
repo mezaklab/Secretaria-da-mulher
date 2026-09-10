@@ -6,18 +6,18 @@
             "date": "31 Ago 2026",
             "title": "Caminhada Agosto Lilás",
             "description": "Caminhada em conscientização ao agosto lilás.",
-            "image": "uploads/media_6a9e10d10b670.png",
-            "fotoCapa": "uploads/media_6a9e10d10b670.png",
+            "image": "uploads\/media_6a9e10d10b670.png",
+            "fotoCapa": "uploads\/media_6a9e10d10b670.png",
             "galeria": [
-                "uploads/media_6a9e10cf5640d.png",
-                "uploads/media_6a9e10cf56e11.png",
-                "uploads/media_6a9e10cf57d7b.png",
-                "uploads/media_6a9e10cf573a9.png",
-                "uploads/media_6a9e10cf58b09.png",
-                "uploads/media_6a9e10cf594c1.png",
-                "uploads/media_6a9e10cf584d2.png",
-                "uploads/media_6a9e10cf59a6f.png",
-                "uploads/media_6a9e10cf59044.png"
+                "uploads\/media_6a9e10cf5640d.png",
+                "uploads\/media_6a9e10cf56e11.png",
+                "uploads\/media_6a9e10cf57d7b.png",
+                "uploads\/media_6a9e10cf573a9.png",
+                "uploads\/media_6a9e10cf58b09.png",
+                "uploads\/media_6a9e10cf594c1.png",
+                "uploads\/media_6a9e10cf584d2.png",
+                "uploads\/media_6a9e10cf59a6f.png",
+                "uploads\/media_6a9e10cf59044.png"
             ]
         }
     ],
@@ -28,7 +28,7 @@
             "title": "Caminhada Agosto Lilás",
             "description": "A Prefeitura de Canindé de São Francisco, por meio da Secretaria Municipal de Políticas Públicas para a Mulher, realizou a Caminhada Agosto Lilás, promovendo um momento de conscientização, mobilização e fortalecimento das políticas públicas voltadas à proteção e aos direitos das mulheres.\n\nA iniciativa reforça o compromisso do município com a promoção do respeito, da segurança e da dignidade das mulheres.\n\nPrefeitura de Canindé de São Francisco\nO desenvolvimento chegou!",
             "category": "Saúde da Mulher",
-            "image": "uploads/media_6a9e16cf94607.mp4"
+            "image": "uploads\/media_6a9e16cf94607.mp4"
         },
         {
             "id": 1788744577805,
@@ -36,7 +36,7 @@
             "title": "Defesa Pessoal",
             "description": "A aula inaugural de defesa pessoal foi um momento de força, aprendizado e união entre mulheres incríveis 💪💜\n\nCada movimento ensinado representa mais do que técnica: é sobre autonomia, segurança e confiança no próprio corpo.\n\nInvestir em ações como essa é cuidar de vidas e fortalecer mulheres para que ocupem todos os espaços com coragem e dignidade. Seguimos firmes, incentivando o autocuidado e a proteção como direitos de todas! 🙌",
             "category": "Saúde da Mulher",
-            "image": "uploads/media_6a9e1381c16aa.mp4"
+            "image": "uploads\/media_6a9e1381c16aa.mp4"
         },
         {
             "id": 1788740949821,
@@ -44,7 +44,7 @@
             "title": "Inauguação casa da mulher",
             "description": "Hoje, tive a honra de prestigiar a inauguração da Casa da Mulher Brasileira, um marco histórico que vai fortalecer o acolhimento e a proteção de todas as sergipanas! Como primeira dama e secretária municipal, reafirmo meu compromisso de seguir alinhando parcerias e fortalecendo a rede de apoio para garantir mais dignidade e segurança para as mulheres da nossa cidade. 🏛️✊💜\n",
             "category": "Saúde da Mulher",
-            "image": "uploads/media_6a9e0572365bf.mp4"
+            "image": "uploads\/media_6a9e0572365bf.mp4"
         },
         {
             "id": 1788739682049,
@@ -52,7 +52,7 @@
             "title": "Chá com Elas",
             "description": "A Secretaria Municipal de Políticas Públicas para a Mulher realizou mais uma edição do projeto Chá com Elas, desta vez no Assentamento Gualter. O encontro foi um momento único de diálogo, escuta ativa e valorização do protagonismo feminino. A iniciativa reafirma o nosso compromisso, levando acolhimento, informações e nossa rede de apoio para todas as regiões do município. 🫂💜",
             "category": "Cultura & Bem-estar",
-            "image": "uploads/media_6a9e006208dde.mp4"
+            "image": "uploads\/media_6a9e006208dde.mp4"
         }
     ],
     "agenda": [
@@ -115,7 +115,7 @@
             "horario": "Segunda a Sexta, das 08h às 13h (Campanhas noturnas até 21h)",
             "publico": "Mulheres de 25 a 64 anos ou que já iniciaram a vida sexual",
             "documentos": "Cartão do SUS, RG e Comprovante de Residência",
-            "imagem": "uploads/media_6a9e153552831.jpg",
+            "imagem": "uploads\/media_6a9e153552831.jpg",
             "publicoAlvo": "Mulheres de 25 a 64 anos ou que já iniciaram a vida sexual"
         },
         {
@@ -150,17 +150,24 @@
         "defesaDescricao": "O Defesa Delas é a nossa rede de proteção e acolhimento para mulheres em situação de violência, oferecendo suporte jurídico, psicológico e social gratuito.\n\nCom profissionais capacitadas e atendimento humanizado, garantimos que nenhuma mulher precise enfrentar o ciclo de violência sozinha. Juntas somos mais fortes e protegidas.",
         "empreenderDescricao": "O Empreender Delas foca na independência financeira das mulheres através de capacitação, mentoria e acesso a microcrédito.\n\nApoiamos ideias inovadoras e negócios locais liderados por mulheres, oferecendo as ferramentas necessárias para que cada empreendedora possa transformar seus sonhos em realidade sustentável e lucrativa.",
         "fotos": [
-            "uploads/media_6a9e0da9286d2.png",
-            "uploads/media_6a9e0da92967f.png",
-            "uploads/media_6a9e0da92901c.png",
-            "uploads/media_6a9e0da92a6eb.png",
-            "uploads/media_6a9e0da92ad55.png",
-            "uploads/media_6a9e0da92a00c.png",
-            "uploads/media_6a9e0da92b694.png",
-            "uploads/media_6a9e0da92c83b.png",
-            "uploads/media_6a9e0da92be97.png",
-            "uploads/media_6a9e0da92c362.png",
-            "uploads/media_6a9e0fd393b44.png"
+            "uploads\/media_6a9e0da9286d2.png",
+            "uploads\/media_6a9e0da92967f.png",
+            "uploads\/media_6a9e0da92901c.png",
+            "uploads\/media_6a9e0da92a6eb.png",
+            "uploads\/media_6a9e0da92ad55.png",
+            "uploads\/media_6a9e0da92a00c.png",
+            "uploads\/media_6a9e0da92b694.png",
+            "uploads\/media_6a9e0da92c83b.png",
+            "uploads\/media_6a9e0da92be97.png",
+            "uploads\/media_6a9e0da92c362.png",
+            "uploads\/media_6a9e0fd393b44.png"
         ]
+    },
+    "configuracoes": {
+        "endereco": "Tv. Manoel Feitosa Sobrinho, 69 - Canindé de São Francisco\/SE. CEP: 49820-000",
+        "telefone": "(79) 99999-9999",
+        "horario": "Seg a Qui, 08h às 14h \/ Sex 8h às 12h",
+        "email": "sec.mulher@caninde.se.gov.br",
+        "instagram": ""
     }
 }

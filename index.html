@@ -224,17 +224,6 @@
             color: #ffffff !important;
         }
 
-        /* Preservar font-family de ícones (FontAwesome, Phosphor, Lucide, SVGs, etc.) */
-        body.high-contrast i,
-        body.high-contrast [class*="fa-"],
-        body.high-contrast [class*="fa"],
-        body.high-contrast [class*="icon"],
-        body.high-contrast .ph,
-        body.high-contrast [data-lucide],
-        body.high-contrast svg {
-            font-family: inherit !important;
-        }
-
         /* Ícones gerais em links/cards */
         body.high-contrast i,
         body.high-contrast [class*="fa-"],
@@ -252,6 +241,19 @@
         body.high-contrast a.rounded-full svg {
             color: #ffffff !important;
             fill: #ffffff !important;
+        }
+
+        
+        /* Garantir o font-weight correto para os ícones FontAwesome não quebrarem (sobrescrevendo o font-weight do [class*="text-"]) */
+        body.high-contrast .fas, 
+        body.high-contrast .fa-solid {
+            font-weight: 900 !important;
+        }
+        body.high-contrast .far, 
+        body.high-contrast .fa-regular,
+        body.high-contrast .fab, 
+        body.high-contrast .fa-brands {
+            font-weight: 400 !important;
         }
 
         /* Inputs de formulário */
@@ -288,6 +290,7 @@
             filter: contrast(110%) !important;
         }
 
+
         /* Brasão no Fundo Claro: torna 100% escuro e nítido */
         body.high-contrast img[src*="brasao"],
         body.high-contrast img[alt*="Brasão"],
@@ -296,6 +299,12 @@
             opacity: 1 !important;
             display: block !important;
         }
+        
+        /* Conserto para o brasão com mask-image nos forms e paginas secundarias */
+        body.high-contrast [aria-label*="Brasão"] {
+            background-color: #000000 !important;
+        }
+
 
         /* Barra Superior de Acessibilidade */
         body.high-contrast #accessibility-bar {
@@ -486,6 +495,7 @@
                         <a href="#direitos" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Direitos</a>
                         <a href="#acoes" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Ações</a>
                         <a href="#agenda" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Agenda</a>
+                        <a href="secretaria.html" class="font-display font-bold text-lg text-white hover:text-white/80 transition-colors">Secretária</a>
                         
                         <!-- Botão Disque 180 -->
                         <a href="tel:180" class="ml-4 inline-flex items-center px-6 py-2.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full font-display font-bold text-lg transition-colors text-white">
@@ -507,6 +517,7 @@
                     <a href="#direitos" class="font-display text-2xl text-white hover:opacity-80" onclick="toggleMenu()">Direitos</a>
                     <a href="#acoes" class="font-display text-2xl text-white hover:opacity-80" onclick="toggleMenu()">Ações</a>
                     <a href="#agenda" class="font-display text-2xl text-white hover:opacity-80" onclick="toggleMenu()">Agenda</a>
+                    <a href="secretaria.html" class="font-display text-2xl text-white hover:opacity-80">Secretária</a>
                     <a href="tel:180" class="inline-flex items-center justify-center px-6 py-3 mt-4 bg-white text-[#5C4573] rounded-full font-display font-bold text-xl" onclick="toggleMenu()">
                         <i class="fas fa-phone mr-2"></i> Disque 180
                     </a>
@@ -839,7 +850,7 @@
                 </div>
 
                 <!-- Grid Responsivo de Fotos -->
-                <div id="caninde-delas-grid" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 lg:grid lg:grid-cols-4 lg:overflow-visible lg:gap-5 pb-4 lg:pb-0">
+                <div id="caninde-delas-grid" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 lg:grid lg:grid-cols-2 xl:grid-cols-4 lg:overflow-visible lg:gap-5 pb-4 lg:pb-0">
                     <!-- Foto 1 -->
                     <div class="relative rounded-3xl overflow-hidden aspect-square bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-purple-100/60" onclick="openCanindeDelasGallery(0)">
                         <img src="" alt="Canindé + Delas 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-95">
@@ -887,7 +898,8 @@
             <div class="text-center mb-16">
                 <img src="/public/cram.png" alt="Logo CRAM" class="block h-20 sm:h-24 w-auto mx-auto mb-4 object-contain" />
                 <h2 class="font-display text-4xl md:text-5xl text-brand-textDark mb-4">Rede de apoio e proteção</h2>
-                <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto">Estamos aqui para amparar você. Nossos serviços sociais, legais e psicológicos são gratuitos e sigilosos.</p>
+                <p class="text-lg md:text-xl font-sans text-brand-textMuted max-w-2xl mx-auto mb-6">Estamos aqui para amparar você. Nossos serviços sociais, legais e psicológicos são gratuitos e sigilosos.</p>
+                <a href="cram.html" class="inline-flex items-center text-brand-primary font-display font-bold hover:underline bg-brand-iconBg px-6 py-2.5 rounded-full border border-brand-primary/10 transition-all hover:bg-purple-100 mb-8">Conheça o CRAM <i class="fas fa-arrow-right ml-2 text-sm"></i></a>
             </div>
 
             <div id="direitos-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -953,7 +965,7 @@
 
         <div id="galeria-container" class="relative z-20 grid grid-cols-1 sm:grid-cols-2 lg:flex lg:overflow-x-auto gap-6 mt-8 hide-scrollbar scroll-smooth lg:snap-x lg:snap-mandatory">
   <!-- Item 1: Vídeo Depoimento -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Depoimento: Dona Maria', descricao: 'Relato emocionante sobre o acolhimento recebido na secretaria.', imagem: '', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Depoimento: Dona Maria', descricao: 'Relato emocionante sobre o acolhimento recebido na secretaria.', imagem: '', categoria: 'Vídeo'})">
     <img src="" alt="Depoimento" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -967,7 +979,7 @@
   </div>
 
   <!-- Item 2: Vídeo Caminhada -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Caminhada de abertura', descricao: 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', imagem: '', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Caminhada de abertura', descricao: 'Mobilização nas ruas de Canindé reunindo dezenas de mulheres.', imagem: '', categoria: 'Vídeo'})">
     <img src="" alt="Caminhada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -981,7 +993,7 @@
   </div>
 
   <!-- Item 3: Vídeo Preventivo -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Como é o preventivo?', descricao: 'Explicativo com a equipe médica desmistificando o exame.', imagem: '', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Como é o preventivo?', descricao: 'Explicativo com a equipe médica desmistificando o exame.', imagem: '', categoria: 'Vídeo'})">
     <img src="" alt="Preventivo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -995,7 +1007,7 @@
   </div>
 
   <!-- Item 4: Vídeo Oficinas -->
-  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Nossas oficinas', descricao: 'Capacitação prática em artesanato e empreendedorismo local.', imagem: '', categoria: 'Vídeo'})">
+  <div class="relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] lg:snap-start" onclick="openMediaModal({titulo: 'Nossas oficinas', descricao: 'Capacitação prática em artesanato e empreendedorismo local.', imagem: '', categoria: 'Vídeo'})">
     <img src="" alt="Nossas Oficinas" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90">
     <div class="absolute inset-0 bg-gradient-to-t from-purple-950/80 via-transparent to-black/20 flex flex-col justify-between p-4">
       <div class="self-center my-auto w-12 h-12 rounded-full bg-white/90 text-purple-900 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -1070,7 +1082,7 @@
                 </div></div></div></section><!-- Footer Elegante -->
     <footer id="contato" class="bg-brand-textDark text-white mt-12 rounded-t-[3rem] pt-20 pb-10 relative z-30 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-16 mb-16">
                 
                 <div>
                     <div class="flex items-center gap-4 mb-6">
@@ -1097,31 +1109,31 @@
                 
                 <div>
                     <h4 class="font-display text-2xl font-bold mb-6 text-white">Fale com a gente</h4>
-                    <ul class="space-y-6 font-sans text-lg text-white/90">
+                    <ul id="footer-contact-list" class="space-y-6 font-sans text-lg text-white/90">
                         <li class="flex items-start gap-4">
                             <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
                                 <i class="fas fa-location-dot"></i>
                             </div>
-                            <span>Rua da Prefeitura, S/N<br>Centro, Canindé de São Francisco - SE</span>
+                            <span id="footer-endereco">Rua da Prefeitura, S/N<br>Centro, Canindé de São Francisco - SE</span>
                         </li>
                         <li class="flex items-center gap-4">
                             <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
                                 <i class="fas fa-clock"></i>
                             </div>
-                            <span>Seg a Sex, 08h às 13h</span>
+                            <span id="footer-horario">Seg a Sex, 08h às 13h</span>
                         </li>
                         <li class="flex items-center gap-4">
                             <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
                                 <i class="fab fa-whatsapp"></i>
                             </div>
-                            <a href="#" class="font-bold hover:underline">(79) 99999-9999</a>
+                            <a href="#" id="footer-telefone" class="font-bold hover:underline">(79) 99999-9999</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="h-64 rounded-3xl overflow-hidden shadow-md bg-white">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15730.083313936656!2d-37.7977!3d-9.6433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x708a3b5a1b55555%3A0x5b3f11d15c7a3b0!2sCanind%C3%A9%20de%20S%C3%A3o%20Francisco%2C%20SE!5e0!3m2!1spt-BR!2sbr!4v1699999999999!5m2!1spt-BR!2sbr" 
+                    <iframe id="footer-map"
+                        src="https://maps.google.com/maps?q=Canind%C3%A9%20de%20S%C3%A3o%20Francisco%2C%20SE&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                         class="w-full h-full border-0"
                         allowfullscreen="" 
                         loading="lazy"
@@ -1188,6 +1200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     if (data.saude && Array.isArray(data.saude)) renderSaude(data.saude);
                     if (data.canindeDelas && typeof data.canindeDelas === 'object') renderCanindeDelas(data.canindeDelas);
+                    if (data.configuracoes) renderConfiguracoes(data.configuracoes);
                 };
 
                 fetch('api.php')
@@ -1247,6 +1260,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Controle de fotos do Canindé + Delas para Lightbox
         let canindeDelasPhotosList = [];
+
+        function renderConfiguracoes(conf) {
+            if (conf.endereco) {
+                const el = document.getElementById('footer-endereco');
+                if (el) el.innerHTML = conf.endereco;
+                
+                const mapEl = document.getElementById('footer-map');
+                if (mapEl) {
+                    let query = conf.endereco;
+                    if (!query.toLowerCase().includes('canindé') && !query.toLowerCase().includes('caninde')) {
+                        query += ", Canindé de São Francisco - SE";
+                    }
+                    mapEl.src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+                }
+            }
+            if (conf.horario) {
+                const el = document.getElementById('footer-horario');
+                if (el) el.innerHTML = conf.horario;
+            }
+            if (conf.telefone) {
+                const el = document.getElementById('footer-telefone');
+                if (el) {
+                    el.innerHTML = conf.telefone;
+                    // Remove non-numeric chars for href
+                    const cleanPhone = conf.telefone.replace(/\D/g,'');
+                    el.href = 'https://wa.me/55' + cleanPhone;
+                }
+            }
+            if (conf.email) {
+                // Check if email item exists, if not, append it
+                let emailEl = document.getElementById('footer-email');
+                if (!emailEl) {
+                    const ul = document.getElementById('footer-contact-list');
+                    if (ul) {
+                        const li = document.createElement('li');
+                        li.className = 'flex items-center gap-4';
+                        li.innerHTML = `
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <a href="mailto:${conf.email}" id="footer-email" class="font-bold hover:underline">${conf.email}</a>
+                        `;
+                        ul.appendChild(li);
+                    }
+                } else {
+                    emailEl.innerHTML = conf.email;
+                    emailEl.href = 'mailto:' + conf.email;
+                }
+            }
+            if (conf.instagram) {
+                let instEl = document.getElementById('footer-instagram');
+                if (!instEl) {
+                    const ul = document.getElementById('footer-contact-list');
+                    if (ul) {
+                        const li = document.createElement('li');
+                        li.className = 'flex items-center gap-4';
+                        li.innerHTML = `
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <a href="${conf.instagram}" target="_blank" id="footer-instagram" class="font-bold hover:underline">Nosso Instagram</a>
+                        `;
+                        ul.appendChild(li);
+                    }
+                } else {
+                    instEl.href = conf.instagram;
+                }
+            }
+        }
 
         function renderCanindeDelas(data) {
             if (!data) return;
@@ -1356,7 +1438,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!container) return;
 
             container.innerHTML = '';
-            container.className = 'grid grid-cols-1 md:grid-cols-3 gap-8';
+            container.className = 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8';
 
             saudeData.forEach(item => {
                 const el = document.createElement('div');
@@ -1524,7 +1606,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
 
                 const el = document.createElement('div');
-                el.className = 'w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.333rem)] shrink-0 snap-start bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
+                el.className = 'w-full md:w-[calc(50%-0.75rem)] lg:w-[calc(50%-0.75rem)] xl:w-[calc(33.333%-1.333rem)] shrink-0 snap-start bg-white rounded-3xl p-6 shadow-sm border border-purple-50 flex flex-col justify-between group cursor-pointer hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300';
                 el.innerHTML = `
                     <div onclick='openMediaModal({ titulo: \`${escapeHtml(safe(title))}\`, descricao: \`${escapeHtml(safe(desc))}\`, imagem: \`${escapeHtml(safe(image))}\`, categoria: \`${escapeHtml(safe(category))}\`, galeria: ${galeriaJson} })'>
                         <div class="relative h-48 rounded-2xl overflow-hidden mb-4">
@@ -1565,7 +1647,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const safe = s => (s || '').replace(/`/g, '\\`').replace(/'/g, "\\'");
 
                 const el = document.createElement('div');
-                el.className = 'relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(25%-1.125rem)] lg:snap-start';
+                el.className = 'relative rounded-3xl overflow-hidden aspect-[9/16] bg-slate-900 group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 lg:flex-none lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] lg:snap-start';
                 el.onclick = function() {
                     const btn = this.querySelector('.play-btn-anim');
                     if (btn) {

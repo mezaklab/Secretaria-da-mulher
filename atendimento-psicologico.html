@@ -6,8 +6,269 @@
     <title>Alguém pra te ouvir - Secretaria da Mulher</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Estilos de Alto Contraste Claro Institucional (High Contrast Light) */
+        body.high-contrast {
+            background-color: #ffffff !important;
+            color: #0a0a0a !important;
+        }
+
+        /* Seções e Containers Principais */
+        body.high-contrast header,
+        body.high-contrast section,
+        body.high-contrast footer,
+        body.high-contrast .bg-white,
+        body.high-contrast .bg-purple-50,
+        body.high-contrast .bg-purple-50\/50,
+        body.high-contrast .bg-\[\#EDE8F3\],
+        body.high-contrast .bg-\[\#8E79A5\],
+        body.high-contrast .bg-gradient-to-r,
+        body.high-contrast [class*="bg-stone-"],
+        body.high-contrast [class*="bg-slate-"],
+        body.high-contrast [class*="bg-purple-"] {
+            background-color: #ffffff !important;
+            background-image: none !important;
+            color: #0a0a0a !important;
+            border-color: #3b0764 !important;
+        }
+
+        body.high-contrast footer#contato {
+            background-color: #f8fafc !important;
+            border-top: 3px solid #3b0764 !important;
+        }
+
+        /* Cards e blocos de conteúdo */
+        body.high-contrast #acoes-container > div,
+        body.high-contrast #saude-container > div,
+        body.high-contrast #agenda-container > div,
+        body.high-contrast .modal-content,
+        body.high-contrast section .rounded-\[2rem\],
+        body.high-contrast section .rounded-\[2\.5rem\],
+        body.high-contrast section .rounded-3xl {
+            background-color: #ffffff !important;
+            border: 2px solid #3b0764 !important;
+            box-shadow: none !important;
+        }
+
+        /* Títulos e subtítulos */
+        body.high-contrast h1,
+        body.high-contrast h2,
+        body.high-contrast h3,
+        body.high-contrast h4,
+        body.high-contrast h5,
+        body.high-contrast h6,
+        body.high-contrast .font-display {
+            color: #000000 !important;
+            font-weight: 800 !important;
+        }
+
+        /* Textos gerais */
+        body.high-contrast p,
+        body.high-contrast span:not(#accessibility-bar span):not(.text-white),
+        body.high-contrast li,
+        body.high-contrast label,
+        body.high-contrast [class*="text-"] {
+            color: #0a0a0a !important;
+            font-weight: 500 !important;
+        }
+
+        /* Links interativos (apenas links em texto corrido, fora de botões) */
+        body.high-contrast a:not(#accessibility-bar a):not(.rounded-full):not([class*="rounded"]):not([class*="bg-"]):not(.btn) {
+            color: #581c87 !important;
+            text-decoration: underline !important;
+            font-weight: 700 !important;
+        }
+
+        body.high-contrast a:not(#accessibility-bar a):not(.rounded-full):not([class*="rounded"]):not([class*="bg-"]):not(.btn):hover,
+        body.high-contrast a:not(#accessibility-bar a):not(.rounded-full):not([class*="rounded"]):not([class*="bg-"]):not(.btn):focus {
+            color: #3b0764 !important;
+            background-color: #f3e8ff !important;
+        }
+
+        /* Botões principais e botões de ação (Hero, rodapé, modais, etc.) */
+        body.high-contrast button:not(#accessibility-bar button),
+        body.high-contrast a.btn,
+        body.high-contrast .btn-primary,
+        body.high-contrast a.rounded-full,
+        body.high-contrast a[href^="tel:"],
+        body.high-contrast a[href^="#galeria"],
+        body.high-contrast [class*="bg-purple"] button,
+        body.high-contrast button[class*="border-purple"] {
+            background-color: #581c87 !important;
+            color: #ffffff !important;
+            border: 2px solid #3b0764 !important;
+            font-weight: bold !important;
+            text-decoration: none !important;
+        }
+
+        /* Forçar texto e ícones brancos em botões */
+        body.high-contrast button:not(#accessibility-bar button) *,
+        body.high-contrast a.btn *,
+        body.high-contrast .btn-primary *,
+        body.high-contrast a.rounded-full *,
+        body.high-contrast a[href^="tel:"] *,
+        body.high-contrast a[href^="#galeria"] * {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+        }
+
+        body.high-contrast button:hover:not(#accessibility-bar button),
+        body.high-contrast a.btn:hover,
+        body.high-contrast .btn-primary:hover,
+        body.high-contrast a.rounded-full:hover,
+        body.high-contrast a[href^="tel:"]:hover,
+        body.high-contrast a[href^="#galeria"]:hover {
+            background-color: #3b0764 !important;
+            color: #ffffff !important;
+        }
+
+        /* Ícones gerais em links/cards */
+        body.high-contrast i,
+        body.high-contrast [class*="fa-"],
+        body.high-contrast svg:not(.text-white) {
+            color: #3b0764 !important;
+            fill: currentColor !important;
+        }
+
+        body.high-contrast button i,
+        body.high-contrast a.btn i,
+        body.high-contrast a.rounded-full i,
+        body.high-contrast a[href^="tel:"] i,
+        body.high-contrast a[href^="#galeria"] i,
+        body.high-contrast button svg,
+        body.high-contrast a.rounded-full svg {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+        }
+
+        
+        /* Garantir o font-weight correto para os ícones FontAwesome não quebrarem (sobrescrevendo o font-weight do [class*="text-"]) */
+        body.high-contrast .fas, 
+        body.high-contrast .fa-solid {
+            font-weight: 900 !important;
+        }
+        body.high-contrast .far, 
+        body.high-contrast .fa-regular,
+        body.high-contrast .fab, 
+        body.high-contrast .fa-brands {
+            font-weight: 400 !important;
+        }
+
+        /* Inputs de formulário */
+        body.high-contrast input,
+        body.high-contrast select,
+        body.high-contrast textarea {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #3b0764 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Divisores e SVGs de onda */
+        body.high-contrast svg.text-white,
+        body.high-contrast .absolute.-bottom-\[1px\] {
+            display: none !important;
+        }
+
+        /* Ocultar elementos decorativos secundários */
+        body.high-contrast .decor-line-art,
+        body.high-contrast img[src*="borboleta"],
+        body.high-contrast img[src*="flores"],
+        body.high-contrast img[src*="rosto"],
+        body.high-contrast img[src*="/rosto-transparente.png"],
+        body.high-contrast img[src*="hero-watermark"],
+        body.high-contrast [data-decorative] {
+            display: none !important;
+        }
+
+        /* Manter imagens reais/fotos normais e visíveis */
+        body.high-contrast img:not([data-decorative]):not([src*="brasao"]) {
+            display: block !important;
+            opacity: 1 !important;
+            filter: contrast(110%) !important;
+        }
+
+
+        /* Brasão no Fundo Claro: torna 100% escuro e nítido */
+        body.high-contrast img[src*="brasao"],
+        body.high-contrast img[alt*="Brasão"],
+        body.high-contrast .logo-brasao {
+            filter: brightness(0) !important;
+            opacity: 1 !important;
+            display: block !important;
+        }
+        
+        /* Conserto para o brasão com mask-image nos forms e paginas secundarias */
+        body.high-contrast [aria-label*="Brasão"] {
+            background-color: #000000 !important;
+        }
+
+
+        /* Barra Superior de Acessibilidade */
+        body.high-contrast #accessibility-bar {
+            background-color: #2c1540 !important;
+            border-bottom: 2px solid #581c87 !important;
+        }
+        body.high-contrast #accessibility-bar span {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+        body.high-contrast #accessibility-bar button {
+            background-color: #3b1d54 !important;
+            color: #ffffff !important;
+            border: 1px solid #7e22ce !important;
+        }
+        body.high-contrast #accessibility-bar button:hover {
+            background-color: #ffffff !important;
+            color: #2c1540 !important;
+        }
+
+        /* VLibras — garante visibilidade acima de qualquer camada */
+        [vw],
+        [vw-access-button],
+        .access-button,
+        div[vw] {
+            z-index: 99999 !important;
+            display: block !important;
+            visibility: visible !important;
+            position: fixed !important;
+        }
+
+    </style>
 </head>
 <body class="bg-[#f6f2f8] text-[#6B5E78] font-sans min-h-screen flex flex-col">
+
+    <!-- Barra de Acessibilidade -->
+    <aside id="accessibility-bar" aria-label="Barra de Acessibilidade Institucional" class="w-full bg-[#3b1d54] text-purple-100 py-[6px] px-[16px] z-[60] relative border-b border-purple-900/30 transition-colors duration-200" style="font-size: 12px !important; line-height: normal !important; letter-spacing: normal !important;">
+        <div class="max-w-[1280px] mx-auto flex flex-wrap items-center justify-between gap-[8px]">
+            <div class="flex items-center gap-[8px]">
+                <span class="font-semibold tracking-wide flex items-center gap-[6px] text-purple-100 text-[12px]">
+                    <i class="fas fa-universal-access text-[14px] text-purple-300" aria-hidden="true"></i>
+                    Acessibilidade
+                </span>
+                <span class="hidden sm:inline text-purple-400/60 text-[12px]">|</span>
+                <span class="hidden sm:inline text-purple-200/90 text-[11px]">Prefeitura Municipal de Canindé de São Francisco</span>
+            </div>
+            
+            <div class="flex items-center gap-[4px] sm:gap-[8px]">
+                <button type="button" onclick="changeFontSize(-10)" class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold" title="Diminuir tamanho do texto (A-)" aria-label="Diminuir tamanho da fonte">
+                    <span>A-</span>
+                </button>
+                <button type="button" onclick="resetFontSize()" class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold" title="Redefinir tamanho normal do texto (A)" aria-label="Redefinir tamanho da fonte">
+                    <span>A</span>
+                </button>
+                <button type="button" onclick="changeFontSize(10)" class="bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[8px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-bold" title="Aumentar tamanho do texto (A+)" aria-label="Aumentar tamanho da fonte">
+                    <span>A+</span>
+                </button>
+                <button type="button" onclick="toggleHighContrast()" id="btn-contrast" class="ml-[4px] sm:ml-[8px] bg-purple-900/60 hover:bg-purple-800 text-purple-100 px-[10px] py-[2px] rounded-[4px] border border-purple-700/50 transition-colors text-[11px] font-semibold flex items-center gap-[6px]" title="Alternar modo de Alto Contraste" aria-label="Alternar Alto Contraste">
+                    <i class="fas fa-circle-half-stroke text-[14px] text-purple-300" aria-hidden="true"></i>
+                    <span class="hidden xs:inline sm:inline text-[11px]">Alto Contraste</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+
     <!-- Header -->
     <header class="w-full bg-white shadow-sm py-4 px-6 md:px-12 flex items-center justify-center md:justify-between sticky top-0 z-50">
         <div class="flex items-center gap-4">
@@ -101,5 +362,56 @@
             </form>
         </div>
     </main>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+    <!-- Scripts de Acessibilidade -->
+    <script>
+        // ── Tamanho de Fonte ──
+        let currentFontSize = 100;
+        function changeFontSize(delta) {
+            currentFontSize = Math.min(130, Math.max(80, currentFontSize + delta));
+            document.documentElement.style.fontSize = currentFontSize + '%';
+            localStorage.setItem('acessibilidade_fonte', currentFontSize);
+        }
+        function resetFontSize() {
+            currentFontSize = 100;
+            document.documentElement.style.fontSize = '100%';
+            localStorage.setItem('acessibilidade_fonte', currentFontSize);
+        }
+
+        // ── Alto Contraste ──
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            const isActive = document.body.classList.contains('high-contrast');
+            localStorage.setItem('acessibilidade_contraste', isActive ? 'sim' : 'nao');
+            
+            const btn = document.getElementById('btn-contrast');
+            if (btn) btn.setAttribute('aria-pressed', isActive);
+        }
+
+        // ── Aplicar estado salvo ──
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedFonte = localStorage.getItem('acessibilidade_fonte');
+            if (savedFonte) {
+                currentFontSize = parseInt(savedFonte, 10);
+                document.documentElement.style.fontSize = currentFontSize + '%';
+            }
+            if (localStorage.getItem('acessibilidade_contraste') === 'sim') {
+                document.body.classList.add('high-contrast');
+                const btn = document.getElementById('btn-contrast');
+                if (btn) btn.setAttribute('aria-pressed', 'true');
+            }
+        });
+    </script>
 </body>
+
 </html>

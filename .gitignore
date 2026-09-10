@@ -9,3 +9,5 @@ node_modules/
 .claude/
 node_modules/
 config.php
+usuarios.json
+log_atividade.json
