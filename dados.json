@@ -168,6 +168,10 @@
         "telefone": "(79) 99999-9999",
         "horario": "Seg a Qui, 08h às 14h \/ Sex 8h às 12h",
         "email": "sec.mulher@caninde.se.gov.br",
-        "instagram": ""
+        "instagram": "",
+        "lacoCampanha": {
+            "ativo": true,
+            "cor": "amarelo"
+        }
     }
 }

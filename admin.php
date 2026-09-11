@@ -828,6 +828,38 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             <label class="block text-sm font-medium text-gray-700 mb-1">Link do Instagram (Opcional)</label>
                             <input type="url" id="config-instagram" placeholder="Ex: https://instagram.com/secretariadamulher" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
                         </div>
+                        
+                        <!-- Laço de Campanha -->
+                        <div class="border-t border-gray-100 pt-5 mt-5">
+                            <h4 class="text-md font-bold text-gray-800 mb-4">Laço de Campanha</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+                                <div>
+                                    <label class="flex items-center cursor-pointer">
+                                        <div class="relative">
+                                            <input type="checkbox" id="config-laco-ativo" class="sr-only">
+                                            <div class="block bg-gray-200 w-10 h-6 rounded-full transition-colors toggle-bg"></div>
+                                            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform"></div>
+                                        </div>
+                                        <div class="ml-3 text-sm font-medium text-gray-700">Ativar Laço na Página Inicial</div>
+                                    </label>
+                                    <style>
+                                        #config-laco-ativo:checked ~ .toggle-bg { background-color: #4CAF50; }
+                                        #config-laco-ativo:checked ~ .dot { transform: translateX(100%); }
+                                    </style>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Cor / Campanha</label>
+                                    <select id="config-laco-cor" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary transition-shadow">
+                                        <option value="amarelo">Amarelo (Setembro Amarelo)</option>
+                                        <option value="rosa">Rosa (Outubro Rosa)</option>
+                                        <option value="lilas">Lilás (Agosto Lilás)</option>
+                                        <option value="azul">Azul (Novembro Azul)</option>
+                                        <option value="verde">Verde (Junho Verde)</option>
+                                        <option value="vermelho">Vermelho (Dezembro Vermelho)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="pt-4 flex justify-end">
                             <button type="submit" id="btn-salvar-configuracoes" class="bg-brand-primary hover:bg-brand-secondary text-white px-6 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
                                 <i class="fas fa-save mr-2"></i> Salvar Alterações
@@ -1579,12 +1611,19 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 const eHor = document.getElementById('config-horario');
                 const eEma = document.getElementById('config-email');
                 const eIns = document.getElementById('config-instagram');
+                const eLacoAtivo = document.getElementById('config-laco-ativo');
+                const eLacoCor = document.getElementById('config-laco-cor');
                 
                 if(eEnd) eEnd.value = conf.endereco || 'Rua da Prefeitura, S/N, Centro, Canindé de São Francisco - SE';
                 if(eTel) eTel.value = conf.telefone || '(79) 99999-9999';
                 if(eHor) eHor.value = conf.horario || 'Seg a Sex, 08h às 13h';
                 if(eEma) eEma.value = conf.email || '';
                 if(eIns) eIns.value = conf.instagram || '';
+                
+                if(conf.lacoCampanha) {
+                    if(eLacoAtivo) eLacoAtivo.checked = conf.lacoCampanha.ativo;
+                    if(eLacoCor) eLacoCor.value = conf.lacoCampanha.cor || 'amarelo';
+                }
             }
 
             const formConfig = document.getElementById('form-configuracoes');
@@ -1596,7 +1635,11 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         telefone: document.getElementById('config-telefone').value,
                         horario: document.getElementById('config-horario').value,
                         email: document.getElementById('config-email').value,
-                        instagram: document.getElementById('config-instagram').value
+                        instagram: document.getElementById('config-instagram').value,
+                        lacoCampanha: {
+                            ativo: document.getElementById('config-laco-ativo').checked,
+                            cor: document.getElementById('config-laco-cor').value
+                        }
                     };
                     
                     const btn = e.target.querySelector('button[type="submit"]');
