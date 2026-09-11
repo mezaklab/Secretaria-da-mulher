@@ -2,20 +2,57 @@
 session_start();
 header('Content-Type: application/json; charset=utf-8');
 
+function registrarLog($acao) {
+    $logFile = __DIR__ . '/log_atividade.json';
+    $logsRaw = file_exists($logFile) ? file_get_contents($logFile) : '{"logs":[]}';
+    $logsData = json_decode($logsRaw, true);
+    
+    if (json_last_error() !== JSON_ERROR_NONE || !isset($logsData['logs']) || !is_array($logsData['logs'])) {
+        http_response_code(500);
+        echo json_encode(["status" => "error", "message" => "O arquivo de log (log_atividade.json) está corrompido ou inacessível. Contate o suporte."]);
+        exit;
+    }
+
+    date_default_timezone_set('America/Sao_Paulo');
+    array_unshift($logsData['logs'], [
+        "usuario" => $_SESSION['usuario_nome'] ?? 'Desconhecido',
+        "papel" => $_SESSION['papel'] ?? 'Desconhecido',
+        "data_hora" => date('d/m/Y H:i:s'),
+        "acao" => $acao
+    ]);
+    $logsData['logs'] = array_slice($logsData['logs'], 0, 200);
+    file_put_contents($logFile, json_encode($logsData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+}
+
 $dataFile = __DIR__ . '/dados.json';
 
 // Tratar requisição GET
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Retornar dados de administração (somente super_admin)
     if (isset($_GET['admin_data'])) {
-        if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || !isset($_SESSION['papel']) || $_SESSION['papel'] !== 'super_admin') {
+        if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || ($_SESSION['papel'] ?? '') !== 'super_admin') {
             http_response_code(403);
             echo json_encode(["status" => "error", "message" => "Acesso negado."]);
             exit;
         }
         
-        $usuarios = file_exists(__DIR__.'/usuarios.json') ? json_decode(file_get_contents(__DIR__.'/usuarios.json'), true)['usuarios'] ?? [] : [];
-        $logs = file_exists(__DIR__.'/log_atividade.json') ? json_decode(file_get_contents(__DIR__.'/log_atividade.json'), true)['logs'] ?? [] : [];
+        $usuariosRaw = file_exists(__DIR__.'/usuarios.json') ? file_get_contents(__DIR__.'/usuarios.json') : '{"usuarios":[]}';
+        $usuariosDecoded = json_decode($usuariosRaw, true);
+        if (json_last_error() !== JSON_ERROR_NONE || !isset($usuariosDecoded['usuarios'])) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "O arquivo de usuários está corrompido. Contate o suporte."]);
+            exit;
+        }
+        $usuarios = $usuariosDecoded['usuarios'];
+        
+        $logsRaw = file_exists(__DIR__.'/log_atividade.json') ? file_get_contents(__DIR__.'/log_atividade.json') : '{"logs":[]}';
+        $logsDecoded = json_decode($logsRaw, true);
+        if (json_last_error() !== JSON_ERROR_NONE || !isset($logsDecoded['logs'])) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "O arquivo de logs está corrompido. Contate o suporte."]);
+            exit;
+        }
+        $logs = $logsDecoded['logs'];
         
         foreach($usuarios as &$u) { unset($u['senha_hash']); } // Ocultar hashes
         
@@ -56,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Gerenciar Usuários
     if (isset($_GET['gerenciar_usuarios'])) {
-        if (!isset($_SESSION['papel']) || $_SESSION['papel'] !== 'super_admin') {
+        if (($_SESSION['papel'] ?? '') !== 'super_admin') {
             http_response_code(403);
             echo json_encode(["status" => "error", "message" => "Acesso negado."]);
             exit;
@@ -67,7 +104,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $action = $data['action'] ?? '';
         
         $usuariosFile = __DIR__ . '/usuarios.json';
-        $usuariosData = file_exists($usuariosFile) ? json_decode(file_get_contents($usuariosFile), true) : ['usuarios' => []];
+        $usuariosRaw = file_exists($usuariosFile) ? file_get_contents($usuariosFile) : '{"usuarios":[]}';
+        $usuariosData = json_decode($usuariosRaw, true);
+        
+        if (json_last_error() !== JSON_ERROR_NONE || !isset($usuariosData['usuarios']) || !is_array($usuariosData['usuarios'])) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "O arquivo de usuários está corrompido ou inacessível. Contate o suporte."]);
+            exit;
+        }
         
         if ($action === 'create') {
             $senha = $data['senha'] ?? '';
@@ -78,9 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit;
             }
             
-            if (!preg_match('/^[a-zA-Z0-9\._\-]+$/', $data['usuario'])) {
+            if (!preg_match('/^[a-z]+\.[a-z]+$/', strtolower($data['usuario']))) {
                 http_response_code(400);
-                echo json_encode(["status" => "error", "message" => "O nome de usuário possui caracteres inválidos. Use apenas letras, números, pontos e traços."]);
+                echo json_encode(["status" => "error", "message" => "O login do operador deve seguir obrigatoriamente o padrão nome.sobrenome (ex: maria.silva)."]);
                 exit;
             }
             
@@ -103,6 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
             
             file_put_contents($usuariosFile, json_encode($usuariosData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            registrarLog("criou operador " . $data['usuario']);
             echo json_encode(["status" => "success", "message" => "Operador criado com sucesso."]);
             exit;
             
@@ -117,6 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         exit;
                     }
                     $u['ativo'] = !$u['ativo'];
+                    $acaoNome = $u['ativo'] ? 'ativou' : 'desativou';
+                    registrarLog("$acaoNome operador " . $u['usuario']);
                     $found = true;
                     break;
                 }
@@ -194,21 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = file_put_contents($dataFile, json_encode($formattedData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         
         if ($result !== false) {
-            // Gerar log de atividade
-            $logFile = __DIR__ . '/log_atividade.json';
-            $logsData = file_exists($logFile) ? json_decode(file_get_contents($logFile), true) : ['logs' => []];
-            
-            date_default_timezone_set('America/Sao_Paulo');
-            array_unshift($logsData['logs'], [
-                "usuario" => $_SESSION['usuario_nome'] ?? 'Desconhecido',
-                "papel" => $_SESSION['papel'] ?? 'Desconhecido',
-                "data_hora" => date('d/m/Y H:i:s'),
-                "acao" => "salvou e publicou alterações no conteúdo do site"
-            ]);
-            
-            // Manter apenas os últimos 200 logs
-            $logsData['logs'] = array_slice($logsData['logs'], 0, 200);
-            file_put_contents($logFile, json_encode($logsData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            registrarLog("salvou e publicou alterações no conteúdo do site");
 
             echo json_encode(["status" => "success", "message" => "Dados atualizados com sucesso."]);
         } else {

@@ -397,139 +397,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
         }
     </script>
 
-    <!-- Admin Management Script (Passo 6 e 7) -->
-    <script>
-        const isSuperAdmin = <?php echo isset($_SESSION['papel']) && $_SESSION['papel'] === 'super_admin' ? 'true' : 'false'; ?>;
-        const currentCsrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        
-        if (isSuperAdmin) {
-            async function loadAdminData() {
-                try {
-                    const res = await fetch('api.php?admin_data=1', { headers: { 'X-CSRF-Token': currentCsrfToken } });
-                    const data = await res.json();
-                    
-                    const listaUsuarios = document.getElementById('lista-usuarios');
-                    if (listaUsuarios && data.usuarios) {
-                        listaUsuarios.innerHTML = '';
-                        data.usuarios.forEach(u => {
-                            const tr = document.createElement('tr');
-                            tr.className = "border-b border-gray-50/50 hover:bg-gray-50/50";
-                            const isSelf = u.usuario === '<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>';
-                            const badgeClass = u.papel === 'super_admin' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
-                            const statusBadgeClass = u.ativo ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
-                            
-                            tr.innerHTML = `
-                                <td class="px-6 py-4 font-medium text-gray-800">${u.nome_completo}</td>
-                                <td class="px-6 py-4">${u.usuario}</td>
-                                <td class="px-6 py-4"><span class="px-2 py-1 rounded-full text-xs font-semibold ${badgeClass}">${u.papel}</span></td>
-                                <td class="px-6 py-4"><span class="px-2 py-1 rounded-full text-xs font-semibold ${statusBadgeClass}">${u.ativo ? 'Ativo' : 'Inativo'}</span></td>
-                                <td class="px-6 py-4 text-right">
-                                    ${!isSelf && u.papel !== 'super_admin' ? `
-                                    <button onclick="toggleUserStatus('${u.id}')" class="text-xs font-semibold px-3 py-1.5 rounded-lg border transition-colors ${u.ativo ? 'border-red-200 text-red-600 hover:bg-red-50' : 'border-green-200 text-green-600 hover:bg-green-50'}">
-                                        ${u.ativo ? 'Desativar' : 'Reativar'}
-                                    </button>
-                                    ` : '<span class="text-xs text-gray-400 italic">Protegido</span>'}
-                                </td>
-                            `;
-                            listaUsuarios.appendChild(tr);
-                        });
-                    }
-                    
-                    const listaLogs = document.getElementById('lista-logs');
-                    if (listaLogs && data.logs) {
-                        listaLogs.innerHTML = '';
-                        data.logs.forEach(l => {
-                            const tr = document.createElement('tr');
-                            tr.className = "border-b border-gray-50/50 hover:bg-gray-50/50";
-                            const badgeClass = l.papel === 'super_admin' ? 'text-purple-600' : 'text-blue-600';
-                            tr.innerHTML = `
-                                <td class="px-6 py-3 text-gray-500 whitespace-nowrap">${l.data_hora}</td>
-                                <td class="px-6 py-3 font-medium text-gray-800">${l.usuario}</td>
-                                <td class="px-6 py-3 text-xs font-semibold ${badgeClass}">${l.papel}</td>
-                                <td class="px-6 py-3 text-gray-600">${l.acao}</td>
-                            `;
-                            listaLogs.appendChild(tr);
-                        });
-                    }
-                } catch (e) {
-                    console.error("Erro ao carregar dados admin:", e);
-                }
-            }
-            
-            // Carrega tabelas
-            const tabLinks = document.querySelectorAll('nav [data-target]');
-            tabLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (e.currentTarget.dataset.target === 'gerenciar-usuarios' || e.currentTarget.dataset.target === 'logs-atividade') {
-                        loadAdminData();
-                    }
-                });
-            });
-            
-            const formNovoOp = document.getElementById('form-novo-operador');
-            if (formNovoOp) {
-                formNovoOp.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    const nome = document.getElementById('op-nome').value.trim();
-                    const usuario = document.getElementById('op-usuario').value.trim();
-                    const senha = document.getElementById('op-senha').value;
-                    
-                    const btn = e.target.querySelector('button[type="submit"]');
-                    const btnText = btn.innerHTML;
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Criando...';
-                    btn.disabled = true;
-                    
-                    try {
-                        const res = await fetch('api.php?gerenciar_usuarios=1', {
-                            method: 'POST',
-                            headers: { 
-                                'X-CSRF-Token': currentCsrfToken,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ action: 'create', nome, usuario, senha })
-                        });
-                        
-                        const result = await res.json();
-                        if (result.status === 'success') {
-                            alert(result.message);
-                            formNovoOp.reset();
-                            loadAdminData();
-                        } else {
-                            alert(result.message || 'Erro ao criar operador.');
-                        }
-                    } catch (e) {
-                        alert('Erro de conexão ao criar operador.');
-                    } finally {
-                        btn.innerHTML = btnText;
-                        btn.disabled = false;
-                    }
-                });
-            }
-            
-            window.toggleUserStatus = async function(id) {
-                if (!confirm('Deseja realmente alterar o status deste usuário?')) return;
-                try {
-                    const res = await fetch('api.php?gerenciar_usuarios=1', {
-                        method: 'POST',
-                        headers: { 
-                            'X-CSRF-Token': currentCsrfToken,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ action: 'toggle_status', id })
-                    });
-                    
-                    const result = await res.json();
-                    if (result.status === 'success') {
-                        loadAdminData(); 
-                    } else {
-                        alert(result.message || 'Erro ao alterar status.');
-                    }
-                } catch (e) {
-                    alert('Erro de conexão ao alterar status.');
-                }
-            };
-        }
-    </script>
+
 </body>
 </html>
 
@@ -616,7 +484,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             <a href="#" data-target="configuracoes" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
                 <i class="fas fa-cog w-5 text-center"></i> Configurações
             </a>
-            <?php if ($_SESSION['papel'] === 'super_admin'): ?>
+            <?php if (($_SESSION['papel'] ?? '') === 'super_admin'): ?>
             <a href="#" data-target="gerenciar-usuarios" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
                 <i class="fas fa-users-cog w-5 text-center"></i> Gerenciar Usuários
             </a>
@@ -651,8 +519,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="text-sm">
-                    <p id="admin-display-name" class="font-bold text-gray-800"><?php echo htmlspecialchars($_SESSION['usuario_nome']); ?></p>
-                    <p id="admin-display-role" class="text-gray-500"><?php echo $_SESSION['papel'] === 'super_admin' ? 'Super Admin' : 'Operador'; ?></p>
+                    <p id="admin-display-name" class="font-bold text-gray-800"><?php echo htmlspecialchars($_SESSION['usuario_nome'] ?? 'Usuário'); ?></p>
+                    <p id="admin-display-role" class="text-gray-500"><?php echo ($_SESSION['papel'] ?? '') === 'super_admin' ? 'Super Admin' : 'Operador'; ?></p>
                 </div>
             </div>
         </header>
@@ -969,7 +837,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 </div>
             </div>
 
-            <?php if ($_SESSION['papel'] === 'super_admin'): ?>
+            <?php if (($_SESSION['papel'] ?? '') === 'super_admin'): ?>
             <!-- Gerenciar Usuários -->
             <div id="gerenciar-usuarios" class="tab-content hidden">
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
@@ -2498,7 +2366,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
 
     <!-- Admin Management Script (Passo 6 e 7) -->
     <script>
-        const isSuperAdmin = <?php echo isset($_SESSION['papel']) && $_SESSION['papel'] === 'super_admin' ? 'true' : 'false'; ?>;
+        const isSuperAdmin = <?php echo ($_SESSION['papel'] ?? '') === 'super_admin' ? 'true' : 'false'; ?>;
         const currentCsrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         
         if (isSuperAdmin) {
@@ -2513,7 +2381,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         data.usuarios.forEach(u => {
                             const tr = document.createElement('tr');
                             tr.className = "border-b border-gray-50/50 hover:bg-gray-50/50";
-                            const isSelf = u.usuario === '<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>';
+                            const isSelf = u.usuario === '<?php echo htmlspecialchars($_SESSION['usuario'] ?? ''); ?>';
                             const badgeClass = u.papel === 'super_admin' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
                             const statusBadgeClass = u.ativo ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
                             
