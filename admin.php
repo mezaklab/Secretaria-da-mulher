@@ -29,10 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
             $password = $_POST['password'] ?? '';
             $usuariosFile = __DIR__ . '/usuarios.json';
             
+            $arquivoValido = false;
             $userFound = null;
             if (file_exists($usuariosFile)) {
                 $usuariosData = json_decode(file_get_contents($usuariosFile), true);
                 if (json_last_error() === JSON_ERROR_NONE && isset($usuariosData['usuarios'])) {
+                    $arquivoValido = true;
                     foreach ($usuariosData['usuarios'] as $u) {
                         if (isset($u['usuario']) && $u['usuario'] === $username) {
                             $userFound = $u;
@@ -44,23 +46,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && isset(
 
             $loginSuccess = false;
             
-            // 1. Tentar login via usuarios.json
-            if ($userFound) {
-                if (isset($userFound['ativo']) && $userFound['ativo'] === true && password_verify($password, $userFound['senha_hash'])) {
+            if ($arquivoValido) {
+                // 1. Arquivo existe e é válido: tentar login via usuarios.json apenas
+                if ($userFound && isset($userFound['ativo']) && $userFound['ativo'] === true && password_verify($password, $userFound['senha_hash'])) {
                     $loginSuccess = true;
                     $_SESSION['usuario'] = $userFound['usuario'];
                     $_SESSION['usuario_id'] = $userFound['id'];
                     $_SESSION['usuario_nome'] = $userFound['nome_completo'];
                     $_SESSION['papel'] = $userFound['papel'];
                 }
-            } 
-            // 2. Fallback de segurança para config.php
-            else if (defined('ADMIN_USER') && defined('ADMIN_PASS_HASH') && $username === ADMIN_USER && password_verify($password, ADMIN_PASS_HASH)) {
-                $loginSuccess = true;
-                $_SESSION['usuario'] = ADMIN_USER;
-                $_SESSION['usuario_id'] = 'fallback_admin';
-                $_SESSION['usuario_nome'] = 'Administrador de Sistema';
-                $_SESSION['papel'] = 'super_admin';
+            } else {
+                // 2. Arquivo ausente ou corrompido: Fallback de segurança para config.php
+                if (defined('ADMIN_USER') && defined('ADMIN_PASS_HASH') && $username === ADMIN_USER && password_verify($password, ADMIN_PASS_HASH)) {
+                    $loginSuccess = true;
+                    $_SESSION['usuario'] = ADMIN_USER;
+                    $_SESSION['usuario_id'] = 'fallback_admin';
+                    $_SESSION['usuario_nome'] = 'Administrador de Sistema';
+                    $_SESSION['papel'] = 'super_admin';
+                }
             }
 
             if ($loginSuccess) {
