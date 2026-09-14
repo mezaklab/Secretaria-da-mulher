@@ -55,3 +55,14 @@ Para que a proteção contra acesso HTTP direto a esses scripts funcione no ambi
 ```bash
 php -S localhost:8000 router.php
 ```
+
+## 📧 Envio de E-mails (PHPMailer)
+
+O projeto utiliza a biblioteca [PHPMailer](https://github.com/PHPMailer/PHPMailer) para envio de formulários (Jurídico e Psicológico) via SMTP.
+
+Para garantir compatibilidade com ambientes de hospedagem compartilhada mais restritos, optou-se por não utilizar o Composer. Os arquivos fonte estritos e essenciais do PHPMailer foram baixados manualmente para o diretório `libs/PHPMailer/`:
+- `Exception.php`
+- `PHPMailer.php`
+- `SMTP.php`
+
+Caso precise atualizar, baixe as versões mais recentes dos 3 arquivos acima do repositório oficial no GitHub e substitua os que estão na pasta.

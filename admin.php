@@ -494,7 +494,13 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             <a href="#" data-target="logs-atividade" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
                 <i class="fas fa-clipboard-list w-5 text-center"></i> Logs de Atividade
             </a>
+            <a href="#" data-target="emails-atendimento" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+                <i class="fas fa-envelope w-5 text-center"></i> E-mails Atendimento
+            </a>
             <?php endif; ?>
+            <a href="#" data-target="historico-solicitacoes" class="nav-item flex items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/5 hover:text-white rounded-lg font-medium transition-colors">
+                <i class="fas fa-history w-5 text-center"></i> Histórico de Solicit.
+            </a>
         </nav>
 
         <div class="p-4 border-t border-white/10 space-y-2">
@@ -927,6 +933,37 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                                 <!-- Preenchido via JS (ou injetado pelo PHP no futuro) -->
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-mails Atendimento -->
+            <div id="emails-atendimento" class="tab-content hidden">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
+                    <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">E-mails de Destino</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">Defina quem recebe os formulários de atendimento do site.</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <form id="form-emails-atendimento" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail do Jurídico</label>
+                                    <input type="email" id="email-juridico" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail do Psicológico</label>
+                                    <input type="email" id="email-psicologico" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
+                                </div>
+                            </div>
+                            <div class="flex justify-end pt-2">
+                                <button type="submit" class="bg-brand-primary hover:bg-brand-secondary text-white px-5 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-2">
+                                    <i class="fas fa-save"></i> Salvar E-mails
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -2464,6 +2501,37 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             listaLogs.appendChild(tr);
                         });
                     }
+
+                    if (data.destinatarios) {
+                        const eJuridico = document.getElementById('email-juridico');
+                        const ePsico = document.getElementById('email-psicologico');
+                        if (eJuridico) eJuridico.value = data.destinatarios.juridico || '';
+                        if (ePsico) ePsico.value = data.destinatarios.psicologico || '';
+                    }
+
+                    const listaHistorico = document.getElementById('lista-historico');
+                    if (listaHistorico && data.historico) {
+                        listaHistorico.innerHTML = '';
+                        if (data.historico.length === 0) {
+                            listaHistorico.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-500">Nenhuma solicitação encontrada.</td></tr>';
+                        } else {
+                            data.historico.forEach(h => {
+                                const tr = document.createElement('tr');
+                                tr.className = "hover:bg-gray-50/50 transition-colors";
+                                const badgeTipo = h.tipo === 'juridico' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
+                                const badgeStatus = h.status === 'sucesso' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700';
+                                const dataFormatada = new Date(h.data_hora).toLocaleString('pt-BR');
+                                
+                                tr.innerHTML = `
+                                    <td class="px-6 py-3 whitespace-nowrap"><span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-md font-mono">${dataFormatada}</span></td>
+                                    <td class="px-6 py-3 whitespace-nowrap"><span class="text-xs px-2 py-1 rounded-md font-bold uppercase ${badgeTipo}">${h.tipo}</span></td>
+                                    <td class="px-6 py-3 whitespace-nowrap"><span class="font-medium text-gray-800">${safe(h.nome)}</span></td>
+                                    <td class="px-6 py-3 whitespace-nowrap"><span class="text-xs px-2 py-1 rounded-md font-bold uppercase ${badgeStatus}">${h.status}</span></td>
+                                `;
+                                listaHistorico.appendChild(tr);
+                            });
+                        }
+                    }
                 } catch (e) {
                     console.error("Erro ao carregar dados admin:", e);
                 }
@@ -2473,12 +2541,49 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             const tabLinks = document.querySelectorAll('nav [data-target]');
             tabLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    if (e.currentTarget.dataset.target === 'gerenciar-usuarios' || e.currentTarget.dataset.target === 'logs-atividade') {
+                    if (['gerenciar-usuarios', 'logs-atividade', 'emails-atendimento', 'historico-solicitacoes'].includes(e.currentTarget.dataset.target)) {
                         loadAdminData();
                     }
                 });
             });
             
+            const formEmails = document.getElementById('form-emails-atendimento');
+            if (formEmails) {
+                formEmails.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const juridico = document.getElementById('email-juridico').value.trim();
+                    const psicologico = document.getElementById('email-psicologico').value.trim();
+                    
+                    const btn = e.target.querySelector('button[type="submit"]');
+                    const btnText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Salvando...';
+                    btn.disabled = true;
+                    
+                    try {
+                        const res = await fetch('api.php?gerenciar_destinatarios=1', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-Token': getSessionToken()
+                            },
+                            body: JSON.stringify({ juridico, psicologico })
+                        });
+                        const data = await res.json();
+                        if (data.status === 'success') {
+                            showToast('Sucesso!', 'E-mails atualizados com sucesso.', 'success');
+                            loadAdminData();
+                        } else {
+                            showToast('Erro', data.message || 'Falha ao salvar', 'error');
+                        }
+                    } catch (err) {
+                        showToast('Erro', 'Erro de comunicação', 'error');
+                    } finally {
+                        btn.innerHTML = btnText;
+                        btn.disabled = false;
+                    }
+                });
+            }
+
             const formNovoOp = document.getElementById('form-novo-operador');
             if (formNovoOp) {
                 formNovoOp.addEventListener('submit', async (e) => {

@@ -28,35 +28,38 @@ $dataFile = __DIR__ . '/dados.json';
 
 // Tratar requisição GET
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Retornar dados de administração (somente super_admin)
+    // Retornar dados de administração (restrito por papel)
     if (isset($_GET['admin_data'])) {
-        if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true || ($_SESSION['papel'] ?? '') !== 'super_admin') {
+        if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             http_response_code(403);
             echo json_encode(["status" => "error", "message" => "Acesso negado."]);
             exit;
         }
         
-        $usuariosRaw = file_exists(__DIR__.'/usuarios.json') ? file_get_contents(__DIR__.'/usuarios.json') : '{"usuarios":[]}';
-        $usuariosDecoded = json_decode($usuariosRaw, true);
-        if (json_last_error() !== JSON_ERROR_NONE || !isset($usuariosDecoded['usuarios'])) {
-            http_response_code(500);
-            echo json_encode(["status" => "error", "message" => "O arquivo de usuários está corrompido. Contate o suporte."]);
-            exit;
+        $is_super_admin = ($_SESSION['papel'] ?? '') === 'super_admin';
+        $response = [];
+
+        // Histórico é comum a todos logados
+        $historicoRaw = file_exists(__DIR__.'/historico_solicitacoes.json') ? file_get_contents(__DIR__.'/historico_solicitacoes.json') : '[]';
+        $response['historico'] = json_decode($historicoRaw, true) ?: [];
+
+        // Demais dados são exclusivos para super_admin
+        if ($is_super_admin) {
+            $usuariosRaw = file_exists(__DIR__.'/usuarios.json') ? file_get_contents(__DIR__.'/usuarios.json') : '{"usuarios":[]}';
+            $usuariosDecoded = json_decode($usuariosRaw, true);
+            $usuarios = $usuariosDecoded['usuarios'] ?? [];
+            foreach($usuarios as &$u) { unset($u['senha_hash']); }
+            $response['usuarios'] = $usuarios;
+            
+            $logsRaw = file_exists(__DIR__.'/log_atividade.json') ? file_get_contents(__DIR__.'/log_atividade.json') : '{"logs":[]}';
+            $logsDecoded = json_decode($logsRaw, true);
+            $response['logs'] = $logsDecoded['logs'] ?? [];
+            
+            $destinatariosRaw = file_exists(__DIR__.'/destinatarios.json') ? file_get_contents(__DIR__.'/destinatarios.json') : '{}';
+            $response['destinatarios'] = json_decode($destinatariosRaw, true) ?: [];
         }
-        $usuarios = $usuariosDecoded['usuarios'];
         
-        $logsRaw = file_exists(__DIR__.'/log_atividade.json') ? file_get_contents(__DIR__.'/log_atividade.json') : '{"logs":[]}';
-        $logsDecoded = json_decode($logsRaw, true);
-        if (json_last_error() !== JSON_ERROR_NONE || !isset($logsDecoded['logs'])) {
-            http_response_code(500);
-            echo json_encode(["status" => "error", "message" => "O arquivo de logs está corrompido. Contate o suporte."]);
-            exit;
-        }
-        $logs = $logsDecoded['logs'];
-        
-        foreach($usuarios as &$u) { unset($u['senha_hash']); } // Ocultar hashes
-        
-        echo json_encode(['usuarios' => $usuarios, 'logs' => $logs]);
+        echo json_encode($response);
         exit;
     }
 
@@ -88,6 +91,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($csrf_token) || !isset($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrf_token)) {
         http_response_code(403);
         echo json_encode(["status" => "error", "message" => "Falha de validação CSRF."]);
+        exit;
+    }
+
+    // Gerenciar Destinatários
+    if (isset($_GET['gerenciar_destinatarios'])) {
+        if (($_SESSION['papel'] ?? '') !== 'super_admin') {
+            http_response_code(403);
+            echo json_encode(["status" => "error", "message" => "Acesso negado."]);
+            exit;
+        }
+
+        $input = json_decode(file_get_contents('php://input'), true);
+        if (!$input) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Dados inválidos."]);
+            exit;
+        }
+
+        $destinatarios = [
+            'juridico' => filter_var($input['juridico'] ?? '', FILTER_VALIDATE_EMAIL) ? $input['juridico'] : '',
+            'psicologico' => filter_var($input['psicologico'] ?? '', FILTER_VALIDATE_EMAIL) ? $input['psicologico'] : ''
+        ];
+
+        if (file_put_contents(__DIR__.'/destinatarios.json', json_encode($destinatarios, JSON_PRETTY_PRINT))) {
+            registrarLog('E-mails de destino atualizados.');
+            echo json_encode(["status" => "success", "message" => "E-mails atualizados com sucesso."]);
+        } else {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Erro ao salvar e-mails."]);
+        }
         exit;
     }
 

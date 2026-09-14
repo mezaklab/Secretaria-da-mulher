@@ -310,8 +310,18 @@
                 </p>
             </div>
 
-            <form action="#" method="POST" class="space-y-6">
+            <form id="formAtendimento" data-tipo="juridico" class="space-y-6">
                 <p class="text-sm text-slate-500 mb-2">Campos marcados com <span class="text-red-500 font-bold">*</span> são obrigatórios.</p>
+
+                <!-- Honeypot anti-spam -->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                    <label for="website_url">Deixe este campo em branco se for humano</label>
+                    <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+                </div>
+
+                <!-- Feedback Div -->
+                <div id="formFeedback" class="hidden px-4 py-3 rounded-xl mb-4 font-semibold text-sm"></div>
+
                 
                 <!-- Nome -->
                 <div>
@@ -411,6 +421,53 @@
                 if (btn) btn.setAttribute('aria-pressed', 'true');
             }
         });
+    </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("formAtendimento");
+        const feedback = document.getElementById("formFeedback");
+        const btnSubmit = form.querySelector("button[type='submit']");
+        const btnOriginalText = btnSubmit.innerHTML;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            feedback.classList.add("hidden");
+            feedback.classList.remove("bg-green-100", "text-green-800", "bg-red-100", "text-red-800");
+
+            const formData = new FormData(form);
+            formData.append("tipo", form.dataset.tipo);
+
+            try {
+                const response = await fetch("enviar_formulario.php", {
+                    method: "POST",
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                feedback.classList.remove("hidden");
+                if (data.success) {
+                    feedback.classList.add("bg-green-100", "text-green-800");
+                    feedback.textContent = data.message;
+                    form.reset();
+                } else {
+                    feedback.classList.add("bg-red-100", "text-red-800");
+                    feedback.textContent = data.message;
+                }
+            } catch (error) {
+                feedback.classList.remove("hidden");
+                feedback.classList.add("bg-red-100", "text-red-800");
+                feedback.textContent = "Erro na comunicação com o servidor. Tente novamente.";
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = btnOriginalText;
+            }
+        });
+    });
     </script>
 </body>
 
