@@ -69,14 +69,7 @@ if (!in_array($tipo, ['juridico', 'psicologico'], true)) {
     responder(false, 'Tipo de solicitação inválido.');
 }
 
-// 4. Limite de reenvio de 60 segundos por sessão
-$session_key = 'ultimo_envio_' . $tipo;
-if (isset($_SESSION[$session_key]) && (time() - $_SESSION[$session_key]) < 60) {
-    responder(false, 'Aguarde um momento antes de enviar outra solicitação desse tipo.');
-}
-$_SESSION[$session_key] = time();
-
-// 5. Lê o destinatário
+// 4. Lê o destinatário ANTES de aplicar limite de reenvio
 $arquivo_destinatarios = __DIR__ . '/destinatarios.json';
 $email_destino = '';
 if (file_exists($arquivo_destinatarios)) {
@@ -85,8 +78,16 @@ if (file_exists($arquivo_destinatarios)) {
 }
 
 if (empty($email_destino)) {
+    registrar_historico($tipo, $nome, 'falha_config');
     responder(false, 'Não foi possível processar seu pedido no momento. Tente novamente mais tarde.');
 }
+
+// 5. Limite de reenvio de 60 segundos por sessão
+$session_key = 'ultimo_envio_' . $tipo;
+if (isset($_SESSION[$session_key]) && (time() - $_SESSION[$session_key]) < 60) {
+    responder(false, 'Aguarde um momento antes de enviar outra solicitação desse tipo.');
+}
+$_SESSION[$session_key] = time();
 
 // 6. Monta e envia o e-mail via PHPMailer
 $mail = new PHPMailer(true);
@@ -107,12 +108,16 @@ try {
     $mail->setFrom(SMTP_USER, 'Secretaria da Mulher');
     $mail->addAddress($email_destino);
 
-    // Conteúdo - Usando apenas Texto Plano (Segurança e Simplicidade)
-    $mail->isHTML(false);
+    // Embutindo o logo para uso no HTML
+    if (file_exists(__DIR__ . '/public/brasao.png')) {
+        $mail->addEmbeddedImage(__DIR__ . '/public/brasao.png', 'brasao_sm');
+    }
+
+    $mail->isHTML(true);
     $assunto_tipo = $tipo === 'juridico' ? 'Jurídico' : 'Psicológico';
     $mail->Subject = "Nova Solicitacao de Atendimento - $assunto_tipo";
     
-    // Corpo do E-mail (Texto Plano)
+    // Fallback Texto Plano (AltBody)
     $textoBody = "Nova Solicitação de Atendimento {$assunto_tipo}\n\n";
     $textoBody .= "Nome: {$nome}\n";
     $textoBody .= "CPF: {$cpf}\n";
@@ -123,8 +128,98 @@ try {
     $textoBody .= "Relato/Problema:\n{$relato}\n\n";
     $textoBody .= "----------------------------------------\n";
     $textoBody .= "Enviado através do portal da Secretaria Municipal da Mulher.";
+
+    // Montagem do HTML com Escape de Segurança
+    $cor_destaque = '#7A3E9D';
+    $data_envio = date('d/m/Y H:i:s');
+
+    $nome_safe = htmlspecialchars($nome, ENT_QUOTES, 'UTF-8');
+    $cpf_safe = htmlspecialchars($cpf, ENT_QUOTES, 'UTF-8');
+    $nascimento_safe = htmlspecialchars($nascimento, ENT_QUOTES, 'UTF-8');
+    $endereco_safe = htmlspecialchars($endereco, ENT_QUOTES, 'UTF-8');
+    $whatsapp_safe = htmlspecialchars($whatsapp, ENT_QUOTES, 'UTF-8');
+    $telefone2_safe = htmlspecialchars($telefone2, ENT_QUOTES, 'UTF-8');
+    $relato_safe = nl2br(htmlspecialchars($relato, ENT_QUOTES, 'UTF-8'));
+
+    $htmlBody = <<<HTML
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitação de Atendimento - {$assunto_tipo}</title>
+</head>
+<body style="margin: 0; padding: 20px; font-family: Arial, Helvetica, sans-serif; background-color: #f4f4f4; -webkit-font-smoothing: antialiased;">
+
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;">
+        <tr>
+            <td style="background-color: {$cor_destaque}; padding: 20px 30px; text-align: left; border-bottom: 4px solid #5d2f78;">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td width="60" style="vertical-align: middle;">
+                            <img src="cid:brasao_sm" alt="Brasão" width="50" style="display: block; max-width: 100%;">
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 16px; font-weight: normal; letter-spacing: 0.5px;">Secretaria Municipal da Mulher</h1>
+                            <h2 style="margin: 4px 0 0 0; color: #ffffff; font-size: 22px; font-weight: bold;">Atendimento {$assunto_tipo}</h2>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 30px;">
+                <p style="margin: 0 0 20px 0; font-size: 14px; color: #666666;">
+                    Uma nova solicitação foi recebida através do portal público. Seguem os dados preenchidos:
+                </p>
+                <table width="100%" cellpadding="12" cellspacing="0" border="0" style="font-size: 15px; border-collapse: collapse;">
+                    <tr>
+                        <td width="35%" style="background-color: #f9f9f9; border-bottom: 1px solid #eeeeee; font-weight: bold; color: #555555;">Nome Completo:</td>
+                        <td width="65%" style="background-color: #f9f9f9; border-bottom: 1px solid #eeeeee; color: #111111;">{$nome_safe}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ffffff; border-bottom: 1px solid #eeeeee; font-weight: bold; color: #555555;">CPF:</td>
+                        <td style="background-color: #ffffff; border-bottom: 1px solid #eeeeee; color: #111111;">{$cpf_safe}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f9f9f9; border-bottom: 1px solid #eeeeee; font-weight: bold; color: #555555;">Nascimento:</td>
+                        <td style="background-color: #f9f9f9; border-bottom: 1px solid #eeeeee; color: #111111;">{$nascimento_safe}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ffffff; border-bottom: 1px solid #eeeeee; font-weight: bold; color: #555555;">Endereço:</td>
+                        <td style="background-color: #ffffff; border-bottom: 1px solid #eeeeee; color: #111111;">{$endereco_safe}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f9f9f9; border-bottom: 1px solid #eeeeee; font-weight: bold; color: #555555;">WhatsApp:</td>
+                        <td style="background-color: #f9f9f9; border-bottom: 1px solid #eeeeee; color: #111111;">{$whatsapp_safe}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #ffffff; border-bottom: 1px solid #eeeeee; font-weight: bold; color: #555555;">Tel. Alternativo:</td>
+                        <td style="background-color: #ffffff; border-bottom: 1px solid #eeeeee; color: #111111;">{$telefone2_safe}</td>
+                    </tr>
+                </table>
+                <div style="margin-top: 30px;">
+                    <h3 style="margin: 0 0 10px 0; font-size: 16px; color: {$cor_destaque}; border-bottom: 2px solid {$cor_destaque}; padding-bottom: 5px;">Relato / Necessidade</h3>
+                    <div style="background-color: #fbfbfb; border-left: 4px solid {$cor_destaque}; padding: 15px; font-size: 15px; line-height: 1.6; color: #333333; margin: 0;">
+                        {$relato_safe}
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="background-color: #f4f4f4; padding: 20px 30px; text-align: center; border-top: 1px solid #e0e0e0;">
+                <p style="margin: 0; font-size: 12px; color: #888888; line-height: 1.5;">
+                    Enviado através do portal oficial da Secretaria Municipal da Mulher de Canindé de São Francisco - SE<br>
+                    Data e Hora do Envio: <strong>{$data_envio}</strong>
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+HTML;
     
-    $mail->Body = $textoBody;
+    $mail->Body = $htmlBody;
+    $mail->AltBody = $textoBody;
 
     $mail->send();
     $status_envio = 'sucesso';

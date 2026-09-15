@@ -1349,7 +1349,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     return result;
                 } catch (e) {
                     console.error("Erro na API:", e);
-                    alert("Erro ao salvar no servidor: " + e.message);
+                    showToast('Erro', "Erro ao salvar no servidor: " + e.message, 'error');
                     throw e; // Repassa o erro para abortar o fluxo da interface
                 }
             }
@@ -1424,7 +1424,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         .then(data => processData(data))
                         .catch(e => {
                             console.error("Erro fatal ao carregar dados:", e);
-                            alert("Não foi possível carregar os dados do servidor. Usando dados padrão.");
+                            showToast('Erro', "Não foi possível carregar os dados do servidor. Usando dados padrão.", 'error');
                             processData({}); // Fallback
                         });
                 });
@@ -1633,10 +1633,10 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         inputCanindeFotos.value = '';
                         currentCanindePhotos = [...finalFotos];
                         
-                        alert('Seção "Canindé + Delas" atualizada e publicada com sucesso!');
+                        showToast('Sucesso', 'Seção "Canindé + Delas" atualizada e publicada com sucesso!', 'success');
                         renderAdminCanindeDelas();
                     } catch (e) {
-                        alert('Erro ao salvar Canindé + Delas: ' + e.message);
+                        showToast('Erro', 'Erro ao salvar Canindé + Delas: ' + e.message, 'error');
                     } finally {
                         btnSalvarCaninde.innerText = 'Salvar Alterações';
                         btnSalvarCaninde.disabled = false;
@@ -1689,9 +1689,9 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     
                     try {
                         await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
-                        alert('Configurações salvas com sucesso!');
+                        showToast('Sucesso', 'Configurações salvas com sucesso!', 'success');
                     } catch (err) {
-                        alert('Erro ao salvar as configurações.');
+                        showToast('Erro', 'Erro ao salvar as configurações.', 'error');
                         console.error(err);
                     } finally {
                         btn.innerHTML = origText;
@@ -1913,7 +1913,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         const status = document.getElementById('agenda-status') ? document.getElementById('agenda-status').value : '';
                         
                         if(!title || !dateVal || !time || !location) {
-                            alert("Preencha todos os campos da agenda.");
+                            showToast('Erro', "Preencha todos os campos da agenda.", 'error');
                             return;
                         }
 
@@ -1942,7 +1942,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             renderAdminAgenda();
                             modal.classList.add('hidden'); if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click();
                         } catch (e) {
-                            alert('Erro ao salvar Agenda: ' + e.message);
+                            showToast('Erro', 'Erro ao salvar Agenda: ' + e.message, 'error');
                         } finally {
                             btn.innerText = 'Salvar Evento';
                             btn.disabled = false;
@@ -2039,9 +2039,9 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             actionGalleryInput.value = '';
                             renderGalleryThumbnails();
                             
-                            alert('Ação salva e publicada com sucesso!');
+                            showToast('Sucesso', 'Ação salva e publicada com sucesso!', 'success');
                         } catch (err) {
-                            alert('Erro durante o salvamento: ' + err.message);
+                            showToast('Erro', 'Erro durante o salvamento: ' + err.message, 'error');
                         } finally {
                             btn.innerText = 'Salvar e Publicar';
                             btn.disabled = false;
@@ -2051,7 +2051,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 
                 if(btn.innerText.includes('Salvar Alterações')) {
                     btn.addEventListener('click', () => {
-                        safeStorageSetItem("sec_mulher_config", JSON.stringify({ endereco: document.querySelectorAll("#configuracoes input")[0].value, telefone: document.querySelectorAll("#configuracoes input")[1].value, email: document.querySelectorAll("#configuracoes input")[2].value, instagram: document.querySelectorAll("#configuracoes input")[3].value })); alert('Configurações institucionais atualizadas com sucesso no localStorage!');
+                        safeStorageSetItem("sec_mulher_config", JSON.stringify({ endereco: document.querySelectorAll("#configuracoes input")[0].value, telefone: document.querySelectorAll("#configuracoes input")[1].value, email: document.querySelectorAll("#configuracoes input")[2].value, instagram: document.querySelectorAll("#configuracoes input")[3].value })); showToast('Sucesso', 'Configurações institucionais atualizadas com sucesso no localStorage!', 'success');
                     });
                 }
             });
@@ -2149,7 +2149,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     const docs = document.getElementById('input-saude-documentos').value;
 
                     if(!titulo || !icone || !descCurta || !descComp) {
-                        alert('Preencha os campos obrigatórios (*)');
+                        showToast('Erro', 'Preencha os campos obrigatórios (*)', 'error');
                         return;
                     }
 
@@ -2180,9 +2180,9 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
                         renderAdminSaude();
                         document.getElementById('modal-saude').classList.add('hidden');
-                        alert('Serviço de saúde salvo com sucesso!');
+                        showToast('Sucesso', 'Serviço de saúde salvo com sucesso!', 'success');
                     } catch (e) {
-                        alert('Erro ao salvar Saúde: ' + e.message);
+                        showToast('Erro', 'Erro ao salvar Saúde: ' + e.message, 'error');
                     } finally {
                         btnSalvarSaude.innerText = 'Salvar Serviço';
                         btnSalvarSaude.disabled = false;
@@ -2452,6 +2452,38 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
         const isSuperAdmin = <?php echo ($_SESSION['papel'] ?? '') === 'super_admin' ? 'true' : 'false'; ?>;
         const currentCsrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         
+        window.showToast = function(title, message, type = 'success') {
+            const containerId = 'toast-container';
+            let container = document.getElementById(containerId);
+            if (!container) {
+                container = document.createElement('div');
+                container.id = containerId;
+                container.className = 'fixed bottom-4 right-4 z-[9999] flex flex-col gap-2';
+                document.body.appendChild(container);
+            }
+            const toast = document.createElement('div');
+            const bgClass = type === 'success' ? 'bg-green-500' : (type === 'error' ? 'bg-red-500' : 'bg-blue-500');
+            const icon = type === 'success' ? 'fa-check-circle' : (type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle');
+            toast.className = `${bgClass} text-white px-4 py-3 rounded shadow-lg flex items-start gap-3 transition-all duration-300 transform translate-y-10 opacity-0 max-w-sm`;
+            toast.innerHTML = `
+                <i class="fas ${icon} mt-0.5"></i>
+                <div>
+                    <h4 class="font-bold text-sm leading-tight">${title}</h4>
+                    ${message ? `<p class="text-sm opacity-90 leading-tight mt-0.5">${message}</p>` : ''}
+                </div>
+            `;
+            container.appendChild(toast);
+            
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            });
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        };
+        
         if (isSuperAdmin) {
             async function loadAdminData() {
                 try {
@@ -2564,7 +2596,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'X-CSRF-Token': getSessionToken()
+                                'X-CSRF-Token': currentCsrfToken
                             },
                             body: JSON.stringify({ juridico, psicologico })
                         });
@@ -2609,14 +2641,14 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         
                         const result = await res.json();
                         if (result.status === 'success') {
-                            alert(result.message);
+                            showToast('Sucesso', result.message, 'success');
                             formNovoOp.reset();
                             loadAdminData();
                         } else {
-                            alert(result.message || 'Erro ao criar operador.');
+                            showToast('Erro', result.message || 'Erro ao criar operador.', 'error');
                         }
                     } catch (e) {
-                        alert('Erro de conexão ao criar operador.');
+                        showToast('Erro', 'Erro de conexão ao criar operador.', 'error');
                     } finally {
                         btn.innerHTML = btnText;
                         btn.disabled = false;
@@ -2640,10 +2672,10 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     if (result.status === 'success') {
                         loadAdminData(); 
                     } else {
-                        alert(result.message || 'Erro ao alterar status.');
+                        showToast('Erro', result.message || 'Erro ao alterar status.', 'error');
                     }
                 } catch (e) {
-                    alert('Erro de conexão ao alterar status.');
+                    showToast('Erro', 'Erro de conexão ao alterar status.', 'error');
                 }
             };
         }
