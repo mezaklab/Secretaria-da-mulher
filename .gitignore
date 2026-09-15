@@ -13,3 +13,4 @@ usuarios.json
 log_atividade.json
 destinatarios.json
 historico_solicitacoes.json
+/uploads/*
