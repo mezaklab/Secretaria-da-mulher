@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Secretaria da Mulher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Atkinson Hyperlegible"', 'sans-serif'],
+                        display: ['"Poppins"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body.high-contrast {
+            background-color: #ffffff !important;
+            color: #0a0a0a !important;
+        }
+
+        body.high-contrast header,
+        body.high-contrast section,
+        body.high-contrast footer,
+        body.high-contrast .bg-white,
+        body.high-contrast .bg-purple-50,
+        body.high-contrast .bg-purple-50\/50,
+        body.high-contrast .bg-\[\#EDE8F3\],
+        body.high-contrast .bg-\[\#8E79A5\],
+        body.high-contrast .bg-gradient-to-r,
+        body.high-contrast [class*="bg-stone-"],
+        body.high-contrast [class*="bg-slate-"],
+        body.high-contrast [class*="bg-purple-"] {
+            background-color: #ffffff !important;
+            background-image: none !important;
+            color: #0a0a0a !important;
+            border-color: #3b0764 !important;
+        }
+
+        body.high-contrast footer#contato {
+            background-color: #f8fafc !important;
+        }
+
+        body.high-contrast .text-purple-600,
+        body.high-contrast .text-purple-700,
+        body.high-contrast .text-purple-800,
+        body.high-contrast .text-brand-primary,
+        body.high-contrast .text-pink-400,
+        body.high-contrast .text-white {
+            color: #0a0a0a !important;
+        }
+        
+        body.high-contrast .text-slate-600,
+        body.high-contrast .text-slate-700,
+        body.high-contrast .text-gray-600 {
+            color: #1a1a1a !important;
+        }
+
+        body.high-contrast .text-purple-200 {
+            color: #0a0a0a !important;
+        }
+
+        body.high-contrast .font-bold,
+        body.high-contrast .font-semibold {
+            font-weight: 800 !important;
+        }
+
+        body.high-contrast .border-slate-200 {
+            border-color: #0a0a0a !important;
+            border-width: 2px !important;
+        }
+    </style>
+</head>
+<body class="font-sans leading-relaxed text-slate-800 bg-slate-50 min-h-screen flex flex-col">
+
+    <!-- Barra de Acessibilidade -->
+    <aside class="w-full bg-[#2C1938] text-white py-1.5 px-6 md:px-12 flex justify-between items-center text-xs md:text-sm z-50 relative" aria-label="Opções de Acessibilidade">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-universal-access" aria-hidden="true"></i>
+            <span class="font-bold hidden md:inline">Acessibilidade</span>
+            <span class="hidden md:inline text-white/50">|</span>
+            <span class="opacity-80">Prefeitura Municipal de Canindé de São Francisco</span>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="changeFontSize(-10)" class="hover:bg-white/10 px-2 py-1 rounded transition-colors focus:ring-2 focus:ring-white focus:outline-none" aria-label="Diminuir tamanho da fonte">A-</button>
+            <button onclick="resetFontSize()" class="hover:bg-white/10 px-2 py-1 rounded transition-colors focus:ring-2 focus:ring-white focus:outline-none font-bold" aria-label="Tamanho de fonte padrão">A</button>
+            <button onclick="changeFontSize(10)" class="hover:bg-white/10 px-2 py-1 rounded transition-colors focus:ring-2 focus:ring-white focus:outline-none" aria-label="Aumentar tamanho da fonte">A+</button>
+            <div class="w-px h-4 bg-white/20 mx-1 self-center"></div>
+            <button id="btn-contrast" onclick="toggleHighContrast()" class="hover:bg-white/10 px-2 py-1 rounded transition-colors focus:ring-2 focus:ring-white focus:outline-none flex items-center gap-1.5" aria-pressed="false">
+                <i class="fas fa-adjust"></i> <span class="hidden sm:inline">Alto Contraste</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Header Principal -->
+    <header class="w-full bg-white shadow-sm py-4 px-6 md:px-12 flex items-center justify-between sticky top-0 z-40 transition-colors duration-300">
+        <div class="flex items-center gap-4">
+            <div class="w-16 h-16 md:w-20 md:h-20 bg-purple-700 shrink-0" style="-webkit-mask-image: url('/public/brasao.png'); -webkit-mask-size: contain; -webkit-mask-position: center; -webkit-mask-repeat: no-repeat; mask-image: url('/public/brasao.png'); mask-size: contain; mask-position: center; mask-repeat: no-repeat;" aria-label="Brasão de Canindé de São Francisco"></div>
+            <div>
+                <a href="index.html" class="font-display font-bold text-2xl md:text-3xl text-slate-800 leading-tight hover:text-purple-700 transition-colors">Secretaria da Mulher</a>
+                <p class="text-xs md:text-sm font-semibold text-slate-500 uppercase tracking-wide mt-0.5">Canindé de São Francisco</p>
+            </div>
+        </div>
+        <a href="index.html" class="hidden md:flex items-center justify-center w-12 h-12 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full transition-colors group" aria-label="Voltar para a página inicial">
+            <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+        </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow w-full max-w-4xl mx-auto px-6 py-12 md:py-20">
+        <a href="index.html" class="inline-flex items-center text-purple-700 hover:text-purple-900 font-bold mb-8 md:hidden">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar ao Início
+        </a>
+
+        <div class="bg-white rounded-3xl shadow-xl shadow-purple-900/5 p-8 md:p-12 relative overflow-hidden">
+            <h1 class="font-display font-bold text-3xl md:text-4xl text-purple-700 mb-2">Política de Privacidade</h1>
+            <p class="text-slate-500 mb-8 font-semibold">Saiba como protegemos seus dados de forma simples e direta.</p>
+            
+            <div class="space-y-8 text-slate-700">
+                <section>
+                    <h2 class="font-display font-bold text-xl text-slate-800 mb-3 border-l-4 border-purple-500 pl-3">1. Quais dados são coletados?</h2>
+                    <p>Coletamos os seguintes dados apenas quando você preenche voluntariamente um de nossos formulários de atendimento (Jurídico ou Psicológico):</p>
+                    <ul class="list-disc ml-6 mt-2 space-y-1 text-slate-600">
+                        <li>Nome completo</li>
+                        <li>CPF</li>
+                        <li>Data de nascimento</li>
+                        <li>Endereço completo</li>
+                        <li>WhatsApp e telefone alternativo</li>
+                        <li>Resumo do seu problema (relato)</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="font-display font-bold text-xl text-slate-800 mb-3 border-l-4 border-purple-500 pl-3">2. Para que servem esses dados?</h2>
+                    <p>Eles são utilizados <strong>exclusivamente</strong> para encaminhar a sua solicitação de atendimento, de forma segura, diretamente para a profissional responsável (advogada ou psicóloga) via e-mail. Não repassamos nem vendemos essas informações para terceiros.</p>
+                </section>
+
+                <section>
+                    <h2 class="font-display font-bold text-xl text-slate-800 mb-3 border-l-4 border-purple-500 pl-3">3. Por quanto tempo ficam guardados?</h2>
+                    <p>O conteúdo sensível completo (como seu CPF, endereço e o relato da sua situação) trafega apenas pelo e-mail seguro enviado à profissional.</p>
+                    <p class="mt-2">No servidor do nosso site, o painel administrativo mantém apenas um registro <strong>mínimo</strong> (seu nome, o tipo de solicitação, a data e o status do envio) para fins de acompanhamento interno de chamados. Não armazenamos CPF, endereço ou o conteúdo da sua mensagem em nosso banco de dados.</p>
+                </section>
+
+                <section>
+                    <h2 class="font-display font-bold text-xl text-slate-800 mb-3 border-l-4 border-purple-500 pl-3">4. Uso de Cookies</h2>
+                    <p>O nosso portal utiliza <strong>apenas um cookie técnico essencial</strong> de sessão. Ele serve apenas para o funcionamento correto dos formulários, garantindo segurança e evitando que o mesmo pedido seja enviado várias vezes por engano.</p>
+                    <p class="mt-2 text-purple-700 font-semibold"><i class="fas fa-shield-check mr-1"></i> Não utilizamos nenhum cookie de rastreamento, publicidade ou analítico (como Google Analytics ou Facebook Pixel).</p>
+                </section>
+
+                <section>
+                    <h2 class="font-display font-bold text-xl text-slate-800 mb-3 border-l-4 border-purple-500 pl-3">5. Seus Direitos (LGPD)</h2>
+                    <p>De acordo com a Lei Geral de Proteção de Dados (LGPD), você tem o direito de solicitar acesso, correção ou a exclusão dos seus dados a qualquer momento.</p>
+                    <p class="mt-2">Para exercer esses direitos, basta entrar em contato conosco pelo e-mail oficial: <a href="mailto:sec.mulher@caninde.se.gov.br" class="text-purple-700 font-bold hover:underline">sec.mulher@caninde.se.gov.br</a>.</p>
+                </section>
+
+                <div class="mt-12 pt-6 border-t border-slate-100 text-sm text-slate-400">
+                    Última atualização: <span class="font-semibold text-slate-500">16 de Setembro de 2026</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Simples -->
+    <footer class="w-full bg-slate-900 text-slate-400 py-8 px-6 md:px-12 text-center text-sm mt-auto">
+        <p>&copy; 2026 Secretaria Municipal de Políticas Públicas para a Mulher.</p>
+        <p class="mt-1">Prefeitura Municipal de Canindé de São Francisco - SE</p>
+    </footer>
+
+    <!-- Widget VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+    <!-- Scripts de Acessibilidade -->
+    <script>
+        let currentFontSize = 100;
+        function changeFontSize(delta) {
+            currentFontSize = Math.min(130, Math.max(80, currentFontSize + delta));
+            document.documentElement.style.fontSize = currentFontSize + '%';
+            localStorage.setItem('acessibilidade_fonte', currentFontSize);
+        }
+        function resetFontSize() {
+            currentFontSize = 100;
+            document.documentElement.style.fontSize = '100%';
+            localStorage.setItem('acessibilidade_fonte', currentFontSize);
+        }
+
+        function toggleHighContrast() {
+            document.body.classList.toggle('high-contrast');
+            const isActive = document.body.classList.contains('high-contrast');
+            localStorage.setItem('acessibilidade_contraste', isActive ? 'sim' : 'nao');
+            
+            const btn = document.getElementById('btn-contrast');
+            if (btn) btn.setAttribute('aria-pressed', isActive);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedFonte = localStorage.getItem('acessibilidade_fonte');
+            if (savedFonte) {
+                currentFontSize = parseInt(savedFonte, 10);
+                document.documentElement.style.fontSize = currentFontSize + '%';
+            }
+            if (localStorage.getItem('acessibilidade_contraste') === 'sim') {
+                document.body.classList.add('high-contrast');
+                const btn = document.getElementById('btn-contrast');
+                if (btn) btn.setAttribute('aria-pressed', 'true');
+            }
+        });
+    </script>
+</body>
+</html>
