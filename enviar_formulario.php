@@ -65,7 +65,7 @@ if (empty($nome) || empty($cpf) || empty($nascimento) || empty($endereco) || emp
 }
 
 // Validação estrita do tipo (Whitelist)
-if (!in_array($tipo, ['juridico', 'psicologico'], true)) {
+if (!in_array($tipo, ['juridico', 'psicologico', 'social'], true)) {
     responder(false, 'Tipo de solicitação inválido.');
 }
 
@@ -74,7 +74,7 @@ $arquivo_destinatarios = __DIR__ . '/destinatarios.json';
 $email_destino = '';
 if (file_exists($arquivo_destinatarios)) {
     $destinatarios = json_decode(file_get_contents($arquivo_destinatarios), true);
-    $email_destino = $destinatarios[$tipo] ?? '';
+    $email_destino = $destinatarios['email_atendimentos'] ?? ($destinatarios[$tipo] ?? ''); // Fallback pro antigo
 }
 
 if (empty($email_destino)) {
@@ -114,7 +114,7 @@ try {
     }
 
     $mail->isHTML(true);
-    $assunto_tipo = $tipo === 'juridico' ? 'Jurídico' : 'Psicológico';
+    $assunto_tipo = $tipo === 'juridico' ? 'Jurídico' : ($tipo === 'psicologico' ? 'Psicológico' : 'Assistência Social');
     $mail->Subject = "Nova Solicitacao de Atendimento - $assunto_tipo";
     
     // Fallback Texto Plano (AltBody)

@@ -110,8 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $destinatarios = [
-            'juridico' => filter_var($input['juridico'] ?? '', FILTER_VALIDATE_EMAIL) ? $input['juridico'] : '',
-            'psicologico' => filter_var($input['psicologico'] ?? '', FILTER_VALIDATE_EMAIL) ? $input['psicologico'] : ''
+            'email_atendimentos' => filter_var($input['email_atendimentos'] ?? '', FILTER_VALIDATE_EMAIL) ? $input['email_atendimentos'] : ''
         ];
 
         if (file_put_contents(__DIR__.'/destinatarios.json', json_encode($destinatarios, JSON_PRETTY_PRINT))) {

@@ -948,14 +948,11 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     </div>
                     <div class="p-6">
                         <form id="form-emails-atendimento" class="space-y-4">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 gap-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail do Jurídico</label>
-                                    <input type="email" id="email-juridico" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail do Psicológico</label>
-                                    <input type="email" id="email-psicologico" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">E-mail para Recebimento dos Formulários</label>
+                                    <p class="text-xs text-gray-500 mb-2">Este e-mail receberá as solicitações de Apoio Jurídico, Psicológico e Assistência Social.</p>
+                                    <input type="email" id="email-atendimentos" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-brand-primary" required>
                                 </div>
                             </div>
                             <div class="flex justify-end pt-2">
@@ -2246,7 +2243,19 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         
                         document.getElementById('edit-id-agenda').value = id;
                         document.getElementById('agenda-title').value = item.title;
-                        document.getElementById('agenda-date').value = ''; // Original date object not saved in YYYY-MM-DD
+                        
+                        if (item.fullDate) {
+                            document.getElementById('agenda-date').value = item.fullDate;
+                        } else {
+                            const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+                            const mIndex = months.indexOf(item.month) + 1;
+                            if (mIndex > 0) {
+                                document.getElementById('agenda-date').value = `2026-${String(mIndex).padStart(2, '0')}-${String(item.date).padStart(2, '0')}`;
+                            } else {
+                                document.getElementById('agenda-date').value = '';
+                            }
+                        }
+                        
                         document.getElementById('agenda-time').value = item.time;
                         document.getElementById('agenda-location').value = item.location;
                         
@@ -2255,8 +2264,9 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             if (opt.text.toLowerCase() === item.status.toLowerCase()) opt.selected = true;
                         });
 
-                        modal.querySelector('h3').innerText = "Editar Evento na Agenda";
-                        modal.classList.remove('hidden');
+                        const modalAgenda = document.getElementById('modal-agenda');
+                        modalAgenda.querySelector('h3').innerText = "Editar Evento na Agenda";
+                        modalAgenda.classList.remove('hidden');
 
                     } else {
                         const item = isGallery ? adminGaleria.find(i => i.id == id) : adminAcoes.find(i => i.id == id);
@@ -2367,15 +2377,6 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
         
 
 
-        // ── Exibe nome do usuário logado no header ──────────────────────
-        (function exibirUsuario() {
-            const usuario = "super.admin";
-
-            const nameEl = document.getElementById('admin-display-name');
-            const roleEl = document.getElementById('admin-display-role');
-            if (nameEl) nameEl.textContent = usuario;
-            if (roleEl) roleEl.textContent = 'Gestor Institucional';
-        })();
 
 
         async function uploadFile(file) {
@@ -2535,10 +2536,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     }
 
                     if (data.destinatarios) {
-                        const eJuridico = document.getElementById('email-juridico');
-                        const ePsico = document.getElementById('email-psicologico');
-                        if (eJuridico) eJuridico.value = data.destinatarios.juridico || '';
-                        if (ePsico) ePsico.value = data.destinatarios.psicologico || '';
+                        const eAtend = document.getElementById('email-atendimentos');
+                        if (eAtend) eAtend.value = data.destinatarios.email_atendimentos || data.destinatarios.juridico || '';
                     }
 
                     const listaHistorico = document.getElementById('lista-historico');
@@ -2583,8 +2582,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             if (formEmails) {
                 formEmails.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    const juridico = document.getElementById('email-juridico').value.trim();
-                    const psicologico = document.getElementById('email-psicologico').value.trim();
+                    const email_atendimentos = document.getElementById('email-atendimentos').value.trim();
                     
                     const btn = e.target.querySelector('button[type="submit"]');
                     const btnText = btn.innerHTML;
@@ -2598,7 +2596,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                                 'Content-Type': 'application/json',
                                 'X-CSRF-Token': currentCsrfToken
                             },
-                            body: JSON.stringify({ juridico, psicologico })
+                            body: JSON.stringify({ email_atendimentos })
                         });
                         const data = await res.json();
                         if (data.status === 'success') {

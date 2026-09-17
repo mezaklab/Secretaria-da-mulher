@@ -554,57 +554,28 @@
                 </div>
 
                 <!-- Coluna da Imagem (Mobile: Fluxo normal, sem margins negativas extremas) -->
-                <div class="relative z-0 w-full flex justify-center items-end select-none mt-6 sm:mt-10 lg:mt-0 hero-img-container bg-transparent -mb-16 sm:-mb-20 md:-mb-40 lg:-mb-56">
+                <div class="relative z-0 w-full flex justify-center items-center lg:items-start select-none mt-6 sm:mt-10 lg:mt-0 hero-img-container bg-transparent -mb-16 sm:-mb-20 md:-mb-40 lg:mb-0">
                   
                   <!-- MARCA D'ÁGUA FLOR (LADO DIREITO DA SECRETÁRIA) -->
-                  <div class="w-16 md:w-24 lg:w-28 2xl:w-32 h-24 md:h-32 lg:h-40 xl:h-48 2xl:h-56 overflow-hidden absolute top-0 md:-top-5 lg:-top-10 left-1/2 sm:ml-[40px] md:ml-[60px] lg:ml-[80px] xl:ml-[100px] 2xl:ml-[120px] pointer-events-none z-0 hidden sm:block opacity-20 filter brightness-0 invert">
+                  <div class="w-16 md:w-24 lg:w-28 2xl:w-32 h-24 md:h-32 lg:h-40 xl:h-48 2xl:h-56 overflow-hidden absolute top-0 md:-top-5 lg:-top-10 left-1/2 sm:ml-[40px] md:ml-[60px] lg:ml-[160px] xl:ml-[200px] 2xl:ml-[260px] pointer-events-none z-0 hidden sm:block opacity-20 filter brightness-0 invert">
                     <img src="/public/flores.png" alt="" aria-hidden="true" data-decorative="true" class="w-[200%] max-w-none h-full object-cover object-left bg-transparent transparent-asset" />
                   </div>
 
-                  <!-- COMPONENTE 3D FLIP CARD (Dimensões flexíveis no mobile) -->
-                  <div 
-                    class="group relative w-full max-w-[300px] sm:max-w-[360px] md:max-w-[440px] lg:max-w-[480px] h-[340px] sm:h-[400px] md:h-[580px] cursor-pointer z-10 bg-transparent mx-auto"
-                    style="perspective: 1000px;"
-                    onclick="this.firstElementChild.classList.toggle('rotate-y-180'); this.firstElementChild.classList.toggle('is-flipped')"
-                  >
-                    <div 
-                      class="relative w-full h-full transition-transform duration-700 ease-in-out bg-transparent"
-                      style="transform-style: preserve-3d;"
-                    >
-                      <!-- FRENTE: FOTO SOLTA DA SECRETÁRIA -->
-                      <div 
-                        class="flip-face-front absolute inset-0 flex items-end justify-center bg-transparent hero-img-container"
-                        style="transform: rotateY(0deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;"
-                      >
-                        <!-- Imagem: 100% width, max-width controlado pelo container, height auto no mobile -->
-                        <img 
-                          src="/public/secretaria-foto.png" 
-                          alt="Luana Machado - Secretária da Mulher" 
-                          class="w-full h-auto md:h-full max-h-full object-contain object-bottom drop-shadow-xl pointer-events-none transition-all duration-300 ease-out group-hover:scale-105 bg-transparent transparent-asset" 
-                          style="clip-path: inset(0 3px 0 0); -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%); mask-image: linear-gradient(to bottom, black 90%, transparent 100%);"
-                        />
-                      </div>
-
-                      <!-- VERSO: CARD DE MENSAGEM -->
-                      <div 
-                        class="absolute inset-0 m-auto w-full md:w-[400px] h-[95%] md:h-[380px] md:-translate-y-16 bg-white rounded-3xl p-5 md:py-6 md:px-8 shadow-2xl flex flex-col justify-center items-center text-center border border-purple-100"
-                        style="transform: rotateY(180deg); backface-visibility: hidden; -webkit-backface-visibility: hidden;"
-                      >
-                        <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#8E79A5] mb-2 sm:mb-3 opacity-80" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                        </svg>
-                        <p class="text-gray-700 italic text-[11px] sm:text-xs md:text-base leading-relaxed mb-2 md:mb-4 font-medium">
-                          "Quando uma mulher se fortalece, toda uma geração se levanta com ela. É na força feminina que nascem mudanças reais, futuros mais justos e uma sociedade mais humana."
-                        </p>
-                        <div class="w-8 md:w-12 h-0.5 bg-[#8E79A5] my-2 md:my-3"></div>
-                        <span class="font-bold text-[#4A3260] text-xs md:text-sm tracking-wide">Luana Machado</span>
-                        <span class="text-[10px] md:text-xs text-gray-500 uppercase font-semibold mt-0.5">Secretária da Mulher</span>
-                      </div>
-                    </div>
+                  <!-- TEXTO DA SECRETÁRIA (Conteúdo mantido sem card/foto) -->
+                  <div class="relative w-full max-w-[300px] lg:max-w-[450px] z-10 flex flex-col justify-center items-center lg:items-start text-center lg:text-left mx-auto lg:mx-0 mt-8 lg:mt-12 mb-12 md:mb-0 lg:-ml-4 xl:ml-0">
+                    <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white/50 mb-3 md:mb-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p class="text-white/90 italic text-[13px] sm:text-sm md:text-base leading-relaxed mb-4 md:mb-6 font-medium drop-shadow-sm">
+                      "Quando uma mulher se fortalece, toda uma geração se levanta com ela. É na força feminina que nascem mudanças reais, futuros mais justos e uma sociedade mais humana."
+                    </p>
+                    <div class="w-8 md:w-12 h-0.5 bg-white/40 my-2 md:my-4"></div>
+                    <span class="font-bold text-white text-base md:text-lg tracking-wide drop-shadow-md">Luana Machado</span>
+                    <span class="text-[11px] md:text-sm text-white/70 uppercase font-semibold mt-1 drop-shadow-md">Secretária da Mulher</span>
                   </div>
                   
                   <!-- LAÇO DE CAMPANHA (VISIBILIDADE E COR CONTROLADA VIA DADOS.JSON) -->
-                  <div id="laco-campanha" class="absolute z-20 left-1/2 top-12 sm:top-8 lg:-top-2 ml-[130px] sm:ml-[180px] md:ml-[220px] lg:ml-[260px] 2xl:ml-[300px] w-8 sm:w-10 lg:w-14 2xl:w-20 rotate-[15deg] drop-shadow-2xl transition-colors duration-500 hidden" aria-hidden="true" data-decorative="true">
+                  <div id="laco-campanha" class="absolute z-20 left-1/2 -top-4 sm:top-0 lg:-top-2 ml-[130px] sm:ml-[180px] md:ml-[220px] lg:ml-[320px] 2xl:ml-[400px] w-8 sm:w-10 lg:w-14 2xl:w-20 rotate-[15deg] drop-shadow-2xl transition-colors duration-500 hidden" aria-hidden="true" data-decorative="true">
                     <svg viewBox="0 0 448 512" fill="currentColor" class="w-full h-full opacity-90 drop-shadow-md">
                       <path d="M6.1 444.3c-9.6 10.8-7.5 27.6 4.5 35.7l68.8 27.9c9.9 6.7 23.3 5 31.3-3.8l91.8-101.9-79.2-87.9-117.2 130zm435.8 0s-292-324.6-295.4-330.1c15.4-8.4 40.2-17.9 77.5-17.9s62.1 9.5 77.5 17.9c-3.3 5.6-56 64.6-56 64.6l79.1 87.7 34.2-38c28.7-31.9 33.3-78.6 11.4-115.5l-43.7-73.5c-4.3-7.2-9.9-13.3-16.8-18-40.7-27.6-127.4-29.7-171.4 0-6.9 4.7-12.5 10.8-16.8 18l-43.6 73.2c-1.5 2.5-37.1 62.2 11.5 116L337.5 504c8 8.9 21.4 10.5 31.3 3.8l68.8-27.9c11.9-8 14-24.8 4.3-35.6z"/>
                     </svg>
@@ -946,12 +917,12 @@
 
                 <div class="bg-white border border-brand-cardBorder rounded-[2rem] p-10 md:p-12 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                     <div class="w-24 h-24 shrink-0 rounded-full bg-brand-iconBg text-brand-primary flex items-center justify-center">
-                        <i class="fas fa-store text-4xl"></i>
+                        <i class="fas fa-hand-holding-heart text-4xl"></i>
                     </div>
                     <div>
-                        <h3 class="font-display text-3xl text-brand-textDark mb-3">Sua independência</h3>
-                        <p class="font-sans text-brand-textMuted text-lg mb-4">Cursos e apoio ao empreendedorismo feminino. Para você construir sua própria renda e ser dona do seu destino.</p>
-                        <a href="#" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Ver cursos <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
+                        <h3 class="font-display text-3xl text-brand-textDark mb-3">Assistência Social</h3>
+                        <p class="font-sans text-brand-textMuted text-lg mb-4">Suporte humanizado e direcionamento para programas sociais, benefícios e garantia de direitos básicos para você e sua família.</p>
+                        <a href="atendimento-social.html" class="inline-block text-brand-primary font-display text-lg font-bold hover:underline">Solicitar assistência <i class="fas fa-arrow-right ml-1 text-sm"></i></a>
                     </div>
                 </div></div></div></section><!-- Galeria -->
     <section id="galeria" class="py-16 max-w-7xl mx-auto px-6 lg:px-8 relative z-20" style="isolation: isolate;">
