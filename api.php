@@ -258,27 +258,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
     
-    if ($data !== null) {
-        // Garantir que a estrutura exista antes de salvar
-        $formattedData = [
-            "acoes" => isset($data['acoes']) ? $data['acoes'] : [],
-            "galeria" => isset($data['galeria']) ? $data['galeria'] : [],
-            "agenda" => isset($data['agenda']) ? $data['agenda'] : [],
-            "saude" => isset($data['saude']) ? $data['saude'] : [],
-            "canindeDelas" => isset($data['canindeDelas']) ? $data['canindeDelas'] : new stdClass(),
-            "configuracoes" => isset($data['configuracoes']) ? $data['configuracoes'] : new stdClass()
-        ];
+    if ($data !== null && is_array($data)) {
+        $allowedSections = ['acoes', 'galeria', 'agenda', 'saude', 'canindeDelas', 'configuracoes'];
         
-        // Salvar com permissões adequadas
-        $result = file_put_contents($dataFile, json_encode($formattedData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        // Identificar quais seções foram enviadas no payload
+        $sectionsToUpdate = [];
+        foreach ($allowedSections as $sec) {
+            if (array_key_exists($sec, $data)) {
+                $sectionsToUpdate[] = $sec;
+            }
+        }
         
-        if ($result !== false) {
-            registrarLog("salvou e publicou alterações no conteúdo do site");
+        if (empty($sectionsToUpdate)) {
+            http_response_code(400);
+            echo json_encode(["status" => "error", "message" => "Nenhuma seção válida fornecida para atualização."]);
+            exit;
+        }
+
+        // Abrir arquivo com modo 'c+' (leitura e escrita, cria se não existir sem truncar)
+        $fp = fopen($dataFile, 'c+');
+        if (!$fp) {
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Erro ao abrir o arquivo dados.json."]);
+            exit;
+        }
+
+        // Bloqueio exclusivo (LOCK_EX): serializa gravações concorrentes.
+        // Qualquer outra requisição concorrente aguarda aqui antes de ler os dados do disco.
+        if (!flock($fp, LOCK_EX)) {
+            fclose($fp);
+            http_response_code(500);
+            echo json_encode(["status" => "error", "message" => "Não foi possível obter trava exclusiva no arquivo dados.json."]);
+            exit;
+        }
+
+        // Leitura atômica do estado mais recente do disco sob a trava
+        rewind($fp);
+        $rawDiskContent = stream_get_contents($fp);
+        $diskData = json_decode($rawDiskContent, true);
+        if (!is_array($diskData)) {
+            $diskData = [];
+        }
+
+        // Garantir que as seções base existam no disco
+        foreach ($allowedSections as $sec) {
+            if (!isset($diskData[$sec])) {
+                $diskData[$sec] = in_array($sec, ['canindeDelas', 'configuracoes']) ? new stdClass() : [];
+            }
+        }
+
+        // Mesclar APENAS as seções que vieram na requisição (preserva 100% das demais)
+        foreach ($sectionsToUpdate as $sec) {
+            $diskData[$sec] = $data[$sec];
+        }
+
+        // Garantir que objetos vazios sejam serializados como {} e não []
+        if (isset($diskData['canindeDelas']) && is_array($diskData['canindeDelas']) && empty($diskData['canindeDelas'])) {
+            $diskData['canindeDelas'] = new stdClass();
+        }
+        if (isset($diskData['configuracoes']) && is_array($diskData['configuracoes']) && empty($diskData['configuracoes'])) {
+            $diskData['configuracoes'] = new stdClass();
+        }
+
+        // Regravar o JSON mesclado de forma atômica sob a trava
+        rewind($fp);
+        ftruncate($fp, 0);
+        $jsonOutput = json_encode($diskData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        $writeSuccess = fwrite($fp, $jsonOutput);
+        fflush($fp); // Garante a escrita em disco antes de liberar a trava
+        flock($fp, LOCK_UN); // Libera a trava exclusiva
+        fclose($fp);
+
+        if ($writeSuccess !== false) {
+            $secoesTexto = implode(', ', $sectionsToUpdate);
+            registrarLog("salvou e publicou alterações na(s) seção(ões): $secoesTexto");
 
             echo json_encode(["status" => "success", "message" => "Dados atualizados com sucesso."]);
         } else {
             http_response_code(500);
-            echo json_encode(["status" => "error", "message" => "Erro ao salvar no arquivo. Verifique as permissões do dados.json."]);
+            echo json_encode(["status" => "error", "message" => "Erro ao salvar no arquivo dados.json. Verifique as permissões."]);
         }
     } else {
         http_response_code(400);

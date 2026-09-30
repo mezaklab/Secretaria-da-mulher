@@ -559,36 +559,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 text-sm">
-                                <tr class="hover:bg-gray-50/50 transition-colors group">
-                                    <td class="px-6 py-4 font-medium text-gray-800">Palestra sobre prevenção</td>
-                                    <td class="whitespace-nowrap px-4 py-2"><span class="inline-block px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap bg-purple-100 text-brand-primary">Saúde</span></td>
-                                    <td class="px-6 py-4 text-gray-500">24 Out 2024</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
-                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50/50 transition-colors group">
-                                    <td class="px-6 py-4 font-medium text-gray-800">Mutirão de Documentação Feminina</td>
-                                    <td class="whitespace-nowrap px-4 py-2"><span class="inline-block px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap bg-blue-100 text-blue-700">Apoio Legal</span></td>
-                                    <td class="px-6 py-4 text-gray-500">15 Out 2024</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
-                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50/50 transition-colors group">
-                                    <td class="px-6 py-4 font-medium text-gray-800">Caminhada Agosto Lilás</td>
-                                    <td class="whitespace-nowrap px-4 py-2"><span class="inline-block px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap bg-purple-100 text-brand-primary">Ações Comunitárias</span></td>
-                                    <td class="px-6 py-4 text-gray-500">01 Set 2026</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Publicado</span></td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
-                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
+                                <!-- Preenchido via JS -->
                             </tbody>
                         </table>
                     </div>
@@ -771,39 +742,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100 text-sm">
-                                <tr class="hover:bg-gray-50/50 transition-colors group">
-                                    <td class="px-6 py-4 font-bold text-brand-primary">20 Out</td>
-                                    <td class="px-6 py-4 font-medium text-gray-800">Mutirão de saúde e acolhimento</td>
-                                    <td class="px-6 py-4 text-gray-500">08h - 13h</td>
-                                    <td class="px-6 py-4 text-gray-500">Clube Altemar Dutra</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Realizado</span></td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
-                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50/50 transition-colors group">
-                                    <td class="px-6 py-4 font-bold text-brand-primary">22 Out</td>
-                                    <td class="px-6 py-4 font-medium text-gray-800">Roda de conversa sobre direitos</td>
-                                    <td class="px-6 py-4 text-gray-500">18h - 21h</td>
-                                    <td class="px-6 py-4 text-gray-500">Assentamento Cuiabá</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Confirmado</span></td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
-                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                                <tr class="hover:bg-gray-50/50 transition-colors group">
-                                    <td class="px-6 py-4 font-bold text-brand-primary">25 Out</td>
-                                    <td class="px-6 py-4 font-medium text-gray-800">Preventivo noturno para trabalhadoras</td>
-                                    <td class="px-6 py-4 text-gray-500">18h - 21h</td>
-                                    <td class="px-6 py-4 text-gray-500">UBS Sede</td>
-                                    <td class="px-6 py-4"><span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">Em Planejamento</span></td>
-                                    <td class="px-6 py-4 text-right">
-                                        <button title="Editar" class="btn-edit text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-edit"></i></button>
-                                        <button title="Excluir" class="btn-delete text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all"><i class="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
+                                <!-- Preenchido via JS -->
                             </tbody>
                         </table>
                     </div>
@@ -1328,7 +1267,29 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             const defaultServicosSaude = [];
 
 
-            async function saveData(acoes, galeria, agenda, saude, canindeDelas, configuracoes) {
+            async function saveData(partialData) {
+                if (typeof partialData !== 'object' || Array.isArray(partialData) || partialData === null) {
+                    const errorMsg = "saveData() chamado em formato inválido — use { secao: dados }";
+                    console.error(errorMsg, partialData);
+                    showToast('Erro', errorMsg, 'error');
+                    throw new Error(errorMsg);
+                }
+
+                const allowed = ['acoes', 'galeria', 'agenda', 'saude', 'canindeDelas', 'configuracoes'];
+                const payload = {};
+                for (const key of allowed) {
+                    if (partialData[key] !== undefined) {
+                        payload[key] = partialData[key];
+                    }
+                }
+
+                if (Object.keys(payload).length === 0) {
+                    const errorMsg = "saveData() chamado sem nenhuma seção válida — use { secao: dados }";
+                    console.error(errorMsg, partialData);
+                    showToast('Erro', errorMsg, 'error');
+                    throw new Error(errorMsg);
+                }
+
                 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 try {
                     const response = await fetch('api.php', {
@@ -1337,7 +1298,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             'Content-Type': 'application/json',
                             'X-CSRF-Token': csrfToken
                         },
-                        body: JSON.stringify({ acoes, galeria, agenda, saude, canindeDelas, configuracoes })
+                        body: JSON.stringify(payload)
                     });
                     const result = await response.json();
                     if (!response.ok) {
@@ -1518,7 +1479,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         thumb.innerHTML = `
                             ${mediaTag}
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10">
-                                <button type="button" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-xs shadow-md transform hover:scale-110 active:scale-95 transition-all" onclick="window.removeCanindePhoto(${idx})">
+                                <button type="button" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-xs shadow-md transform hover:scale-110 active:scale-95 transition-all" onclick="window.removeCanindePhoto(${idx}, this)">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
@@ -1529,9 +1490,46 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 }
             }
 
-            window.removeCanindePhoto = function(index) {
-                currentCanindePhotos.splice(index, 1);
-                renderAdminCanindeDelas();
+            window.removeCanindePhoto = async function(index, btn) {
+                if (!confirm('Deseja realmente remover esta mídia de Canindé + Delas?')) return;
+
+                const targetBtn = btn || (window.event ? (window.event.currentTarget || window.event.target.closest('button')) : null);
+                const origHtml = targetBtn ? targetBtn.innerHTML : '';
+                const targetCard = targetBtn ? targetBtn.closest('.group') : null;
+
+                if (targetBtn) {
+                    targetBtn.disabled = true;
+                    targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                }
+
+                try {
+                    const updatedFotos = currentCanindePhotos.filter((_, i) => i !== index);
+                    const updatedCaninde = {
+                        ...adminCanindeDelas,
+                        fotos: updatedFotos
+                    };
+
+                    await saveData({ canindeDelas: updatedCaninde });
+
+                    if (targetCard) {
+                        targetCard.style.transition = 'all 0.3s ease';
+                        targetCard.style.opacity = '0';
+                        targetCard.style.transform = 'scale(0.95)';
+                        await new Promise(r => setTimeout(r, 300));
+                    }
+
+                    currentCanindePhotos = updatedFotos;
+                    adminCanindeDelas = updatedCaninde;
+                    renderAdminCanindeDelas();
+                    showToast('Sucesso', 'Mídia removida com sucesso!', 'success');
+                } catch (e) {
+                    console.error("Erro ao remover mídia do Canindé + Delas:", e);
+                    if (targetBtn) {
+                        targetBtn.disabled = false;
+                        targetBtn.innerHTML = origHtml;
+                    }
+                    showToast('Erro', 'Não foi possível excluir a mídia. Tente novamente.', 'error');
+                }
             };
 
             function showCanindeError(msg) {
@@ -1624,7 +1622,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             fotos: finalFotos
                         };
 
-                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
+                        await saveData({ canindeDelas: adminCanindeDelas });
                         
                         // Reseta inputs e estado
                         inputCanindeFotos.value = '';
@@ -1685,7 +1683,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     btn.disabled = true;
                     
                     try {
-                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
+                        await saveData({ configuracoes: adminConfiguracoes });
                         showToast('Sucesso', 'Configurações salvas com sucesso!', 'success');
                     } catch (err) {
                         showToast('Erro', 'Erro ao salvar as configurações.', 'error');
@@ -1727,7 +1725,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             </td>
                             <td class="px-6 py-4 text-right whitespace-nowrap">
                                 <button title="Editar" class="btn-edit-saude text-brand-secondary hover:text-brand-primary mr-3 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all" onclick="editSaudeItem(${item.id})"><i class="fas fa-edit"></i></button>
-                                <button title="Excluir" class="btn-delete-saude text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all" onclick="deleteSaudeItem(${item.id})"><i class="fas fa-trash"></i></button>
+                                <button title="Excluir" class="btn-delete-saude text-red-400 hover:text-red-600 p-2 cursor-pointer hover:scale-110 active:scale-95 transition-all" onclick="deleteSaudeItem(${item.id}, this)"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>`;
                 });
@@ -1803,7 +1801,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                     thumb.innerHTML = `
                         ${mediaTag}
                         <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <button type="button" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-xs shadow-md transform hover:scale-110 active:scale-95 transition-all" onclick="window.removeGalleryPhoto(${index})">
+                            <button type="button" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center text-xs shadow-md transform hover:scale-110 active:scale-95 transition-all" onclick="window.removeGalleryPhoto(${index}, this)">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -1813,8 +1811,60 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 });
             }
 
-            window.removeGalleryPhoto = function(index) {
-                currentActionGallery.splice(index, 1);
+            window.removeGalleryPhoto = async function(index, btn) {
+                if (!confirm('Deseja realmente remover esta mídia da galeria?')) return;
+
+                const editId = document.getElementById('edit-id-acoes') ? document.getElementById('edit-id-acoes').value : '';
+                const targetBtn = btn || (window.event ? (window.event.currentTarget || window.event.target.closest('button')) : null);
+                const origHtml = targetBtn ? targetBtn.innerHTML : '';
+                const targetThumb = targetBtn ? targetBtn.closest('.group') : null;
+
+                const updatedGallery = currentActionGallery.filter((_, i) => i !== index);
+
+                // Se estivermos editando uma ação já persistida no servidor
+                if (editId) {
+                    const acaoIndex = adminAcoes.findIndex(item => item.id == editId);
+                    if (acaoIndex > -1) {
+                        if (targetBtn) {
+                            targetBtn.disabled = true;
+                            targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                        }
+
+                        try {
+                            const updatedAcoes = [...adminAcoes];
+                            updatedAcoes[acaoIndex] = {
+                                ...updatedAcoes[acaoIndex],
+                                galeria: updatedGallery
+                            };
+
+                            await saveData({ acoes: updatedAcoes });
+
+                            if (targetThumb) {
+                                targetThumb.style.transition = 'all 0.3s ease';
+                                targetThumb.style.opacity = '0';
+                                targetThumb.style.transform = 'scale(0.95)';
+                                await new Promise(r => setTimeout(r, 300));
+                            }
+
+                            adminAcoes = updatedAcoes;
+                            currentActionGallery = updatedGallery;
+                            renderGalleryThumbnails();
+                            renderAdminAcoes();
+                            showToast('Sucesso', 'Mídia removida da galeria com sucesso!', 'success');
+                        } catch (e) {
+                            console.error("Erro ao remover mídia da galeria:", e);
+                            if (targetBtn) {
+                                targetBtn.disabled = false;
+                                targetBtn.innerHTML = origHtml;
+                            }
+                            showToast('Erro', 'Não foi possível excluir a mídia. Tente novamente.', 'error');
+                        }
+                        return;
+                    }
+                }
+
+                // Se for criação de nova ação (ainda não salva no servidor)
+                currentActionGallery = updatedGallery;
                 renderGalleryThumbnails();
             };
 
@@ -1935,7 +1985,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         try {
                             btn.innerText = 'Salvando...';
                             btn.disabled = true;
-                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
+                            await saveData({ agenda: adminAgenda });
                             renderAdminAgenda();
                             modal.classList.add('hidden'); if(typeof removeImageBtn !== 'undefined' && removeImageBtn) removeImageBtn.click();
                         } catch (e) {
@@ -1988,9 +2038,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             const isPlaceholder = finalImage.includes('unsplash.com');
 
                             if (editId) {
-                                const isGaleria = context === 'galeria';
-                                
-                                if (!isGaleria) {
+                                if (context !== 'galeria') {
                                     const acaoIndex = adminAcoes.findIndex(item => item.id == editId);
                                     if (acaoIndex > -1) {
                                         const oldImage = adminAcoes[acaoIndex].image || adminAcoes[acaoIndex].imagem || adminAcoes[acaoIndex].fotoCapa;
@@ -2026,7 +2074,8 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             }
 
                             // 3. Salvar no servidor (api.php)
-                            await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
+                            const modalPayload = context === 'galeria' ? { galeria: adminGaleria } : { acoes: adminAcoes };
+                            await saveData(modalPayload);
                             
                             renderAdminAcoes();
                             renderAdminGaleria();
@@ -2043,12 +2092,6 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             btn.innerText = 'Salvar e Publicar';
                             btn.disabled = false;
                         }
-                    });
-                }
-                
-                if(btn.innerText.includes('Salvar Alterações')) {
-                    btn.addEventListener('click', () => {
-                        safeStorageSetItem("sec_mulher_config", JSON.stringify({ endereco: document.querySelectorAll("#configuracoes input")[0].value, telefone: document.querySelectorAll("#configuracoes input")[1].value, email: document.querySelectorAll("#configuracoes input")[2].value, instagram: document.querySelectorAll("#configuracoes input")[3].value })); showToast('Sucesso', 'Configurações institucionais atualizadas com sucesso no localStorage!', 'success');
                     });
                 }
             });
@@ -2123,11 +2166,39 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                 document.getElementById('modal-saude').classList.remove('hidden');
             };
 
-            window.deleteSaudeItem = function(id) {
-                if (confirm('Deseja realmente remover este serviço de saúde?')) {
-                    adminServicosSaude = adminServicosSaude.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
+            window.deleteSaudeItem = async function(id, btn) {
+                if (!confirm('Deseja realmente remover este serviço de saúde?')) return;
+
+                const targetBtn = btn || (window.event ? (window.event.currentTarget || window.event.target.closest('button')) : null);
+                const origHtml = targetBtn ? targetBtn.innerHTML : '';
+                const row = targetBtn ? targetBtn.closest('tr') : null;
+
+                if (targetBtn) {
+                    targetBtn.disabled = true;
+                    targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                }
+
+                try {
+                    const updatedSaude = adminServicosSaude.filter(i => i.id != id);
+                    await saveData({ saude: updatedSaude });
+
+                    if (row) {
+                        row.style.transition = 'all 0.3s ease';
+                        row.style.opacity = '0';
+                        row.style.transform = 'scale(0.95)';
+                        await new Promise(r => setTimeout(r, 300));
+                    }
+
+                    adminServicosSaude = updatedSaude;
                     renderAdminSaude();
+                    showToast('Sucesso', 'Item removido com sucesso!', 'success');
+                } catch (e) {
+                    console.error("Erro ao excluir serviço de saúde:", e);
+                    if (targetBtn) {
+                        targetBtn.disabled = false;
+                        targetBtn.innerHTML = origHtml;
+                    }
+                    showToast('Erro', 'Não foi possível excluir. Tente novamente.', 'error');
                 }
             };
 
@@ -2174,7 +2245,7 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                             adminServicosSaude.push({ id: Date.now(), titulo, icone, descricaoCurta: descCurta, descricaoCompleta: descComp, local, horario, publicoAlvo: publico, documentos: docs, imagem: finalImage });
                         }
 
-                        await saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes);
+                        await saveData({ saude: adminServicosSaude });
                         renderAdminSaude();
                         document.getElementById('modal-saude').classList.add('hidden');
                         showToast('Sucesso', 'Serviço de saúde salvo com sucesso!', 'success');
@@ -2188,24 +2259,66 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
             }
 
             // Make global functions so standard click handlers work (overriding previous DOM events)
-            window.deleteItem = function(id, type) {
-                if(type === 'acoes') {
-                    adminAcoes = adminAcoes.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
-                    renderAdminAcoes();
-                } else if(type === 'galeria') {
-                    adminGaleria = adminGaleria.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
-                    renderAdminGaleria();
-                } else if(type === 'agenda') {
-                    adminAgenda = adminAgenda.filter(i => i.id != id);
-                    saveData(adminAcoes, adminGaleria, adminAgenda, adminServicosSaude, adminCanindeDelas, adminConfiguracoes).catch(e => console.error(e));
-                    renderAdminAgenda();
+            window.deleteItem = async function(id, type, btn, row) {
+                const targetBtn = btn || (window.event ? (window.event.currentTarget || window.event.target.closest('button')) : null);
+                const origHtml = targetBtn ? targetBtn.innerHTML : '';
+                const targetRow = row || (targetBtn ? (targetBtn.closest('tr') || targetBtn.closest('.group')) : null);
+
+                if (targetBtn) {
+                    targetBtn.disabled = true;
+                    targetBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
                 }
-            }
+
+                try {
+                    let updatedAcoes = adminAcoes;
+                    let updatedGaleria = adminGaleria;
+                    let updatedAgenda = adminAgenda;
+
+                    const deletePayload = {};
+                    if (type === 'acoes') {
+                        updatedAcoes = adminAcoes.filter(i => i.id != id);
+                        deletePayload.acoes = updatedAcoes;
+                    } else if (type === 'galeria') {
+                        updatedGaleria = adminGaleria.filter(i => i.id != id);
+                        deletePayload.galeria = updatedGaleria;
+                    } else if (type === 'agenda') {
+                        updatedAgenda = adminAgenda.filter(i => i.id != id);
+                        deletePayload.agenda = updatedAgenda;
+                    }
+
+                    await saveData(deletePayload);
+
+                    if (targetRow) {
+                        targetRow.style.transition = 'all 0.3s ease';
+                        targetRow.style.opacity = '0';
+                        targetRow.style.transform = 'scale(0.95)';
+                        await new Promise(r => setTimeout(r, 300));
+                    }
+
+                    if (type === 'acoes') {
+                        adminAcoes = updatedAcoes;
+                        renderAdminAcoes();
+                    } else if (type === 'galeria') {
+                        adminGaleria = updatedGaleria;
+                        renderAdminGaleria();
+                    } else if (type === 'agenda') {
+                        adminAgenda = updatedAgenda;
+                        renderAdminAgenda();
+                    }
+
+                    showToast('Sucesso', 'Item removido com sucesso!', 'success');
+                } catch (e) {
+                    console.error(`Erro ao excluir item de ${type}:`, e);
+                    if (targetBtn) {
+                        targetBtn.disabled = false;
+                        targetBtn.innerHTML = origHtml;
+                    }
+                    showToast('Erro', 'Não foi possível excluir. Tente novamente.', 'error');
+                }
+            };
 
             // --- LÓGICA DE AÇÕES (EDITAR / EXCLUIR) ---
-            document.body.addEventListener('click', function(e) {
+            document.body.addEventListener('click', async function(e) {
                 // EXCLUIR
                 const btnDelete = e.target.closest('.btn-delete');
                 if (btnDelete) {
@@ -2213,15 +2326,15 @@ $isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
                         // Encontra a linha da tabela ou o card da galeria
                         const row = btnDelete.closest('tr') || btnDelete.closest('.group');
                         if (row) {
-                            row.style.transition = 'all 0.4s ease';
-                            row.style.opacity = '0';
-                            row.style.transform = 'scale(0.95)';
-                            setTimeout(() => {
-                                const id = row.getAttribute('data-id');
-                                const agendaRow = row.closest('#agenda') !== null; const galRow = row.tagName.toLowerCase() !== 'tr'; if (agendaRow) window.deleteItem(id, 'agenda');
-                                else if (galRow) window.deleteItem(id, 'galeria');
-                                else window.deleteItem(id, 'acoes');
-                            }, 400);
+                            const id = row.getAttribute('data-id');
+                            if (!id) {
+                                showToast('Erro', 'Identificador do registro não encontrado.', 'error');
+                                return;
+                            }
+                            const agendaRow = row.closest('#agenda') !== null;
+                            const galRow = row.tagName.toLowerCase() !== 'tr';
+                            const type = agendaRow ? 'agenda' : (galRow ? 'galeria' : 'acoes');
+                            await window.deleteItem(id, type, btnDelete, row);
                         }
                     }
                     return; // Para não disparar mais nada
